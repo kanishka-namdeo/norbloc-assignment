@@ -1,0 +1,32 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]: norbloc Sancus
+    - generic [ref=e5]: Intelligent UBO Graph Extraction
+    - generic [ref=e6]:
+      - button "1 Upload" [ref=e7] [cursor=pointer]:
+        - generic [ref=e8]: "1"
+        - text: Upload
+      - generic [ref=e9]: →
+      - button "2 Extraction":
+        - generic: "2"
+        - text: Extraction
+      - generic [ref=e10]: →
+      - button "3 Graph":
+        - generic: "3"
+        - text: Graph
+      - generic [ref=e11]: →
+      - button "4 Review":
+        - generic: "4"
+        - text: Review
+    - generic [ref=e12]: Prototype
+  - generic [ref=e14]:
+    - img [ref=e16]
+    - generic [ref=e19]: Upload Registry Documents
+    - generic [ref=e20]: Upload corporate registry extracts, certificates of incorporation, or ownership declarations — in any language. Our AI extracts UBOs, directors, and ownership chains, cutting onboarding time by 50–60%.
+    - generic [ref=e21] [cursor=pointer]:
+      - generic [ref=e22]: 📄
+      - generic [ref=e23]:
+        - text: Drag & drop files here, or
+        - strong [ref=e24]: browse
+      - generic [ref=e25]: Supports PDF, PNG, JPG up to 50MB · Multi-language OCR enabled
+    - 'button "Demo: Load Sample Data" [ref=e26] [cursor=pointer]'

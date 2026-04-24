@@ -1,0 +1,3537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Norbloc Design System</title>
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — shadcn-inspired, OKLCH, light corporate SaaS
+       ============================================================ */
+    :root {
+      /* Border radius */
+      --radius: 0.625rem;
+      --radius-sm: calc(var(--radius) * 0.5);
+      --radius-md: calc(var(--radius) * 0.8);
+      --radius-lg: var(--radius);
+      --radius-xl: calc(var(--radius) * 1.4);
+      --radius-2xl: calc(var(--radius) * 1.8);
+
+      /* Page background / foreground */
+      --background: oklch(1 0 0);
+      --foreground: oklch(0.145 0 0);
+
+      /* Card surfaces */
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.145 0 0);
+
+      /* Popover surfaces */
+      --popover: oklch(1 0 0);
+      --popover-foreground: oklch(0.145 0 0);
+
+      /* Primary brand (neutral dark for corporate feel) */
+      --primary: oklch(0.205 0 0);
+      --primary-foreground: oklch(0.985 0 0);
+
+      /* Secondary actions */
+      --secondary: oklch(0.97 0 0);
+      --secondary-foreground: oklch(0.205 0 0);
+
+      /* Muted / disabled states */
+      --muted: oklch(0.97 0 0);
+      --muted-foreground: oklch(0.556 0 0);
+
+      /* Accent (hover states) */
+      --accent: oklch(0.97 0 0);
+      --accent-foreground: oklch(0.205 0 0);
+
+      /* Destructive (error states) */
+      --destructive: oklch(0.577 0.245 27.325);
+      --destructive-foreground: oklch(1 0 0);
+
+      /* Border / Input / Focus ring */
+      --border: oklch(0.922 0 0);
+      --input: oklch(0.922 0 0);
+      --ring: oklch(0.708 0 0);
+
+      /* Chart palette (5 colors) */
+      --chart-1: oklch(0.646 0.222 41.116);
+      --chart-2: oklch(0.6 0.118 184.704);
+      --chart-3: oklch(0.398 0.07 227.392);
+      --chart-4: oklch(0.828 0.189 84.429);
+      --chart-5: oklch(0.769 0.188 70.08);
+
+      /* Sidebar tokens */
+      --sidebar: oklch(0.985 0 0);
+      --sidebar-foreground: oklch(0.145 0 0);
+      --sidebar-primary: oklch(0.205 0 0);
+      --sidebar-primary-foreground: oklch(0.985 0 0);
+      --sidebar-accent: oklch(0.97 0 0);
+      --sidebar-accent-foreground: oklch(0.205 0 0);
+      --sidebar-border: oklch(0.922 0 0);
+      --sidebar-ring: oklch(0.708 0 0);
+
+      /* Norbloc compliance-specific tokens */
+      --success: oklch(0.577 0.155 150.62);
+      --success-foreground: oklch(0.985 0 0);
+      --success-muted: oklch(0.96 0.04 150);
+      --success-muted-foreground: oklch(0.4 0.12 150);
+
+      --warning: oklch(0.795 0.184 86.04);
+      --warning-foreground: oklch(0.28 0.07 46);
+      --warning-muted: oklch(0.96 0.06 86);
+      --warning-muted-foreground: oklch(0.55 0.18 86);
+
+      --info: oklch(0.572 0.223 256.61);
+      --info-foreground: oklch(0.985 0 0);
+      --info-muted: oklch(0.96 0.05 256);
+      --info-muted-foreground: oklch(0.45 0.18 256);
+
+      --critical: oklch(0.577 0.245 27.325);
+      --critical-foreground: oklch(1 0 0);
+      --critical-muted: oklch(0.96 0.06 27);
+      --critical-muted-foreground: oklch(0.577 0.245 27.325);
+    }
+
+    /* ============================================================
+       BASE RESET & TYPOGRAPHY
+       ============================================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Links */
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+    a:hover { text-decoration: underline; }
+    a:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 2px; }
+
+    /* Selection */
+    ::selection {
+      background: oklch(0.708 0 0 / 0.3);
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Images */
+    img, svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Lists */
+    ul, ol { list-style: none; }
+
+    /* Type scale */
+    .text-xs { font-size: 11px; line-height: 1.4; }
+    .text-sm { font-size: 12px; line-height: 1.4; }
+    .text-base { font-size: 14px; line-height: 1.5; }
+    .text-md { font-size: 15px; line-height: 1.5; }
+    .text-lg { font-size: 16px; line-height: 1.5; }
+    .text-xl { font-size: 20px; line-height: 1.4; }
+    .text-2xl { font-size: 24px; line-height: 1.4; }
+    .text-3xl { font-size: 32px; line-height: 1.3; }
+
+    .font-normal { font-weight: 400; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+    .font-bold { font-weight: 700; }
+    .font-extrabold { font-weight: 800; }
+
+    .leading-tight { line-height: 1.4; }
+    .leading-normal { line-height: 1.5; }
+    .leading-relaxed { line-height: 1.6; }
+
+    .tracking-tight { letter-spacing: -0.025em; }
+    .tracking-wide { letter-spacing: 0.025em; }
+    .tracking-wider { letter-spacing: 0.05em; }
+
+    .text-muted-foreground { color: var(--muted-foreground); }
+    .text-success { color: var(--success); }
+    .text-warning { color: var(--warning); }
+    .text-info { color: var(--info); }
+    .text-critical { color: var(--critical); }
+
+    /* Text utilities */
+    .truncate {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .text-left { text-align: left; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .uppercase { text-transform: uppercase; }
+    .capitalize { text-transform: capitalize; }
+    .italic { font-style: italic; }
+    .no-underline { text-decoration: none; }
+
+    /* Inline code */
+    .code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      background: var(--muted);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      color: var(--foreground);
+    }
+
+    /* Code block */
+    .code-block {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      background: oklch(0.145 0 0);
+      color: oklch(0.985 0 0);
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+    }
+
+    /* Notification dot / badge */
+    .notification-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--destructive);
+    }
+    .notification-dot.active {
+      animation: pulse-ring 2s infinite;
+    }
+
+    /* File input */
+    .file-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .file-input {
+      font-size: 14px;
+    }
+    .file-input::file-selector-button {
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--input);
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      margin-right: 12px;
+      transition: background 0.15s;
+    }
+    .file-input::file-selector-button:hover {
+      background: oklch(0.94 0 0);
+    }
+
+    /* Drop zone */
+    .drop-zone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .drop-zone:hover, .drop-zone.dragging {
+      border-color: var(--ring);
+      background: oklch(0.97 0 0 / 0.5);
+    }
+
+    /* Status indicator */
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .status-dot.active { background: var(--success); }
+    .status-dot.inactive { background: var(--muted-foreground); }
+    .status-dot.error { background: var(--destructive); }
+
+    /* Badge count */
+    .badge-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      border-radius: 10px;
+      background: var(--destructive);
+      color: var(--destructive-foreground);
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .badge-count-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted-foreground);
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    /* ============================================================
+       SPACING UTILITY CLASSES
+       ============================================================ */
+    .gap-1 { gap: 4px; }
+    .gap-2 { gap: 8px; }
+    .gap-3 { gap: 12px; }
+    .gap-4 { gap: 16px; }
+    .gap-6 { gap: 24px; }
+    .gap-8 { gap: 32px; }
+
+    .mb-1 { margin-bottom: 4px; }
+    .mb-2 { margin-bottom: 8px; }
+    .mb-3 { margin-bottom: 12px; }
+    .mb-4 { margin-bottom: 16px; }
+    .mb-6 { margin-bottom: 24px; }
+    .mb-8 { margin-bottom: 32px; }
+
+    .mt-2 { margin-top: 8px; }
+    .mt-4 { margin-top: 16px; }
+    .mt-6 { margin-top: 24px; }
+
+    .p-2 { padding: 8px; }
+    .p-3 { padding: 12px; }
+    .p-4 { padding: 16px; }
+    .p-6 { padding: 24px; }
+
+    /* Flex utilities */
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .flex-1 { flex: 1; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .items-end { align-items: flex-end; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .flex-wrap { flex-wrap: wrap; }
+    .gap-1 { gap: 4px; }
+    .gap-2 { gap: 8px; }
+    .gap-3 { gap: 12px; }
+
+    /* Grid */
+    .grid { display: grid; }
+    .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* ============================================================
+       SCROLLBAR
+       ============================================================ */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border); }
+
+    /* ============================================================
+       ANIMATIONS
+       ============================================================ */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(100%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes pulse-ring {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0.1); }
+      50% { box-shadow: 0 0 0 6px rgba(0,0,0,0); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes typing-bounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-6px); opacity: 1; }
+    }
+    @keyframes progress-stripes {
+      0% { background-position: 0 0; }
+      100% { background-position: 24px 0; }
+    }
+
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.4;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      user-select: none;
+      text-decoration: none;
+    }
+    .btn:disabled, .btn[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .btn-primary:hover {
+      background: oklch(0.269 0 0);
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .btn-secondary:hover {
+      background: oklch(0.94 0 0);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--foreground);
+      border-color: var(--input);
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: var(--accent-foreground);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--foreground);
+      border: none;
+    }
+    .btn-ghost:hover {
+      background: var(--accent);
+      color: var(--accent-foreground);
+    }
+
+    .btn-destructive {
+      background: var(--destructive);
+      color: var(--destructive-foreground);
+    }
+    .btn-destructive:hover {
+      background: oklch(0.51 0.22 27);
+    }
+
+    .btn-link {
+      background: transparent;
+      color: var(--info);
+      border: none;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .btn-link:hover { text-decoration: none; }
+
+    .btn-sm { padding: 6px 12px; font-size: 13px; border-radius: var(--radius-sm); }
+    .btn-lg { padding: 10px 24px; font-size: 16px; border-radius: var(--radius-lg); }
+    .btn-icon { padding: 8px; }
+
+    /* ============================================================
+       INPUTS
+       ============================================================ */
+    .input,
+    .textarea,
+    .select {
+      display: flex;
+      width: 100%;
+      height: 40px;
+      padding: 8px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--input);
+      background: transparent;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--foreground);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      font-family: inherit;
+    }
+    .input::placeholder,
+    .textarea::placeholder {
+      color: var(--muted-foreground);
+    }
+    .input:focus,
+    .textarea:focus,
+    .select:focus {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.15);
+    }
+    .input:disabled { opacity: 0.5; pointer-events: none; }
+    .input.has-error {
+      border-color: var(--destructive);
+    }
+    .input.has-error:focus {
+      border-color: var(--destructive);
+      box-shadow: 0 0 0 3px oklch(0.577 0.245 27.325 / 0.15);
+    }
+
+    .textarea {
+      height: auto;
+      min-height: 80px;
+      padding: 12px;
+      resize: vertical;
+    }
+
+    .select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .input-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--foreground);
+    }
+    .input-description {
+      font-size: 12px;
+      color: var(--muted-foreground);
+    }
+    .input-error-message {
+      font-size: 12px;
+      color: var(--destructive);
+    }
+
+    /* Checkbox */
+    .checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      user-select: none;
+    }
+    .checkbox input[type="checkbox"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--input);
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .checkbox input[type="checkbox"]:checked {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .checkbox input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 1px;
+      width: 6px;
+      height: 10px;
+      border: solid var(--primary-foreground);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .checkbox input[type="checkbox"]:focus {
+      box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.15);
+    }
+
+    /* Radio */
+    .radio {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      user-select: none;
+    }
+    .radio input[type="radio"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--input);
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .radio input[type="radio"]:checked {
+      border-color: var(--primary);
+    }
+    .radio input[type="radio"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+    .radio input[type="radio"]:focus {
+      box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.15);
+    }
+
+    /* Switch/Toggle */
+    .switch {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      user-select: none;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .switch-track {
+      width: 44px;
+      height: 24px;
+      background: var(--input);
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .switch-track::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+    }
+    .switch input:checked + .switch-track {
+      background: var(--primary);
+    }
+    .switch input:checked + .switch-track::after {
+      transform: translateX(20px);
+    }
+
+    /* ============================================================
+       BADGES
+       ============================================================ */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .badge-default {
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+    }
+    .badge-secondary {
+      background: var(--muted);
+      color: var(--muted-foreground);
+    }
+    .badge-outline {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--foreground);
+    }
+    .badge-destructive {
+      background: oklch(0.577 0.245 27.325 / 0.15);
+      color: var(--destructive);
+    }
+
+    /* Compliance severity badges */
+    .badge-critical {
+      background: var(--critical-muted);
+      color: var(--critical);
+    }
+    .badge-critical .badge-dot { background: var(--critical); }
+    .badge-high {
+      background: oklch(0.96 0.08 56);
+      color: oklch(0.5 0.2 56);
+    }
+    .badge-high .badge-dot { background: oklch(0.6 0.2 56); }
+    .badge-medium {
+      background: var(--warning-muted);
+      color: var(--warning-muted-foreground);
+    }
+    .badge-medium .badge-dot { background: var(--warning); }
+    .badge-low {
+      background: var(--success-muted);
+      color: var(--success-muted-foreground);
+    }
+    .badge-low .badge-dot { background: var(--success); }
+
+    /* Compliance status badges */
+    .badge-pep {
+      background: oklch(0.96 0.05 290);
+      color: oklch(0.5 0.2 290);
+    }
+    .badge-sanctions {
+      background: var(--critical-muted);
+      color: var(--critical);
+    }
+    .badge-jurisdiction {
+      background: oklch(0.96 0.08 56);
+      color: oklch(0.5 0.2 56);
+    }
+
+    /* KYC status badges */
+    .badge-kyc-valid {
+      background: var(--success-muted);
+      color: var(--success-muted-foreground);
+    }
+    .badge-kyc-expiring {
+      background: var(--warning-muted);
+      color: var(--warning-muted-foreground);
+    }
+    .badge-kyc-expired {
+      background: var(--critical-muted);
+      color: var(--critical-muted-foreground);
+    }
+
+    /* ============================================================
+       CARDS
+       ============================================================ */
+    .card {
+      background: var(--card);
+      color: var(--card-foreground);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px 0;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .card-description {
+      font-size: 13px;
+      color: var(--muted-foreground);
+      margin-top: 2px;
+    }
+    .card-content {
+      padding: 20px 24px;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      padding: 0 24px 20px;
+    }
+
+    .card-hover {
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .card-hover:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-color: var(--ring);
+    }
+
+    /* ============================================================
+       TABLES
+       ============================================================ */
+    .table-container {
+      overflow-x: auto;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+      background: oklch(0.97 0 0 / 0.5);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .data-table th:hover {
+      color: var(--foreground);
+    }
+    .data-table th .sort-icon {
+      margin-left: 4px;
+      opacity: 0.3;
+    }
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      vertical-align: middle;
+    }
+    .data-table tbody tr {
+      transition: background 0.15s;
+    }
+    .data-table tbody tr:hover {
+      background: oklch(0.97 0 0 / 0.5);
+    }
+    .data-table.zebra tbody tr:nth-child(even) {
+      background: oklch(0.97 0 0 / 0.3);
+    }
+
+    /* User cell in tables */
+    .user-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .user-cell .avatar {
+      width: 32px;
+      height: 32px;
+    }
+    .user-cell-name { font-weight: 500; }
+    .user-cell-email { font-size: 12px; color: var(--muted-foreground); }
+
+    /* ============================================================
+       AVATARS
+       ============================================================ */
+    .avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--info), oklch(0.45 0.22 280));
+      color: white;
+      font-weight: 600;
+      font-size: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .avatar-sm { width: 24px; height: 24px; font-size: 10px; }
+    .avatar-md { width: 32px; height: 32px; font-size: 12px; }
+    .avatar-lg { width: 40px; height: 40px; font-size: 14px; }
+    .avatar-xl { width: 64px; height: 64px; font-size: 24px; font-weight: 700; }
+
+    /* ============================================================
+       DIALOGS / MODALS
+       ============================================================ */
+    .dialog-overlay {
+      position: fixed;
+      inset: 0;
+      background: oklch(0 0 0 / 0.5);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .dialog-overlay.open {
+      display: flex;
+      animation: fadeIn 0.15s ease;
+    }
+    .dialog-content {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      padding: 24px;
+      max-width: 440px;
+      width: 90%;
+      animation: slideIn 0.2s ease;
+    }
+    .dialog-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .dialog-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .dialog-description {
+      font-size: 14px;
+      color: var(--muted-foreground);
+      line-height: 1.5;
+    }
+    .dialog-close {
+      background: none;
+      border: none;
+      color: var(--muted-foreground);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+    .dialog-close:hover {
+      color: var(--foreground);
+      background: var(--muted);
+    }
+    .dialog-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    /* ============================================================
+       TOASTS
+       ============================================================ */
+    .toast-container {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 1100;
+    }
+    .toast {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      min-width: 320px;
+      max-width: 420px;
+      animation: slideInRight 0.3s ease;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .toast.removing {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    .toast-title { font-weight: 600; font-size: 14px; }
+    .toast-description { font-size: 13px; color: var(--muted-foreground); margin-top: 2px; }
+    .toast-close {
+      background: none;
+      border: none;
+      color: var(--muted-foreground);
+      cursor: pointer;
+      padding: 2px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .toast-close:hover { color: var(--foreground); }
+
+    .toast-success { border-left: 3px solid var(--success); }
+    .toast-warning { border-left: 3px solid var(--warning); }
+    .toast-error { border-left: 3px solid var(--destructive); }
+    .toast-info { border-left: 3px solid var(--info); }
+
+    /* ============================================================
+       TABS
+       ============================================================ */
+    .tabs {
+      display: inline-flex;
+      gap: 2px;
+      background: var(--muted);
+      padding: 4px;
+      border-radius: var(--radius-md);
+    }
+    .tab {
+      padding: 6px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--muted-foreground);
+      transition: all 0.15s;
+    }
+    .tab:hover { color: var(--foreground); }
+    .tab.active {
+      background: var(--card);
+      color: var(--foreground);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    /* Horizontal tabs (nav style) */
+    .tabs-nav {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      gap: 0;
+    }
+    .tab-nav {
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--muted-foreground);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .tab-nav:hover { color: var(--foreground); }
+    .tab-nav.active {
+      color: var(--foreground);
+      border-bottom-color: var(--foreground);
+    }
+
+    /* ============================================================
+       ACCORDION
+       ============================================================ */
+    .accordion {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--foreground);
+      text-align: left;
+      transition: background 0.15s;
+    }
+    .accordion-trigger:hover {
+      background: oklch(0.97 0 0 / 0.5);
+    }
+    .accordion-trigger svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .accordion-trigger.active svg {
+      transform: rotate(180deg);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .accordion-content.open {
+      max-height: 500px;
+    }
+    .accordion-body {
+      padding: 0 20px 16px;
+      font-size: 14px;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       PROGRESS BARS
+       ============================================================ */
+    .progress {
+      height: 8px;
+      background: var(--muted);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: var(--primary);
+      transition: width 0.5s ease;
+    }
+    .progress-fill.success { background: var(--success); }
+    .progress-fill.warning { background: var(--warning); }
+    .progress-fill.destructive { background: var(--destructive); }
+
+    .progress-indeterminate .progress-fill {
+      width: 30% !important;
+      animation: progress-stripes 1s linear infinite;
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--primary),
+        var(--primary) 6px,
+        oklch(0.4 0 0) 6px,
+        oklch(0.4 0 0) 12px
+      );
+      background-size: 24px 24px;
+    }
+
+    /* ============================================================
+       SEPARATORS
+       ============================================================ */
+    .separator {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+    .separator-vertical {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+      display: inline-block;
+      margin: 0 12px;
+      vertical-align: middle;
+    }
+
+    /* ============================================================
+       SKELETONS
+       ============================================================ */
+    .skeleton {
+      background: var(--muted);
+      border-radius: var(--radius-sm);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .skeleton-text {
+      height: 12px;
+      margin-bottom: 8px;
+    }
+    .skeleton-text:last-child { width: 80%; margin-bottom: 0; }
+    .skeleton-circle { border-radius: 50%; }
+    .skeleton-rect { border-radius: var(--radius-md); }
+
+    /* ============================================================
+       DROPDOWN
+       ============================================================ */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 200px;
+      background: var(--popover);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      padding: 4px;
+      z-index: 100;
+      display: none;
+    }
+    .dropdown-menu.open {
+      display: block;
+      animation: fadeIn 0.15s ease;
+    }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--foreground);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      transition: background 0.1s;
+    }
+    .dropdown-item:hover { background: var(--muted); }
+    .dropdown-item.danger { color: var(--destructive); }
+    .dropdown-separator {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 0;
+    }
+    .dropdown-label {
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .dropdown-shortcut {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--muted-foreground);
+    }
+
+    /* ============================================================
+       TOOLTIP
+       ============================================================ */
+    .tooltip-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip-wrapper .tooltip-content {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.95);
+      padding: 6px 12px;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .tooltip-wrapper:hover .tooltip-content {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* ============================================================
+       EMPTY STATE
+       ============================================================ */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .empty-state-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--muted-foreground);
+      margin-bottom: 16px;
+    }
+    .empty-state-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .empty-state-desc {
+      font-size: 14px;
+      color: var(--muted-foreground);
+      margin-bottom: 24px;
+    }
+
+    /* ============================================================
+       ALERT BANNER
+       ============================================================ */
+    .alert-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: var(--radius-lg);
+      font-size: 14px;
+    }
+    .alert-banner-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .alert-banner-title { font-weight: 600; margin-bottom: 2px; }
+    .alert-banner-desc { color: var(--muted-foreground); font-size: 13px; }
+    .alert-banner-close {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: var(--muted-foreground);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .alert-banner-info {
+      background: var(--info-muted);
+      border: 1px solid oklch(0.45 0.18 256 / 0.2);
+      color: var(--info);
+    }
+    .alert-banner-success {
+      background: var(--success-muted);
+      border: 1px solid oklch(0.4 0.12 150 / 0.2);
+      color: var(--success);
+    }
+    .alert-banner-warning {
+      background: var(--warning-muted);
+      border: 1px solid oklch(0.55 0.18 86 / 0.2);
+      color: var(--warning);
+    }
+    .alert-banner-error {
+      background: var(--critical-muted);
+      border: 1px solid oklch(0.577 0.245 27.325 / 0.2);
+      color: var(--critical);
+    }
+
+    /* ============================================================
+       FILTER CHIPS
+       ============================================================ */
+    .filter-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .filter-chip {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted-foreground);
+      transition: all 0.15s;
+    }
+    .filter-chip:hover {
+      border-color: var(--ring);
+      color: var(--foreground);
+    }
+    .filter-chip.active {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border-color: var(--primary);
+    }
+
+    /* ============================================================
+       BREADCRUMBS
+       ============================================================ */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .breadcrumb-item {
+      color: var(--muted-foreground);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .breadcrumb-item:hover { color: var(--foreground); }
+    .breadcrumb-separator {
+      color: var(--muted-foreground);
+      flex-shrink: 0;
+    }
+    .breadcrumb-current {
+      color: var(--foreground);
+      font-weight: 500;
+    }
+
+    /* ============================================================
+       COMPLIANCE: RISK SCORE DISPLAY
+       ============================================================ */
+    .risk-score {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .risk-score-value {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .risk-score-bar {
+      width: 80px;
+      height: 6px;
+      background: var(--muted);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .risk-score-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .risk-score-low .risk-score-value { color: var(--success); }
+    .risk-score-low .risk-score-bar-fill { background: var(--success); }
+    .risk-score-medium .risk-score-value { color: var(--warning); }
+    .risk-score-medium .risk-score-bar-fill { background: var(--warning); }
+    .risk-score-high .risk-score-value { color: oklch(0.5 0.2 56); }
+    .risk-score-high .risk-score-bar-fill { background: oklch(0.6 0.2 56); }
+    .risk-score-critical .risk-score-value { color: var(--critical); }
+    .risk-score-critical .risk-score-bar-fill { background: var(--critical); }
+
+    /* ============================================================
+       COMPLIANCE: RISK FACTOR BARS
+       ============================================================ */
+    .risk-factor {
+      margin-bottom: 14px;
+    }
+    .risk-factor-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+    .risk-factor-name { font-weight: 500; }
+    .risk-factor-value { color: var(--muted-foreground); }
+    .risk-factor-bar {
+      height: 6px;
+      background: var(--muted);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .risk-factor-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+
+    /* ============================================================
+       COMPLIANCE: ALERT CARD
+       ============================================================ */
+    .alert-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      background: var(--card);
+      transition: box-shadow 0.2s, border-color 0.2s;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .alert-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .alert-card.severity-critical { border-left: 3px solid var(--critical); }
+    .alert-card.severity-high { border-left: 3px solid oklch(0.6 0.2 56); }
+    .alert-card.severity-medium { border-left: 3px solid var(--warning); }
+    .alert-card.severity-low { border-left: 3px solid var(--success); }
+
+    .alert-card-content { flex: 1; }
+    .alert-card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+    .alert-card-customer { font-weight: 600; font-size: 14px; }
+    .alert-card-type { font-size: 13px; color: var(--muted-foreground); margin-bottom: 8px; }
+    .alert-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted-foreground);
+    }
+
+    /* ============================================================
+       COMPLIANCE: TRANSACTION TIMELINE
+       ============================================================ */
+    .tx-timeline {
+      position: relative;
+      padding-left: 24px;
+    }
+    .tx-timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .tx-timeline-item {
+      position: relative;
+      padding-bottom: 20px;
+    }
+    .tx-timeline-item:last-child { padding-bottom: 0; }
+    .tx-timeline-dot {
+      position: absolute;
+      left: -20px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid var(--info);
+      background: var(--card);
+    }
+    .tx-timeline-dot.inbound { border-color: var(--success); background: var(--success-muted); }
+    .tx-timeline-dot.outbound { border-color: var(--destructive); background: var(--critical-muted); }
+
+    .tx-date { font-size: 12px; color: var(--muted-foreground); margin-bottom: 2px; }
+    .tx-amount { font-weight: 700; font-size: 14px; }
+    .tx-counterparty { font-size: 13px; color: var(--muted-foreground); }
+    .tx-direction { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .tx-direction.inbound { color: var(--success); }
+    .tx-direction.outbound { color: var(--destructive); }
+
+    /* ============================================================
+       COMPLIANCE: KYC STATUS
+       ============================================================ */
+    .kyc-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .kyc-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .kyc-valid .kyc-dot { background: var(--success); }
+    .kyc-expiring .kyc-dot { background: var(--warning); }
+    .kyc-expired .kyc-dot { background: var(--critical); animation: pulse-ring 2s infinite; }
+
+    /* ============================================================
+       COMPLIANCE: AI RECOMMENDATION CARD
+       ============================================================ */
+    .ai-recommendation {
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .ai-recommendation.approve {
+      background: var(--success-muted);
+      border: 1px solid oklch(0.4 0.12 150 / 0.2);
+    }
+    .ai-recommendation.review {
+      background: var(--warning-muted);
+      border: 1px solid oklch(0.55 0.18 86 / 0.2);
+    }
+    .ai-recommendation.reject {
+      background: var(--critical-muted);
+      border: 1px solid oklch(0.577 0.245 27.325 / 0.2);
+    }
+    .ai-recommendation-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .ai-rec-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+    .ai-rec-text { font-size: 13px; color: var(--muted-foreground); line-height: 1.6; }
+
+    /* ============================================================
+       COMPLIANCE: INVESTIGATION STEPPER
+       ============================================================ */
+    .stepper {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .step-dot {
+      width: 32px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--muted);
+      transition: background 0.3s;
+    }
+    .step-dot.active { background: var(--warning); }
+    .step-dot.done { background: var(--success); }
+
+    /* ============================================================
+       COMPLIANCE: EVIDENCE CARD
+       ============================================================ */
+    .evidence-card {
+      background: oklch(0.97 0 0 / 0.5);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      border-left: 3px solid var(--info);
+    }
+    .evidence-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .evidence-card-desc {
+      font-size: 12px;
+      color: var(--muted-foreground);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       COMPLIANCE: CONFIDENCE BADGE
+       ============================================================ */
+    .confidence-high {
+      background: var(--success-muted);
+      color: var(--success-muted-foreground);
+    }
+    .confidence-medium {
+      background: var(--warning-muted);
+      color: var(--warning-muted-foreground);
+    }
+    .confidence-low {
+      background: var(--critical-muted);
+      color: var(--critical-muted-foreground);
+    }
+
+    /* ============================================================
+       COMPLIANCE: SCORE TREND
+       ============================================================ */
+    .trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+      font-size: 13px;
+    }
+    .trend-up { color: var(--critical); }
+    .trend-down { color: var(--success); }
+    .trend-stable { color: var(--muted-foreground); }
+    .trend svg { width: 14px; height: 14px; }
+
+    /* ============================================================
+       LAYOUT: STATS CARD (dashboard metric)
+       ============================================================ */
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted-foreground);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .stat-change {
+      font-size: 12px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .stat-change.positive { color: var(--success); }
+    .stat-change.negative { color: var(--destructive); }
+
+    /* ============================================================
+       LAYOUT: DASHBOARD GRID
+       ============================================================ */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    /* ============================================================
+       SHOWCASE DEMO STYLES
+       ============================================================ */
+    .showcase-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    .showcase-sidebar {
+      width: 240px;
+      min-width: 240px;
+      background: var(--sidebar);
+      border-right: 1px solid var(--sidebar-border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 50;
+      overflow-y: auto;
+    }
+    .showcase-logo {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--sidebar-border);
+    }
+    .showcase-logo h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--sidebar-foreground);
+      letter-spacing: -0.5px;
+    }
+    .showcase-logo p {
+      font-size: 11px;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 2px;
+    }
+    .showcase-nav {
+      padding: 12px 8px;
+      flex: 1;
+    }
+    .showcase-nav-group {
+      margin-bottom: 16px;
+    }
+    .showcase-nav-label {
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .showcase-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--sidebar-foreground);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      transition: background 0.15s;
+    }
+    .showcase-nav-item:hover { background: var(--sidebar-accent); }
+    .showcase-nav-item.active {
+      background: var(--sidebar-accent);
+      color: var(--sidebar-foreground);
+      font-weight: 600;
+    }
+    .showcase-content {
+      flex: 1;
+      margin-left: 240px;
+      padding: 32px 40px;
+      max-width: 1200px;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--muted-foreground);
+      margin-bottom: 32px;
+    }
+    .demo-block {
+      margin-bottom: 32px;
+    }
+    .demo-block-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .demo-block-desc {
+      font-size: 13px;
+      color: var(--muted-foreground);
+      margin-bottom: 12px;
+    }
+    .demo-preview {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+    .demo-code {
+      background: var(--muted);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      color: var(--muted-foreground);
+      margin-top: 8px;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* Color swatch grid */
+    .color-swatch {
+      border-radius: var(--radius-md);
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+    .color-swatch-preview {
+      height: 64px;
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+    }
+    .color-swatch-name {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .color-swatch-value {
+      font-size: 11px;
+      color: var(--muted-foreground);
+      font-family: monospace;
+    }
+
+    /* ============================================================
+       PAGINATION
+       ============================================================ */
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .pagination-btn {
+      min-width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--foreground);
+      transition: all 0.15s;
+    }
+    .pagination-btn:hover { background: var(--muted); }
+    .pagination-btn.active { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+    .pagination-btn:disabled { opacity: 0.4; pointer-events: none; }
+    .pagination-info { font-size: 13px; color: var(--muted-foreground); margin-left: 12px; }
+
+    /* ============================================================
+       AVATAR GROUP
+       ============================================================ */
+    .avatar-group {
+      display: flex;
+      align-items: center;
+    }
+    .avatar-group .avatar {
+      border: 2px solid var(--card);
+      margin-left: -10px;
+    }
+    .avatar-group .avatar:first-child { margin-left: 0; }
+    .avatar-group-overflow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--muted);
+      color: var(--muted-foreground);
+      font-size: 11px;
+      font-weight: 600;
+      border: 2px solid var(--card);
+      margin-left: -10px;
+    }
+
+    /* ============================================================
+       KBD (KEYBOARD SHORTCUT)
+       ============================================================ */
+    .kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 6px;
+      min-width: 24px;
+      height: 24px;
+      background: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 11px;
+      font-family: inherit;
+      font-weight: 500;
+      color: var(--muted-foreground);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    /* ============================================================
+       LOADING SPINNER
+       ============================================================ */
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    .spinner-sm { width: 16px; height: 16px; border-width: 1.5px; }
+    .spinner-lg { width: 32px; height: 32px; border-width: 3px; }
+
+    /* ============================================================
+       INPUT WITH ICON / ADDON
+       ============================================================ */
+    .input-with-icon {
+      position: relative;
+    }
+    .input-with-icon .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted-foreground);
+      pointer-events: none;
+      width: 16px;
+      height: 16px;
+    }
+    .input-with-icon .input {
+      padding-left: 36px;
+    }
+    .input-addon {
+      display: flex;
+      align-items: center;
+    }
+    .input-addon-prefix,
+    .input-addon-suffix {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 12px;
+      height: 40px;
+      background: var(--muted);
+      border: 1px solid var(--input);
+      font-size: 13px;
+      color: var(--muted-foreground);
+      user-select: none;
+      white-space: nowrap;
+    }
+    .input-addon-prefix { border-radius: var(--radius-md) 0 0 var(--radius-md); border-right: none; }
+    .input-addon-suffix { border-radius: 0 var(--radius-md) var(--radius-md) 0; border-left: none; }
+
+    /* ============================================================
+       TAG INPUT
+       ============================================================ */
+    .tag-input {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 6px 8px;
+      min-height: 40px;
+      border: 1px solid var(--input);
+      border-radius: var(--radius-md);
+      background: transparent;
+      cursor: text;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .tag-input:focus-within {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.15);
+    }
+    .tag-input .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      background: var(--muted);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .tag-input .tag-remove {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: var(--muted-foreground);
+      font-size: 12px;
+      line-height: 1;
+      transition: background 0.15s;
+    }
+    .tag-input .tag-remove:hover { background: var(--border); }
+    .tag-input input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 14px;
+      flex: 1;
+      min-width: 80px;
+      padding: 2px 4px;
+      font-family: inherit;
+    }
+    .tag-input input::placeholder { color: var(--muted-foreground); }
+
+    /* ============================================================
+       CARD BARE (no border, for embedded use)
+       ============================================================ */
+    .card-bordered {
+      border: 1px solid var(--border);
+    }
+    .card-shadow {
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* ============================================================
+       ACCESSIBILITY
+       ============================================================ */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    *:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+      border-radius: inherit;
+    }
+
+    /* ============================================================
+       DARK MODE TOKENS
+       ============================================================ */
+    .dark {
+      --background: oklch(0.145 0 0);
+      --foreground: oklch(0.985 0 0);
+      --card: oklch(0.205 0 0);
+      --card-foreground: oklch(0.985 0 0);
+      --popover: oklch(0.205 0 0);
+      --popover-foreground: oklch(0.985 0 0);
+      --primary: oklch(0.985 0 0);
+      --primary-foreground: oklch(0.205 0 0);
+      --secondary: oklch(0.269 0 0);
+      --secondary-foreground: oklch(0.985 0 0);
+      --muted: oklch(0.269 0 0);
+      --muted-foreground: oklch(0.708 0 0);
+      --accent: oklch(0.269 0 0);
+      --accent-foreground: oklch(0.985 0 0);
+      --destructive: oklch(0.704 0.191 22.216);
+      --destructive-foreground: oklch(0.985 0 0);
+      --border: oklch(1 0 0 / 10%);
+      --input: oklch(1 0 0 / 15%);
+      --ring: oklch(0.556 0 0);
+      --sidebar: oklch(0.205 0 0);
+      --sidebar-foreground: oklch(0.985 0 0);
+      --sidebar-primary: oklch(0.488 0.243 264.376);
+      --sidebar-primary-foreground: oklch(0.985 0 0);
+      --sidebar-accent: oklch(0.269 0 0);
+      --sidebar-accent-foreground: oklch(0.985 0 0);
+      --sidebar-border: oklch(1 0 0 / 10%);
+      --sidebar-ring: oklch(0.556 0 0);
+      --success: oklch(0.72 0.18 150);
+      --success-muted: oklch(0.3 0.08 150);
+      --success-muted-foreground: oklch(0.72 0.18 150);
+      --warning: oklch(0.82 0.18 86);
+      --warning-muted: oklch(0.3 0.1 86);
+      --warning-muted-foreground: oklch(0.82 0.18 86);
+      --info: oklch(0.7 0.2 256);
+      --info-muted: oklch(0.3 0.1 256);
+      --info-muted-foreground: oklch(0.7 0.2 256);
+      --critical: oklch(0.7 0.24 27);
+      --critical-muted: oklch(0.3 0.12 27);
+      --critical-muted-foreground: oklch(0.7 0.24 27);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .showcase-sidebar { width: 200px; min-width: 200px; }
+      .showcase-content { margin-left: 200px; }
+    }
+    @media (max-width: 768px) {
+      .showcase-layout { flex-direction: column; }
+      .showcase-sidebar {
+        position: relative;
+        width: 100%;
+        min-width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--sidebar-border);
+        max-height: 200px;
+      }
+      .showcase-content { margin-left: 0; padding: 24px 16px; }
+      .dashboard-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="showcase-layout">
+    <!-- Sidebar Navigation -->
+    <nav class="showcase-sidebar">
+      <div class="showcase-logo">
+        <h1>Norbloc</h1>
+        <p>Design System</p>
+      </div>
+      <div class="showcase-nav">
+        <div class="showcase-nav-group">
+          <div class="showcase-nav-label">Foundations</div>
+          <button class="showcase-nav-item active" data-section="colors">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+            Colors
+          </button>
+          <button class="showcase-nav-item" data-section="typography">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+            Typography
+          </button>
+          <button class="showcase-nav-item" data-section="spacing">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
+            Spacing &amp; Radius
+          </button>
+        </div>
+        <div class="showcase-nav-group">
+          <div class="showcase-nav-label">Components</div>
+          <button class="showcase-nav-item" data-section="buttons">Buttons</button>
+          <button class="showcase-nav-item" data-section="inputs">Form Controls</button>
+          <button class="showcase-nav-item" data-section="badges">Badges &amp; Tags</button>
+          <button class="showcase-nav-item" data-section="cards">Cards</button>
+          <button class="showcase-nav-item" data-section="tables">Tables</button>
+          <button class="showcase-nav-item" data-section="navigation">Navigation</button>
+          <button class="showcase-nav-item" data-section="overlays">Overlays</button>
+          <button class="showcase-nav-item" data-section="feedback">Feedback</button>
+          <button class="showcase-nav-item" data-section="extra">Additional</button>
+        </div>
+        <div class="showcase-nav-group">
+          <div class="showcase-nav-label">Compliance</div>
+          <button class="showcase-nav-item" data-section="compliance">Components</button>
+          <button class="showcase-nav-item" data-section="utilities">Utilities</button>
+          <button class="showcase-nav-item" data-section="layouts">Layouts</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="showcase-content">
+
+      <!-- ======================== COLORS ======================== -->
+      <section class="section active" id="section-colors">
+        <h2 class="section-title">Colors</h2>
+        <p class="section-desc">Core design tokens following shadcn/ui OKLCH color system for a light corporate SaaS theme.</p>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Background &amp; Foreground</div>
+          <div class="grid grid-cols-3" style="gap: 12px;">
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(1 0 0); border: 1px solid var(--border);"></div><div class="color-swatch-name">Background</div><div class="color-swatch-value">oklch(1 0 0)</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(0.145 0 0);"></div><div class="color-swatch-name">Foreground</div><div class="color-swatch-value">oklch(0.145 0 0)</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(1 0 0); border: 1px solid var(--border);"></div><div class="color-swatch-name">Card</div><div class="color-swatch-value">oklch(1 0 0)</div></div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Semantic Colors</div>
+          <div class="grid grid-cols-4" style="gap: 12px;">
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(0.205 0 0);"></div><div class="color-swatch-name">Primary</div><div class="color-swatch-value">oklch(0.205 0 0)</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(0.97 0 0); border: 1px solid var(--border);"></div><div class="color-swatch-name">Secondary</div><div class="color-swatch-value">oklch(0.97 0 0)</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(0.577 0.245 27.325);"></div><div class="color-swatch-name">Destructive</div><div class="color-swatch-value">oklch(0.577 0.245 27)</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(0.922 0 0);"></div><div class="color-swatch-name">Border</div><div class="color-swatch-value">oklch(0.922 0 0)</div></div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Compliance Tokens</div>
+          <div class="grid grid-cols-4" style="gap: 12px;">
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(0.577 0.155 150.62);"></div><div class="color-swatch-name">Success</div><div class="color-swatch-value">oklch(0.577 0.155 150)</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(0.795 0.184 86.04);"></div><div class="color-swatch-name">Warning</div><div class="color-swatch-value">oklch(0.795 0.184 86)</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(0.572 0.223 256.61);"></div><div class="color-swatch-name">Info</div><div class="color-swatch-value">oklch(0.572 0.223 256)</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: oklch(0.577 0.245 27.325);"></div><div class="color-swatch-name">Critical</div><div class="color-swatch-value">oklch(0.577 0.245 27)</div></div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Chart Palette</div>
+          <div class="grid grid-cols-5" style="gap: 12px;">
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: var(--chart-1);"></div><div class="color-swatch-name">Chart 1</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: var(--chart-2);"></div><div class="color-swatch-name">Chart 2</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: var(--chart-3);"></div><div class="color-swatch-name">Chart 3</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: var(--chart-4);"></div><div class="color-swatch-name">Chart 4</div></div>
+            <div class="color-swatch"><div class="color-swatch-preview" style="background: var(--chart-5);"></div><div class="color-swatch-name">Chart 5</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== TYPOGRAPHY ======================== -->
+      <section class="section" id="section-typography">
+        <h2 class="section-title">Typography</h2>
+        <p class="section-desc">System font stack with a complete type scale for hierarchy and readability.</p>
+        <div class="demo-block">
+          <div class="demo-preview" style="display: flex; flex-direction: column; gap: 24px;">
+            <div><span class="text-3xl font-extrabold tracking-tight">Display — 32px ExtraBold</span></div>
+            <div><span class="text-2xl font-bold tracking-tight">Heading 1 — 24px Bold</span></div>
+            <div><span class="text-xl font-semibold">Heading 2 — 20px Semibold</span></div>
+            <div><span class="text-lg font-semibold">Heading 3 — 16px Semibold</span></div>
+            <div><span class="text-md font-medium">Emphasized — 15px Medium</span></div>
+            <div><span class="text-base font-normal">Body text — 14px Regular — The quick brown fox jumps over the lazy dog.</span></div>
+            <div><span class="text-sm text-muted-foreground">Small text — 12px Muted</span></div>
+            <div><span class="text-xs text-muted-foreground uppercase tracking-wider">Micro label — 11px Uppercase Wide</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== SPACING ======================== -->
+      <section class="section" id="section-spacing">
+        <h2 class="section-title">Spacing &amp; Border Radius</h2>
+        <p class="section-desc">Consistent spacing scale using multiples of 4px, with derived border radius values.</p>
+        <div class="demo-block">
+          <div class="demo-block-title">Border Radius Scale</div>
+          <div class="demo-preview">
+            <div class="flex items-end gap-4" style="align-items: flex-end;">
+              <div style="width: 64px; height: 64px; background: var(--muted); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--muted-foreground);">sm</div>
+              <div style="width: 64px; height: 64px; background: var(--muted); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--muted-foreground);">md</div>
+              <div style="width: 64px; height: 64px; background: var(--muted); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--muted-foreground);">lg</div>
+              <div style="width: 64px; height: 64px; background: var(--muted); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--muted-foreground);">xl</div>
+              <div style="width: 64px; height: 64px; background: var(--muted); border-radius: var(--radius-2xl); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--muted-foreground);">2xl</div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Spacing Scale</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center gap-3"><div style="width: 4px; height: 16px; background: var(--primary); border-radius: 2px; flex-shrink: 0;"></div><span class="text-xs text-muted-foreground">4px (0.25rem)</span></div>
+              <div class="flex items-center gap-3"><div style="width: 8px; height: 16px; background: var(--primary); border-radius: 2px; flex-shrink: 0;"></div><span class="text-xs text-muted-foreground">8px (0.5rem)</span></div>
+              <div class="flex items-center gap-3"><div style="width: 12px; height: 16px; background: var(--primary); border-radius: 2px; flex-shrink: 0;"></div><span class="text-xs text-muted-foreground">12px (0.75rem)</span></div>
+              <div class="flex items-center gap-3"><div style="width: 16px; height: 16px; background: var(--primary); border-radius: 2px; flex-shrink: 0;"></div><span class="text-xs text-muted-foreground">16px (1rem)</span></div>
+              <div class="flex items-center gap-3"><div style="width: 24px; height: 16px; background: var(--primary); border-radius: 2px; flex-shrink: 0;"></div><span class="text-xs text-muted-foreground">24px (1.5rem)</span></div>
+              <div class="flex items-center gap-3"><div style="width: 32px; height: 16px; background: var(--primary); border-radius: 2px; flex-shrink: 0;"></div><span class="text-xs text-muted-foreground">32px (2rem)</span></div>
+              <div class="flex items-center gap-3"><div style="width: 48px; height: 16px; background: var(--primary); border-radius: 2px; flex-shrink: 0;"></div><span class="text-xs text-muted-foreground">48px (3rem)</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== BUTTONS ======================== -->
+      <section class="section" id="section-buttons">
+        <h2 class="section-title">Buttons</h2>
+        <p class="section-desc">Action triggers with variants for emphasis, size, and context.</p>
+        <div class="demo-block">
+          <div class="demo-block-title">Variants</div>
+          <div class="demo-preview">
+            <div class="flex flex-wrap gap-3" style="align-items: center;">
+              <button class="btn btn-primary">Primary</button>
+              <button class="btn btn-secondary">Secondary</button>
+              <button class="btn btn-outline">Outline</button>
+              <button class="btn btn-ghost">Ghost</button>
+              <button class="btn btn-destructive">Destructive</button>
+              <button class="btn btn-link">Link</button>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Sizes</div>
+          <div class="demo-preview">
+            <div class="flex flex-wrap gap-3" style="align-items: center;">
+              <button class="btn btn-primary btn-sm">Small</button>
+              <button class="btn btn-primary">Default</button>
+              <button class="btn btn-primary btn-lg">Large</button>
+              <button class="btn btn-primary" disabled>Disabled</button>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">With Icons</div>
+          <div class="demo-preview">
+            <div class="flex flex-wrap gap-3" style="align-items: center;">
+              <button class="btn btn-primary">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download
+              </button>
+              <button class="btn btn-outline">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Edit
+              </button>
+              <button class="btn btn-destructive">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== FORM CONTROLS ======================== -->
+      <section class="section" id="section-inputs">
+        <h2 class="section-title">Form Controls</h2>
+        <p class="section-desc">Inputs, selects, checkboxes, radio buttons, and toggles for data entry.</p>
+        <div class="demo-block">
+          <div class="demo-block-title">Text Inputs</div>
+          <div class="demo-preview">
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div class="input-group">
+                <label class="input-label">Email</label>
+                <input class="input" type="email" placeholder="name@example.com">
+              </div>
+              <div class="input-group">
+                <label class="input-label">Disabled</label>
+                <input class="input" type="text" placeholder="Disabled" disabled>
+              </div>
+              <div class="input-group">
+                <label class="input-label">With Error</label>
+                <input class="input has-error" type="text" value="invalid-value">
+                <span class="input-error-message">This field is required</span>
+              </div>
+              <div class="input-group">
+                <label class="input-label">With Description</label>
+                <input class="input" type="text" placeholder="Enter your name">
+                <span class="input-description">This will be your display name.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Textarea</div>
+          <div class="demo-preview">
+            <div class="input-group">
+              <label class="input-label">Bio</label>
+              <textarea class="textarea" placeholder="Tell us about yourself..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Select</div>
+          <div class="demo-preview">
+            <div class="input-group">
+              <label class="input-label">Role</label>
+              <select class="select">
+                <option>Select a role...</option>
+                <option>Compliance Analyst</option>
+                <option>AML Manager</option>
+                <option>System Admin</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Checkbox</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-3">
+              <label class="checkbox"><input type="checkbox" checked> Accept terms and conditions</label>
+              <label class="checkbox"><input type="checkbox"> Send me marketing emails</label>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Radio</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-3">
+              <label class="radio"><input type="radio" name="plan" checked> Standard screening</label>
+              <label class="radio"><input type="radio" name="plan"> Enhanced due diligence</label>
+              <label class="radio"><input type="radio" name="plan"> Simplified screening</label>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Switch / Toggle</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-3">
+              <label class="switch"><input type="checkbox" checked><span class="switch-track"></span> Real-time alerts</label>
+              <label class="switch"><input type="checkbox"><span class="switch-track"></span> Email notifications</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== BADGES ======================== -->
+      <section class="section" id="section-badges">
+        <h2 class="section-title">Badges &amp; Tags</h2>
+        <p class="section-desc">Status indicators and categorical labels for at-a-glance information.</p>
+        <div class="demo-block">
+          <div class="demo-block-title">Core Variants</div>
+          <div class="demo-preview">
+            <div class="flex flex-wrap gap-3" style="align-items: center;">
+              <span class="badge badge-default">Default</span>
+              <span class="badge badge-secondary">Secondary</span>
+              <span class="badge badge-outline">Outline</span>
+              <span class="badge badge-destructive">Destructive</span>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Severity Badges</div>
+          <div class="demo-preview">
+            <div class="flex flex-wrap gap-3" style="align-items: center;">
+              <span class="badge badge-critical"><span class="badge-dot"></span>Critical</span>
+              <span class="badge badge-high"><span class="badge-dot"></span>High</span>
+              <span class="badge badge-medium"><span class="badge-dot"></span>Medium</span>
+              <span class="badge badge-low"><span class="badge-dot"></span>Low</span>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Compliance Tags</div>
+          <div class="demo-preview">
+            <div class="flex flex-wrap gap-3" style="align-items: center;">
+              <span class="badge badge-pep">PEP</span>
+              <span class="badge badge-sanctions">Sanctions</span>
+              <span class="badge badge-jurisdiction">High-Risk Jurisdiction</span>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">KYC Status</div>
+          <div class="demo-preview">
+            <div class="flex flex-wrap gap-3" style="align-items: center;">
+              <span class="badge badge-kyc-valid">Valid</span>
+              <span class="badge badge-kyc-expiring">Expiring</span>
+              <span class="badge badge-kyc-expired">Expired</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== CARDS ======================== -->
+      <section class="section" id="section-cards">
+        <h2 class="section-title">Cards</h2>
+        <p class="section-desc">Content containers with header, body, and footer regions.</p>
+        <div class="demo-block">
+          <div class="demo-block-title">Standard Card</div>
+          <div class="demo-preview">
+            <div class="card" style="max-width: 400px;">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Risk Assessment</div>
+                  <div class="card-description">Review the latest risk scoring for this customer.</div>
+                </div>
+              </div>
+              <div class="card-content">
+                <p class="text-muted-foreground text-sm">This card demonstrates the standard card component with header, content, and footer regions.</p>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-primary btn-sm">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Hover State</div>
+          <div class="demo-preview">
+            <div class="card card-hover" style="max-width: 400px;">
+              <div class="card-content">
+                <div class="card-title mb-2">Interactive Card</div>
+                <p class="text-muted-foreground text-sm">Hover over this card to see the shadow effect applied on hover.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== TABLES ======================== -->
+      <section class="section" id="section-tables">
+        <h2 class="section-title">Tables</h2>
+        <p class="section-desc">Data tables with sortable headers, row hover, and avatar cells.</p>
+        <div class="demo-block">
+          <div class="demo-preview" style="padding: 0; overflow: hidden;">
+            <div class="table-container">
+              <table class="data-table" id="demo-table">
+                <thead>
+                  <tr>
+                    <th onclick="sortTable('demo-table', 0)">Customer <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                    <th onclick="sortTable('demo-table', 1)">Status <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                    <th onclick="sortTable('demo-table', 2)">Risk Score <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                    <th onclick="sortTable('demo-table', 3)">Last Review <span class="sort-icon">&#x25B2;&#x25BC;</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><div class="user-cell"><div class="avatar avatar-md">DV</div><div><div class="user-cell-name">Dmitri Volkov</div><div class="user-cell-email">d.volkov@example.com</div></div></div></td>
+                    <td><span class="badge badge-kyc-expired">Expired</span></td>
+                    <td><div class="risk-score risk-score-critical"><span class="risk-score-value">92</span><div class="risk-score-bar"><div class="risk-score-bar-fill" style="width: 92%;"></div></div></div></td>
+                    <td class="text-muted-foreground text-sm">2025-01-18</td>
+                  </tr>
+                  <tr>
+                    <td><div class="user-cell"><div class="avatar avatar-md">LW</div><div><div class="user-cell-name">Li Wei</div><div class="user-cell-email">l.wei@example.com</div></div></div></td>
+                    <td><span class="badge badge-kyc-valid">Valid</span></td>
+                    <td><div class="risk-score risk-score-high"><span class="risk-score-value">78</span><div class="risk-score-bar"><div class="risk-score-bar-fill" style="width: 78%;"></div></div></div></td>
+                    <td class="text-muted-foreground text-sm">2025-01-15</td>
+                  </tr>
+                  <tr>
+                    <td><div class="user-cell"><div class="avatar avatar-md">MS</div><div><div class="user-cell-name">Maria Santos</div><div class="user-cell-email">m.santos@example.com</div></div></div></td>
+                    <td><span class="badge badge-kyc-valid">Valid</span></td>
+                    <td><div class="risk-score risk-score-high"><span class="risk-score-value">85</span><div class="risk-score-bar"><div class="risk-score-bar-fill" style="width: 85%;"></div></div></div></td>
+                    <td class="text-muted-foreground text-sm">2025-01-10</td>
+                  </tr>
+                  <tr>
+                    <td><div class="user-cell"><div class="avatar avatar-md">AR</div><div><div class="user-cell-name">Ahmed Al-Rashid</div><div class="user-cell-email">a.rashid@example.com</div></div></div></td>
+                    <td><span class="badge badge-kyc-valid">Valid</span></td>
+                    <td><div class="risk-score risk-score-medium"><span class="risk-score-value">65</span><div class="risk-score-bar"><div class="risk-score-bar-fill" style="width: 65%;"></div></div></div></td>
+                    <td class="text-muted-foreground text-sm">2025-01-12</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== NAVIGATION ======================== -->
+      <section class="section" id="section-navigation">
+        <h2 class="section-title">Navigation</h2>
+        <p class="section-desc">Tabs, breadcrumbs, and filter chips for user navigation and content organization.</p>
+        <div class="demo-block">
+          <div class="demo-block-title">Tabs (Pill Style)</div>
+          <div class="demo-preview">
+            <div class="tabs">
+              <button class="tab active" onclick="setActiveTab(this)">Overview</button>
+              <button class="tab" onclick="setActiveTab(this)">Transactions</button>
+              <button class="tab" onclick="setActiveTab(this)">Alerts</button>
+              <button class="tab" onclick="setActiveTab(this)">Documents</button>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Tabs (Nav Style)</div>
+          <div class="demo-preview">
+            <div class="tabs-nav">
+              <button class="tab-nav active">Overview</button>
+              <button class="tab-nav">Transactions</button>
+              <button class="tab-nav">Alerts</button>
+              <button class="tab-nav">Documents</button>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Breadcrumbs</div>
+          <div class="demo-preview">
+            <nav class="breadcrumb">
+              <a class="breadcrumb-item" href="#">Dashboard</a>
+              <svg class="breadcrumb-separator" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <a class="breadcrumb-item" href="#">Customers</a>
+              <svg class="breadcrumb-separator" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <span class="breadcrumb-current">Dmitri Volkov</span>
+            </nav>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Filter Chips</div>
+          <div class="demo-preview">
+            <div class="filter-chips" id="demo-filters">
+              <button class="filter-chip active" onclick="toggleFilter(this)">All</button>
+              <button class="filter-chip" onclick="toggleFilter(this)">Pending</button>
+              <button class="filter-chip" onclick="toggleFilter(this)">Escalated</button>
+              <button class="filter-chip" onclick="toggleFilter(this)">Dismissed</button>
+              <button class="filter-chip" onclick="toggleFilter(this)">Under Review</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== OVERLAYS ======================== -->
+      <section class="section" id="section-overlays">
+        <h2 class="section-title">Overlays</h2>
+        <p class="section-desc">Dialogs, dropdown menus, and tooltips for layered interactions.</p>
+        <div class="demo-block">
+          <div class="demo-block-title">Dialog</div>
+          <div class="demo-preview">
+            <button class="btn btn-primary" onclick="openDialog()">Open Dialog</button>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Dropdown Menu</div>
+          <div class="demo-preview">
+            <div class="dropdown" id="demo-dropdown-wrapper">
+              <button class="btn btn-outline" onclick="toggleDropdown()">
+                Options
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="dropdown-menu" id="demo-dropdown">
+                <div class="dropdown-label">Actions</div>
+                <button class="dropdown-item">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Edit
+                  <span class="dropdown-shortcut">&#x2318;E</span>
+                </button>
+                <button class="dropdown-item">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                  Duplicate
+                </button>
+                <div class="dropdown-separator"></div>
+                <button class="dropdown-item danger">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                  Delete
+                  <span class="dropdown-shortcut">&#x2318;D</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Tooltip</div>
+          <div class="demo-preview">
+            <div style="display: flex; gap: 16px; align-items: center; padding-top: 32px;">
+              <span class="tooltip-wrapper">
+                <button class="btn btn-outline btn-icon">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </button>
+                <span class="tooltip-content">More information</span>
+              </span>
+              <span class="tooltip-wrapper">
+                <button class="btn btn-outline btn-icon">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <span class="tooltip-content">Edit this item</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== FEEDBACK ======================== -->
+      <section class="section" id="section-feedback">
+        <h2 class="section-title">Feedback</h2>
+        <p class="section-desc">Progress indicators, skeletons, toasts, empty states, and alert banners for system feedback.</p>
+        <div class="demo-block">
+          <div class="demo-block-title">Progress Bars</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-4">
+              <div>
+                <div class="flex justify-between mb-2"><span class="text-sm font-medium">Upload progress</span><span class="text-sm text-muted-foreground">65%</span></div>
+                <div class="progress"><div class="progress-fill" style="width: 65%;"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2"><span class="text-sm font-medium">Completed</span><span class="text-sm text-muted-foreground">Success</span></div>
+                <div class="progress"><div class="progress-fill success" style="width: 100%;"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2"><span class="text-sm font-medium">Indeterminate</span><span class="text-sm text-muted-foreground">Loading...</span></div>
+                <div class="progress progress-indeterminate"><div class="progress-fill"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Skeleton Loaders</div>
+          <div class="demo-preview">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="skeleton skeleton-circle" style="width: 40px; height: 40px;"></div>
+              <div class="flex-1">
+                <div class="skeleton skeleton-text" style="width: 60%;"></div>
+                <div class="skeleton skeleton-text" style="width: 40%;"></div>
+              </div>
+            </div>
+            <div class="skeleton skeleton-rect" style="height: 160px;"></div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Alert Banners</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-4">
+              <div class="alert-banner alert-banner-info">
+                <svg class="alert-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <div><div class="alert-banner-title">Information</div><div class="alert-banner-desc">Sanctions list updated to version 2025.01. All screening tasks have been updated.</div></div>
+                <button class="alert-banner-close" onclick="this.parentElement.style.display='none'">&times;</button>
+              </div>
+              <div class="alert-banner alert-banner-success">
+                <svg class="alert-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div><div class="alert-banner-title">Success</div><div class="alert-banner-desc">KYC verification completed successfully for Dmitri Volkov.</div></div>
+              </div>
+              <div class="alert-banner alert-banner-warning">
+                <svg class="alert-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <div><div class="alert-banner-title">Warning</div><div class="alert-banner-desc">5 KYC documents expiring within 30 days. Please review and renew.</div></div>
+              </div>
+              <div class="alert-banner alert-banner-error">
+                <svg class="alert-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <div><div class="alert-banner-title">Error</div><div class="alert-banner-desc">Sanctions screening API returned a timeout. Please retry or contact support.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Toasts</div>
+          <div class="demo-preview">
+            <div class="flex flex-wrap gap-3">
+              <button class="btn btn-sm btn-outline" onclick="showToast('success')">Success Toast</button>
+              <button class="btn btn-sm btn-outline" onclick="showToast('warning')">Warning Toast</button>
+              <button class="btn btn-sm btn-outline" onclick="showToast('error')">Error Toast</button>
+              <button class="btn btn-sm btn-outline" onclick="showToast('info')">Info Toast</button>
+            </div>
+          </div>
+        </div>
+        <div class="demo-block">
+          <div class="demo-block-title">Empty State</div>
+          <div class="demo-preview">
+            <div class="empty-state">
+              <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+              <div class="empty-state-title">No alerts found</div>
+              <div class="empty-state-desc">All alerts have been triaged and resolved. New alerts will appear here when generated.</div>
+              <button class="btn btn-primary">Refresh Alerts</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== EXTRA COMPONENTS ======================== -->
+      <section class="section" id="section-extra">
+        <h2 class="section-title">Additional Components</h2>
+        <p class="section-desc">Pagination, avatar groups, keyboard shortcuts, loading spinners, input patterns, tags, and chat bubbles.</p>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Accordion</div>
+          <div class="demo-preview">
+            <div class="accordion" id="demo-accordion">
+              <div class="accordion-item">
+                <button class="accordion-trigger active" onclick="toggleAccordion(this)">What is sanctions screening? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                <div class="accordion-content open"><div class="accordion-body">Sanctions screening is the process of checking customers and transactions against government and international sanctions lists to prevent doing business with prohibited entities.</div></div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-trigger" onclick="toggleAccordion(this)">What is Enhanced Due Diligence? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                <div class="accordion-content"><div class="accordion-body">EDD is a higher level of customer due diligence applied to high-risk customers, including PEPs and customers from high-risk jurisdictions.</div></div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-trigger" onclick="toggleAccordion(this)">When should I file a SAR? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                <div class="accordion-content"><div class="accordion-body">File a Suspicious Activity Report (SAR) when you identify transactions or patterns that may involve money laundering, terrorist financing, or other financial crimes.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Pagination</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-6">
+              <div class="pagination">
+                <button class="pagination-btn" disabled>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <span class="text-sm text-muted-foreground" style="padding: 0 4px;">...</span>
+                <button class="pagination-btn">12</button>
+                <button class="pagination-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
+              <div class="pagination">
+                <button class="pagination-btn" disabled>Previous</button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">Next</button>
+                <span class="pagination-info">Page 1 of 5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Avatar Group</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-4">
+              <div>
+                <p class="text-sm font-medium mb-3">Team members assigned</p>
+                <div class="avatar-group">
+                  <div class="avatar avatar-md" style="background: linear-gradient(135deg, var(--chart-1), var(--chart-2));">DV</div>
+                  <div class="avatar avatar-md" style="background: linear-gradient(135deg, var(--chart-3), var(--chart-4));">LW</div>
+                  <div class="avatar avatar-md" style="background: linear-gradient(135deg, var(--chart-5), var(--chart-1));">MS</div>
+                  <div class="avatar avatar-md" style="background: linear-gradient(135deg, var(--info), var(--chart-2));">AR</div>
+                  <div class="avatar-group-overflow">+3</div>
+                </div>
+              </div>
+              <div>
+                <p class="text-sm font-medium mb-3">Approval chain</p>
+                <div class="avatar-group">
+                  <div class="avatar avatar-sm" style="background: linear-gradient(135deg, var(--success), oklch(0.4 0.1 150));">JP</div>
+                  <div class="avatar avatar-sm" style="background: linear-gradient(135deg, var(--info), var(--chart-3));">MK</div>
+                  <div class="avatar avatar-sm" style="background: linear-gradient(135deg, var(--chart-4), var(--chart-5));">RB</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Keyboard Shortcuts</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-2"><span class="text-sm">Save</span><div class="flex gap-1"><kbd class="kbd">⌘</kbd><kbd class="kbd">S</kbd></div></div>
+              <div class="flex items-center gap-2"><span class="text-sm">Search</span><div class="flex gap-1"><kbd class="kbd">⌘</kbd><kbd class="kbd">K</kbd></div></div>
+              <div class="flex items-center gap-2"><span class="text-sm">New alert</span><div class="flex gap-1"><kbd class="kbd">⌘</kbd><kbd class="kbd">N</kbd></div></div>
+              <div class="flex items-center gap-2"><span class="text-sm">Escalate</span><div class="flex gap-1"><kbd class="kbd">Shift</kbd><kbd class="kbd">E</kbd></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Loading Spinners</div>
+          <div class="demo-preview">
+            <div class="flex items-center gap-6">
+              <div class="spinner spinner-sm"></div>
+              <div class="spinner"></div>
+              <div class="spinner spinner-lg"></div>
+              <button class="btn btn-primary btn-sm" disabled>
+                <div class="spinner spinner-sm" style="border-color: oklch(0.985 0 0 / 0.3); border-top-color: var(--primary-foreground);"></div>
+                Processing...
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Input with Icon / Addon</div>
+          <div class="demo-preview">
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div class="input-group">
+                <label class="input-label">Search</label>
+                <div class="input-with-icon">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input class="input" type="text" placeholder="Search alerts...">
+                </div>
+              </div>
+              <div class="input-group">
+                <label class="input-label">Website</label>
+                <div class="input-addon">
+                  <span class="input-addon-prefix">https://</span>
+                  <input class="input" type="text" placeholder="example.com" style="border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+                </div>
+              </div>
+              <div class="input-group">
+                <label class="input-label">Transaction Amount</label>
+                <div class="input-addon">
+                  <span class="input-addon-prefix">$</span>
+                  <input class="input" type="number" placeholder="0.00" style="border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+                  <span class="input-addon-suffix">USD</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Tag Input</div>
+          <div class="demo-preview">
+            <div class="input-group">
+              <label class="input-label">Tags</label>
+              <div class="tag-input" id="demo-tag-input">
+                <span class="tag">PEP <button class="tag-remove" onclick="this.parentElement.remove()">&times;</button></span>
+                <span class="tag">Sanctions <button class="tag-remove" onclick="this.parentElement.remove()">&times;</button></span>
+                <span class="tag">High-Risk <button class="tag-remove" onclick="this.parentElement.remove()">&times;</button></span>
+                <input type="text" placeholder="Add tag...">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Chat / Message Bubbles</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-4" style="max-width: 500px;">
+              <div class="flex gap-3" style="align-self: flex-start;">
+                <div class="avatar avatar-sm" style="background: linear-gradient(135deg, var(--info), oklch(0.45 0.22 280)); flex-shrink: 0;">AI</div>
+                <div style="background: var(--muted); border-radius: var(--radius-md); padding: 12px 16px; max-width: 360px; font-size: 14px; line-height: 1.6;">
+                  I've analyzed alert AML-001. This is a critical sanctions match on the OFAC SDN list. I recommend immediate escalation.
+                </div>
+              </div>
+              <div class="flex gap-3" style="align-self: flex-end; flex-direction: row-reverse;">
+                <div class="avatar avatar-sm" style="background: var(--primary); flex-shrink: 0;">JD</div>
+                <div style="background: var(--primary); color: var(--primary-foreground); border-radius: var(--radius-md); padding: 12px 16px; max-width: 360px; font-size: 14px; line-height: 1.6;">
+                  Show me the transaction patterns that triggered this.
+                </div>
+              </div>
+              <div class="flex gap-3" style="align-self: flex-start;">
+                <div class="avatar avatar-sm" style="background: linear-gradient(135deg, var(--info), oklch(0.45 0.22 280)); flex-shrink: 0;">AI</div>
+                <div style="background: var(--muted); border-radius: var(--radius-md); padding: 12px 16px; max-width: 360px; font-size: 14px; line-height: 1.6;">
+                  Three large transfers to high-risk jurisdictions within 72 hours: $485K to Cyprus, $250K from Latvia, $175K to Malta.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Form Layout Patterns</div>
+          <div class="demo-preview">
+            <div style="max-width: 480px;">
+              <div class="input-group mb-4">
+                <label class="input-label">Full name</label>
+                <input class="input" placeholder="John Doe">
+              </div>
+              <div class="input-group mb-4">
+                <label class="input-label">Email</label>
+                <input class="input" type="email" placeholder="john@example.com">
+                <span class="input-description">We'll never share your email with anyone else.</span>
+              </div>
+              <div style="grid-template-columns: 1fr 1fr; gap: 16px;" class="grid mb-4">
+                <div class="input-group mb-4">
+                  <label class="input-label">Country</label>
+                  <select class="select"><option>Select country...</option><option>United States</option><option>United Kingdom</option><option>Singapore</option></select>
+                </div>
+                <div class="input-group mb-4">
+                  <label class="input-label">Customer ID</label>
+                  <input class="input" placeholder="CUST-XXXX">
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 mb-4">
+                <label class="checkbox"><input type="checkbox"> Enable auto-screening against sanctions lists</label>
+                <label class="checkbox"><input type="checkbox"> Send email notifications for new alerts</label>
+              </div>
+              <div class="separator"></div>
+              <div class="flex gap-3" style="justify-content: flex-end;">
+                <button class="btn btn-outline">Cancel</button>
+                <button class="btn btn-primary">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Table with Bulk Selection</div>
+          <div class="demo-preview" style="padding: 0; overflow: hidden;">
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 48px; padding: 0 16px;"><label class="checkbox" style="justify-content: center;"><input type="checkbox" id="select-all-rows" onclick="toggleAllRows(this)"></label></th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Risk Score</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="bulk-table">
+                  <tr><td style="text-align: center;"><label class="checkbox" style="justify-content: center;"><input type="checkbox" class="row-checkbox"></label></td><td><div class="user-cell"><div class="avatar avatar-md">DV</div><div><div class="user-cell-name">Dmitri Volkov</div></div></div></td><td><span class="badge badge-critical"><span class="badge-dot"></span>Critical</span></td><td><div class="risk-score risk-score-critical"><span class="risk-score-value">92</span></div></td><td><button class="btn btn-outline btn-sm">Review</button></td></tr>
+                  <tr><td style="text-align: center;"><label class="checkbox" style="justify-content: center;"><input type="checkbox" class="row-checkbox"></label></td><td><div class="user-cell"><div class="avatar avatar-md">LW</div><div><div class="user-cell-name">Li Wei</div></div></div></td><td><span class="badge badge-high"><span class="badge-dot"></span>High</span></td><td><div class="risk-score risk-score-high"><span class="risk-score-value">78</span></div></td><td><button class="btn btn-outline btn-sm">Review</button></td></tr>
+                  <tr><td style="text-align: center;"><label class="checkbox" style="justify-content: center;"><input type="checkbox" class="row-checkbox"></label></td><td><div class="user-cell"><div class="avatar avatar-md">AR</div><div><div class="user-cell-name">Ahmed Al-Rashid</div></div></div></td><td><span class="badge badge-medium"><span class="badge-dot"></span>Medium</span></td><td><div class="risk-score risk-score-medium"><span class="risk-score-value">65</span></div></td><td><button class="btn btn-outline btn-sm">Review</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== COMPLIANCE COMPONENTS ======================== -->
+      <section class="section" id="section-compliance">
+        <h2 class="section-title">Compliance Components</h2>
+        <p class="section-desc">Domain-specific components extracted from norbloc prototypes for AML, KYC, and UBO workflows.</p>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Risk Score Display</div>
+          <p class="demo-block-desc">Numeric risk score with color-coded severity and mini progress bar.</p>
+          <div class="demo-preview">
+            <div class="grid grid-cols-4" style="gap: 20px;">
+              <div class="risk-score risk-score-low"><span class="risk-score-value">23</span><div class="risk-score-bar"><div class="risk-score-bar-fill" style="width: 23%;"></div></div><span class="text-xs text-muted-foreground">Low</span></div>
+              <div class="risk-score risk-score-medium"><span class="risk-score-value">58</span><div class="risk-score-bar"><div class="risk-score-bar-fill" style="width: 58%;"></div></div><span class="text-xs text-muted-foreground">Medium</span></div>
+              <div class="risk-score risk-score-high"><span class="risk-score-value">78</span><div class="risk-score-bar"><div class="risk-score-bar-fill" style="width: 78%;"></div></div><span class="text-xs text-muted-foreground">High</span></div>
+              <div class="risk-score risk-score-critical"><span class="risk-score-value">92</span><div class="risk-score-bar"><div class="risk-score-bar-fill" style="width: 92%;"></div></div><span class="text-xs text-muted-foreground">Critical</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Risk Factor Breakdown</div>
+          <p class="demo-block-desc">Weighted factor contributions to overall risk score.</p>
+          <div class="demo-preview" style="max-width: 400px;">
+            <div class="risk-factor">
+              <div class="risk-factor-header"><span class="risk-factor-name">Sanctions Proximity</span><span class="risk-factor-value">98%</span></div>
+              <div class="risk-factor-bar"><div class="risk-factor-fill" style="width: 98%; background: var(--critical);"></div></div>
+            </div>
+            <div class="risk-factor">
+              <div class="risk-factor-header"><span class="risk-factor-name">High-Risk Jurisdiction</span><span class="risk-factor-value">75%</span></div>
+              <div class="risk-factor-bar"><div class="risk-factor-fill" style="width: 75%; background: oklch(0.6 0.2 56);"></div></div>
+            </div>
+            <div class="risk-factor">
+              <div class="risk-factor-header"><span class="risk-factor-name">Transaction Velocity</span><span class="risk-factor-value">60%</span></div>
+              <div class="risk-factor-bar"><div class="risk-factor-fill" style="width: 60%; background: var(--warning);"></div></div>
+            </div>
+            <div class="risk-factor">
+              <div class="risk-factor-header"><span class="risk-factor-name">PEP Status</span><span class="risk-factor-value">45%</span></div>
+              <div class="risk-factor-bar"><div class="risk-factor-fill" style="width: 45%; background: var(--info);"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Alert Cards</div>
+          <p class="demo-block-desc">Severity-colored left border with customer info, alert type, status, and actions.</p>
+          <div class="demo-preview" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="alert-card severity-critical">
+              <div class="alert-card-content">
+                <div class="alert-card-top">
+                  <span class="alert-card-customer">Dmitri Volkov</span>
+                  <span class="badge badge-critical" style="font-size: 11px;"><span class="badge-dot"></span>Critical</span>
+                  <span class="badge badge-sanctions" style="font-size: 11px;">Sanctions</span>
+                </div>
+                <div class="alert-card-type">Sanctions Hit &mdash; AML-001</div>
+                <div class="alert-card-meta">
+                  <span>CUST-4821</span>
+                  <span class="kyc-status kyc-expired"><span class="kyc-dot"></span> KYC Expired</span>
+                  <span>1 hour ago</span>
+                </div>
+              </div>
+              <div class="flex gap-2" style="align-items: flex-start;">
+                <button class="btn btn-primary btn-sm">Investigate</button>
+              </div>
+            </div>
+            <div class="alert-card severity-high">
+              <div class="alert-card-content">
+                <div class="alert-card-top">
+                  <span class="alert-card-customer">Li Wei</span>
+                  <span class="badge badge-high" style="font-size: 11px;"><span class="badge-dot"></span>High</span>
+                </div>
+                <div class="alert-card-type">Structuring &mdash; AML-002</div>
+                <div class="alert-card-meta">
+                  <span>CUST-3392</span>
+                  <span class="kyc-status kyc-valid"><span class="kyc-dot"></span> KYC Valid</span>
+                  <span>2 hours ago</span>
+                </div>
+              </div>
+              <div class="flex gap-2" style="align-items: flex-start;">
+                <button class="btn btn-outline btn-sm">View</button>
+              </div>
+            </div>
+            <div class="alert-card severity-medium">
+              <div class="alert-card-content">
+                <div class="alert-card-top">
+                  <span class="alert-card-customer">Ahmed Al-Rashid</span>
+                  <span class="badge badge-medium" style="font-size: 11px;"><span class="badge-dot"></span>Medium</span>
+                </div>
+                <div class="alert-card-type">Volume Spike &mdash; AML-005</div>
+                <div class="alert-card-meta">
+                  <span>CUST-5566</span>
+                  <span class="kyc-status kyc-expiring"><span class="kyc-dot"></span> KYC Expiring</span>
+                  <span>12 hours ago</span>
+                </div>
+              </div>
+              <div class="flex gap-2" style="align-items: flex-start;">
+                <button class="btn btn-outline btn-sm">View</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Transaction Timeline</div>
+          <p class="demo-block-desc">Chronological transaction entries with inbound/outbound indicators.</p>
+          <div class="demo-preview" style="max-width: 400px;">
+            <div class="tx-timeline">
+              <div class="tx-timeline-item">
+                <div class="tx-timeline-dot outbound"></div>
+                <div class="tx-date">2025-01-18</div>
+                <div class="tx-amount" style="color: var(--destructive);">-$485,000 USD</div>
+                <div class="tx-counterparty">To: Meridian Holdings Ltd (Cyprus)</div>
+                <div class="tx-direction outbound">Outbound</div>
+              </div>
+              <div class="tx-timeline-item">
+                <div class="tx-timeline-dot inbound"></div>
+                <div class="tx-date">2025-01-17</div>
+                <div class="tx-amount" style="color: var(--success);">+$250,000 EUR</div>
+                <div class="tx-counterparty">From: Baltic Trade Corp (Latvia)</div>
+                <div class="tx-direction inbound">Inbound</div>
+              </div>
+              <div class="tx-timeline-item">
+                <div class="tx-timeline-dot outbound"></div>
+                <div class="tx-date">2025-01-15</div>
+                <div class="tx-amount" style="color: var(--destructive);">-$175,000 USD</div>
+                <div class="tx-counterparty">To: Aegis Capital (Malta)</div>
+                <div class="tx-direction outbound">Outbound</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">AI Recommendation</div>
+          <p class="demo-block-desc">AI-generated triage recommendations with severity-colored cards.</p>
+          <div class="demo-preview" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="ai-recommendation reject">
+              <span class="ai-recommendation-icon">&#x26A0;</span>
+              <div>
+                <div class="ai-rec-title">Escalate Immediately</div>
+                <div class="ai-rec-text">Critical sanctions match on OFAC SDN list (entry #21847). DOB verified. Multiple large transfers to high-risk jurisdictions in 72 hours. Recommend immediate escalation to compliance manager.</div>
+              </div>
+            </div>
+            <div class="ai-recommendation review">
+              <span class="ai-recommendation-icon">&#x1F50D;</span>
+              <div>
+                <div class="ai-rec-title">Enhanced Review Required</div>
+                <div class="ai-rec-text">Structuring pattern detected: 5 cash deposits below $10K threshold within 4 days. Total $47,500 vs historical baseline of $2,100/month. Recommend filing SAR if no legitimate explanation found.</div>
+              </div>
+            </div>
+            <div class="ai-recommendation approve">
+              <span class="ai-recommendation-icon">&#x2713;</span>
+              <div>
+                <div class="ai-rec-title">Clear — No Action Required</div>
+                <div class="ai-rec-text">Volume spike consistent with seasonal business pattern. All counterparties verified. Transaction purposes documented. Recommend closing alert with "Business as Usual" rationale.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Investigation Stepper</div>
+          <p class="demo-block-desc">Multi-step investigation progress indicator.</p>
+          <div class="demo-preview">
+            <div class="stepper">
+              <div class="step-dot done"></div>
+              <div class="step-dot done"></div>
+              <div class="step-dot done"></div>
+              <div class="step-dot active"></div>
+              <div class="step-dot"></div>
+              <div class="step-dot"></div>
+            </div>
+            <p class="text-sm text-muted-foreground">Step 4 of 6: Entity Relationship Analysis</p>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Evidence Cards</div>
+          <p class="demo-block-desc">Source attribution cards for investigation evidence.</p>
+          <div class="demo-preview" style="max-width: 400px; display: flex; flex-direction: column; gap: 8px;">
+            <div class="evidence-card">
+              <div class="evidence-card-title">OFAC Match</div>
+              <div class="evidence-card-desc">Name matches SDN list entry #21847, DOB verified with 98% confidence.</div>
+            </div>
+            <div class="evidence-card">
+              <div class="evidence-card-title">Transaction Pattern</div>
+              <div class="evidence-card-desc">3 large transfers in 72 hours to high-risk jurisdictions (Cyprus, Latvia, Malta).</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Confidence Badges</div>
+          <p class="demo-block-desc">AI extraction confidence levels.</p>
+          <div class="demo-preview">
+            <div class="flex gap-3">
+              <span class="badge confidence-high">96% Confidence</span>
+              <span class="badge confidence-medium">84% Confidence</span>
+              <span class="badge confidence-low">62% Confidence</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Score Trend Indicators</div>
+          <p class="demo-block-desc">Directional risk score change over time.</p>
+          <div class="demo-preview">
+            <div class="flex gap-6" style="align-items: center;">
+              <div class="trend trend-up">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+                +12
+              </div>
+              <div class="trend trend-down">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                -8
+              </div>
+              <div class="trend trend-stable">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                0
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== UTILITIES ======================== -->
+      <section class="section" id="section-utilities">
+        <h2 class="section-title">Utilities</h2>
+        <p class="section-desc">Common utility classes, text handling, file inputs, and misc components.</p>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Text Utilities</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-3">
+              <div class="truncate" style="max-width: 280px; background: var(--muted); padding: 8px 12px; border-radius: var(--radius-sm);">This is a long text that will be truncated with an ellipsis when it overflows its container</div>
+              <span class="code">const apiKey = process.env.API_KEY;</span>
+              <div class="code-block">function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+// Call the function
+greet("World");</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Notification &amp; Status</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-4">
+              <div class="flex items-center gap-3">
+                <button class="btn btn-ghost btn-sm relative">
+                  Notifications
+                  <span class="badge-count" style="position: absolute; top: -4px; right: -4px;">3</span>
+                </button>
+                <button class="btn btn-ghost btn-sm relative">
+                  Updates
+                  <span class="badge-count-outline" style="position: absolute; top: -4px; right: -4px;">12</span>
+                </button>
+              </div>
+              <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2"><span class="status-dot active"></span><span class="text-sm">Active</span></div>
+                <div class="flex items-center gap-2"><span class="status-dot inactive"></span><span class="text-sm">Inactive</span></div>
+                <div class="flex items-center gap-2"><span class="status-dot error"></span><span class="text-sm">Error</span></div>
+                <div class="flex items-center gap-2"><span class="notification-dot active"></span><span class="text-sm">Live</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">File Input</div>
+          <div class="demo-preview">
+            <div class="flex flex-col gap-4">
+              <div class="input-group">
+                <label class="input-label">Upload document</label>
+                <input type="file" class="file-input">
+              </div>
+              <div class="drop-zone">
+                <div class="text-xl mb-2">&#x2B06;</div>
+                <div class="text-md font-medium mb-1">Drag &amp; drop your file here</div>
+                <div class="text-sm text-muted-foreground">or <button class="btn btn-link" style="display: inline; padding: 0;">browse files</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================== LAYOUTS ======================== -->
+      <section class="section" id="section-layouts">
+        <h2 class="section-title">Layouts</h2>
+        <p class="section-desc">Common layout patterns for dashboard and multi-panel interfaces.</p>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Dashboard Stats Grid</div>
+          <p class="demo-block-desc">Responsive grid of metric cards for KPI dashboards.</p>
+          <div class="dashboard-grid">
+            <div class="stat-card">
+              <div class="stat-label">Total Alerts</div>
+              <div class="stat-value">1,284</div>
+              <div class="stat-change positive">&#x2193; 12% from last week</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Pending Reviews</div>
+              <div class="stat-value">47</div>
+              <div class="stat-change negative">&#x2191; 8% from last week</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Avg Resolution Time</div>
+              <div class="stat-value">2.4h</div>
+              <div class="stat-change positive">&#x2193; 15% improvement</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Escalation Rate</div>
+              <div class="stat-value">3.2%</div>
+              <div class="stat-change positive">&#x2193; 0.5% from last month</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Card Header Pattern</div>
+          <p class="demo-block-desc">Standard card header with title, subtitle, and action buttons.</p>
+          <div class="demo-preview" style="padding: 0; overflow: hidden;">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Customer Risk Profile</div>
+                  <div class="card-description">Comprehensive risk assessment across all monitored customers.</div>
+                </div>
+                <div class="flex gap-2">
+                  <button class="btn btn-outline btn-sm">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Export
+                  </button>
+                  <button class="btn btn-primary btn-sm">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+                    Refresh
+                  </button>
+                </div>
+              </div>
+              <div class="card-content">
+                <p class="text-muted-foreground text-sm">Card content goes here. This pattern is used consistently across all dashboard cards.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-block">
+          <div class="demo-block-title">Separators</div>
+          <p class="demo-block-desc">Horizontal and vertical dividers for content organization.</p>
+          <div class="demo-preview">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium">Overview</span>
+              <span class="separator-vertical"></span>
+              <span class="text-sm text-muted-foreground">Customer Profile</span>
+              <span class="separator-vertical"></span>
+              <span class="text-sm text-muted-foreground">Risk Factors</span>
+            </div>
+            <div class="separator"></div>
+            <p class="text-sm text-muted-foreground">Content below the separator.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Dialog Overlay -->
+  <div class="dialog-overlay" id="dialog-overlay" onclick="closeDialog(event)">
+    <div class="dialog-content" onclick="event.stopPropagation()">
+      <div class="dialog-header">
+        <div>
+          <div class="dialog-title">Confirm Escalation</div>
+          <div class="dialog-description mt-2">This alert will be escalated to the compliance management team. This action cannot be undone.</div>
+        </div>
+        <button class="dialog-close" onclick="closeDialog()">&times;</button>
+      </div>
+      <div class="dialog-footer">
+        <button class="btn btn-outline" onclick="closeDialog()">Cancel</button>
+        <button class="btn btn-destructive" onclick="closeDialog()">Escalate Alert</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script>
+    /* ============================================================
+       SHOWCASE NAVIGATION
+       ============================================================ */
+    const navItems = document.querySelectorAll('.showcase-nav-item');
+    const sections = document.querySelectorAll('.section');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const sectionId = item.getAttribute('data-section');
+        if (!sectionId) return;
+
+        navItems.forEach(n => n.classList.remove('active'));
+        item.classList.add('active');
+
+        sections.forEach(s => s.classList.remove('active'));
+        const target = document.getElementById('section-' + sectionId);
+        if (target) target.classList.add('active');
+      });
+    });
+
+    /* ============================================================
+       TAB INTERACTION
+       ============================================================ */
+    function setActiveTab(el) {
+      el.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+    }
+    document.querySelectorAll('.tab-nav').forEach(tab => {
+      tab.addEventListener('click', function() {
+        this.parentElement.querySelectorAll('.tab-nav').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    /* ============================================================
+       FILTER CHIPS
+       ============================================================ */
+    function toggleFilter(el) {
+      el.classList.toggle('active');
+    }
+
+    /* ============================================================
+       DIALOG
+       ============================================================ */
+    function openDialog() {
+      document.getElementById('dialog-overlay').classList.add('open');
+    }
+    function closeDialog(e) {
+      if (e && e.target !== e.currentTarget) return;
+      document.getElementById('dialog-overlay').classList.remove('open');
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeDialog();
+        closeDropdown();
+      }
+    });
+
+    /* ============================================================
+       DROPDOWN
+       ============================================================ */
+    function toggleDropdown() {
+      const menu = document.getElementById('demo-dropdown');
+      menu.classList.toggle('open');
+    }
+    function closeDropdown() {
+      const menu = document.getElementById('demo-dropdown');
+      if (menu) menu.classList.remove('open');
+    }
+    document.addEventListener('click', function(e) {
+      const wrapper = document.getElementById('demo-dropdown-wrapper');
+      if (wrapper && !wrapper.contains(e.target)) {
+        closeDropdown();
+      }
+    });
+
+    /* ============================================================
+       TOAST NOTIFICATIONS
+       ============================================================ */
+    const toastMessages = {
+      success: { title: 'KYC Verified', desc: 'Document verification completed successfully.' },
+      warning: { title: 'Review Needed', desc: '5 documents expiring within 30 days.' },
+      error: { title: 'Screening Failed', desc: 'Sanctions API returned a timeout error.' },
+      info: { title: 'Sanctions Updated', desc: 'List updated to version 2025.01.18.' }
+    };
+
+    function showToast(type) {
+      const container = document.getElementById('toast-container');
+      const msg = toastMessages[type] || toastMessages.info;
+
+      const toast = document.createElement('div');
+      toast.className = 'toast toast-' + type;
+
+      const iconMap = {
+        success: '&#x2713;',
+        warning: '&#x26A0;',
+        error: '&#x2717;',
+        info: '&#x2139;'
+      };
+
+      toast.innerHTML = `
+        <div style="font-size: 16px; line-height: 1;">${iconMap[type] || iconMap.info}</div>
+        <div class="flex-1">
+          <div class="toast-title">${msg.title}</div>
+          <div class="toast-description">${msg.desc}</div>
+        </div>
+        <button class="toast-close" onclick="this.parentElement.classList.add('removing'); setTimeout(() => this.parentElement.remove(), 300);">&times;</button>
+      `;
+
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.add('removing');
+        setTimeout(() => toast.remove(), 300);
+      }, 5000);
+    }
+
+    /* ============================================================
+       ACCORDION
+       ============================================================ */
+    function toggleAccordion(trigger) {
+      const content = trigger.nextElementSibling;
+      const isOpen = content.classList.contains('open');
+
+      trigger.classList.toggle('active');
+      content.classList.toggle('open');
+    }
+
+    /* ============================================================
+       PAGINATION
+       ============================================================ */
+    document.querySelectorAll('.pagination-btn:not(:disabled)').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const pagination = this.closest('.pagination');
+        if (!pagination) return;
+        pagination.querySelectorAll('.pagination-btn').forEach(b => b.classList.remove('active'));
+        if (!this.querySelector('svg')) {
+          this.classList.add('active');
+        }
+      });
+    });
+
+    /* ============================================================
+       TABLE BULK SELECTION
+       ============================================================ */
+    function toggleAllRows(masterCheckbox) {
+      const checkboxes = masterCheckbox.closest('.data-table')?.querySelectorAll('.row-checkbox')
+        || document.querySelectorAll('#bulk-table .row-checkbox');
+      checkboxes.forEach(cb => { cb.checked = masterCheckbox.checked; });
+    }
+
+    /* ============================================================
+       TAG INPUT
+       ============================================================ */
+    document.querySelectorAll('.tag-input input').forEach(input => {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && this.value.trim()) {
+          e.preventDefault();
+          const tag = document.createElement('span');
+          tag.className = 'tag';
+          tag.innerHTML = this.value.trim() + ' <button class="tag-remove" onclick="this.parentElement.remove()">&times;</button>';
+          this.parentElement.insertBefore(tag, this);
+          this.value = '';
+        }
+      });
+    });
+
+    /* ============================================================
+       TABLE SORTING
+       ============================================================ */
+    function sortTable(tableId, colIndex) {
+      const table = document.getElementById(tableId);
+      if (!table) return;
+      const tbody = table.querySelector('tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+
+      const header = table.querySelectorAll('th')[colIndex];
+      const isAsc = header.getAttribute('data-sort') !== 'asc';
+
+      rows.sort((a, b) => {
+        let aText = a.cells[colIndex].textContent.trim();
+        let bText = b.cells[colIndex].textContent.trim();
+
+        const aNum = parseFloat(aText.replace(/[^0-9.-]/g, ''));
+        const bNum = parseFloat(bText.replace(/[^0-9.-]/g, ''));
+        if (!isNaN(aNum) && !isNaN(bNum)) {
+          return isAsc ? aNum - bNum : bNum - aNum;
+        }
+        return isAsc ? aText.localeCompare(bText) : bText.localeCompare(aText);
+      });
+
+      rows.forEach(row => tbody.appendChild(row));
+      table.querySelectorAll('th').forEach(th => th.removeAttribute('data-sort'));
+      header.setAttribute('data-sort', isAsc ? 'asc' : 'desc');
+    }
+  </script>
+</body>
+</html>

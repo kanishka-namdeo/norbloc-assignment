@@ -1,0 +1,48 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic "norbloc Sancus" [ref=e3]
+    - separator [ref=e4]
+    - generic [ref=e5]: Intelligent UBO Graph Extraction
+    - navigation "Stage navigation" [ref=e6]:
+      - tab "Upload" [selected] [ref=e7] [cursor=pointer]:
+        - generic [ref=e8]: "1"
+        - text: Upload
+      - generic [ref=e9]: →
+      - tab "Extraction" [ref=e27] [cursor=pointer]:
+        - generic [ref=e28]: "2"
+        - text: Extraction
+      - generic [ref=e10]: →
+      - tab "Graph" [ref=e29] [cursor=pointer]:
+        - generic [ref=e30]: "3"
+        - text: Graph
+      - generic [ref=e11]: →
+      - tab "Review":
+        - generic: "4"
+        - text: Review
+    - generic "Prototype version" [ref=e12]: Prototype
+  - tabpanel "Extracting UBO Data... Ingesting Documents OCR scanning and multi-language text extraction Extracting Entities Identifying company names, directors, UBOs, and jurisdictions Mapping Relationships Resolving ownership chains and control structures Building UBO Graph Structuring entities, versioning, and audit trail for FATF/EU compliance 25 Scanning documents with multi-language OCR..." [ref=e31]:
+    - generic [ref=e32]:
+      - heading "Extracting UBO Data..." [level=2] [ref=e33]
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - img [ref=e37]
+          - generic [ref=e40]:
+            - generic [ref=e41]: Ingesting Documents
+            - generic [ref=e42]: OCR scanning and multi-language text extraction
+        - generic [ref=e45]:
+          - img [ref=e47]
+          - generic [ref=e50]:
+            - generic [ref=e51]: Extracting Entities
+            - generic [ref=e52]: Identifying company names, directors, UBOs, and jurisdictions
+        - generic [ref=e53]:
+          - img [ref=e55]
+          - generic [ref=e57]:
+            - generic [ref=e58]: Mapping Relationships
+            - generic [ref=e59]: Resolving ownership chains and control structures
+        - generic [ref=e60]:
+          - img [ref=e62]
+          - generic [ref=e66]:
+            - generic [ref=e67]: Building UBO Graph
+            - generic [ref=e68]: Structuring entities, versioning, and audit trail for FATF/EU compliance
+      - progressbar "Extraction progress" [ref=e69]
+      - generic [ref=e71]: Scanning documents with multi-language OCR...

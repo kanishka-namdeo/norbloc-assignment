@@ -1,0 +1,137 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - button "Go back to new case" [ref=e72] [cursor=pointer]:
+      - img [ref=e73]
+      - text: New Case
+    - generic "norbloc Sancus" [ref=e3]
+    - separator [ref=e4]
+    - generic [ref=e5]: Intelligent UBO Graph Extraction
+    - navigation "Stage navigation" [ref=e6]:
+      - tab "Upload" [ref=e7] [cursor=pointer]:
+        - generic [ref=e8]: "1"
+        - text: Upload
+      - generic [ref=e9]: →
+      - tab "Extraction" [ref=e27] [cursor=pointer]:
+        - generic [ref=e28]: "2"
+        - text: Extraction
+      - generic [ref=e10]: →
+      - tab "Graph" [selected] [ref=e29] [cursor=pointer]:
+        - generic [ref=e30]: "3"
+        - text: Graph
+      - generic [ref=e11]: →
+      - tab "Review":
+        - generic: "4"
+        - text: Review
+    - button "Settings menu" [ref=e76] [cursor=pointer]: ⚙ Settings
+    - generic "Prototype version" [ref=e12]: Prototype
+  - tabpanel "Extracted UBO Graph 9 Entities 3 Jurisdictions 91% Avg Confidence Start entity review mode Entities needing review Open extraction dashboard Extraction metadata Graph filters UBO ownership graph visualization Graph legend" [ref=e77]:
+    - generic [ref=e78]:
+      - generic [ref=e79]:
+        - generic [ref=e80]: Extracted UBO Graph
+        - generic [ref=e81]:
+          - generic [ref=e82]:
+            - generic [ref=e83]: "9"
+            - generic [ref=e84]: Entities
+          - generic [ref=e85]:
+            - generic [ref=e86]: "3"
+            - generic [ref=e87]: Jurisdictions
+          - generic [ref=e88]:
+            - generic [ref=e89]: 91%
+            - generic [ref=e90]: Avg Confidence
+        - generic [ref=e91]:
+          - button "Start entity review mode" [ref=e92] [cursor=pointer]: ✓ Start Review
+          - button "Entities needing review" [ref=e93] [cursor=pointer]:
+            - generic [ref=e95]: "3"
+            - text: need review
+          - button "Open extraction dashboard" [ref=e96] [cursor=pointer]: 📊 Dashboard
+      - navigation "Extraction metadata" [ref=e97]:
+        - generic [ref=e98]:
+          - text: "📄 Source:"
+          - strong [ref=e99]: demo_registry_extract.pdf
+        - generic [ref=e100]:
+          - text: "⏱ Extracted:"
+          - strong [ref=e101]: 03:13 PM
+        - generic [ref=e102]:
+          - text: "🔄 Version:"
+          - strong [ref=e103]: v1.0
+        - generic [ref=e104]:
+          - text: "🛡 FATF/EU Audit Trail:"
+          - strong [ref=e105]: Compliant
+      - toolbar "Graph filters" [ref=e106]:
+        - generic [ref=e107]: "Confidence:"
+        - radio "All" [checked] [ref=e108] [cursor=pointer]
+        - radio "🟢 High" [ref=e109] [cursor=pointer]
+        - radio "🟡 Medium" [ref=e110] [cursor=pointer]
+        - radio "🔴 Low" [ref=e111] [cursor=pointer]
+        - separator [ref=e112]
+        - generic [ref=e113]: "Type:"
+        - radio "All" [checked] [ref=e114] [cursor=pointer]
+        - radio "UBOs" [ref=e115] [cursor=pointer]
+        - radio "Directors" [ref=e116] [cursor=pointer]
+        - radio "Subsidiaries" [ref=e117] [cursor=pointer]
+        - separator [ref=e118]
+        - button "Toggle entity list sidebar" [ref=e119] [cursor=pointer]: 📋 Entity List
+        - button "Show help tips" [ref=e120] [cursor=pointer]: "? Help"
+      - img "UBO ownership graph visualization" [ref=e121]:
+        - tooltip "Explore the UBO Graph Click any node to view details · Drag to rearrange · Scroll to zoom This hint will disappear after your first click.":
+          - heading "Explore the UBO Graph" [level=4]
+          - paragraph:
+            - text: Click any node to view details · Drag to rearrange · Scroll to zoom
+            - text: This hint will disappear after your first click.
+        - button "Reset graph zoom and pan" [ref=e122] [cursor=pointer]: ⤊ Reset View
+        - img [ref=e123]:
+          - generic [ref=e124]:
+            - generic [ref=e135]:
+              - generic [ref=e136]: 60%
+              - generic [ref=e137]: 100%
+              - generic [ref=e138]: 45%
+              - generic [ref=e139]: 30%
+              - generic [ref=e140]: 70%
+              - generic [ref=e141]: 30%
+              - generic [ref=e142]: 25%
+            - generic [ref=e143]:
+              - generic [ref=e144] [cursor=pointer]:
+                - generic: AH
+                - generic: Alpha Holdings F...
+              - generic [ref=e147] [cursor=pointer]:
+                - generic: NT
+                - generic: Nordic Trade AB
+              - generic [ref=e150] [cursor=pointer]:
+                - generic: GV
+                - generic: Gulf Ventures DMCC
+              - generic [ref=e153] [cursor=pointer]:
+                - generic: AL
+                - generic: Aegean Logistics...
+              - generic [ref=e156] [cursor=pointer]:
+                - generic: RA
+                - generic: Rashid Al-Maktoum
+              - generic [ref=e159] [cursor=pointer]:
+                - generic: FA
+                - generic: Fatima Al-Nahyan
+              - generic [ref=e162] [cursor=pointer]:
+                - generic: SP
+                - generic: Sofia Papadopoulos
+              - generic [ref=e165] [cursor=pointer]:
+                - generic: EL
+                - generic: Erik Lindqvist
+              - generic [ref=e168] [cursor=pointer]:
+                - generic: NV
+                - generic: Nikos Vlahos
+      - complementary "Graph legend" [ref=e171]:
+        - generic [ref=e172]: Legend
+        - generic [ref=e173]:
+          - generic [ref=e174]: Entity Type
+          - generic [ref=e175]:
+            - generic [ref=e176]: Parent Company
+            - generic [ref=e178]: Subsidiary
+            - generic [ref=e180]: UBO
+            - generic [ref=e182]: Director
+        - generic [ref=e184]:
+          - generic [ref=e185]: Confidence
+          - generic [ref=e186]:
+            - generic [ref=e187]: High (>0.90)
+            - generic [ref=e189]: Medium (0.80-0.90)
+            - generic [ref=e191]: Low (<0.80)
+        - generic [ref=e193]:
+          - generic [ref=e194]: Edges
+          - generic [ref=e196]: Ownership %

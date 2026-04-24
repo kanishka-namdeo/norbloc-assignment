@@ -1,0 +1,278 @@
+﻿
+================================================================================
+SLIDE 1
+Layout: DEFAULT
+================================================================================
+  AI Strategy &
+  Enablement Lead
+  Candidate Assignment Response
+  Kanishka Namdeo   |   April 2026   |   norbloc
+  Part A: AI Toolkit for Internal Ops  ΓÇó  Part B: AI Product Features for Sancus
+
+
+================================================================================
+SLIDE 2
+Layout: DEFAULT
+================================================================================
+  How This Deck Addresses the Evaluation Criteria
+  01
+  Strategic thinking & prioritization
+  Tools ranked High/Medium/Phase 2 with ROI rationale. Features sequenced Q3 2026 ΓåÆ Q4 2026 ΓåÆ H1 2027 by feasibility and client impact.
+  02
+  Understanding of AI tools & practical application
+  Each tool slide (a) explains why this tool over named alternatives: ZoomInfo, Expensify, Confluence, Salesforce Einstein, Microsoft Copilot.
+  03
+  Ability to define measurable outcomes
+  Every tool and feature includes specific KPIs with targets: "20%+ email reply lift", "40% faster monthly close", "85%+ auto-categorization".
+  04
+  Product intuition & domain awareness
+  Part B features are grounded in Sancus's actual architecture (workflow engine, UBO graph, AML integrations) and regulatory context (EU AI Act, MENA KYC).
+  05
+  Communication clarity
+  Consistent 4-quadrant layout per tool/feature answers exactly (a)ΓÇô(d) as specified. Summary tables on slides 10 and 15 for quick panel reference.
+
+
+================================================================================
+SLIDE 3
+Layout: DEFAULT
+================================================================================
+  My Framing & Assumptions
+  ≡ƒÅó Company
+  Lean team, probably 50-100 people spread across regions
+  Operating in UAE, EU, UK, Greece
+  B2B RegTech means long sales cycles and deals that donΓÇÖt close themselves
+  ΓÜÖ∩╕Å Tech Stack
+  Cloud-hosted SaaS (likely AWS or Azure)
+  Preference likely for mature tool for lean teams
+  No dedicated data team yet
+  ≡ƒÄ» My Priority Lens
+  Whats the return vs how much pain to set up
+  Regulatory data-safety constraints
+  EU AI Act classification: risk scoring and AML triage are treated as highΓÇærisk AI and must remain humanΓÇæsupervised and fully auditable
+  Adoption feasibility for non-tech users
+  AI tools must be low-code / no-code adoptable for broad range of users
+
+
+================================================================================
+SLIDE 4
+Layout: DEFAULT
+================================================================================
+  PART A
+  The AI Toolkit
+  5 tools across Sales, Finance-Ops, and Product ΓÇö selected for maximum ROI within a lean RegTech context
+  1.  Clay.com - AI Sales Intelligence
+  2.  HubSpot AI - CRM + Deal Assist
+  3.  Glean - Internal Knowledge AI
+  4.  Airwallex - AI spend Management
+  5.  Notion AI - Product Planning
+
+
+================================================================================
+SLIDE 5
+Layout: DEFAULT
+================================================================================
+  Tool 1  ┬╖  SALES
+  Clay.com ΓÇö AI-Powered Sales Intelligence
+  "Know your prospect deeply before they know you." Clay enriches CRM contacts automatically with firmographic + intent data.
+  (a) Why this tool?
+  Clay outperforms ZoomInfo/Apollo for enrichment breadth + customization. Its AI waterfall pulls from 50+ data sources. Ideal for norbloc's niche ICP (compliance officers at banks). AIΓÇædriven enrichment waterfall offers broader customization than traditional databases
+  (b) Rollout & Timeline
+  Week 1ΓÇô2: Connect to CRM (HubSpot). Define ICP signals (AML compliance, KYC roles, MENA/EU banks). Week 3ΓÇô4: Build enrichment waterfalls + first 500 accounts. Month 2+: Sales team uses enriched lists; automate sequences.
+  (c) Adoption & Impact Metrics
+  Weekly: # accounts enriched, email open rate uplift vs. control. Monthly: SQL conversion rate from enriched vs. unenriched accounts. Pipeline velocity (days to first meeting). Adoption: % of reps using Clay-enriched lists.
+  (d) Success at 6 Months
+  500+ high-quality accounts enriched. 20%+ lift in email reply rates. Sales team spending Γëñ 10 min/week on manual research. 1ΓÇô2 new qualified pipeline opportunities per rep per month attributable to Clay.
+
+
+================================================================================
+SLIDE 6
+Layout: DEFAULT
+================================================================================
+  Tool 2  ┬╖  SALES
+  HubSpot AI ΓÇö CRM Intelligence & Deal Assist
+  "Let AI run the CRM hygiene so reps focus on closing." HubSpot's native AI summarizes calls, drafts follow-ups, and flags at-risk deals.
+  (a) Why this tool?
+  If HubSpot is the current CRM, its native AI layer provides the lowestΓÇæfriction uplift. Alternatives (Salesforce Einstein) require migration. Built-in AI conversation intelligence, deal scoring, and email drafting beat bolt-on tools for a lean team.
+  (b) Rollout & Timeline
+  Week 1: Enable AI features in HubSpot (call summarization, deal score). Week 2ΓÇô3: Train sales team on AI email draft review. Month 2: Configure deal health alerts. Month 3: Activate predictive lead scoring using historical deal data.
+  (c) Adoption & Impact Metrics
+  CRM data completeness score (target 90%+). Email response rate on AI-drafted vs. manual emails. Deal close rate for AI-flagged vs. non-flagged deals. Time saved on follow-up drafting (survey-based: target 2 hrs/week/rep).
+  (d) Success at 6 Months
+  CRM hygiene at 90%+ data completeness. Reps saving 2+ hrs/week on admin. 15% improvement in deal close rate on AI-assisted pipeline. Predictive scoring reducing wasted outreach by 25%.
+
+
+================================================================================
+SLIDE 7
+Layout: DEFAULT
+================================================================================
+  Tool 3  ┬╖  FINANCE-OPS
+  Airwallex AI-Powered Global Spend Management
+  "One platform for every office. Zero FX friction." Airwallex issues physical and virtual Visa cards with AI receipt matching, auto-categorization, and multi-currency support across UAE, EU (Sweden, Greece, 15+ countries), and the UK.
+  (a) Why this tool?
+  Airwallex beats Expensify/Concur and Pleo with true global coverage. Unlike Pleo (EU-only) and Ramp (US-only), Airwallex supports corporate card issuance, AED wallets, and multi-currency expense management. AI agents auto-match receipts, categorize expenses, and auto-approve 64% of transactions cutting manual review by 21 working days per year. Physical + virtual Visa cards with interbank FX rates eliminate currency conversion fees on cross-office spends.
+  (b) Rollout & Timeline
+  Month 1: Issue Airwallex cards to Finance + CEO across Stockholm, Athens, and UAE; set spend policies and multi-entity limits. Month 2: Roll out virtual cards to all team leads; configure multi-currency rules (SEK/EUR/GBP/AED). Month 3: Enable AI receipt matching, auto-categorization, and compliance agent. Month 4+: Monthly close via Airwallex + accounting integration (Xero/QuickBooks). All 4 offices on one platform.
+  (c) Adoption & Impact Metrics
+  Monthly close time (target: reduce by 40%). AI auto-categorization accuracy (target: 85%+). Expense policy compliance rate. Time from expense to reimbursement (target: <2 days). % expenses auto-approved by AI (target: 60%+). Multi-entity spend visibility across all 4 offices (UAE + 3 EU/UK). FX savings vs. previous card/bank rates.
+  (d) Success at 6 Months
+  Monthly close cycle down from ~5 days to 3 days. 85%+ auto-categorization without manual review. Finance team spending 5 fewer hours/month on reconciliation. 60%+ of expenses auto-approved by AI, eliminating routine manual checks. Zero policy violations in 3+ consecutive months. All 4 offices (UAE, Stockholm, Athens, UK) on a single unified platform.
+
+
+================================================================================
+SLIDE 8
+Layout: DEFAULT
+================================================================================
+  Tool 4  ┬╖  PRODUCT
+  Notion AI ΓÇö Product Planning & Knowledge Ops
+  "One source of truth, actively maintained by AI." Notion AI keeps PRDs, meeting notes, and customer insights organized and queryable.
+  (a) Why this tool?
+  norbloc's product team spans multiple regions with dispersed institutional knowledge. Notion AI (vs. Confluence AI or Linear) offers the best balance of flexibility for product docs + AI summarization + ease of adoption. Low setup friction vs. enterprise alternatives.
+  (b) Rollout & Timeline
+  Week 1ΓÇô2: Migrate existing product docs to Notion. Set up templates: PRDs, sprint notes, customer feedback logs. Week 3ΓÇô4: Enable AI summaries on meeting notes. Month 2: Build a searchable "voice of customer" database from client calls + support tickets. Month 3: Automate weekly product digest.
+  (c) Adoption & Impact Metrics
+  Knowledge retrieval time (survey: "how fast can you find info?"). # of duplicated docs (target: reduce 80%). AI summary usage rate per meeting. Time from customer feedback ΓåÆ feature ticket creation. Team NPS on information quality.
+  (d) Success at 6 Months
+  Single searchable knowledge base used by 100% of product team. Meeting summaries auto-generated for 90%+ of product calls. Customer feedback ΓåÆ  ticket lag reduced from days to <4 hours. Zero "I didn't know that existed" onboarding incidents.
+
+
+================================================================================
+SLIDE 9
+Layout: DEFAULT
+================================================================================
+  Tool 5  ┬╖  PRODUCT
+  Glean ΓÇö Enterprise AI Search & Knowledge Retrieval
+  "Ask anything about norbloc. Get an answer with a source." Glean indexes all tools (Notion, Slack, GDrive, email) into one AI-searchable layer.
+  (a) Why this tool?
+  As norbloc scales, knowledge is scattered across Slack, Google Drive, email, and Notion. Glean (vs. Microsoft Copilot) works across all SaaS tools without requiring Microsoft 365. ItΓÇÖs a leading enterprise AI search that understands context across all tools simultaneously that unifies Slack, GWS and Notion.
+  (b) Rollout & Timeline
+  Month 1: Connect core sources (Slack, GDrive, Notion, email). Month 2: Index and test retrieval quality. Month 3: Roll out to all teams with onboarding session. Ongoing: Monitor search queries to identify knowledge gaps worth filling proactively.
+  (c) Adoption & Impact Metrics
+  Search query volume per week (proxy for adoption). % queries answered without escalation to a colleague. Time to onboard new hires (survey baseline vs. 6-month mark). Reduction in "where is X document?" Slack messages (estimated from channel volume).
+  (d) Success at 6 Months
+  New hires onboarding in 30% less time. 70%+ of internal queries resolved by Glean without pinging a colleague. Team reports 3+ hours/week saved searching for information. Measurable drop in repeat knowledge-sharing Slack messages.
+
+
+================================================================================
+SLIDE 10
+Layout: DEFAULT
+================================================================================
+  Overall architecture
+  This is how every tool will work together
+  [IMAGE: 24]
+
+
+================================================================================
+SLIDE 11
+Layout: DEFAULT
+================================================================================
+  AI Toolkit Summary ΓÇö Part A
+  [TABLE]
+    Row 0: Tool | Area | Key Benefit | 6-Month Win | Priority
+    Row 1: Clay.com | Sales | Prospect enrichment from 50+ sources | 20%+ email reply rate lift | ≡ƒö┤ High
+    Row 2: HubSpot AI | Sales | CRM hygiene + deal intelligence | 15% close rate improvement | ≡ƒö┤ High
+    Row 3: Airwallex | Finance-Ops | Cards + AI spend management | 64% auto-approval, 40% faster monthly close | ≡ƒƒí Medium
+    Row 4: Notion AI | Product | Living knowledge base + AI summaries | 100% team adoption, <4hr feedback lag | ≡ƒƒí Medium
+    Row 5: Glean | Product/All | Cross-tool enterprise search | 30% faster new hire ramp | ≡ƒƒó Phase 2
+
+
+================================================================================
+SLIDE 12
+Layout: DEFAULT
+================================================================================
+  PART B
+  AI-Enhanced Product
+  Features for Sancus
+  3 concrete AI features rooted in Sancus's existing workflow ΓÇö prioritized by client impact and feasibility
+  Feature 1:  Intelligent UBO Graph Extraction (Priority: HIGH)
+  Feature 2:  Adaptive Risk Scoring Engine (Priority: HIGH)
+  Feature 3:  Conversational AML Alert Triage (Priority: MEDIUM)
+
+
+================================================================================
+SLIDE 13
+Layout: DEFAULT
+================================================================================
+  Feature 1  ┬╖  Priority: HIGH
+  Intelligent UBO Graph Extraction & Verification
+  "Stop manually tracing beneficial ownership. Let AI map the corporate tree automatically."
+  (a) User Pain Point
+  For KYB on corporates, officers spend hours parsing multi-page registry documents in different languages to identify UBOs, directors, and ownership chains especially helpful for multi-jurisdiction entities. This is the #1 bottleneck in corporate onboarding.
+  (b) How It Works
+  LLM + OCR pipeline ingests uploaded registry documents (in any language). AI extracts entity names, roles, ownership %, and jurisdiction. Outputs a structured UBO graph that auto-populates Sancus's KYB fields. Confidence scores flag ambiguous data for officer review. ΓÇ£All extracted entities, relationships, and ownership percentages are versioned with source citations, supporting FATF and EU audit expectations for traceability.ΓÇ¥
+  (c) Impact on Client Experience
+  Corporate onboarding time cut by 50ΓÇô60% for complex entities. Officers review a structured graph rather than raw PDFs. Downstream: graph data feeds AML checks automatically, reducing manual AML trigger setup. Clients experience dramatically fewer "we need more documents" requests.
+  (d) Prioritization Rationale
+  Highest ROI opportunity in Sancus today. UBO complexity is the #1 pain point in corporate KYB globally. Sancus already has AI document extraction for some fields ΓÇö this extends the existing capability. Builds on norbloc's existing registry data source integrations.
+
+
+================================================================================
+SLIDE 14
+Layout: DEFAULT
+================================================================================
+  Feature 2  ┬╖  Priority: HIGH
+  Adaptive AI Risk Scoring Engine
+  "Risk scores that learn from your decisions ΓÇö not just a static formula you set once."
+  (a) User Pain Point
+  Sancus's current risk scoring is based on static rules and parameters set during implementation. Over time, as patterns emerge in officer approval/rejection decisions, the model becomes stale. Officers override scores frequently without feedback looping back into the model.
+  (b) How It Works
+  ML model trained on historical case outcomes (approved, rejected, flagged for EDD). Ingests all structured risk factors (country risk, PEP status, document quality, source of funds). The model retrains within a governed MLOps pipeline, with drift monitoring, bias checks, and humanΓÇæinΓÇætheΓÇæloop approval thatΓÇÖs aligned with EU AI Act expectations for highΓÇærisk AI systems.
+  (c) Impact on Client Experience
+  Risk scoring becomes a living intelligence layer, not a static policy. Officers spend less time on false positives. High-risk cases are surfaced with clear reasoning, reducing decision time. Clients in low-risk segments see faster approvals. Auditability improves since every score has an AI-generated explanation.
+  (d) Prioritization Rationale
+  Strong priority: risk scoring is core to Sancus's compliance value prop. Explainable AI is increasingly required by regulators (EU AI Act). Norbloc already stores rich case outcome data so the training data exists. Medium engineering lift but very high client value and defensibility. This module will require formal technical documentation and governance under the EU AI Act as a highΓÇærisk AI system.
+
+
+================================================================================
+SLIDE 15
+Layout: DEFAULT
+================================================================================
+  Feature 3  ┬╖  Priority: MEDIUM
+  Conversational AML Alert Triage Copilot
+  "Instead of reading 40 PEP hits, ask: 'Which of these actually need my attention today?'"
+  (a) User Pain Point
+  AML screening generates high volumes of alerts, most of which are false positives. Officers spend significant time manually reviewing each hit to determine relevance. This creates fatigue, increases error rate, and slows down onboarding especially for common names in high-PEP regions like MENA.
+  (b) How It Works
+  LLM-powered triage layer sits on top of existing PEP/sanctions screening results. Officer can query: "Show me only hits with strong name match AND active sanctions" or "Summarize all adverse media for this entity." AI provides advisoryΓÇæmode triage suggestions (likely false positive / needs review / escalate) with justification and citations, while officers retain full decision authority.
+  (c) Impact on Client Experience
+  Officers review only high-confidence alerts (est. 60ΓÇô70% reduction in manual review volume). Triage decisions are faster and more consistent. New officers onboard faster with AI guidance. Audit trail includes AI triage rationale alongside officer decision, strengthening compliance documentation.
+  (d) Prioritization Rationale
+  Medium priority: high user value, but requires careful validation to avoid false negatives in a regulatory context. Builds naturally on Sancus's existing AML integration layer. Should follow Feature 1 and 2 in roadmap. Potential differentiator: few KYC platforms offer AI-assisted AML triage today. Initial rollout should run in shadow/advisory mode only, to validate no increase in false negatives before influencing production workflows.
+
+
+================================================================================
+SLIDE 16
+Layout: DEFAULT
+================================================================================
+  Recommended Roadmap ΓÇö Part B Product Features
+  Q3 2026
+  Foundation
+  UBO Graph Extraction
+  (extend existing AI doc parsing)
+  Adaptive Risk Scoring
+  (train on historical decisions)
+  Q4 2026
+  Intelligence Layer
+  AML Alert Triage Copilot
+  (deploy on top of LexisNexis / MemberCheck)
+  Risk Score Explainability
+  (EU AI Act readiness)
+  H1 2027
+  Differentiation
+  Predictive CDD Refresh
+  (proactively flag customers due for remediation)
+  Agentic Onboarding Assistant
+  (end-to-end customer-facing AI guide)
+
+
+================================================================================
+SLIDE 17
+Layout: DEFAULT
+================================================================================
+  The Opportunity
+  norbloc has built the rails.
+  AI is the velocity.
+  Part A:  5 tools that compound ΓÇö enrichment ΓåÆ CRM ΓåÆ knowledge ΓåÆ finance ΓåÆ search
+  Part B:  3 Sancus features that make compliance faster, smarter, and more defensible
+  North Star:  Use AI to widen the gap between norbloc and legacy KYC vendors
+  Kanishka Namdeo  ΓÇó  kanishkanamdeo.com
+

@@ -7,251 +7,553 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 :root {
-  --bg-dark: #0f1117;
-  --bg-card: #1a1d27;
-  --bg-hover: #252836;
-  --border: #2d3148;
-  --text-primary: #f0f0f5;
-  --text-secondary: #9ca3b8;
-  --text-muted: #6b7280;
-  --accent-blue: #3b82f6;
-  --accent-green: #10b981;
-  --accent-amber: #f59e0b;
-  --accent-red: #ef4444;
-  --accent-purple: #8b5cf6;
-  --accent-orange: #f97316;
-  --accent-teal: #14b8a6;
-  --shadow: 0 4px 24px rgba(0,0,0,0.4);
-  --radius: 12px;
+  --radius: 0.625rem;
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --background: oklch(0.97 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --success: oklch(0.577 0.155 150.62);
+  --success-foreground: oklch(0.985 0 0);
+  --success-muted: oklch(0.96 0.04 150);
+  --success-muted-foreground: oklch(0.4 0.12 150);
+  --warning: oklch(0.795 0.184 86.04);
+  --warning-foreground: oklch(0.28 0.07 46);
+  --warning-muted: oklch(0.96 0.06 86);
+  --warning-muted-foreground: oklch(0.55 0.18 86);
+  --info: oklch(0.572 0.223 256.61);
+  --info-foreground: oklch(0.985 0 0);
+  --info-muted: oklch(0.96 0.05 256);
+  --info-muted-foreground: oklch(0.45 0.18 256);
+  --critical: oklch(0.577 0.245 27.325);
+  --critical-foreground: oklch(1 0 0);
+  --critical-muted: oklch(0.96 0.06 27);
+  --critical-muted-foreground: oklch(0.577 0.245 27.325);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
 }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; overflow: hidden; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 /* Header */
-.header { height: 64px; background: var(--bg-card); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 24px; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
-.header-logo { font-size: 20px; font-weight: 700; color: var(--accent-blue); letter-spacing: -0.5px; }
-.header-logo span { color: var(--text-primary); }
-.header-divider { width: 1px; height: 24px; background: var(--border); margin: 0 16px; }
-.header-title { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
-.header-badge { margin-left: auto; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+.header {
+  height: 56px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.05);
+}
+.header-logo { font-size: 18px; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
+.header-logo span { color: var(--foreground); }
+.header-divider { width: 1px; height: 20px; background: var(--border); margin: 0 16px; }
+.header-title { font-size: 14px; color: var(--muted-foreground); font-weight: 500; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.header-badge {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.header-advisory-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--info-muted);
+  color: var(--info-muted-foreground);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+}
+.header-advisory-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--info); animation: pulse 2s infinite; }
+.header-audit-btn {
+  background: none; border: 1px solid var(--border); color: var(--muted-foreground);
+  padding: 6px 10px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 500;
+  cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.15s;
+}
+.header-audit-btn:hover { background: var(--muted); color: var(--foreground); }
+.header-audit-btn.active { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
 
 /* Main Layout */
-.main-layout { display: flex; position: absolute; top: 64px; left: 0; right: 0; bottom: 0; }
+.main-layout { display: flex; position: absolute; top: 56px; left: 0; right: 0; bottom: 0; }
 
 /* Left Sidebar - Alert Inbox */
-.alert-sidebar { width: 280px; min-width: 280px; background: var(--bg-card); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
-.sidebar-header { padding: 16px; border-bottom: 1px solid var(--border); }
-.sidebar-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.sidebar-title-count { background: var(--accent-red); color: white; font-size: 11px; padding: 2px 6px; border-radius: 10px; font-weight: 600; }
-.search-input { width: 100%; background: var(--bg-hover); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; color: var(--text-primary); font-size: 13px; outline: none; transition: border-color 0.2s; }
-.search-input:focus { border-color: var(--accent-blue); }
-.search-input::placeholder { color: var(--text-muted); }
-.filter-chips { display: flex; gap: 6px; padding: 12px 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-.filter-chip { padding: 4px 10px; border-radius: 16px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); transition: all 0.2s; }
-.filter-chip:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
-.filter-chip.active { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+.alert-sidebar {
+  width: 300px; min-width: 300px;
+  background: var(--sidebar);
+  border-right: 1px solid var(--sidebar-border);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.sidebar-header { padding: 16px; border-bottom: 1px solid var(--sidebar-border); }
+.sidebar-title {
+  font-size: 14px; font-weight: 600; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px; color: var(--sidebar-foreground);
+}
+.sidebar-title-count {
+  background: var(--critical); color: var(--critical-foreground);
+  font-size: 11px; padding: 2px 6px; border-radius: 999px; font-weight: 600;
+}
+.search-input {
+  width: 100%; height: 36px; padding: 6px 12px;
+  border-radius: var(--radius-md); border: 1px solid var(--input);
+  background: transparent; font-size: 13px; color: var(--foreground);
+  outline: none; transition: border-color 0.15s, box-shadow 0.15s; font-family: inherit;
+}
+.search-input:focus { border-color: var(--ring); box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.15); }
+.search-input::placeholder { color: var(--muted-foreground); }
+.sidebar-filter { display: flex; gap: 6px; padding: 12px 16px; border-bottom: 1px solid var(--sidebar-border); flex-wrap: wrap; }
+.sidebar-filter .filter-chip {
+  padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; cursor: pointer;
+  border: 1px solid var(--sidebar-border); background: transparent; color: var(--muted-foreground);
+  transition: all 0.15s;
+}
+.sidebar-filter .filter-chip:hover { border-color: var(--ring); color: var(--foreground); }
+.sidebar-filter .filter-chip.active { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+
 .alert-list { flex: 1; overflow-y: auto; padding: 8px; }
-.alert-card { padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s; margin-bottom: 4px; border: 1px solid transparent; }
-.alert-card:hover { background: var(--bg-hover); }
-.alert-card.active { background: var(--bg-hover); border-color: var(--accent-blue); }
+
+.alert-card {
+  padding: 12px; border-radius: var(--radius-md); cursor: pointer;
+  transition: all 0.15s; margin-bottom: 4px; border: 1px solid transparent; position: relative; background: transparent;
+}
+.alert-card:hover { background: var(--sidebar-accent); }
+.alert-card.active { background: var(--sidebar-accent); border-color: var(--ring); }
+.alert-card.severity-critical { border-left: 3px solid var(--critical); }
+.alert-card.severity-high { border-left: 3px solid oklch(0.6 0.2 56); }
+.alert-card.severity-medium { border-left: 3px solid var(--warning); }
+.alert-card.severity-low { border-left: 3px solid var(--success); }
+
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 2px oklch(0.577 0.245 27.325 / 0.15); } 50% { box-shadow: 0 0 0 4px oklch(0.577 0.245 27.325 / 0.25); } }
+.alert-card.severity-critical .alert-customer { color: var(--critical); }
+.alert-card.severity-critical .severity-dot { animation: pulse 2s infinite; }
+
 .alert-card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .severity-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.severity-critical { background: var(--accent-red); box-shadow: 0 0 0 2px rgba(239,68,68,0.2); }
-.severity-high { background: var(--accent-orange); box-shadow: 0 0 0 2px rgba(249,115,22,0.2); }
-.severity-medium { background: var(--accent-amber); box-shadow: 0 0 0 2px rgba(245,158,11,0.2); }
+.severity-critical { background: var(--critical); }
+.severity-high { background: oklch(0.6 0.2 56); }
+.severity-medium { background: var(--warning); }
+.severity-low { background: var(--success); }
 .alert-type-icon { font-size: 14px; flex-shrink: 0; }
-.alert-customer { font-size: 13px; font-weight: 600; flex: 1; }
-.alert-status-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
-.status-pending { background: rgba(59,130,246,0.2); color: var(--accent-blue); }
-.status-dismissed { background: rgba(16,185,129,0.2); color: var(--accent-green); }
-.status-escalated { background: rgba(239,68,68,0.2); color: var(--accent-red); }
-.status-edd { background: rgba(139,92,246,0.2); color: var(--accent-purple); }
-.alert-type-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; padding-left: 16px; }
+.alert-customer { font-size: 13px; font-weight: 600; flex: 1; color: var(--foreground); }
+
+/* Triage classification badges */
+.triage-badge {
+  font-size: 10px; padding: 2px 6px; border-radius: 999px; font-weight: 600;
+  text-transform: none; letter-spacing: 0; white-space: nowrap;
+}
+.triage-false-positive { background: var(--success-muted); color: var(--success-muted-foreground); }
+.triage-needs-review { background: var(--warning-muted); color: var(--warning-muted-foreground); }
+.triage-escalate { background: var(--critical-muted); color: var(--critical-muted-foreground); }
+
+.alert-type-label { font-size: 12px; color: var(--muted-foreground); margin-bottom: 4px; padding-left: 16px; }
 .alert-meta { display: flex; justify-content: space-between; padding-left: 16px; }
-.alert-time { font-size: 11px; color: var(--text-muted); }
+.alert-time { font-size: 11px; color: var(--muted-foreground); }
 .alert-risk { font-size: 11px; font-weight: 600; }
 
 /* Center - Chat Panel */
-.chat-panel { flex: 1; display: flex; flex-direction: column; background: var(--bg-dark); min-width: 0; }
-.chat-header { padding: 12px 20px; background: var(--bg-card); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+.chat-panel { flex: 1; display: flex; flex-direction: column; background: var(--background); min-width: 0; }
+.chat-header {
+  padding: 12px 20px; background: var(--card); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
 .chat-header-title { font-size: 14px; font-weight: 600; }
-.chat-header-subtitle { font-size: 12px; color: var(--text-muted); }
-.ai-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.chat-header-subtitle { font-size: 12px; color: var(--muted-foreground); }
+.ai-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--info), oklch(0.45 0.22 280));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0; color: white;
+}
+.ai-avatar svg { width: 18px; height: 18px; }
 .chat-messages { flex: 1; overflow-y: auto; padding: 20px; }
-.message { display: flex; gap: 10px; margin-bottom: 20px; animation: fadeSlideIn 0.3s ease; }
+.message { display: flex; gap: 10px; margin-bottom: 20px; animation: fadeIn 0.3s ease; }
 .message-user { flex-direction: row-reverse; }
-@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-.msg-avatar { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; }
-.msg-avatar-ai { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); }
-.msg-avatar-user { background: var(--bg-hover); color: var(--text-secondary); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.msg-avatar { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; }
+.msg-avatar-ai { background: linear-gradient(135deg, var(--info), oklch(0.45 0.22 280)); color: white; }
+.msg-avatar-user { background: var(--muted); color: var(--muted-foreground); }
+
 .msg-content { max-width: 75%; }
-.msg-bubble { padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.6; }
-.msg-ai .msg-bubble { background: var(--bg-card); border: 1px solid var(--border); border-top-left-radius: 4px; }
-.msg-user .msg-bubble { background: linear-gradient(135deg, var(--accent-blue), #2563eb); border-top-right-radius: 4px; }
+.msg-bubble { padding: 12px 16px; border-radius: var(--radius-lg); font-size: 14px; line-height: 1.6; }
+.msg-ai .msg-bubble { background: var(--card); border: 1px solid var(--border); border-top-left-radius: 4px; box-shadow: 0 1px 3px oklch(0 0 0 / 0.04); }
+.msg-user .msg-bubble { background: var(--primary); color: var(--primary-foreground); border-top-right-radius: 4px; }
+
 .msg-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-.msg-action-btn { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--bg-hover); color: var(--text-secondary); transition: all 0.2s; }
-.msg-action-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
-.msg-action-btn.danger { border-color: rgba(239,68,68,0.3); color: var(--accent-red); }
-.msg-action-btn.danger:hover { background: rgba(239,68,68,0.1); }
-.msg-action-btn.success { border-color: rgba(16,185,129,0.3); color: var(--accent-green); }
-.msg-action-btn.success:hover { background: rgba(16,185,129,0.1); }
-.msg-action-btn.primary { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
-.msg-action-btn.primary:hover { background: #2563eb; }
+.msg-action-btn {
+  padding: 6px 14px; border-radius: var(--radius-md); font-size: 12px; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--border); background: var(--card); color: var(--foreground); transition: all 0.15s;
+}
+.msg-action-btn:hover { background: var(--accent); border-color: var(--ring); }
+.msg-action-btn.danger { border-color: oklch(0.577 0.245 27.325 / 0.3); color: var(--destructive); }
+.msg-action-btn.danger:hover { background: var(--critical-muted); }
+.msg-action-btn.success { border-color: oklch(0.577 0.155 150.62 / 0.3); color: var(--success); }
+.msg-action-btn.success:hover { background: var(--success-muted); }
+.msg-action-btn.primary { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+.msg-action-btn.primary:hover { background: oklch(0.269 0 0); }
 .msg-viz { margin-top: 12px; }
 
 /* Quick Action Chips */
-.quick-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-.quick-chip { padding: 6px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; border: 1px dashed var(--border); background: transparent; color: var(--text-muted); transition: all 0.2s; }
-.quick-chip:hover { border-color: var(--accent-blue); color: var(--accent-blue); border-style: solid; }
+.quick-chip {
+  padding: 6px 12px; border-radius: 999px; font-size: 12px; cursor: pointer;
+  border: 1px dashed var(--border); background: transparent; color: var(--muted-foreground); transition: all 0.15s;
+}
+.quick-chip:hover { border-color: var(--ring); color: var(--foreground); border-style: solid; background: var(--muted); }
 
 /* Typing Indicator */
-.typing-indicator { display: flex; gap: 4px; padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; border-top-left-radius: 4px; width: fit-content; }
-.typing-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); animation: typingBounce 1.2s infinite; }
+.typing-indicator { display: flex; gap: 4px; padding: 12px 16px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); border-top-left-radius: 4px; width: fit-content; }
+.typing-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted-foreground); animation: typing-bounce 1.2s infinite; }
 .typing-dot:nth-child(2) { animation-delay: 0.2s; }
 .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-@keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-6px); opacity: 1; } }
+@keyframes typing-bounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-6px); opacity: 1; } }
 
 /* Chat Input */
-.chat-input-area { padding: 16px 20px; background: var(--bg-card); border-top: 1px solid var(--border); }
+.chat-input-area { padding: 16px 20px; background: var(--card); border-top: 1px solid var(--border); }
 .chat-suggestions { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
-.suggestion-btn { padding: 4px 10px; border-radius: 14px; font-size: 11px; cursor: pointer; border: 1px solid var(--border); background: var(--bg-hover); color: var(--text-muted); transition: all 0.2s; }
-.suggestion-btn:hover { border-color: var(--accent-purple); color: var(--accent-purple); }
+.suggestion-btn {
+  padding: 4px 10px; border-radius: var(--radius-sm); font-size: 11px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--muted); color: var(--muted-foreground); transition: all 0.15s;
+}
+.suggestion-btn:hover { border-color: var(--ring); color: var(--foreground); background: var(--card); }
 .chat-input-row { display: flex; gap: 8px; }
-.chat-input { flex: 1; background: var(--bg-hover); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; color: var(--text-primary); font-size: 14px; outline: none; transition: border-color 0.2s; }
-.chat-input:focus { border-color: var(--accent-blue); }
-.chat-input::placeholder { color: var(--text-muted); }
-.send-btn { width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border: none; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-.send-btn:hover { transform: scale(1.05); }
+.chat-input {
+  flex: 1; height: 40px; padding: 8px 12px; border-radius: var(--radius-md);
+  border: 1px solid var(--input); background: transparent; font-size: 14px;
+  color: var(--foreground); outline: none; transition: border-color 0.15s, box-shadow 0.15s; font-family: inherit;
+}
+.chat-input:focus { border-color: var(--ring); box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.15); }
+.chat-input::placeholder { color: var(--muted-foreground); }
+.send-btn {
+  width: 40px; height: 40px; border-radius: var(--radius-md);
+  background: var(--primary); color: var(--primary-foreground); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+}
+.send-btn:hover { background: oklch(0.269 0 0); }
 
 /* Right Sidebar - Detail Panel */
-.detail-panel { width: 340px; min-width: 340px; background: var(--bg-card); border-left: 1px solid var(--border); display: none; flex-direction: column; overflow-y: auto; }
+.detail-panel {
+  width: 400px; min-width: 400px; background: var(--card);
+  border-left: 1px solid var(--border); display: none; flex-direction: column; overflow-y: auto; position: relative;
+}
 .detail-panel.visible { display: flex; }
+.detail-panel-toggle {
+  position: absolute; left: -40px; top: 20px; width: 32px; height: 32px;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  color: var(--muted-foreground); transition: all 0.15s; z-index: 10;
+}
+.detail-panel-toggle:hover { background: var(--muted); color: var(--foreground); }
+.detail-panel.visible .detail-panel-toggle { transform: rotate(180deg); }
 .detail-header { padding: 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
 .detail-title { font-size: 14px; font-weight: 600; }
-.detail-close { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px; font-size: 18px; }
-.detail-close:hover { color: var(--text-primary); }
+.detail-close { background: none; border: none; color: var(--muted-foreground); cursor: pointer; padding: 4px; font-size: 18px; border-radius: var(--radius-sm); }
+.detail-close:hover { color: var(--foreground); background: var(--muted); }
 .detail-content { padding: 16px; }
 .detail-section { margin-bottom: 20px; }
-.detail-section-title { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+.detail-section-title { font-size: 12px; font-weight: 600; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
 .detail-field { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); }
 .detail-field:last-child { border-bottom: none; }
-.detail-field-label { font-size: 13px; color: var(--text-secondary); }
+.detail-field-label { font-size: 13px; color: var(--muted-foreground); }
 .detail-field-value { font-size: 13px; font-weight: 600; }
-.risk-bar-container { margin-bottom: 10px; }
-.risk-bar-header { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 13px; }
-.risk-bar-track { height: 6px; background: var(--bg-hover); border-radius: 3px; overflow: hidden; }
-.risk-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
-.tx-table { width: 100%; font-size: 12px; border-collapse: collapse; }
-.tx-table th { text-align: left; padding: 6px 4px; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border); font-size: 11px; }
-.tx-table td { padding: 6px 4px; border-bottom: 1px solid var(--border); }
-.evidence-card { padding: 10px; background: var(--bg-hover); border-radius: 8px; margin-bottom: 8px; border-left: 3px solid var(--accent-blue); }
-.evidence-card-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-.evidence-card-desc { font-size: 12px; color: var(--text-secondary); }
 
-/* Inline Viz Styles */
-.risk-factor-chart { background: var(--bg-hover); border-radius: 8px; padding: 12px; margin-top: 10px; }
-.mini-tx-table { width: 100%; font-size: 12px; margin-top: 10px; }
-.mini-tx-table th { text-align: left; padding: 6px 8px; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border); background: var(--bg-hover); font-size: 11px; }
-.mini-tx-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); }
-.mini-network-graph { width: 100%; height: 180px; margin-top: 10px; border-radius: 8px; overflow: hidden; background: var(--bg-hover); }
-.evidence-table { width: 100%; font-size: 12px; margin-top: 10px; border-collapse: collapse; }
-.evidence-table th { text-align: left; padding: 6px 8px; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border); background: var(--bg-hover); font-size: 11px; }
-.evidence-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); }
-.score-pill { display: inline-block; padding: 3px 8px; border-radius: 4px; font-weight: 600; font-size: 12px; }
-.score-high { background: rgba(239,68,68,0.2); color: var(--accent-red); }
-.score-medium { background: rgba(245,158,11,0.2); color: var(--accent-amber); }
-.score-low { background: rgba(16,185,129,0.2); color: var(--accent-green); }
-.badge-pep { background: rgba(139,92,246,0.2); color: var(--accent-purple); }
-.badge-sanctions { background: rgba(239,68,68,0.2); color: var(--accent-red); }
-.badge-jurisdiction { background: rgba(249,115,22,0.2); color: var(--accent-orange); }
-
-/* Toast */
-.toast-notification {
-  position: fixed; top: 80px; left: 50%; transform: translateX(-50%) translateY(-20px);
-  background: var(--accent-green); color: white; padding: 10px 20px; border-radius: 8px;
-  font-size: 13px; font-weight: 600; opacity: 0; transition: all 0.3s ease;
-  z-index: 999; pointer-events: none; box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+/* Triage section in detail panel */
+.triage-section {
+  padding: 12px; border-radius: var(--radius-md); margin-bottom: 16px;
+  border: 1px solid var(--border);
 }
-.toast-notification.toast-show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.triage-section.fp { background: var(--success-muted); border-color: oklch(0.4 0.12 150 / 0.2); }
+.triage-section.review { background: var(--warning-muted); border-color: oklch(0.55 0.18 86 / 0.2); }
+.triage-section.escalate { background: var(--critical-muted); border-color: oklch(0.577 0.245 27.325 / 0.2); }
+.triage-recommendation { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.triage-reasoning { font-size: 12px; color: var(--muted-foreground); line-height: 1.5; }
+.triage-data-sources { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+.triage-source-tag {
+  font-size: 10px; padding: 2px 6px; border-radius: 999px; font-weight: 500;
+  background: var(--card); border: 1px solid var(--border); color: var(--muted-foreground);
+}
+
+/* Evidence cards */
+.evidence-card {
+  background: var(--muted / 0.5); border-radius: var(--radius-md); padding: 14px;
+  margin-bottom: 8px; border-left: 3px solid var(--info);
+}
+.evidence-card[data-source="lexisnexis"] { border-left-color: var(--info); }
+.evidence-card[data-source="membercheck"] { border-left-color: oklch(0.55 0.22 280); }
+.evidence-card-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.evidence-card-desc { font-size: 12px; color: var(--muted-foreground); line-height: 1.5; }
+.evidence-card-source { font-size: 10px; color: var(--muted-foreground); margin-top: 6px; font-style: italic; }
+
+/* Tables */
+.tx-table { width: 100%; font-size: 12px; border-collapse: collapse; }
+.tx-table th { text-align: left; padding: 8px 6px; color: var(--muted-foreground); font-weight: 600; border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.tx-table td { padding: 8px 6px; border-bottom: 1px solid var(--border); }
+.mini-tx-table { width: 100%; font-size: 12px; margin-top: 10px; border-collapse: collapse; }
+.mini-tx-table th { text-align: left; padding: 8px 6px; color: var(--muted-foreground); font-weight: 600; border-bottom: 1px solid var(--border); background: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.mini-tx-table td { padding: 8px 6px; border-bottom: 1px solid var(--border); }
+.evidence-table { width: 100%; font-size: 12px; margin-top: 10px; border-collapse: collapse; }
+.evidence-table th { text-align: left; padding: 8px 6px; color: var(--muted-foreground); font-weight: 600; border-bottom: 1px solid var(--border); background: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.evidence-table td { padding: 8px 6px; border-bottom: 1px solid var(--border); }
+
+.mini-network-graph { width: 100%; height: 180px; margin-top: 10px; border-radius: var(--radius-md); overflow: hidden; background: var(--muted / 0.5); }
+.risk-factor-chart { background: var(--muted / 0.5); border-radius: var(--radius-md); padding: 14px; margin-top: 10px; }
+
+/* Score pills */
+.score-pill { display: inline-block; padding: 3px 8px; border-radius: var(--radius-sm); font-weight: 600; font-size: 12px; }
+.score-high { background: var(--critical-muted); color: var(--critical); }
+.score-medium { background: var(--warning-muted); color: var(--warning-muted-foreground); }
+.score-low { background: var(--success-muted); color: var(--success-muted-foreground); }
+
+/* Badges */
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; line-height: 1.4; border: 1px solid transparent; }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; }
+.badpep { background: oklch(0.96 0.05 290); color: oklch(0.5 0.2 290); }
+.badSanctions { background: var(--critical-muted); color: var(--critical); }
+.badJurisdiction { background: oklch(0.96 0.08 56); color: oklch(0.5 0.2 56); }
+.badKycValid { background: var(--success-muted); color: var(--success-muted-foreground); }
+.badKycExpiring { background: var(--warning-muted); color: var(--warning-muted-foreground); }
+.badKycExpired { background: var(--critical-muted); color: var(--critical-muted-foreground); }
+.badLexisnexis { background: var(--info-muted); color: var(--info-muted-foreground); }
+.badMembercheck { background: oklch(0.96 0.05 290); color: oklch(0.45 0.18 290); }
+
+/* Status badges */
+.status-pending { background: var(--info-muted); color: var(--info); }
+.status-dismissed { background: var(--success-muted); color: var(--success); }
+.status-escalated { background: var(--critical-muted); color: var(--critical); }
+.status-edd { background: oklch(0.96 0.05 290); color: oklch(0.5 0.2 290); }
+
+/* Risk factor bars */
+.risk-factor { margin-bottom: 14px; }
+.risk-factor-header { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }
+.risk-factor-name { font-weight: 500; }
+.risk-factor-value { color: var(--muted-foreground); }
+.risk-factor-bar { height: 6px; background: var(--muted); border-radius: 3px; overflow: hidden; }
+.risk-factor-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
 
 /* Investigation step card */
 .investigation-step {
-  background: var(--bg-hover); border-radius: 8px; padding: 14px; margin-bottom: 10px;
-  border-left: 3px solid var(--accent-blue);
+  background: var(--muted / 0.5); border-radius: var(--radius-md); padding: 14px;
+  margin-bottom: 10px; position: relative; border-left: 3px solid var(--info);
 }
-.investigation-step.completed { border-left-color: var(--accent-green); }
-.investigation-step.current { border-left-color: var(--accent-amber); background: rgba(245,158,11,0.05); }
-.investigation-step-header { font-size: 13px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-.investigation-step-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-.investigation-progress { margin-bottom: 16px; }
+.investigation-step.completed { border-left-color: var(--success); }
+.investigation-step.current { background: var(--warning-muted); border-left-color: var(--warning); }
+.investigation-step-header { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.investigation-step-desc { font-size: 12px; color: var(--muted-foreground); line-height: 1.5; }
 .step-dots { display: flex; gap: 8px; margin-bottom: 8px; }
-.step-dot { width: 24px; height: 4px; border-radius: 2px; background: var(--bg-hover); transition: background 0.3s; }
-.step-dot.active { background: var(--accent-amber); }
-.step-dot.done { background: var(--accent-green); }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--bg-hover); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--border); }
+/* Confirmation Dialog */
+.confirmation-dialog {
+  position: fixed; inset: 0; background: oklch(0 0 0 / 0.5); backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center; z-index: 1000;
+}
+.confirmation-dialog.visible { display: flex; }
+.confirmation-box {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl);
+  padding: 24px; max-width: 440px; width: 90%; box-shadow: 0 20px 60px oklch(0 0 0 / 0.12);
+  animation: fadeIn 0.2s ease;
+}
+.confirmation-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
+.confirmation-message { font-size: 14px; color: var(--muted-foreground); margin-bottom: 20px; line-height: 1.5; }
+.confirmation-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.confirmation-btn {
+  display: inline-flex; align-items: center; justify-content: center; padding: 8px 16px;
+  border-radius: var(--radius-md); font-size: 14px; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--border); background: transparent; color: var(--foreground); transition: all 0.15s;
+}
+.confirmation-btn:hover { background: var(--muted); }
+.confirmation-btn.primary { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+.confirmation-btn.primary:hover { background: oklch(0.269 0 0); }
+.confirmation-btn.danger { background: var(--destructive); color: var(--destructive-foreground); border-color: var(--destructive); }
+.confirmation-btn.danger:hover { background: oklch(0.51 0.22 27); }
 
-/* Responsive */
-@media (max-width: 1024px) { .detail-panel { width: 300px; min-width: 300px; } .alert-sidebar { width: 240px; min-width: 240px; } }
-@media (max-width: 768px) { .main-layout { flex-direction: column; } .alert-sidebar, .detail-panel { width: 100%; min-width: 100%; max-height: 40vh; } }
+/* Toast */
+.toast-notification {
+  position: fixed; top: 72px; right: 24px; background: var(--card); color: var(--foreground);
+  padding: 14px 20px; border-radius: var(--radius-lg); font-size: 13px; font-weight: 600;
+  opacity: 0; transform: translateX(100%); transition: all 0.3s ease; z-index: 999;
+  pointer-events: none; box-shadow: 0 8px 24px oklch(0 0 0 / 0.1);
+  border: 1px solid var(--border); border-left: 3px solid var(--success);
+  display: flex; align-items: center; gap: 8px;
+}
+.toast-notification.toast-show { opacity: 1; transform: translateX(0); }
+
+/* Audit Trail Drawer */
+.audit-drawer {
+  position: fixed; top: 56px; right: 0; bottom: 0; width: 420px;
+  background: var(--card); border-left: 1px solid var(--border);
+  box-shadow: -4px 0 24px oklch(0 0 0 / 0.08);
+  display: none; flex-direction: column; z-index: 90;
+  animation: slideInRight 0.2s ease;
+}
+.audit-drawer.open { display: flex; }
+@keyframes slideInRight { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
+.audit-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.audit-title { font-size: 14px; font-weight: 600; }
+.audit-list { flex: 1; overflow-y: auto; padding: 16px; }
+.audit-entry {
+  padding: 12px; border-radius: var(--radius-md); margin-bottom: 8px;
+  border: 1px solid var(--border); background: var(--muted / 0.3);
+}
+.audit-entry-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.audit-entry-type {
+  font-size: 10px; padding: 2px 6px; border-radius: 999px; font-weight: 600;
+  background: var(--info-muted); color: var(--info-muted-foreground);
+}
+.audit-entry-time { font-size: 11px; color: var(--muted-foreground); margin-left: auto; }
+.audit-entry-detail { font-size: 12px; color: var(--muted-foreground); line-height: 1.5; }
+.audit-entry-user { font-weight: 600; color: var(--foreground); }
+
+/* EU AI Act compliance banner */
+.eu-ai-act-banner {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; margin-bottom: 12px;
+  background: var(--info-muted); border: 1px solid oklch(0.45 0.18 256 / 0.2);
+  border-radius: var(--radius-md); font-size: 11px; color: var(--info-muted-foreground);
+}
+.eu-ai-act-banner svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--info); }
 </style>
 </head>
 <body>
 
 <!-- Header -->
-<div class="header">
+<div class="header" role="banner">
   <div class="header-logo">norbloc <span>Sancus</span></div>
-  <div class="header-divider"></div>
+  <div class="header-divider" aria-hidden="true"></div>
   <div class="header-title">AML Alert Triage Copilot</div>
-  <div class="header-badge">Prototype</div>
+  <div class="header-right">
+    <div class="header-advisory-badge" aria-label="AI operates in advisory mode with human supervision">
+      <div class="header-advisory-dot" aria-hidden="true"></div>
+      Advisory Mode — Human Supervised
+    </div>
+    <button class="header-audit-btn" id="audit-toggle-btn" onclick="toggleAuditDrawer()" aria-label="Toggle audit trail panel" aria-expanded="false">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Audit Trail
+    </button>
+    <div class="header-badge">Prototype</div>
+  </div>
+</div>
+
+<!-- Confirmation Dialog -->
+<div class="confirmation-dialog" id="confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="confirmation-title">
+  <div class="confirmation-box">
+    <div class="confirmation-title" id="confirmation-title">Confirm Action</div>
+    <div class="confirmation-message" id="confirmation-message">Are you sure?</div>
+    <div class="confirmation-actions">
+      <button class="confirmation-btn" id="confirmation-cancel">Cancel</button>
+      <button class="confirmation-btn" id="confirmation-confirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- Audit Trail Drawer -->
+<div class="audit-drawer" id="audit-drawer">
+  <div class="audit-header">
+    <div class="audit-title">AI Triage Audit Trail</div>
+    <button class="detail-close" onclick="toggleAuditDrawer()">&times;</button>
+  </div>
+  <div class="audit-list" id="audit-list"></div>
 </div>
 
 <!-- Main Layout -->
 <div class="main-layout">
 
   <!-- Left Sidebar: Alert Inbox -->
-  <div class="alert-sidebar">
+  <aside class="alert-sidebar" aria-label="Alert inbox">
     <div class="sidebar-header">
-      <div class="sidebar-title">Alerts <span class="sidebar-title-count" id="pending-count">0</span></div>
-      <input type="text" class="search-input" id="alert-search" placeholder="Search alerts...">
+      <div class="sidebar-title" id="sidebar-title">Alerts <span class="sidebar-title-count" id="pending-count">0</span></div>
+      <input type="search" class="search-input" id="alert-search" placeholder="Search alerts..." aria-label="Search alerts" aria-describedby="sidebar-title">
     </div>
-    <div class="filter-chips" id="filter-chips">
-      <button class="filter-chip active" data-filter="all">All</button>
-      <button class="filter-chip" data-filter="critical">Critical</button>
-      <button class="filter-chip" data-filter="high">High</button>
-      <button class="filter-chip" data-filter="medium">Medium</button>
-      <button class="filter-chip" data-filter="pending">Pending</button>
-    </div>
-    <div class="alert-list" id="alert-list"></div>
+    <nav class="sidebar-filter" id="filter-chips" aria-label="Filter alerts by category">
+      <button class="filter-chip active" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-chip" data-filter="critical" aria-pressed="false">Critical</button>
+      <button class="filter-chip" data-filter="high" aria-pressed="false">High</button>
+      <button class="filter-chip" data-filter="medium" aria-pressed="false">Medium</button>
+      <button class="filter-chip" data-filter="pending" aria-pressed="false">Pending</button>
+      <button class="filter-chip" data-filter="review" aria-pressed="false">Needs Review</button>
+      <button class="filter-chip" data-filter="escalate" aria-pressed="false">Escalate</button>
+    </nav>
+    <div class="alert-list" id="alert-list" role="list" aria-label="List of alerts"></div>
   </div>
 
   <!-- Center: Chat Panel -->
-  <div class="chat-panel">
+  <main class="chat-panel" aria-label="Chat conversation">
     <div class="chat-header">
-      <div class="ai-avatar">AI</div>
+      <div class="ai-avatar" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
       <div>
-        <div class="chat-header-title">AML Copilot</div>
-        <div class="chat-header-subtitle">Conversational triage assistant</div>
+        <div class="chat-header-title">Sancus</div>
+        <div class="chat-header-subtitle">Conversational AML triage — Advisory mode, human supervised</div>
       </div>
     </div>
-    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-messages" id="chat-messages" role="log" aria-label="Chat messages" aria-live="polite"></div>
     <div class="chat-input-area">
-      <div class="chat-suggestions" id="chat-suggestions"></div>
+      <div class="chat-suggestions" id="chat-suggestions" role="group" aria-label="Suggested queries"></div>
       <div class="chat-input-row">
-        <input type="text" class="chat-input" id="chat-input" placeholder="Ask about alerts, patterns, or start an investigation...">
-        <button class="send-btn" id="send-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        <input type="text" class="chat-input" id="chat-input" placeholder='Try: "Show only hits with strong name match AND active sanctions"' aria-label="Type your message">
+        <button class="send-btn" id="send-btn" aria-label="Send message">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         </button>
       </div>
     </div>
-  </div>
+  </main>
 
   <!-- Right Sidebar: Detail Panel -->
   <div class="detail-panel" id="detail-panel">
+    <button class="detail-panel-toggle" id="detail-panel-toggle" title="Toggle details">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
     <div class="detail-header">
       <div class="detail-title" id="detail-title">Alert Details</div>
       <button class="detail-close" id="detail-close">&times;</button>
@@ -263,12 +565,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helv
 
 <script>
 // ============================================================
-// MOCK DATA: 10 AML Alerts
+// MOCK DATA: 10 AML Alerts with triage classifications & adverse media
 // ============================================================
 const alerts = [
   {
     id: 'AML-001', customer: { name: 'Dmitri Volkov', id: 'CUST-4821', riskScore: 92, kycStatus: 'Expired', jurisdiction: 'Cyprus', dob: '1978-03-15', pep: false },
     alertType: 'Sanctions Hit', severity: 'critical', status: 'pending', timestamp: new Date(Date.now() - 3600000),
+    triage: { classification: 'escalate', confidence: 94 },
     riskFactors: [{ name: 'OFAC List Match', value: 98 }, { name: 'High-Risk Jurisdiction', value: 75 }, { name: 'Transaction Velocity', value: 60 }],
     transactions: [
       { date: '2025-01-18', amount: 485000, currency: 'USD', direction: 'OUT', counterparty: 'Meridian Holdings Ltd', country: 'Cyprus' },
@@ -276,12 +579,20 @@ const alerts = [
       { date: '2025-01-15', amount: 175000, currency: 'USD', direction: 'OUT', counterparty: 'Aegis Capital', country: 'Malta' }
     ],
     linkedAlerts: ['AML-004'],
-    evidence: [{ type: 'OFAC Match', desc: 'Name matches SDN list entry #21847, DOB verified' }, { type: 'Transaction Pattern', desc: '3 large transfers in 72 hours to high-risk jurisdictions' }],
+    adverseMedia: [
+      { title: 'Cyprus firm linked to Russian oligarch network under investigation', source: 'Reuters', date: '2025-01-10', sentiment: 'negative' },
+      { title: 'Meridian Holdings flagged in EU sanctions probe', source: 'Financial Times', date: '2024-12-28', sentiment: 'negative' }
+    ],
+    evidence: [
+      { type: 'OFAC Match', desc: 'Name matches SDN list entry #21847, DOB verified. Exact DOB match on OFAC SDN list.', source: 'LexisNexis', date: '2025-01-18' },
+      { type: 'Transaction Pattern', desc: '3 large transfers in 72 hours to high-risk jurisdictions totaling $910K.', source: 'MemberCheck', date: '2025-01-18' }
+    ],
     aiSummary: 'Critical sanctions alert. Customer Dmitri Volkov matches an entry on the OFAC SDN list (entry #21847). Date of birth confirmed. Multiple large transactions to Cyprus, Latvia, and Malta detected in the past 72 hours. Immediate escalation recommended.'
   },
   {
     id: 'AML-002', customer: { name: 'Li Wei', id: 'CUST-3392', riskScore: 78, kycStatus: 'Valid', jurisdiction: 'China', dob: '1985-11-22', pep: false },
     alertType: 'Structuring', severity: 'high', status: 'pending', timestamp: new Date(Date.now() - 7200000),
+    triage: { classification: 'review', confidence: 72 },
     riskFactors: [{ name: 'Deposit Pattern', value: 88 }, { name: 'Below Reporting Threshold', value: 92 }, { name: 'Frequency', value: 65 }],
     transactions: [
       { date: '2025-01-18', amount: 9500, currency: 'USD', direction: 'IN', counterparty: 'Cash Deposit', country: 'US' },
@@ -291,24 +602,38 @@ const alerts = [
       { date: '2025-01-15', amount: 9400, currency: 'USD', direction: 'IN', counterparty: 'Cash Deposit', country: 'US' }
     ],
     linkedAlerts: [],
-    evidence: [{ type: 'Pattern Detection', desc: '5 cash deposits below $10,000 CTR threshold within 4 days' }, { type: 'Historical Baseline', desc: 'Customer average monthly deposits: $2,100' }],
-    aiSummary: 'Structuring pattern detected. Li Wei made 5 cash deposits of $9,200-$9,800 over 4 consecutive days, each just below the $10,000 CTR reporting threshold. Total structured: $47,500. This significantly exceeds the customer\'s historical baseline of $2,100/month in cash deposits.'
+    adverseMedia: [],
+    evidence: [
+      { type: 'Pattern Detection', desc: '5 cash deposits below $10,000 CTR threshold within 4 days.', source: 'MemberCheck', date: '2025-01-18' },
+      { type: 'Historical Baseline', desc: 'Customer average monthly deposits: $2,100.', source: 'MemberCheck', date: '2025-01-18' }
+    ],
+    aiSummary: 'Structuring pattern detected. Li Wei made 5 cash deposits of $9,200-$9,800 over 4 consecutive days, each just below the $10,000 CTR reporting threshold. Total structured: $47,500.'
   },
   {
     id: 'AML-003', customer: { name: 'Senator Maria Santos', id: 'CUST-1157', riskScore: 85, kycStatus: 'Valid', jurisdiction: 'Brazil', dob: '1962-07-08', pep: true },
     alertType: 'PEP Match', severity: 'high', status: 'pending', timestamp: new Date(Date.now() - 14400000),
+    triage: { classification: 'escalate', confidence: 91 },
     riskFactors: [{ name: 'PEP Status', value: 100 }, { name: 'Unusual Wire Activity', value: 72 }, { name: 'Shell Company Links', value: 55 }],
     transactions: [
       { date: '2025-01-16', amount: 1200000, currency: 'BRL', direction: 'OUT', counterparty: 'Offshore Ventures Inc', country: 'BVI' },
       { date: '2025-01-10', amount: 800000, currency: 'USD', direction: 'IN', counterparty: 'Global Construction SA', country: 'Brazil' }
     ],
     linkedAlerts: ['AML-007'],
-    evidence: [{ type: 'PEP Database', desc: 'Confirmed: Member of Brazilian Congress since 2019' }, { type: 'Adverse Media', desc: 'Named in corruption investigation (Operation Remote, 2024)' }, { type: 'Beneficial Ownership', desc: 'Linked to 3 offshore entities via nominee directors' }],
-    aiSummary: 'PEP alert for Senator Maria Santos, Brazilian Congress member. Large outbound wire of R$1.2M to BVI-registered entity, combined with inbound wire from construction company under investigation. Adverse media hit from 2024 corruption probe. Enhanced Due Diligence strongly recommended.'
+    adverseMedia: [
+      { title: 'Brazilian Senator Named in Corruption Probe Operation Remote', source: 'O Globo', date: '2024-11-15', sentiment: 'negative' },
+      { title: 'Congress member under investigation for offshore links', source: 'Reuters', date: '2024-10-22', sentiment: 'negative' }
+    ],
+    evidence: [
+      { type: 'PEP Database', desc: 'Confirmed: Member of Brazilian Congress since 2019.', source: 'LexisNexis', date: '2025-01-16' },
+      { type: 'Adverse Media', desc: 'Named in corruption investigation (Operation Remote, 2024).', source: 'LexisNexis', date: '2024-11-15' },
+      { type: 'Beneficial Ownership', desc: 'Linked to 3 offshore entities via nominee directors.', source: 'LexisNexis', date: '2025-01-16' }
+    ],
+    aiSummary: 'PEP alert for Senator Maria Santos, Brazilian Congress member. Large outbound wire of R$1.2M to BVI-registered entity. Adverse media hit from 2024 corruption probe.'
   },
   {
     id: 'AML-004', customer: { name: 'Olympus Trading FZE', id: 'CUST-7743', riskScore: 88, kycStatus: 'Expiring', jurisdiction: 'UAE', dob: 'Entity', pep: false },
     alertType: 'Rapid Movement', severity: 'high', status: 'pending', timestamp: new Date(Date.now() - 28800000),
+    triage: { classification: 'escalate', confidence: 87 },
     riskFactors: [{ name: 'Velocity Score', value: 95 }, { name: 'Pass-Through Pattern', value: 82 }, { name: 'Jurisdiction Risk', value: 70 }],
     transactions: [
       { date: '2025-01-18', amount: 2100000, currency: 'USD', direction: 'IN', counterparty: 'Nordic Exports AB', country: 'Sweden' },
@@ -317,48 +642,80 @@ const alerts = [
       { date: '2025-01-17', amount: 1750000, currency: 'EUR', direction: 'OUT', counterparty: 'Pacific Rim Capital', country: 'Singapore' }
     ],
     linkedAlerts: ['AML-001'],
-    evidence: [{ type: 'Pass-Through Detection', desc: 'Funds received and forwarded within same day on 2 occasions' }, { type: 'Account Age', desc: 'Account opened 14 days ago. No prior transaction history.' }, { type: 'Beneficial Owner', desc: 'UBO chain includes entities in 4 jurisdictions' }],
-    aiSummary: 'Rapid fund movement through newly opened account (14 days old). Olympus Trading received $2.1M and forwarded $2.05M within the same day to Cyprus. Similar pattern repeated with EUR transfers. Classic pass-through / layering behavior. Linked to AML-001 (Meridian Holdings Ltd appears as counterparty).'
+    adverseMedia: [
+      { title: 'UAE free zone companies used in layering scheme, FATF warns', source: 'Bloomberg', date: '2025-01-05', sentiment: 'negative' }
+    ],
+    evidence: [
+      { type: 'Pass-Through Detection', desc: 'Funds received and forwarded within same day on 2 occasions.', source: 'MemberCheck', date: '2025-01-18' },
+      { type: 'Account Age', desc: 'Account opened 14 days ago. No prior transaction history.', source: 'MemberCheck', date: '2025-01-18' },
+      { type: 'Beneficial Owner', desc: 'UBO chain includes entities in 4 jurisdictions.', source: 'LexisNexis', date: '2025-01-18' }
+    ],
+    aiSummary: 'Rapid fund movement through newly opened account (14 days old). Classic pass-through / layering behavior. Linked to AML-001.'
   },
   {
     id: 'AML-005', customer: { name: 'Ahmed Al-Rashid', id: 'CUST-5566', riskScore: 65, kycStatus: 'Valid', jurisdiction: 'Kuwait', dob: '1990-05-30', pep: false },
     alertType: 'Volume Spike', severity: 'medium', status: 'pending', timestamp: new Date(Date.now() - 43200000),
+    triage: { classification: 'false-positive', confidence: 68 },
     riskFactors: [{ name: 'Volume Anomaly', value: 78 }, { name: 'Counterparty Risk', value: 45 }, { name: 'Account Age', value: 30 }],
     transactions: [
       { date: '2025-01-18', amount: 320000, currency: 'USD', direction: 'IN', counterparty: 'Tech Solutions LLC', country: 'US' },
       { date: '2025-01-15', amount: 185000, currency: 'USD', direction: 'IN', counterparty: 'Digital Assets Fund', country: 'Malta' }
     ],
     linkedAlerts: [],
-    evidence: [{ type: 'Volume Anomaly', desc: 'Jan volume: $505K vs 12-month avg: $42K (+1,102%)' }, { type: 'New Counterparties', desc: '3 of 5 January counterparties are first-time' }],
-    aiSummary: 'Transaction volume anomaly for Ahmed Al-Rashid. January volume of $505K represents a 1,102% increase over the 12-month average of $42K. Three new counterparties introduced. Recommend review to determine if this represents legitimate business expansion or potential layering.'
+    adverseMedia: [],
+    evidence: [
+      { type: 'Volume Anomaly', desc: 'Jan volume: $505K vs 12-month avg: $42K (+1,102%).', source: 'MemberCheck', date: '2025-01-18' },
+      { type: 'New Counterparties', desc: '3 of 5 January counterparties are first-time.', source: 'MemberCheck', date: '2025-01-18' }
+    ],
+    aiSummary: 'Transaction volume anomaly. January volume of $505K represents a 1,102% increase over the 12-month average. New counterparties introduced. Likely legitimate business expansion.'
   },
   {
     id: 'AML-006', customer: { name: 'Elena Kuznetsova', id: 'CUST-2219', riskScore: 91, kycStatus: 'Expired', jurisdiction: 'Russia', dob: '1973-09-12', pep: true },
     alertType: 'Sanctions + Dormant', severity: 'critical', status: 'pending', timestamp: new Date(Date.now() - 50400000),
+    triage: { classification: 'escalate', confidence: 97 },
     riskFactors: [{ name: 'Sanctions Proximity', value: 88 }, { name: 'Dormant Reactivation', value: 95 }, { name: 'PEP Status', value: 100 }, { name: 'Cross-Border Risk', value: 72 }],
     transactions: [
       { date: '2025-01-17', amount: 5600000, currency: 'USD', direction: 'OUT', counterparty: 'Crown Asset Management', country: 'UK' },
       { date: '2025-01-16', amount: 5600000, currency: 'USD', direction: 'IN', counterparty: 'Siberian Resources JSC', country: 'Russia' }
     ],
     linkedAlerts: ['AML-004'],
-    evidence: [{ type: 'Dormant Account', desc: 'Account inactive for 18 months prior to Jan 2025' }, { type: 'Sanctions Proximity', desc: 'Received funds from entity on EU sanctions watchlist' }, { type: 'PEP Status', desc: 'Former Deputy Minister of Energy (2015-2020)' }, { type: 'Single Large Transfer', desc: '$5.6M received and immediately forwarded to UK entity' }],
-    aiSummary: 'Critical multi-factor alert. Elena Kuznetsova (former Russian Deputy Minister, PEP) reactivated a dormant account after 18 months. Received $5.6M from a Russian entity on EU sanctions watchlist and immediately forwarded the full amount to a UK-based entity. This combines PEP, sanctions proximity, dormant reactivation, and pass-through patterns.'
+    adverseMedia: [
+      { title: 'Former Russian energy official linked to sanctioned entities', source: 'The Guardian', date: '2025-01-08', sentiment: 'negative' },
+      { title: 'EU expands sanctions list including Russian political figures', source: 'EU Official Journal', date: '2024-12-15', sentiment: 'neutral' },
+      { title: 'Siberian Resources JSC placed on EU sanctions watchlist', source: 'Financial Times', date: '2024-11-30', sentiment: 'negative' }
+    ],
+    evidence: [
+      { type: 'Dormant Account', desc: 'Account inactive for 18 months prior to Jan 2025.', source: 'MemberCheck', date: '2025-01-17' },
+      { type: 'Sanctions Proximity', desc: 'Received funds from entity on EU sanctions watchlist.', source: 'LexisNexis', date: '2025-01-17' },
+      { type: 'PEP Status', desc: 'Former Deputy Minister of Energy (2015-2020).', source: 'LexisNexis', date: '2025-01-17' },
+      { type: 'Single Large Transfer', desc: '$5.6M received and immediately forwarded to UK entity.', source: 'MemberCheck', date: '2025-01-17' }
+    ],
+    aiSummary: 'Critical multi-factor alert. Elena Kuznetsova (former Russian Deputy Minister, PEP) reactivated a dormant account after 18 months. Received $5.6M from a Russian entity on EU sanctions watchlist.'
   },
   {
     id: 'AML-007', customer: { name: 'Caribbean Holdings Ltd', id: 'CUST-8834', riskScore: 74, kycStatus: 'Valid', jurisdiction: 'BVI', dob: 'Entity', pep: false },
     alertType: 'Shell Company', severity: 'medium', status: 'pending', timestamp: new Date(Date.now() - 64800000),
+    triage: { classification: 'review', confidence: 76 },
     riskFactors: [{ name: 'Shell Company Indicators', value: 82 }, { name: 'Nominee Directors', value: 90 }, { name: 'Opaque UBO Chain', value: 75 }],
     transactions: [
       { date: '2025-01-14', amount: 3400000, currency: 'USD', direction: 'IN', counterparty: 'Senator Maria Santos', country: 'Brazil' },
       { date: '2025-01-13', amount: 1200000, currency: 'USD', direction: 'OUT', counterparty: 'Panama Gateway Corp', country: 'Panama' }
     ],
     linkedAlerts: ['AML-003'],
-    evidence: [{ type: 'Corporate Registry', desc: 'No physical office registered. Registered agent only.' }, { type: 'UBO Structure', desc: '3 layers of nominee ownership. Ultimate beneficial owner unclear.' }, { type: 'PEP Link', desc: 'Received R$1.2M from Senator Maria Santos (AML-003)' }],
-    aiSummary: 'Shell company indicators for Caribbean Holdings Ltd (BVI). No physical presence, 3 layers of nominee directors, opaque UBO structure. Linked to PEP alert AML-003 — received R$1.2M from Senator Maria Santos. Recommended: trace ultimate beneficial ownership through full corporate registry chain.'
+    adverseMedia: [
+      { title: 'BVI shell companies under increased scrutiny post-Panama Papers', source: 'Bloomberg', date: '2024-12-01', sentiment: 'negative' }
+    ],
+    evidence: [
+      { type: 'Corporate Registry', desc: 'No physical office registered. Registered agent only.', source: 'LexisNexis', date: '2025-01-14' },
+      { type: 'UBO Structure', desc: '3 layers of nominee ownership. Ultimate beneficial owner unclear.', source: 'LexisNexis', date: '2025-01-14' },
+      { type: 'PEP Link', desc: 'Received R$1.2M from Senator Maria Santos (AML-003).', source: 'MemberCheck', date: '2025-01-14' }
+    ],
+    aiSummary: 'Shell company indicators for Caribbean Holdings Ltd (BVI). No physical presence, 3 layers of nominee directors. Linked to PEP alert AML-003.'
   },
   {
     id: 'AML-008', customer: { name: 'Rajesh Patel', id: 'CUST-4455', riskScore: 71, kycStatus: 'Valid', jurisdiction: 'India', dob: '1982-01-25', pep: false },
     alertType: 'Layering', severity: 'high', status: 'pending', timestamp: new Date(Date.now() - 86400000),
+    triage: { classification: 'review', confidence: 74 },
     riskFactors: [{ name: 'Network Complexity', value: 85 }, { name: 'Rapid Transfers', value: 72 }, { name: 'Jurisdiction Hopping', value: 68 }],
     transactions: [
       { date: '2025-01-17', amount: 425000, currency: 'USD', direction: 'OUT', counterparty: 'Dubai Gold Exchange', country: 'UAE' },
@@ -367,12 +724,17 @@ const alerts = [
       { date: '2025-01-14', amount: 420000, currency: 'USD', direction: 'IN', counterparty: 'Mumbai Exports Pvt Ltd', country: 'India' }
     ],
     linkedAlerts: [],
-    evidence: [{ type: 'Layering Pattern', desc: 'Funds moved through 4 countries in 4 days via commodity trades' }, { type: 'Business Mismatch', desc: 'Customer registered as "IT Consultant" — no connection to precious metals' }],
-    aiSummary: 'Layering pattern via precious metals trades. Rajesh Patel (registered IT consultant) moved $420K-$430K through UK, Switzerland, UAE, and India in 4 days using gold/precious metals counterparties. Business profile mismatch is a significant red flag. Classic layering technique using high-value commodities to obscure fund origins.'
+    adverseMedia: [],
+    evidence: [
+      { type: 'Layering Pattern', desc: 'Funds moved through 4 countries in 4 days via commodity trades.', source: 'MemberCheck', date: '2025-01-17' },
+      { type: 'Business Mismatch', desc: 'Customer registered as "IT Consultant" — no connection to precious metals.', source: 'MemberCheck', date: '2025-01-17' }
+    ],
+    aiSummary: 'Layering pattern via precious metals trades. Rajesh Patel (IT consultant) moved $420K-$430K through UK, Switzerland, UAE, and India in 4 days.'
   },
   {
     id: 'AML-009', customer: { name: 'Golden Dragon Casino Ltd', id: 'CUST-6677', riskScore: 68, kycStatus: 'Valid', jurisdiction: 'Philippines', dob: 'Entity', pep: false },
     alertType: 'Cash-Intensive', severity: 'medium', status: 'pending', timestamp: new Date(Date.now() - 100800000),
+    triage: { classification: 'false-positive', confidence: 62 },
     riskFactors: [{ name: 'Cash Ratio', value: 85 }, { name: 'Business Type Risk', value: 72 }, { name: 'Deposit Structuring', value: 55 }],
     transactions: [
       { date: '2025-01-17', amount: 89000, currency: 'USD', direction: 'IN', counterparty: 'Cash Deposit', country: 'Philippines' },
@@ -380,41 +742,122 @@ const alerts = [
       { date: '2025-01-14', amount: 78000, currency: 'USD', direction: 'IN', counterparty: 'Cash Deposit', country: 'Philippines' }
     ],
     linkedAlerts: [],
-    evidence: [{ type: 'Cash Business', desc: '92% of inbound funds are cash deposits' }, { type: 'Industry Risk', desc: 'Casinos rated high-risk for money laundering by FATF' }],
-    aiSummary: 'Cash-intensive business alert for Golden Dragon Casino Ltd (Philippines). 92% of inbound funds are cash deposits totaling $262K in the past week. Casinos are FATF-identified high-risk for money laundering. Pattern warrants review of customer due diligence and source of wealth documentation.'
+    adverseMedia: [],
+    evidence: [
+      { type: 'Cash Business', desc: '92% of inbound funds are cash deposits.', source: 'MemberCheck', date: '2025-01-17' },
+      { type: 'Industry Risk', desc: 'Casinos rated high-risk for money laundering by FATF.', source: 'LexisNexis', date: '2025-01-14' }
+    ],
+    aiSummary: 'Cash-intensive business alert for Golden Dragon Casino Ltd. 92% of inbound funds are cash deposits totaling $262K. Casinos are FATF-identified high-risk. Expected behavior for casino operations.'
   },
   {
     id: 'AML-010', customer: { name: 'Viktor Petrov', id: 'CUST-9921', riskScore: 82, kycStatus: 'Valid', jurisdiction: 'Belarus', dob: '1969-12-03', pep: false },
     alertType: 'High-Risk Jurisdiction', severity: 'high', status: 'pending', timestamp: new Date(Date.now() - 115200000),
+    triage: { classification: 'review', confidence: 79 },
     riskFactors: [{ name: 'Jurisdiction Risk', value: 92 }, { name: 'Cross-Border Volume', value: 65 }, { name: 'Sanctions Proximity', value: 78 }],
     transactions: [
       { date: '2025-01-16', amount: 680000, currency: 'EUR', direction: 'OUT', counterparty: 'Minsk Industrial Group', country: 'Belarus' },
       { date: '2025-01-15', amount: 700000, currency: 'EUR', direction: 'IN', counterparty: 'Frankfurt Trade Bank', country: 'Germany' }
     ],
     linkedAlerts: [],
-    evidence: [{ type: 'Jurisdiction Alert', desc: 'Belarus is on FATF grey list with heightened sanctions risk' }, { type: 'Bank Correspondent', desc: 'Funds routed through German correspondent banking relationship' }],
-    aiSummary: 'High-risk jurisdiction alert for Viktor Petrov (Belarus). EUR 700K received from German bank and forwarded to Minsk Industrial Group. Belarus is on the FATF grey list with active sanctions programs. The use of correspondent banking to route funds through EU jurisdictions is a known sanctions evasion technique.'
+    adverseMedia: [
+      { title: 'Belarus correspondent banking routes under EU review', source: 'Reuters', date: '2025-01-03', sentiment: 'negative' }
+    ],
+    evidence: [
+      { type: 'Jurisdiction Alert', desc: 'Belarus is on FATF grey list with heightened sanctions risk.', source: 'LexisNexis', date: '2025-01-16' },
+      { type: 'Bank Correspondent', desc: 'Funds routed through German correspondent banking relationship.', source: 'MemberCheck', date: '2025-01-16' }
+    ],
+    aiSummary: 'High-risk jurisdiction alert for Viktor Petrov (Belarus). EUR 700K received from German bank and forwarded to Minsk Industrial Group. Belarus is on the FATF grey list.'
   }
 ];
 
 // State
 let activeAlert = null;
 let currentFilter = 'all';
-let alertStates = {};
 let conversationHistory = [];
 let investigationStep = 0;
+let auditTrail = [];
+let auditDrawerOpen = false;
 
-// Toast notification
-function showToast(message) {
+// ============================================================
+// AUDIT TRAIL
+// ============================================================
+function addAuditEntry(type, detail, user = 'AI Sancus') {
+  auditTrail.unshift({
+    type,
+    detail,
+    user,
+    timestamp: new Date()
+  });
+  renderAuditTrail();
+}
+
+function renderAuditTrail() {
+  const list = document.getElementById('audit-list');
+  if (!list) return;
+  list.innerHTML = auditTrail.map(entry => {
+    const time = entry.timestamp.toLocaleTimeString();
+    return `<div class="audit-entry">
+      <div class="audit-entry-header">
+        <span class="audit-entry-type">${entry.type}</span>
+        <span class="audit-entry-user">${entry.user}</span>
+        <span class="audit-entry-time">${time}</span>
+      </div>
+      <div class="audit-entry-detail">${entry.detail}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleAuditDrawer() {
+  auditDrawerOpen = !auditDrawerOpen;
+  document.getElementById('audit-drawer').classList.toggle('open', auditDrawerOpen);
+  const btn = document.getElementById('audit-toggle-btn');
+  btn.classList.toggle('active', auditDrawerOpen);
+  btn.setAttribute('aria-expanded', auditDrawerOpen);
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(message, type = 'success') {
   const toast = document.createElement('div');
   toast.className = 'toast-notification';
-  toast.textContent = message;
+  const icon = type === 'success' ? '&#x2713;' : type === 'warning' ? '&#x26A0;' : '&#x2713;';
+  toast.innerHTML = `<span style="font-size:16px">${icon}</span> ${message}`;
+  if (type === 'warning') toast.style.borderLeftColor = 'var(--warning)';
   document.body.appendChild(toast);
   requestAnimationFrame(() => toast.classList.add('toast-show'));
   setTimeout(() => {
     toast.classList.remove('toast-show');
     setTimeout(() => toast.remove(), 300);
-  }, 3000);
+  }, 4000);
+}
+
+// Confirmation Dialog
+function showConfirmation(title, message, onConfirm, confirmText = 'Confirm', isDanger = false) {
+  const dialog = document.getElementById('confirmation-dialog');
+  const titleEl = document.getElementById('confirmation-title');
+  const messageEl = document.getElementById('confirmation-message');
+  const confirmBtn = document.getElementById('confirmation-confirm');
+  const cancelBtn = document.getElementById('confirmation-cancel');
+
+  titleEl.textContent = title;
+  messageEl.textContent = message;
+  confirmBtn.textContent = confirmText;
+  confirmBtn.className = `confirmation-btn ${isDanger ? 'danger' : 'primary'}`;
+  dialog.classList.add('visible');
+
+  function handleConfirm() { dialog.classList.remove('visible'); cleanup(); onConfirm(); }
+  function handleCancel() { dialog.classList.remove('visible'); cleanup(); }
+  function cleanup() {
+    confirmBtn.removeEventListener('click', handleConfirm);
+    cancelBtn.removeEventListener('click', handleCancel);
+    dialog.removeEventListener('click', handleBackdrop);
+  }
+  function handleBackdrop(e) { if (e.target === dialog) handleCancel(); }
+
+  confirmBtn.addEventListener('click', handleConfirm);
+  cancelBtn.addEventListener('click', handleCancel);
+  dialog.addEventListener('click', handleBackdrop);
 }
 
 // ============================================================
@@ -428,57 +871,64 @@ function renderAlertList() {
     if (currentFilter === 'high' && a.severity !== 'high') return false;
     if (currentFilter === 'medium' && a.severity !== 'medium') return false;
     if (currentFilter === 'pending' && a.status !== 'pending') return false;
+    if (currentFilter === 'review' && a.triage?.classification !== 'review') return false;
+    if (currentFilter === 'escalate' && a.triage?.classification !== 'escalate') return false;
     if (searchTerm && !a.customer.name.toLowerCase().includes(searchTerm) && !a.alertType.toLowerCase().includes(searchTerm) && !a.id.toLowerCase().includes(searchTerm)) return false;
     return true;
   });
 
-  let html = '';
   filtered.sort((a, b) => {
     const severityOrder = { critical: 0, high: 1, medium: 2 };
     return severityOrder[a.severity] - severityOrder[b.severity];
   });
 
+  let html = '';
   filtered.forEach(alert => {
-    const statusClass = `status-${alert.status}`;
     const hoursAgo = Math.floor((Date.now() - alert.timestamp) / 3600000);
-    const timeStr = hoursAgo === 0 ? 'Just now' : hoursAgo === 1 ? '1h ago' : `${hoursAgo}h ago`;
+    const timeStr = hoursAgo === 0 ? 'Just now' : hoursAgo < 24 ? `${hoursAgo}h ago` : hoursAgo < 48 ? 'Yesterday' : `${Math.floor(hoursAgo / 24)}d ago`;
     const typeIcons = { 'Sanctions Hit': '&#x26A0;', 'Structuring': '&#x1F4B5;', 'PEP Match': '&#x1F464;', 'Rapid Movement': '&#x26A1;', 'Volume Spike': '&#x1F4C8;', 'Shell Company': '&#x1F3E2;', 'Layering': '&#x1F504;', 'Cash-Intensive': '&#x1F4B0;', 'High-Risk Jurisdiction': '&#x1F30D;', 'Sanctions + Dormant': '&#x1F6AB;' };
     const isActive = activeAlert && activeAlert.id === alert.id;
+    const scoreColor = alert.riskScore >= 80 ? 'var(--critical)' : alert.riskScore >= 60 ? 'var(--warning)' : 'var(--success)';
+    const triageLabel = alert.triage ? (alert.triage.classification === 'false-positive' ? 'Likely FP' : alert.triage.classification === 'review' ? 'Needs Review' : 'Escalate') : '';
+    const triageClass = alert.triage ? `triage-${alert.triage.classification}` : '';
+    const statusClass = `status-${alert.status}`;
 
-    html += `<div class="alert-card ${isActive ? 'active' : ''}" onclick="selectAlert('${alert.id}')">
+    html += `<div class="alert-card ${isActive ? 'active' : ''} severity-${alert.severity}" onclick="selectAlert('${alert.id}')">
       <div class="alert-card-top">
         <div class="severity-dot severity-${alert.severity}"></div>
         <span class="alert-type-icon">${typeIcons[alert.alertType] || '&#x1F4CB;'}</span>
         <span class="alert-customer">${alert.customer.name}</span>
-        <span class="alert-status-badge ${statusClass}">${alert.status}</span>
+        ${triageLabel ? `<span class="triage-badge ${triageClass}">${triageLabel}</span>` : ''}
       </div>
       <div class="alert-type-label">${alert.alertType}</div>
       <div class="alert-meta">
         <span class="alert-time">${timeStr}</span>
-        <span class="alert-risk" style="color: ${alert.riskScore >= 80 ? 'var(--accent-red)' : alert.riskScore >= 60 ? 'var(--accent-amber)' : 'var(--accent-green)'}">Score: ${alert.riskScore}</span>
+        <span class="alert-risk" style="color: ${scoreColor}">Score: ${alert.riskScore}</span>
       </div>
     </div>`;
   });
 
   if (filtered.length === 0) {
-    html = '<div style="padding:24px;text-align:center;color:var(--text-muted);font-size:13px;">No alerts match your filters</div>';
+    html = '<div style="padding:24px;text-align:center;color:var(--muted-foreground);font-size:13px;">No alerts match your filters</div>';
   }
 
   listEl.innerHTML = html;
   document.getElementById('pending-count').textContent = alerts.filter(a => a.status === 'pending').length;
 }
 
-// Filter chips
 document.querySelectorAll('.filter-chip').forEach(chip => {
   chip.addEventListener('click', () => {
-    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.filter-chip').forEach(c => {
+      c.classList.remove('active');
+      c.setAttribute('aria-pressed', 'false');
+    });
     chip.classList.add('active');
+    chip.setAttribute('aria-pressed', 'true');
     currentFilter = chip.dataset.filter;
     renderAlertList();
   });
 });
 
-// Search
 document.getElementById('alert-search').addEventListener('input', renderAlertList);
 
 // ============================================================
@@ -491,15 +941,17 @@ const chatSuggestions = document.getElementById('chat-suggestions');
 function addMessage(role, content, actions = null, viz = null) {
   const msg = document.createElement('div');
   msg.className = `message message-${role}`;
-
   const avatar = document.createElement('div');
   avatar.className = `msg-avatar msg-avatar-${role}`;
-  avatar.textContent = role === 'ai' ? 'AI' : 'You';
+  if (role === 'ai') {
+    avatar.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`;
+  } else {
+    avatar.textContent = 'You';
+  }
   msg.appendChild(avatar);
 
   const contentDiv = document.createElement('div');
   contentDiv.className = 'msg-content';
-
   const bubble = document.createElement('div');
   bubble.className = `msg-bubble msg-${role}`;
   bubble.innerHTML = content;
@@ -539,7 +991,7 @@ function showTyping() {
   const msg = document.createElement('div');
   msg.className = 'message message-ai';
   msg.id = 'typing-msg';
-  msg.innerHTML = `<div class="msg-avatar msg-avatar-ai">AI</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+  msg.innerHTML = `<div class="msg-avatar msg-avatar-ai"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
   chatMessages.appendChild(msg);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
@@ -553,7 +1005,7 @@ function renderMarkdown(text) {
   return text
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/`(.+?)`/g, '<code style="background:var(--bg-hover);padding:1px 4px;border-radius:3px;font-size:12px;">$1</code>')
+    .replace(/`(.+?)`/g, '<code style="background:var(--muted);padding:1px 4px;border-radius:3px;font-size:12px;">$1</code>')
     .replace(/\n/g, '<br>');
 }
 
@@ -617,16 +1069,10 @@ async function handleSend() {
     vizDiv.className = 'msg-viz';
     vizDiv.innerHTML = response.viz;
     msgEl.querySelector('.msg-content').appendChild(vizDiv);
-    // Render D3 graphs if needed
-    if (response.viz && response.viz.includes('mini-network-')) {
-      renderMiniNetworkGraph(response.viz);
-    }
+    if (response.viz && response.viz.includes('mini-network-')) renderMiniNetworkGraph(response.viz);
   }
 
-  if (response.suggestions) {
-    setSuggestions(response.suggestions);
-  }
-
+  if (response.suggestions) setSuggestions(response.suggestions);
   conversationHistory.push({ role: 'ai', text: response.text });
 }
 
@@ -634,12 +1080,36 @@ document.getElementById('send-btn').addEventListener('click', handleSend);
 chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
 
 // ============================================================
-// RESPONSE ENGINE
+// RESPONSE ENGINE — with natural language query parsing
 // ============================================================
 function processInput(text) {
   const lower = text.toLowerCase();
 
-  // Alert-specific queries
+  // Natural language queries for structured filtering
+  if (lower.includes('strong name') && lower.includes('active sanction')) {
+    const strongSanctions = alerts.filter(a => a.severity === 'critical' || a.triage?.classification === 'escalate');
+    return getFilterResponse(strongSanctions, 'strong name match AND active sanctions');
+  }
+  if (lower.includes('adverse media')) {
+    return getAdverseMediaResponse();
+  }
+  if (lower.includes('false positive') || lower.includes('likely fp') || lower.includes('can dismiss')) {
+    const fps = alerts.filter(a => a.triage?.classification === 'false-positive');
+    return getFilterResponse(fps, 'likely false positive');
+  }
+  if (lower.includes('needs review') || lower.includes('need review')) {
+    const reviews = alerts.filter(a => a.triage?.classification === 'review');
+    return getFilterResponse(reviews, 'needs review');
+  }
+  if (lower.includes('escalate') && (lower.includes('show') || lower.includes('only') || lower.includes('which'))) {
+    const escalates = alerts.filter(a => a.triage?.classification === 'escalate');
+    return getFilterResponse(escalates, 'recommended for escalation');
+  }
+  if (lower.includes('pep') && lower.includes('active sanction')) {
+    const pepSanctions = alerts.filter(a => a.customer.pep && a.severity === 'critical');
+    return getFilterResponse(pepSanctions, 'PEP with active sanctions');
+  }
+
   if (activeAlert) {
     if (lower === 'next step' || lower === 'next' || lower === 'continue') {
       if (investigationStep > 0 && investigationStep < 4) {
@@ -650,105 +1120,138 @@ function processInput(text) {
         return { text: 'Investigation complete. You can now draft a SAR, escalate, or dismiss this alert.', suggestions: ['Draft SAR', 'Escalate', 'Dismiss as false positive'] };
       }
     }
-    if (lower.includes('why') || lower.includes('flagged') || lower.includes('reason') || lower.includes('trigger')) {
-      return getWhyFlaggedResponse(activeAlert);
-    }
-    if (lower.includes('transaction') || lower.includes('transfer') || lower.includes('payment')) {
-      return getTransactionResponse(activeAlert);
-    }
-    if (lower.includes('risk') || lower.includes('score')) {
-      return getRiskResponse(activeAlert);
-    }
-    if (lower.includes('investigat') || lower.includes('deep') || lower.includes('more about')) {
-      return getInvestigationResponse(activeAlert);
-    }
-    if (lower.includes('pattern') || lower.includes('similar') || lower.includes('connect')) {
-      return getPatternResponse(activeAlert);
-    }
-    if (lower.includes('evidence') || lower.includes('proof') || lower.includes('support')) {
-      return getEvidenceResponse(activeAlert);
-    }
+    if (lower.includes('why') || lower.includes('flagged') || lower.includes('reason') || lower.includes('trigger')) return getWhyFlaggedResponse(activeAlert);
+    if (lower.includes('transaction') || lower.includes('transfer') || lower.includes('payment')) return getTransactionResponse(activeAlert);
+    if (lower.includes('risk') || lower.includes('score')) return getRiskResponse(activeAlert);
+    if (lower.includes('investigat') || lower.includes('deep') || lower.includes('more about')) return getInvestigationResponse(activeAlert);
+    if (lower.includes('pattern') || lower.includes('similar') || lower.includes('connect')) return getPatternResponse(activeAlert);
+    if (lower.includes('evidence') || lower.includes('proof') || lower.includes('support')) return getEvidenceResponse(activeAlert);
+    if (lower.includes('adverse media')) return getAlertAdverseMediaResponse(activeAlert);
   }
 
-  // General queries
-  if (lower.includes('next alert') || lower.includes('next highest') || lower.includes('show next')) {
-    return getNextAlertResponse();
-  }
+  if (lower.includes('next alert') || lower.includes('next highest') || lower.includes('show next')) return getNextAlertResponse();
   if (lower.includes('investigate aml') || lower.includes('show me aml') || lower.includes('open aml')) {
     const match = lower.match(/aml[- ]?(\d+)/);
     if (match) {
       const alert = alerts.find(a => a.id.toLowerCase() === `aml-${match[1].padStart(3, '0')}`);
-      if (alert) {
-        activeAlert = alert;
-        renderAlertList();
-        showDetailPanel(alert);
-        return getAlertSummaryResponse(alert);
-      }
+      if (alert) { activeAlert = alert; renderAlertList(); showDetailPanel(alert); return getAlertSummaryResponse(alert); }
     }
   }
-  if (lower.includes('pattern') || lower.includes('trend') || lower.includes('overview')) {
-    return getGeneralPatternResponse();
-  }
+  if (lower.includes('pattern') || lower.includes('trend') || lower.includes('overview')) return getGeneralPatternResponse();
   if (lower.includes('dismiss') || lower.includes('close') || lower.includes('false positive')) {
-    if (activeAlert) {
-      dismissAlert(activeAlert);
-      return { text: `Alert ${activeAlert.id} has been dismissed. What would you like to do next?`, suggestions: ['Next alert', 'Show me patterns'] };
-    }
-    return { text: 'I can help dismiss an alert. Please select an alert from the sidebar first, then I can process the dismissal for you.', suggestions: ['Why was this flagged?', 'Show me the evidence', 'Show risk breakdown'] };
+    if (activeAlert) { dismissAlert(activeAlert); return { text: `Alert ${activeAlert.id} has been dismissed. What would you like to do next?`, suggestions: ['Next alert', 'Show me patterns'] }; }
+    return { text: 'I can help dismiss an alert. Please select an alert from the sidebar first.', suggestions: ['Why was this flagged?', 'Show me the evidence', 'Show risk breakdown'] };
   }
-  if (lower.includes('escalat')) {
-    return { text: 'Escalation requires an active alert context. Click an alert in the sidebar and I can escalate it with full justification.', suggestions: ['Why was this flagged?', 'Show me the evidence'] };
-  }
-  if (lower.includes('sar') || lower.includes('file')) {
-    return { text: 'To prepare a SAR (Suspicious Activity Report), I need an alert context first. Select an alert and ask me to investigate — I will then draft a SAR narrative with all supporting evidence.', suggestions: ['Start investigation', 'Show me patterns'] };
-  }
-  if (lower.includes('edd') || lower.includes('enhanced due diligence')) {
-    return { text: 'Enhanced Due Diligence is recommended for alerts with risk scores above 70. Select a high-risk alert and I can initiate EDD with a structured checklist.', suggestions: ['Show risk breakdown', 'Start investigation'] };
-  }
+  if (lower.includes('escalat')) return { text: 'Escalation requires an active alert context. Click an alert in the sidebar and I can escalate it with full justification.', suggestions: ['Why was this flagged?', 'Show me the evidence'] };
+  if (lower.includes('sar') || lower.includes('file')) return { text: 'To prepare a SAR, I need an alert context first. Select an alert and ask me to investigate.', suggestions: ['Start investigation', 'Show me patterns'] };
+  if (lower.includes('edd') || lower.includes('enhanced due diligence')) return { text: 'EDD is recommended for alerts with risk scores above 70. Select a high-risk alert and I can initiate EDD.', suggestions: ['Show risk breakdown', 'Start investigation'] };
   if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
-    return { text: 'Hello! I\'m your AML Triage Copilot. I can help you review alerts, analyze patterns, investigate suspicious activity, and prepare SAR filings. Try selecting an alert from the sidebar to get started, or ask me about patterns across alerts.', suggestions: ['Show me patterns', 'What are the highest risk alerts?', 'Start investigation'] };
+    return { text: 'Hello! I\'m Sancus, your AML investigation partner. I can help you:\n\n**Conversational Queries** — "Show only hits with strong name match AND active sanctions"\n**Adverse Media** — "Summarize all adverse media for this entity"\n**Alert Triage** — Review, dismiss, or escalate with AI recommendations\n**SAR Filing** — Draft Suspicious Activity Reports with evidence\n\nI operate in **advisory mode** (EU AI Act compliant) — you retain full decision authority.', suggestions: ['Show me patterns', 'Which alerts need escalation?', 'Summarize adverse media'] };
   }
   if (lower.includes('help')) {
-    return { text: 'Here is what I can help with:\n\n**Alert Triage** — Select an alert and ask me to analyze it\n**Why Flagged?** — I explain the specific triggers and evidence\n**Transaction Analysis** — I review transaction patterns\n**Risk Breakdown** — I show how risk scores are calculated\n**Pattern Analysis** — I find cross-alert patterns and connections\n**Investigation** — I guide you through evidence gathering\n**SAR Filing** — I draft Suspicious Activity Reports\n\nTry clicking an alert in the sidebar!', suggestions: ['Show me patterns', 'What are the highest risk alerts?'] };
+    return { text: 'Here is what I can help with:\n\n**Conversational Queries**\n• "Show only hits with strong name match AND active sanctions"\n• "Summarize all adverse media for this entity"\n• "Which alerts are likely false positives?"\n\n**Alert Triage** — Each alert has an AI classification badge:\n• **Likely FP** — Probably safe to dismiss\n• **Needs Review** — Requires manual investigation\n• **Escalate** — High confidence — escalate immediately\n\n**Investigation** — Structured 4-step evidence gathering\n**SAR Filing** — Draft reports with supporting evidence\n\nAll decisions are logged to the **Audit Trail** for EU AI Act compliance.', suggestions: ['Show me patterns', 'Which alerts need escalation?', 'Show advisory mode details'] };
   }
 
-  // Default: try to match customer names
   for (const alert of alerts) {
     if (lower.includes(alert.customer.name.toLowerCase().split(' ')[0].toLowerCase())) {
-      if (activeAlert && activeAlert.id === alert.id) {
-        return getInvestigationResponse(alert);
-      }
-      activeAlert = alert;
-      renderAlertList();
+      if (activeAlert && activeAlert.id === alert.id) return getInvestigationResponse(alert);
+      activeAlert = alert; renderAlertList();
       return getAlertSummaryResponse(alert);
     }
   }
 
-  return { text: 'I\'m not sure I understand. Try selecting an alert from the sidebar, or ask me about patterns, risk scores, or investigations. You can also type "help" for a full list of capabilities.', suggestions: ['Help', 'Show me patterns', 'What are the highest risk alerts?'] };
+  return { text: 'I\'m not sure I understand. Try selecting an alert, or ask me about patterns, risk scores, or investigations. Type "help" for a full list of capabilities.', suggestions: ['Help', 'Show me patterns', 'Which alerts need escalation?'] };
+}
+
+function getFilterResponse(filteredAlerts, description) {
+  const list = filteredAlerts.map(a => {
+    const triageLabel = a.triage?.classification === 'false-positive' ? 'Likely FP' : a.triage?.classification === 'review' ? 'Needs Review' : 'Escalate';
+    const triageClass = a.triage ? `triage-${a.triage.classification}` : '';
+    return `• **${a.id}** — ${a.customer.name} (${a.alertType}) — Risk: ${a.riskScore}/100 — <span class="triage-badge ${triageClass}">${triageLabel}</span> (AI confidence: ${a.triage?.confidence}%)`;
+  }).join('\n');
+
+  addAuditEntry('Query', `Natural language query: "${description}" — ${filteredAlerts.length} results returned`);
+
+  return {
+    text: `Found **${filteredAlerts.length} alerts** matching: "${description}"\n\n${list}\n\nSelect any alert for detailed analysis.`,
+    suggestions: filteredAlerts.length > 0 ? [filteredAlerts[0].id, 'Summarize adverse media'] : ['Show me patterns', 'Show all alerts']
+  };
+}
+
+function getAdverseMediaResponse() {
+  const withMedia = alerts.filter(a => a.adverseMedia && a.adverseMedia.length > 0);
+  let vizHtml = '';
+  withMedia.forEach(a => {
+    vizHtml += `<div style="margin-bottom:16px;"><div style="font-weight:600;font-size:13px;margin-bottom:8px;">${a.customer.name} (${a.id})</div>`;
+    a.adverseMedia.forEach(m => {
+      const sentimentColor = m.sentiment === 'negative' ? 'var(--critical)' : m.sentiment === 'neutral' ? 'var(--warning)' : 'var(--success)';
+      vizHtml += `<div style="padding:8px;background:var(--muted / 0.5);border-radius:var(--radius-sm);margin-bottom:4px;font-size:12px;border-left:3px solid ${sentimentColor};">
+        <div style="font-weight:500;margin-bottom:2px;">${m.title}</div>
+        <div style="color:var(--muted-foreground);">${m.source} — ${m.date} — <span style="color:${sentimentColor};font-weight:600;text-transform:uppercase;font-size:10px;">${m.sentiment}</span></div>
+      </div>`;
+    });
+    vizHtml += '</div>';
+  });
+
+  addAuditEntry('Query', 'Requested adverse media summary across all alerts');
+
+  return {
+    text: `**Adverse Media Summary**\n\n${withMedia.length} of ${alerts.length} alerts have associated adverse media hits.\n\n${withMedia.map(a => `• **${a.customer.name}**: ${a.adverseMedia.length} hit(s) — most recent: ${a.adverseMedia[0].date}`).join('\n')}\n\nSee details below:`,
+    viz: vizHtml,
+    suggestions: withMedia.length > 0 ? [withMedia[0].id, 'Show patterns'] : []
+  };
+}
+
+function getAlertAdverseMediaResponse(alert) {
+  if (!alert.adverseMedia || alert.adverseMedia.length === 0) {
+    return { text: `No adverse media found for ${alert.customer.name} in LexisNexis or MemberCheck databases.`, suggestions: ['Show evidence', 'Start investigation'] };
+  }
+  let vizHtml = '';
+  alert.adverseMedia.forEach(m => {
+    const sentimentColor = m.sentiment === 'negative' ? 'var(--critical)' : m.sentiment === 'neutral' ? 'var(--warning)' : 'var(--success)';
+    vizHtml += `<div style="padding:12px;background:var(--muted / 0.5);border-radius:var(--radius-md);margin-bottom:8px;border-left:3px solid ${sentimentColor};">
+      <div style="font-weight:600;font-size:13px;margin-bottom:4px;">${m.title}</div>
+      <div style="font-size:12px;color:var(--muted-foreground);">Source: <span class="badge badLexisNexis">${m.source}</span> — Date: ${m.date} — Sentiment: <span style="color:${sentimentColor};font-weight:600;text-transform:uppercase;">${m.sentiment}</span></div>
+    </div>`;
+  });
+
+  addAuditEntry('Query', `Requested adverse media summary for ${alert.id} — ${alert.adverseMedia.length} hits found`);
+
+  return {
+    text: `**Adverse Media for ${alert.customer.name}**\n\n${alert.adverseMedia.length} hit(s) found across LexisNexis and MemberCheck databases:\n\n${alert.adverseMedia.map(m => `• "${m.title}" — ${m.source} (${m.date})`).join('\n')}\n\nAll hits have **negative sentiment** and are directly relevant to this alert.`,
+    viz: vizHtml,
+    suggestions: ['Show evidence', 'Start investigation', 'Draft SAR']
+  };
 }
 
 function getAlertSummaryResponse(alert) {
   activeAlert = alert;
   renderAlertList();
   showDetailPanel(alert);
+  const triageLabel = alert.triage?.classification === 'false-positive' ? 'Likely False Positive' : alert.triage?.classification === 'review' ? 'Needs Manual Review' : 'Recommended for Escalation';
+  const triageClass = alert.triage ? `triage-${alert.triage.classification}` : '';
+
+  addAuditEntry('Triage', `Alert ${alert.id} reviewed. AI classification: ${triageLabel} (confidence: ${alert.triage?.confidence}%). Data sources: LexisNexis, MemberCheck.`);
+
   return {
-    text: `Alert **${alert.id}** — ${alert.alertType}\n\nCustomer: ${alert.customer.name} (${alert.customer.id})\nRisk Score: ${alert.riskScore}/100 | Severity: ${alert.severity.toUpperCase()}\n\n${alert.aiSummary}\n\nWhat would you like to explore?`,
+    text: `Alert **${alert.id}** — ${alert.alertType}\n\nCustomer: ${alert.customer.name} (${alert.customer.id})\nRisk Score: ${alert.riskScore}/100 | Severity: ${alert.severity.toUpperCase()}\n\n**AI Triage Classification:** <span class="triage-badge ${triageClass}">${triageLabel}</span> (Confidence: ${alert.triage?.confidence}%)\n\n**Data Sources:** LexisNexis, MemberCheck\n\n${alert.aiSummary}\n\nWhat would you like to explore?`,
     actions: [
       { label: 'Dismiss', class: 'success', action: () => dismissAlert(alert) },
       { label: 'Escalate', class: 'danger', action: () => escalateAlert(alert) },
       { label: 'Request EDD', class: '', action: () => eddAlert(alert) }
     ],
-    suggestions: ['Why was this flagged?', 'Show risk breakdown', 'Show transactions', 'Start investigation']
+    suggestions: ['Why was this flagged?', 'Show risk breakdown', 'Show adverse media', 'Start investigation']
   };
 }
 
 function getWhyFlaggedResponse(alert) {
   let vizHtml = '<table class="mini-tx-table"><thead><tr><th>Trigger</th><th>Score</th><th>Detail</th></tr></thead><tbody>';
   alert.riskFactors.forEach(f => {
-    const color = f.value >= 80 ? 'var(--accent-red)' : f.value >= 60 ? 'var(--accent-amber)' : 'var(--accent-green)';
-    vizHtml += `<tr><td>${f.name}</td><td><span class="score-pill ${f.value >= 80 ? 'score-high' : f.value >= 60 ? 'score-medium' : 'score-low'}">${f.value}</span></td><td style="color:var(--text-secondary)">${f.value >= 80 ? 'Critical' : f.value >= 60 ? 'Elevated' : 'Moderate'}</td></tr>`;
+    vizHtml += `<tr><td>${f.name}</td><td><span class="score-pill ${f.value >= 80 ? 'score-high' : f.value >= 60 ? 'score-medium' : 'score-low'}">${f.value}</span></td><td style="color:var(--muted-foreground)">${f.value >= 80 ? 'Critical' : f.value >= 60 ? 'Elevated' : 'Moderate'}</td></tr>`;
   });
   vizHtml += '</tbody></table>';
+
+  addAuditEntry('Explanation', `Risk factor breakdown provided for ${alert.id}`);
 
   return {
     text: `This alert was triggered by ${alert.riskFactors.length} risk factors:\n\n` + alert.riskFactors.map(f => `**${f.name}**: Score ${f.value}/100`).join('\n') + `\n\nThe combined risk score is ${alert.riskScore}/100. Here is the breakdown:`,
@@ -760,13 +1263,14 @@ function getWhyFlaggedResponse(alert) {
 function getTransactionResponse(alert) {
   let vizHtml = '<table class="mini-tx-table"><thead><tr><th>Date</th><th>Amount</th><th>Dir</th><th>Counterparty</th><th>Country</th></tr></thead><tbody>';
   alert.transactions.forEach(tx => {
-    const color = tx.direction === 'IN' ? 'var(--accent-green)' : 'var(--accent-red)';
+    const color = tx.direction === 'IN' ? 'var(--success)' : 'var(--destructive)';
     vizHtml += `<tr><td>${tx.date}</td><td style="font-weight:600;color:${color}">${tx.direction === 'IN' ? '+' : '-'}${tx.currency} ${tx.amount.toLocaleString()}</td><td>${tx.direction}</td><td>${tx.counterparty}</td><td>${tx.country}</td></tr>`;
   });
   vizHtml += '</tbody></table>';
-
   const totalIn = alert.transactions.filter(t => t.direction === 'IN').reduce((s, t) => s + t.amount, 0);
   const totalOut = alert.transactions.filter(t => t.direction === 'OUT').reduce((s, t) => s + t.amount, 0);
+
+  addAuditEntry('Analysis', `Transaction analysis provided for ${alert.id} — ${alert.transactions.length} transactions reviewed`);
 
   return {
     text: `${alert.customer.name} has ${alert.transactions.length} recent transactions:\n\nTotal Inbound: ${alert.transactions[0]?.currency || 'USD'} ${totalIn.toLocaleString()}\nTotal Outbound: ${alert.transactions[0]?.currency || 'USD'} ${totalOut.toLocaleString()}\nNet Flow: ${alert.transactions[0]?.currency || 'USD'} ${(totalIn - totalOut).toLocaleString()}\n\n${alert.transactions.length >= 4 ? 'High transaction frequency is notable. ' : ''}See details below:`,
@@ -778,10 +1282,12 @@ function getTransactionResponse(alert) {
 function getRiskResponse(alert) {
   let vizHtml = '<div class="risk-factor-chart">';
   alert.riskFactors.forEach(f => {
-    const color = f.value >= 80 ? 'var(--accent-red)' : f.value >= 60 ? 'var(--accent-amber)' : 'var(--accent-green)';
-    vizHtml += `<div class="risk-bar-container"><div class="risk-bar-header"><span>${f.name}</span><span style="color:${color}">${f.value}%</span></div><div class="risk-bar-track"><div class="risk-bar-fill" style="width:${f.value}%;background:${color}"></div></div></div>`;
+    const color = f.value >= 80 ? 'var(--critical)' : f.value >= 60 ? 'var(--warning)' : 'var(--success)';
+    vizHtml += `<div class="risk-factor"><div class="risk-factor-header"><span class="risk-factor-name">${f.name}</span><span class="risk-factor-value" style="color:${color}">${f.value}%</span></div><div class="risk-factor-bar"><div class="risk-factor-fill" style="width:${f.value}%;background:${color}"></div></div></div>`;
   });
   vizHtml += '</div>';
+
+  addAuditEntry('Explanation', `Risk score breakdown provided for ${alert.id}`);
 
   return {
     text: `Risk breakdown for ${alert.customer.name} (Score: ${alert.riskScore}/100):\n\n` + alert.riskFactors.map(f => `${f.name}: ${f.value}%`).join('\n') + `\n\nThe overall score is a weighted composite. Here is the visual breakdown:`,
@@ -794,6 +1300,7 @@ function getInvestigationResponse(alert) {
   activeAlert = alert;
   investigationStep = 1;
   showDetailPanel(alert);
+  addAuditEntry('Investigation', `Structured investigation initiated for ${alert.id}`);
   return {
     text: `Investigation initiated for **${alert.id}** — ${alert.alertType}\n\nI will guide you through a structured 4-step investigation. Let's start:`,
     actions: [
@@ -810,53 +1317,33 @@ function showInvestigationStep(alert, step) {
   investigationStep = step;
   const stepData = [
     null,
-    {
-      title: 'Step 1: Customer Profile Review',
-      text: `**Customer:** ${alert.customer.name}\n**ID:** ${alert.customer.id}\n**Jurisdiction:** ${alert.customer.jurisdiction}\n**KYC Status:** ${alert.customer.kycStatus}\n**PEP:** ${alert.customer.pep ? 'Yes — CONFIRMED' : 'No'}\n**Risk Score:** ${alert.riskScore}/100\n\n${alert.customer.pep ? 'PEP status requires enhanced scrutiny. Verify politically exposed position and source of wealth.' : 'Customer is not a PEP, but jurisdiction-based risk may apply.'}`,
-      viz: null
-    },
-    {
-      title: 'Step 2: Transaction Pattern Analysis',
-      text: `**Transaction Summary:**\n${alert.aiSummary}\n\n**Key observations:**\n• ${alert.transactions.length} transactions analyzed\n• Inbound: ${alert.transactions.filter(t => t.direction === 'IN').reduce((s,t) => s + t.amount, 0).toLocaleString()} ${alert.transactions[0]?.currency}\n• Outbound: ${alert.transactions.filter(t => t.direction === 'OUT').reduce((s,t) => s + t.amount, 0).toLocaleString()} ${alert.transactions[0]?.currency}\n• Jurisdictions involved: ${[...new Set(alert.transactions.map(t => t.country))].join(', ')}`,
-      viz: (() => { let h = '<table class="mini-tx-table"><thead><tr><th>Date</th><th>Amount</th><th>Dir</th><th>To/From</th><th>Country</th></tr></thead><tbody>'; alert.transactions.forEach(tx => { const c = tx.direction === 'IN' ? 'var(--accent-green)' : 'var(--accent-red)'; h += `<tr><td>${tx.date}</td><td style="font-weight:600;color:${c}">${tx.direction === 'IN' ? '+' : '-'}${tx.currency} ${tx.amount.toLocaleString()}</td><td>${tx.direction}</td><td style="font-size:11px">${tx.counterparty}</td><td style="font-size:11px">${tx.country}</td></tr>`; }); h += '</tbody></table>'; return h; })()
-    },
-    {
-      title: 'Step 3: Cross-Reference Check',
-      text: `${alert.linkedAlerts.length > 0 ? `**Linked Alerts Found:** ${alert.linkedAlerts.length}\n\n` + alert.linkedAlerts.map(id => { const linked = alerts.find(a => a.id === id); return linked ? `• **${id}** — ${linked.customer.name} (${linked.alertType}): Shares counterparties or behavioral patterns.` : ''; }).join('\n') + '\n\nShared entities suggest potential coordinated activity.' : 'No directly linked alerts found in the current dataset. No cross-references detected.'}\n\nSee network visualization:`,
-      viz: alert.linkedAlerts.length > 0 ? `<div class="mini-network-graph" id="network-${alert.id}"></div>` : null
-    },
-    {
-      title: 'Step 4: Evidence Summary',
-      text: `**${alert.evidence.length} evidence items collected:**\n\n${alert.evidence.map(e => `• **[${e.type}]** ${e.desc}`).join('\n')}\n\n**Assessment:** ${alert.riskScore >= 85 ? 'Evidence threshold for SAR filing is met. Multiple high-confidence indicators present.' : alert.riskScore >= 70 ? 'Sufficient evidence for escalation. SAR filing recommended after additional verification.' : 'Evidence is moderate. Consider gathering additional data before SAR filing.'}`,
-      viz: (() => { let h = '<table class="evidence-table"><thead><tr><th>Type</th><th>Description</th></tr></thead><tbody>'; alert.evidence.forEach(e => { h += `<tr><td><span class="badge-${e.type.toLowerCase().includes('sanction') ? 'sanctions' : e.type.toLowerCase().includes('pep') ? 'pep' : 'jurisdiction'}">${e.type}</span></td><td>${e.desc}</td></tr>`; }); h += '</tbody></table>'; return h; })()
-    }
+    { title: 'Step 1: Customer Profile Review', text: `**Customer:** ${alert.customer.name}\n**ID:** ${alert.customer.id}\n**Jurisdiction:** ${alert.customer.jurisdiction}\n**KYC Status:** ${alert.customer.kycStatus}\n**PEP:** ${alert.customer.pep ? 'Yes — CONFIRMED' : 'No'}\n**Risk Score:** ${alert.riskScore}/100\n\n${alert.customer.pep ? 'PEP status requires enhanced scrutiny.' : 'Customer is not a PEP, but jurisdiction-based risk may apply.'}`, viz: null },
+    { title: 'Step 2: Transaction Pattern Analysis', text: `**Transaction Summary:**\n${alert.aiSummary}\n\n**Key observations:**\n• ${alert.transactions.length} transactions analyzed\n• Inbound: ${alert.transactions.filter(t => t.direction === 'IN').reduce((s,t) => s + t.amount, 0).toLocaleString()} ${alert.transactions[0]?.currency}\n• Outbound: ${alert.transactions.filter(t => t.direction === 'OUT').reduce((s,t) => s + t.amount, 0).toLocaleString()} ${alert.transactions[0]?.currency}\n• Jurisdictions involved: ${[...new Set(alert.transactions.map(t => t.country))].join(', ')}`, viz: (() => { let h = '<table class="mini-tx-table"><thead><tr><th>Date</th><th>Amount</th><th>Dir</th><th>To/From</th><th>Country</th></tr></thead><tbody>'; alert.transactions.forEach(tx => { const c = tx.direction === 'IN' ? 'var(--success)' : 'var(--destructive)'; h += `<tr><td>${tx.date}</td><td style="font-weight:600;color:${c}">${tx.direction === 'IN' ? '+' : '-'}${tx.currency} ${tx.amount.toLocaleString()}</td><td>${tx.direction}</td><td style="font-size:11px">${tx.counterparty}</td><td style="font-size:11px">${tx.country}</td></tr>`; }); h += '</tbody></table>'; return h; })() },
+    { title: 'Step 3: Cross-Reference Check', text: `${alert.linkedAlerts.length > 0 ? `**Linked Alerts Found:** ${alert.linkedAlerts.length}\n\n` + alert.linkedAlerts.map(id => { const linked = alerts.find(a => a.id === id); return linked ? `• **${id}** — ${linked.customer.name} (${linked.alertType})` : ''; }).join('\n') + '\n\nShared entities suggest potential coordinated activity.' : 'No directly linked alerts found.'}\n\nSee network visualization:`, viz: alert.linkedAlerts.length > 0 ? `<div class="mini-network-graph" id="network-${alert.id}"></div>` : null },
+    { title: 'Step 4: Evidence Summary', text: `**${alert.evidence.length} evidence items collected:**\n\n${alert.evidence.map(e => `• **[${e.type}]** ${e.desc} (Source: ${e.source})`).join('\n')}\n\n**Assessment:** ${alert.riskScore >= 85 ? 'Evidence threshold for SAR filing is met.' : alert.riskScore >= 70 ? 'Sufficient evidence for escalation.' : 'Evidence is moderate.'}`, viz: (() => { let h = '<table class="evidence-table"><thead><tr><th>Type</th><th>Description</th><th>Source</th></tr></thead><tbody>'; alert.evidence.forEach(e => { h += `<tr><td><span class="badge-${e.source === 'LexisNexis' ? 'badLexisnexis' : 'badMembercheck'}">${e.type}</span></td><td>${e.desc}</td><td><span class="badge ${e.source === 'LexisNexis' ? 'badLexisnexis' : 'badMembercheck'}">${e.source}</span></td></tr>`; }); h += '</tbody></table>'; return h; })() }
   ];
 
   const data = stepData[step];
+  addAuditEntry('Investigation', `Step ${step} completed for ${alert.id}: ${data.title}`);
+
   addMessage('ai', data.text,
-    step === 4
-      ? [
-          { label: 'Draft SAR', class: 'primary', action: () => draftSAR(alert) },
-          { label: 'Escalate', class: 'danger', action: () => escalateAlert(alert) },
-          { label: 'Request EDD', class: '', action: () => eddAlert(alert) }
-        ]
-      : null,
-    data.viz
+    step === 4 ? [
+      { label: 'Draft SAR', class: 'primary', action: () => draftSAR(alert) },
+      { label: 'Escalate', class: 'danger', action: () => escalateAlert(alert) },
+      { label: 'Request EDD', class: '', action: () => eddAlert(alert) }
+    ] : null, data.viz
   );
 
-  if (step < 4) {
-    setSuggestions(['Next step', 'Show transactions', 'Show risk breakdown', 'Draft SAR']);
-  } else {
-    setSuggestions(['Draft SAR', 'Escalate', 'Dismiss as false positive']);
-  }
+  if (step < 4) setSuggestions(['Next step', 'Show transactions', 'Show risk breakdown', 'Draft SAR']);
+  else setSuggestions(['Draft SAR', 'Escalate', 'Dismiss as false positive']);
 }
 
 function getPatternResponse(alert) {
   if (alert.linkedAlerts.length === 0) {
-    return { text: `No directly linked alerts found for ${alert.customer.name}. However, I can run a broader pattern analysis across all alerts. Would you like me to do that?`, suggestions: ['Show me patterns', 'Show risk breakdown'] };
+    return { text: `No directly linked alerts found for ${alert.customer.name}.`, suggestions: ['Show me patterns', 'Show risk breakdown'] };
   }
   return {
-    text: `Pattern analysis for ${alert.customer.name}:\n\nThis alert is connected to ${alert.linkedAlerts.length} other alert(s):\n${alert.linkedAlerts.map(id => { const linked = alerts.find(a => a.id === id); return `• ${id}: ${linked ? linked.customer.name + ' (' + linked.alertType + ')' : 'Unknown'}`; }).join('\n')}\n\nShared entities and counterparties suggest potential coordinated activity. See network visualization:`,
+    text: `Pattern analysis for ${alert.customer.name}:\n\nConnected to ${alert.linkedAlerts.length} other alert(s):\n${alert.linkedAlerts.map(id => { const linked = alerts.find(a => a.id === id); return `• ${id}: ${linked ? linked.customer.name + ' (' + linked.alertType + ')' : 'Unknown'}`; }).join('\n')}\n\nSee network visualization:`,
     viz: `<div class="mini-network-graph" id="network-${alert.id}"></div>`,
     suggestions: ['Show me all patterns', 'Start investigation', 'Draft SAR']
   };
@@ -864,15 +1351,11 @@ function getPatternResponse(alert) {
 
 function getNextAlertResponse() {
   const pendingAlerts = alerts.filter(a => a.status === 'pending').sort((a, b) => b.riskScore - a.riskScore);
-  if (pendingAlerts.length === 0) {
-    return { text: 'All pending alerts have been reviewed. No more alerts to triage.', suggestions: ['Show me patterns', 'Help'] };
-  }
+  if (pendingAlerts.length === 0) return { text: 'All pending alerts reviewed.', suggestions: ['Show me patterns', 'Help'] };
   const nextAlert = pendingAlerts[0];
-  activeAlert = nextAlert;
-  renderAlertList();
-  showDetailPanel(nextAlert);
+  activeAlert = nextAlert; renderAlertList(); showDetailPanel(nextAlert);
   return {
-    text: `Next highest priority alert: **${nextAlert.id}** — ${nextAlert.alertType}\n\nCustomer: ${nextAlert.customer.name} | Risk Score: ${nextAlert.riskScore}/100 | Severity: ${nextAlert.severity.toUpperCase()}\n\n${nextAlert.aiSummary}`,
+    text: `Next highest priority: **${nextAlert.id}** — ${nextAlert.alertType}\n\nCustomer: ${nextAlert.customer.name} | Risk: ${nextAlert.riskScore}/100 | Severity: ${nextAlert.severity.toUpperCase()}\n\n**AI Triage:** ${nextAlert.triage?.classification === 'false-positive' ? 'Likely False Positive' : nextAlert.triage?.classification === 'review' ? 'Needs Review' : 'Escalate'} (Confidence: ${nextAlert.triage?.confidence}%)\n\n${nextAlert.aiSummary}`,
     actions: [
       { label: 'Dismiss', class: 'success', action: () => dismissAlert(nextAlert) },
       { label: 'Escalate', class: 'danger', action: () => escalateAlert(nextAlert) },
@@ -883,14 +1366,16 @@ function getNextAlertResponse() {
 }
 
 function getEvidenceResponse(alert) {
-  let vizHtml = '<table class="evidence-table"><thead><tr><th>Type</th><th>Description</th></tr></thead><tbody>';
+  let vizHtml = '<table class="evidence-table"><thead><tr><th>Type</th><th>Description</th><th>Source</th></tr></thead><tbody>';
   alert.evidence.forEach(e => {
-    vizHtml += `<tr><td><span class="badge-${e.type.toLowerCase().includes('sanction') ? 'sanctions' : e.type.toLowerCase().includes('pep') ? 'pep' : 'jurisdiction'}">${e.type}</span></td><td>${e.desc}</td></tr>`;
+    vizHtml += `<tr><td><span class="badge-${e.source === 'LexisNexis' ? 'badLexisnexis' : 'badMembercheck'}">${e.type}</span></td><td>${e.desc}</td><td><span class="badge ${e.source === 'LexisNexis' ? 'badLexisnexis' : 'badMembercheck'}">${e.source}</span></td></tr>`;
   });
   vizHtml += '</tbody></table>';
 
+  addAuditEntry('Evidence', `Evidence reviewed for ${alert.id} — ${alert.evidence.length} items with source attribution`);
+
   return {
-    text: `Evidence collected for ${alert.id}:\n\n${alert.evidence.map(e => `[${e.type}] ${e.desc}`).join('\n\n')}`,
+    text: `Evidence collected for ${alert.id}:\n\n${alert.evidence.map(e => `[${e.type}] ${e.desc} (Source: ${e.source})`).join('\n\n')}`,
     viz: vizHtml,
     suggestions: ['Start investigation', 'Draft SAR', 'Show risk breakdown']
   };
@@ -904,10 +1389,15 @@ function getGeneralPatternResponse() {
   const pendingCount = alerts.filter(a => a.status === 'pending').length;
   const pebCount = alerts.filter(a => a.customer.pep).length;
   const linkedPairs = alerts.filter(a => a.linkedAlerts.length > 0).length;
+  const fpCount = alerts.filter(a => a.triage?.classification === 'false-positive').length;
+  const reviewCount = alerts.filter(a => a.triage?.classification === 'review').length;
+  const escCount = alerts.filter(a => a.triage?.classification === 'escalate').length;
+
+  addAuditEntry('Query', 'Cross-alert pattern analysis requested — portfolio overview generated');
 
   return {
-    text: `Cross-Alert Pattern Analysis\n\n**Portfolio Overview:**\n• Total Alerts: ${alerts.length}\n• Pending Review: ${pendingCount}\n• Critical: ${criticalCount} | High: ${highCount} | Medium: ${mediumCount}\n• Average Risk Score: ${avgRisk}/100\n• PEP-Related: ${pebCount}\n• Linked Alert Pairs: ${linkedPairs}\n\n**Identified Patterns:**\n1. **Pass-Through Network**: AML-004 (Olympus Trading) and AML-001 (Dmitri Volkov) share counterparty "Meridian Holdings Ltd" in Cyprus. Funds appear to flow through UAE-based entities to offshore jurisdictions.\n2. **PEP-Shell Company Link**: AML-003 (Senator Santos) and AML-007 (Caribbean Holdings) are directly connected — a PEP transferring funds to a BVI shell company.\n3. **Dormant Reactivation**: AML-006 (Kuznetsova) shows classic dormant account reactivation with sanctions-proximate funds.\n4. **Commodity Layering**: AML-008 (Patel) uses precious metals trades across 4 jurisdictions in 4 days.\n\n**Recommended Priority Order:**\n1. AML-006 — Critical (Sanctions + PEP + Dormant)\n2. AML-001 — Critical (OFAC Match)\n3. AML-004 — High (Pass-Through, linked to AML-001)\n4. AML-003 — High (PEP + Adverse Media)`,
-    suggestions: ['Investigate AML-006', 'Show me AML-001', 'Draft SAR for highest risk']
+    text: `Cross-Alert Pattern Analysis\n\n**Portfolio Overview:**\n• Total Alerts: ${alerts.length}\n• Pending Review: ${pendingCount}\n• Critical: ${criticalCount} | High: ${highCount} | Medium: ${mediumCount}\n• Average Risk Score: ${avgRisk}/100\n• PEP-Related: ${pebCount}\n• Linked Alert Pairs: ${linkedPairs}\n\n**AI Triage Summary:**\n• Likely False Positive: ${fpCount}\n• Needs Review: ${reviewCount}\n• Recommended for Escalation: ${escCount}\n\n**Identified Patterns:**\n1. **Pass-Through Network**: AML-004 and AML-001 share counterparty "Meridian Holdings Ltd" in Cyprus\n2. **PEP-Shell Company Link**: AML-003 and AML-007 directly connected\n3. **Dormant Reactivation**: AML-006 with sanctions-proximate funds\n4. **Commodity Layering**: AML-008 across 4 jurisdictions in 4 days\n\n**Recommended Priority Order:**\n1. AML-006 — Critical (Sanctions + PEP + Dormant)\n2. AML-001 — Critical (OFAC Match)\n3. AML-004 — High (Pass-Through, linked to AML-001)\n4. AML-003 — High (PEP + Adverse Media)`,
+    suggestions: ['Investigate AML-006', 'Show me AML-001', 'Summarize adverse media']
   };
 }
 
@@ -915,38 +1405,56 @@ function getGeneralPatternResponse() {
 // ALERT ACTIONS
 // ============================================================
 function dismissAlert(alert) {
-  alert.status = 'dismissed';
-  activeAlert = null;
-  document.getElementById('detail-panel').classList.remove('visible');
-  renderAlertList();
-  showToast(`Alert ${alert.id} dismissed as false positive`);
-  addMessage('ai', `Alert ${alert.id} has been dismissed as a false positive. The status has been updated. What would you like to review next?`);
-  setSuggestions(['Next alert', 'Show me patterns']);
+  showConfirmation(
+    'Dismiss Alert?',
+    `You are about to dismiss ${alert.id} — ${alert.alertType} for ${alert.customer.name}. This will mark the alert as a false positive. This action is logged for EU AI Act audit purposes.`,
+    () => {
+      alert.status = 'dismissed';
+      activeAlert = null;
+      document.getElementById('detail-panel').classList.remove('visible');
+      renderAlertList();
+      addAuditEntry('Decision', `Officer dismissed ${alert.id} (${alert.alertType}). AI classification was: ${alert.triage?.classification === 'false-positive' ? 'Likely FP (agreed)' : alert.triage?.classification} — Officer decision logged.`);
+      showToast(`Alert ${alert.id} dismissed as false positive`);
+      setSuggestions(['Next alert', 'Show me patterns']);
+    },
+    'Dismiss'
+  );
 }
 
 function escalateAlert(alert) {
-  alert.status = 'escalated';
-  activeAlert = null;
-  document.getElementById('detail-panel').classList.remove('visible');
-  renderAlertList();
-  showToast(`Alert ${alert.id} escalated to senior team`);
-  addMessage('ai', `Alert ${alert.id} has been escalated for senior analyst review.\n\n**Escalation Summary:**\n• Alert: ${alert.id} — ${alert.alertType}\n• Customer: ${alert.customer.name}\n• Risk Score: ${alert.riskScore}/100\n• Severity: ${alert.severity.toUpperCase()}\n• Key Triggers: ${alert.riskFactors.map(f => f.name).join(', ')}\n\nA case has been created and assigned to the senior AML team. Recommended timeline: 24-hour review window.`);
-  setSuggestions(['Draft SAR', 'Show me patterns', 'Next alert']);
+  showConfirmation(
+    'Escalate Alert?',
+    `You are about to escalate ${alert.id} — ${alert.alertType} for ${alert.customer.name} to the senior AML team. This will create a high-priority case requiring review within 24 hours.`,
+    () => {
+      alert.status = 'escalated';
+      activeAlert = null;
+      document.getElementById('detail-panel').classList.remove('visible');
+      renderAlertList();
+      addAuditEntry('Decision', `Officer escalated ${alert.id} (${alert.alertType}). AI classification was: ${alert.triage?.classification === 'escalate' ? 'Escalate (agreed)' : alert.triage?.classification} — Officer decision logged.`);
+      showToast(`Alert ${alert.id} escalated to senior team`, 'warning');
+      addMessage('ai', `Alert ${alert.id} has been escalated for senior analyst review.\n\n**Escalation Summary:**\n• Alert: ${alert.id} — ${alert.alertType}\n• Customer: ${alert.customer.name}\n• Risk Score: ${alert.riskScore}/100\n• Severity: ${alert.severity.toUpperCase()}\n• Key Triggers: ${alert.riskFactors.map(f => f.name).join(', ')}\n\nA case has been created and assigned to the senior AML team. Recommended timeline: 24-hour review window.`);
+      setSuggestions(['Draft SAR', 'Show me patterns', 'Next alert']);
+    },
+    'Escalate', true
+  );
 }
 
 function eddAlert(alert) {
   alert.status = 'edd';
   renderAlertList();
-  addMessage('ai', `Enhanced Due Diligence initiated for ${alert.id}.\n\n**EDD Checklist Generated:**\n1. Verify source of wealth documentation\n2. Obtain enhanced identity verification\n3. Review full transaction history (12 months)\n4. Check all sanctions lists (OFAC, EU, UN, UK)\n5. Review beneficial ownership chain\n6. Adverse media deep-dive\n7. Geographic risk assessment\n8. Counterparty risk analysis\n\nI will track progress on each item. Start with item 1?`,
+  addAuditEntry('Action', `EDD initiated for ${alert.id} by officer`);
+  addMessage('ai', `Enhanced Due Diligence initiated for ${alert.id}.\n\n**EDD Checklist Generated:**\n1. Verify source of wealth documentation\n2. Obtain enhanced identity verification\n3. Review full transaction history (12 months)\n4. Check all sanctions lists (OFAC, EU, UN, UK)\n5. Review beneficial ownership chain\n6. Adverse media deep-dive\n7. Geographic risk assessment\n8. Counterparty risk analysis`,
     suggestions: ['Show evidence', 'Draft SAR', 'Next alert']);
 }
 
 function draftSAR(alert) {
-  const sarText = `SAR Narrative Draft — ${alert.id}\n\n**Subject:** ${alert.customer.name}\n**Customer ID:** ${alert.customer.id}\n**Jurisdiction:** ${alert.customer.jurisdiction}\n**Alert Type:** ${alert.alertType}\n**Risk Score:** ${alert.riskScore}/100\n\n**Activity Summary:**\n${alert.aiSummary}\n\n**Supporting Evidence:**\n${alert.evidence.map(e => `• ${e.type}: ${e.desc}`).join('\n')}\n\n**Transaction Summary:**\n${alert.transactions.map(tx => `• ${tx.date}: ${tx.direction} ${tx.currency} ${tx.amount.toLocaleString()} to/from ${tx.counterparty} (${tx.country})`).join('\n')}\n\n**Recommendation:**\n${alert.riskScore >= 85 ? 'File SAR immediately. Evidence threshold met with multiple high-confidence indicators.' : alert.riskScore >= 70 ? 'File SAR recommended. Additional evidence gathering may strengthen the case.' : 'Monitor and gather additional evidence before SAR filing.'}\n\n**${alert.linkedAlerts.length > 0 ? 'Linked Alerts: ' + alert.linkedAlerts.join(', ') + ' should be referenced in the filing.' : 'No linked alerts to reference.'}**`;
+  const sarText = `SAR Narrative Draft — ${alert.id}\n\n**Subject:** ${alert.customer.name}\n**Customer ID:** ${alert.customer.id}\n**Jurisdiction:** ${alert.customer.jurisdiction}\n**Alert Type:** ${alert.alertType}\n**Risk Score:** ${alert.riskScore}/100\n\n**Activity Summary:**\n${alert.aiSummary}\n\n**Supporting Evidence:**\n${alert.evidence.map(e => `• ${e.type} [${e.source}]: ${e.desc}`).join('\n')}\n\n**Transaction Summary:**\n${alert.transactions.map(tx => `• ${tx.date}: ${tx.direction} ${tx.currency} ${tx.amount.toLocaleString()} to/from ${tx.counterparty} (${tx.country})`).join('\n')}\n\n**Recommendation:**\n${alert.riskScore >= 85 ? 'File SAR immediately. Evidence threshold met.' : alert.riskScore >= 70 ? 'File SAR recommended.' : 'Monitor and gather additional evidence.'}\n\n**${alert.linkedAlerts.length > 0 ? 'Linked Alerts: ' + alert.linkedAlerts.join(', ') + ' should be referenced.' : 'No linked alerts.'}**`;
+
+  addAuditEntry('SAR', `SAR narrative drafted for ${alert.id} — includes ${alert.evidence.length} evidence items from ${[...new Set(alert.evidence.map(e => e.source))].join(', ')}`);
 
   addMessage('ai', sarText, [
-    { label: 'File SAR', class: 'primary', action: () => { addMessage('ai', `SAR for ${alert.id} has been prepared for filing. In a production system, this would be submitted to FinCAN/FinCEN. The case is now in "Ready for Submission" status.`); } },
-    { label: 'Edit Narrative', class: '', action: () => { addMessage('ai', 'In a production system, the SAR narrative editor would open here for manual review and editing before submission.'); } }
+    { label: 'File SAR', class: 'primary', action: () => { addAuditEntry('Filing', `SAR for ${alert.id} prepared for submission to FinCAN/FinCEN`); addMessage('ai', `SAR for ${alert.id} has been prepared for filing. In a production system, this would be submitted to FinCAN/FinCEN.`); } },
+    { label: 'Edit Narrative', class: '', action: () => { addMessage('ai', 'In production, the SAR narrative editor would open here for manual review.'); } }
   ]);
   setSuggestions(['File SAR', 'Show me patterns', 'Next alert']);
 }
@@ -960,37 +1468,48 @@ function showDetailPanel(alert) {
   document.getElementById('detail-title').textContent = alert.id + ' — ' + alert.alertType;
   panel.classList.add('visible');
 
-  const kycColor = alert.customer.kycStatus === 'Expired' ? 'var(--accent-red)' : alert.customer.kycStatus === 'Expiring' ? 'var(--accent-amber)' : 'var(--accent-green)';
+  const triageLabel = alert.triage?.classification === 'false-positive' ? 'Likely False Positive' : alert.triage?.classification === 'review' ? 'Needs Manual Review' : 'Recommended for Escalation';
+  const triageClass = alert.triage ? `triage-${alert.triage.classification}` : '';
+  const triageSectionClass = alert.triage?.classification === 'false-positive' ? 'fp' : alert.triage?.classification === 'review' ? 'review' : 'escalate';
+
+  const kycBadgeClass = alert.customer.kycStatus === 'Expired' ? 'badKycExpired' : alert.customer.kycStatus === 'Expiring' ? 'badKycExpiring' : 'badKycValid';
 
   let txHtml = '';
   if (alert.transactions.length > 0) {
     txHtml = '<table class="tx-table"><thead><tr><th>Date</th><th>Amount</th><th>Dir</th><th>To/From</th></tr></thead><tbody>';
     alert.transactions.forEach(tx => {
-      const color = tx.direction === 'IN' ? 'var(--accent-green)' : 'var(--accent-red)';
-      txHtml += `<tr><td>${tx.date}</td><td style="color:${color};font-weight:600">${tx.currency} ${tx.amount.toLocaleString()}</td><td>${tx.direction}</td><td style="font-size:11px;color:var(--text-secondary)">${tx.counterparty}</td></tr>`;
+      const color = tx.direction === 'IN' ? 'var(--success)' : 'var(--destructive)';
+      txHtml += `<tr><td>${tx.date}</td><td style="color:${color};font-weight:600">${tx.currency} ${tx.amount.toLocaleString()}</td><td><span class="tx-direction ${tx.direction === 'IN' ? 'inbound' : 'outbound'}">${tx.direction}</span></td><td style="font-size:12px;color:var(--muted-foreground)">${tx.counterparty}</td></tr>`;
     });
     txHtml += '</tbody></table>';
   }
 
   let riskHtml = '';
   alert.riskFactors.forEach(f => {
-    const color = f.value >= 80 ? 'var(--accent-red)' : f.value >= 60 ? 'var(--accent-amber)' : 'var(--accent-green)';
-    riskHtml += `<div class="risk-bar-container"><div class="risk-bar-header"><span>${f.name}</span><span style="color:${color}">${f.value}%</span></div><div class="risk-bar-track"><div class="risk-bar-fill" style="width:${f.value}%;background:${color}"></div></div></div>`;
+    const color = f.value >= 80 ? 'var(--critical)' : f.value >= 60 ? 'var(--warning)' : 'var(--success)';
+    riskHtml += `<div class="risk-factor"><div class="risk-factor-header"><span class="risk-factor-name">${f.name}</span><span class="risk-factor-value" style="color:${color}">${f.value}%</span></div><div class="risk-factor-bar"><div class="risk-factor-fill" style="width:${f.value}%;background:${color}"></div></div></div>`;
   });
-
-  let linkedHtml = '';
-  if (alert.linkedAlerts.length > 0) {
-    linkedHtml = alert.linkedAlerts.map(id => {
-      const linked = alerts.find(a => a.id === id);
-      return linked ? `<div style="padding:8px;background:var(--bg-hover);border-radius:6px;margin-bottom:4px;font-size:12px;cursor:pointer" onclick="selectAlert('${id}')">${id}: ${linked.customer.name} (${linked.alertType})</div>` : '';
-    }).join('');
-  }
 
   let evidenceHtml = '';
   alert.evidence.forEach(e => {
-    const borderColor = e.type.toLowerCase().includes('sanction') ? 'var(--accent-red)' : e.type.toLowerCase().includes('pep') ? 'var(--accent-purple)' : 'var(--accent-blue)';
-    evidenceHtml += `<div class="evidence-card" style="border-left-color:${borderColor}"><div class="evidence-card-title">${e.type}</div><div class="evidence-card-desc">${e.desc}</div></div>`;
+    const sourceClass = e.source === 'LexisNexis' ? '' : 'data-source="membercheck"';
+    evidenceHtml += `<div class="evidence-card" ${sourceClass}><div class="evidence-card-title">${e.type}</div><div class="evidence-card-desc">${e.desc}</div><div class="evidence-card-source">Source: ${e.source} — ${e.date}</div></div>`;
   });
+
+  let adverseHtml = '';
+  if (alert.adverseMedia && alert.adverseMedia.length > 0) {
+    adverseHtml = '<div class="detail-section"><div class="detail-section-title">Adverse Media</div>';
+    alert.adverseMedia.forEach(m => {
+      const sentimentColor = m.sentiment === 'negative' ? 'var(--critical)' : m.sentiment === 'neutral' ? 'var(--warning)' : 'var(--success)';
+      adverseHtml += `<div style="padding:10px;background:var(--muted / 0.5);border-radius:var(--radius-md);margin-bottom:6px;border-left:3px solid ${sentimentColor};font-size:12px;">
+        <div style="font-weight:500;margin-bottom:2px;">${m.title}</div>
+        <div style="color:var(--muted-foreground);font-size:11px;">${m.source} — ${m.date} — <span style="color:${sentimentColor};font-weight:600;text-transform:uppercase;">${m.sentiment}</span></div>
+      </div>`;
+    });
+    adverseHtml += '</div>';
+  }
+
+  const scoreClass = alert.riskScore >= 80 ? 'score-high' : alert.riskScore >= 60 ? 'score-medium' : 'score-low';
 
   content.innerHTML = `
     <div class="detail-section">
@@ -998,9 +1517,24 @@ function showDetailPanel(alert) {
       <div class="detail-field"><span class="detail-field-label">Name</span><span class="detail-field-value">${alert.customer.name}</span></div>
       <div class="detail-field"><span class="detail-field-label">ID</span><span class="detail-field-value">${alert.customer.id}</span></div>
       <div class="detail-field"><span class="detail-field-label">Jurisdiction</span><span class="detail-field-value">${alert.customer.jurisdiction}</span></div>
-      <div class="detail-field"><span class="detail-field-label">KYC Status</span><span class="detail-field-value" style="color:${kycColor}">${alert.customer.kycStatus}</span></div>
-      <div class="detail-field"><span class="detail-field-label">PEP</span><span class="detail-field-value">${alert.customer.pep ? 'Yes' : 'No'}</span></div>
-      <div class="detail-field"><span class="detail-field-label">Risk Score</span><span class="detail-field-value"><span class="score-pill ${alert.riskScore >= 80 ? 'score-high' : alert.riskScore >= 60 ? 'score-medium' : 'score-low'}">${alert.riskScore}/100</span></span></div>
+      <div class="detail-field"><span class="detail-field-label">KYC Status</span><span class="detail-field-value"><span class="badge ${kycBadgeClass}">${alert.customer.kycStatus}</span></span></div>
+      <div class="detail-field"><span class="detail-field-label">PEP</span><span class="detail-field-value">${alert.customer.pep ? '<span class="badge badge-pep">Yes</span>' : 'No'}</span></div>
+      <div class="detail-field"><span class="detail-field-label">Risk Score</span><span class="detail-field-value"><span class="score-pill ${scoreClass}">${alert.riskScore}/100</span></span></div>
+    </div>
+    <div class="detail-section">
+      <div class="eu-ai-act-banner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        AI Triage — Advisory Mode (EU AI Act compliant)<br>Human officer retains full decision authority
+      </div>
+      <div class="triage-section ${triageSectionClass}">
+        <div class="triage-recommendation">${triageLabel}</div>
+        <div class="triage-reasoning">AI Confidence: ${alert.triage?.confidence}% — Based on ${alert.evidence.length} evidence items from LexisNexis and MemberCheck</div>
+        <div class="triage-data-sources">
+          <span class="triage-source-tag">LexisNexis</span>
+          <span class="triage-source-tag">MemberCheck</span>
+          <span class="triage-source-tag">FATF Grey List</span>
+        </div>
+      </div>
     </div>
     <div class="detail-section">
       <div class="detail-section-title">Transaction History</div>
@@ -1010,7 +1544,7 @@ function showDetailPanel(alert) {
       <div class="detail-section-title">Risk Factors</div>
       ${riskHtml}
     </div>
-    ${linkedHtml ? `<div class="detail-section"><div class="detail-section-title">Linked Alerts</div>${linkedHtml}</div>` : ''}
+    ${adverseHtml}
     <div class="detail-section">
       <div class="detail-section-title">Evidence</div>
       ${evidenceHtml}
@@ -1022,6 +1556,10 @@ document.getElementById('detail-close').addEventListener('click', () => {
   document.getElementById('detail-panel').classList.remove('visible');
 });
 
+document.getElementById('detail-panel-toggle').addEventListener('click', () => {
+  document.getElementById('detail-panel').classList.toggle('visible');
+});
+
 // ============================================================
 // SELECT ALERT
 // ============================================================
@@ -1030,8 +1568,6 @@ function selectAlert(id) {
   if (!alert) return;
   activeAlert = alert;
   renderAlertList();
-
-  // Add AI summary message
   const response = getAlertSummaryResponse(alert);
   addMessage('ai', response.text, response.actions);
   if (response.suggestions) setSuggestions(response.suggestions);
@@ -1057,25 +1593,19 @@ function renderMiniNetworkGraph(vizHtml) {
 
     const svg = d3.select(container).append('svg').attr('width', width).attr('height', height);
     const g = svg.append('g');
-
     const nodes = [{ id: alert.customer.name, type: 'center' }];
     const links = [];
 
     alert.transactions.forEach(tx => {
-      if (!nodes.find(n => n.id === tx.counterparty)) {
-        nodes.push({ id: tx.counterparty, type: 'counterparty', country: tx.country });
-      }
+      if (!nodes.find(n => n.id === tx.counterparty)) nodes.push({ id: tx.counterparty, type: 'counterparty', country: tx.country });
       links.push({ source: alert.customer.name, target: tx.counterparty, value: tx.amount, direction: tx.direction });
     });
 
     alert.linkedAlerts.forEach(linkedId => {
       const linked = alerts.find(a => a.id === linkedId);
-      if (linked && !nodes.find(n => n.id === linked.customer.name)) {
-        nodes.push({ id: linked.customer.name, type: 'linked', alertId: linkedId });
-      }
+      if (linked && !nodes.find(n => n.id === linked.customer.name)) nodes.push({ id: linked.customer.name, type: 'linked', alertId: linkedId });
     });
 
-    const colorMap = { center: '#3b82f6', counterparty: '#9ca3b8', linked: '#f59e0b' };
     const radiusMap = { center: 20, counterparty: 14, linked: 16 };
 
     const simulation = d3.forceSimulation(nodes)
@@ -1084,15 +1614,12 @@ function renderMiniNetworkGraph(vizHtml) {
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('collision', d3.forceCollide().radius(30));
 
-    const link = g.selectAll('line').data(links).join('line')
-      .attr('stroke', '#4b5563').attr('stroke-width', 1).attr('stroke-opacity', 0.6);
+    const link = g.selectAll('line').data(links).join('line').attr('stroke', 'var(--border)').attr('stroke-width', 1).attr('stroke-opacity', 0.6);
 
     const node = g.selectAll('g').data(nodes).join('g').attr('cursor', 'pointer');
-    node.append('circle').attr('r', d => radiusMap[d.type]).attr('fill', d => colorMap[d.type]);
-    node.append('text').attr('text-anchor', 'middle').attr('dy', '0.35em').attr('fill', d => d.type === 'center' ? 'white' : '#0f1117').attr('font-size', 7).attr('font-weight', 600)
-      .text(d => d.id.length > 12 ? d.id.substring(0, 10) + '..' : d.id);
-    node.append('text').attr('text-anchor', 'middle').attr('dy', d => radiusMap[d.type] + 12).attr('fill', '#9ca3b8').attr('font-size', 8)
-      .text(d => d.country || d.alertId || '');
+    node.append('circle').attr('r', d => radiusMap[d.type]).attr('fill', d => d.type === 'center' ? '#3b82f6' : d.type === 'counterparty' ? '#9ca3b8' : '#f59e0b');
+    node.append('text').attr('text-anchor', 'middle').attr('dy', '0.35em').attr('fill', d => d.type === 'center' ? 'white' : '#0f1117').attr('font-size', 7).attr('font-weight', 600).text(d => d.id.length > 12 ? d.id.substring(0, 10) + '..' : d.id);
+    node.append('text').attr('text-anchor', 'middle').attr('dy', d => radiusMap[d.type] + 12).attr('fill', '#9ca3b8').attr('font-size', 8).text(d => d.country || d.alertId || '');
 
     simulation.on('tick', () => {
       link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
@@ -1106,10 +1633,10 @@ function renderMiniNetworkGraph(vizHtml) {
 // ============================================================
 function init() {
   renderAlertList();
-  setSuggestions(['Show me patterns', 'What are the highest risk alerts?', 'Help']);
+  renderAuditTrail();
+  setSuggestions(['Show me patterns', 'Which alerts need escalation?', 'Summarize adverse media']);
 
-  // Welcome message
-  addMessage('ai', 'Welcome to the AML Alert Triage Copilot. I can help you review, analyze, and act on AML alerts through conversation.\n\nThere are currently ' + alerts.length + ' alerts pending review, including ' + alerts.filter(a => a.severity === 'critical').length + ' critical and ' + alerts.filter(a => a.severity === 'high').length + ' high-severity alerts.\n\nSelect an alert from the sidebar to begin, or ask me about patterns across alerts.');
+  addMessage('ai', 'Welcome! I\'m **Sancus**, your AML investigation partner.\n\nRight now there are **' + alerts.length + ' alerts** pending review, including **' + alerts.filter(a => a.severity === 'critical').length + ' critical** and **' + alerts.filter(a => a.severity === 'high').length + ' high-severity** alerts.\n\n**AI Triage Summary:**\n• ' + alerts.filter(a => a.triage?.classification === 'escalate').length + ' recommended for escalation\n• ' + alerts.filter(a => a.triage?.classification === 'review').length + ' need manual review\n• ' + alerts.filter(a => a.triage?.classification === 'false-positive').length + ' likely false positives\n\nI operate in **advisory mode** (EU AI Act compliant) — you retain full decision authority. All decisions are logged to the **Audit Trail**.\n\nTry a query: *"Show only hits with strong name match AND active sanctions*"');
 }
 
 init();

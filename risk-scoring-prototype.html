@@ -8,34 +8,77 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg-dark: #0f1117;
-      --bg-card: #1a1d27;
-      --bg-hover: #252836;
-      --border: #2d3148;
-      --text-primary: #f0f0f5;
-      --text-secondary: #9ca3b8;
-      --text-muted: #6b7280;
-      --accent-blue: #3b82f6;
-      --accent-green: #10b981;
-      --accent-amber: #f59e0b;
-      --accent-red: #ef4444;
-      --accent-purple: #8b5cf6;
-      --accent-orange: #f97316;
-      --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-      --radius: 12px;
+      --radius: 0.625rem;
+      --radius-sm: calc(var(--radius) * 0.5);
+      --radius-md: calc(var(--radius) * 0.8);
+      --radius-lg: var(--radius);
+      --radius-xl: calc(var(--radius) * 1.4);
+
+      --background: oklch(1 0 0);
+      --foreground: oklch(0.145 0 0);
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.145 0 0);
+      --primary: oklch(0.205 0 0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.97 0 0);
+      --secondary-foreground: oklch(0.205 0 0);
+      --muted: oklch(0.97 0 0);
+      --muted-foreground: oklch(0.556 0 0);
+      --accent: oklch(0.97 0 0);
+      --accent-foreground: oklch(0.205 0 0);
+      --destructive: oklch(0.577 0.245 27.325);
+      --destructive-foreground: oklch(1 0 0);
+      --border: oklch(0.922 0 0);
+      --input: oklch(0.922 0 0);
+      --ring: oklch(0.708 0 0);
+
+      --chart-1: oklch(0.646 0.222 41.116);
+      --chart-2: oklch(0.6 0.118 184.704);
+      --chart-3: oklch(0.398 0.07 227.392);
+      --chart-4: oklch(0.828 0.189 84.429);
+      --chart-5: oklch(0.769 0.188 70.08);
+
+      --success: oklch(0.577 0.155 150.62);
+      --success-foreground: oklch(0.985 0 0);
+      --success-muted: oklch(0.96 0.04 150);
+      --success-muted-foreground: oklch(0.4 0.12 150);
+
+      --warning: oklch(0.795 0.184 86.04);
+      --warning-foreground: oklch(0.28 0.07 46);
+      --warning-muted: oklch(0.96 0.06 86);
+      --warning-muted-foreground: oklch(0.55 0.18 86);
+
+      --info: oklch(0.572 0.223 256.61);
+      --info-foreground: oklch(0.985 0 0);
+      --info-muted: oklch(0.96 0.05 256);
+      --info-muted-foreground: oklch(0.45 0.18 256);
+
+      --critical: oklch(0.577 0.245 27.325);
+      --critical-foreground: oklch(1 0 0);
+      --critical-muted: oklch(0.96 0.06 27);
+      --critical-muted-foreground: oklch(0.577 0.245 27.325);
+
+      --accent-blue: var(--info);
+      --accent-green: var(--success);
+      --accent-amber: var(--warning);
+      --accent-red: var(--destructive);
+      --accent-purple: oklch(0.55 0.22 280);
+      --accent-orange: oklch(0.6 0.2 56);
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-primary);
+      background: var(--background);
+      color: var(--foreground);
+      font-size: 14px;
+      line-height: 1.5;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
     /* Header */
     .header {
-      height: 64px;
-      background: var(--bg-card);
+      height: 56px;
+      background: var(--card);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -47,42 +90,42 @@
       z-index: 100;
     }
     .header-logo {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
-      color: var(--accent-blue);
+      color: var(--primary);
       letter-spacing: -0.5px;
     }
-    .header-logo span { color: var(--text-primary); }
+    .header-logo span { color: var(--foreground); }
     .header-divider {
       width: 1px;
-      height: 24px;
+      height: 20px;
       background: var(--border);
       margin: 0 16px;
     }
     .header-title {
       font-size: 14px;
-      color: var(--text-secondary);
+      color: var(--muted-foreground);
       font-weight: 500;
     }
     .header-badge {
       margin-left: auto;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      color: white;
+      background: var(--primary);
+      color: var(--primary-foreground);
       padding: 6px 14px;
-      border-radius: 20px;
+      border-radius: var(--radius-xl);
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.5px;
       text-transform: uppercase;
     }
 
-    /* Nav tabs inside header area - using a secondary nav bar */
+    /* Nav tabs */
     .nav-bar {
-      background: var(--bg-card);
+      background: var(--card);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
       position: fixed;
-      top: 64px;
+      top: 56px;
       left: 0;
       right: 0;
       z-index: 99;
@@ -92,7 +135,7 @@
     }
     .nav-tabs {
       display: flex;
-      gap: 4px;
+      gap: 2px;
     }
     .nav-tab {
       padding: 8px 16px;
@@ -101,24 +144,24 @@
       cursor: pointer;
       font-size: 13px;
       font-weight: 500;
-      color: var(--text-muted);
-      border-radius: 6px;
-      transition: all 0.2s ease;
+      color: var(--muted-foreground);
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .nav-tab:hover { color: var(--text-secondary); background: var(--bg-hover); }
+    .nav-tab:hover { color: var(--foreground); background: var(--muted); }
     .nav-tab.active {
-      color: var(--accent-blue);
-      background: rgba(59, 130, 246, 0.1);
+      color: var(--foreground);
+      background: var(--accent);
     }
     .nav-tab .alert-badge {
-      background: var(--accent-red);
-      color: white;
+      background: var(--destructive);
+      color: var(--destructive-foreground);
       font-size: 10px;
       padding: 1px 6px;
-      border-radius: 10px;
+      border-radius: var(--radius-xl);
       font-weight: 600;
     }
     .nav-right {
@@ -132,13 +175,13 @@
       align-items: center;
       gap: 6px;
       font-size: 12px;
-      color: var(--accent-green);
+      color: var(--success);
       font-weight: 500;
     }
     .ai-dot {
       width: 8px;
       height: 8px;
-      background: var(--accent-green);
+      background: var(--success);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
@@ -149,15 +192,13 @@
 
     /* Main content */
     .main {
-      padding: 128px 24px 24px;
+      padding: 100px 24px 24px;
       max-width: 1400px;
       margin: 0 auto;
     }
 
     /* Screens */
-    .screen {
-      display: none;
-    }
+    .screen { display: none; }
     .screen.active {
       display: block;
       animation: fadeIn 0.3s ease forwards;
@@ -166,14 +207,11 @@
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* Row flash animation for score changes */
     @keyframes rowFlash {
-      0% { background: rgba(59, 130, 246, 0.15); }
+      0% { background: oklch(0.96 0.05 256); }
       100% { background: transparent; }
     }
-    .row-flash {
-      animation: rowFlash 1.5s ease-out;
-    }
+    .row-flash { animation: rowFlash 1.5s ease-out; }
 
     /* Stats cards */
     .stats-grid {
@@ -183,15 +221,15 @@
       margin-bottom: 24px;
     }
     .stat-card {
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow);
+      background: var(--card);
       border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: 0 1px 3px oklch(0 0 0 / 0.05);
     }
     .stat-label {
       font-size: 12px;
-      color: var(--text-muted);
+      color: var(--muted-foreground);
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -207,32 +245,37 @@
       margin-top: 4px;
       font-weight: 500;
     }
-    .stat-change.positive { color: var(--accent-green); }
-    .stat-change.negative { color: var(--accent-red); }
+    .stat-change.positive { color: var(--success); }
+    .stat-change.negative { color: var(--destructive); }
 
     /* Cards */
     .card {
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      background: var(--card);
       border: 1px solid var(--border);
-      padding: 20px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 1px 3px oklch(0 0 0 / 0.05);
+      padding: 0;
       margin-bottom: 20px;
     }
     .card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      padding: 20px 24px 0;
+      margin-bottom: 0;
     }
     .card-title {
       font-size: 16px;
       font-weight: 600;
+      letter-spacing: -0.01em;
     }
     .card-subtitle {
       font-size: 13px;
-      color: var(--text-muted);
+      color: var(--muted-foreground);
       margin-top: 2px;
+    }
+    .card-content {
+      padding: 20px 24px;
     }
 
     /* Table */
@@ -246,25 +289,28 @@
       text-align: left;
       padding: 12px 16px;
       font-weight: 600;
-      color: var(--text-muted);
+      color: var(--muted-foreground);
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.05em;
       border-bottom: 1px solid var(--border);
+      background: oklch(0.97 0 0 / 0.5);
       cursor: pointer;
       user-select: none;
       white-space: nowrap;
     }
-    th:hover { color: var(--text-secondary); }
+    th:hover { color: var(--foreground); }
     th .sort-icon { margin-left: 4px; opacity: 0.3; }
-    th.sorted .sort-icon { opacity: 1; color: var(--accent-blue); }
+    th.sorted .sort-icon { opacity: 1; color: var(--info); }
     td {
-      padding: 14px 16px;
+      padding: 12px 16px;
       border-bottom: 1px solid var(--border);
       vertical-align: middle;
     }
-    tr { cursor: pointer; transition: background 0.2s ease; }
-    tbody tr:hover { background: var(--bg-hover); }
+    tr { cursor: pointer; transition: background 0.15s; }
+    tbody tr:hover { background: oklch(0.97 0 0 / 0.5); }
+    tbody tr[role="row"] { outline: none; }
+    tbody tr[role="row"]:focus-visible { outline: 2px solid var(--info); outline-offset: -2px; }
 
     .user-cell {
       display: flex;
@@ -275,7 +321,7 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      background: linear-gradient(135deg, var(--info), oklch(0.45 0.22 280));
       color: white;
       display: flex;
       align-items: center;
@@ -285,24 +331,69 @@
       flex-shrink: 0;
     }
     .user-name { font-weight: 500; }
-    .user-email { font-size: 12px; color: var(--text-muted); }
+    .user-email { font-size: 12px; color: var(--muted-foreground); }
 
-    /* Badges - matching index.html style */
+    /* Badges */
     .badge {
       display: inline-flex;
       align-items: center;
+      gap: 6px;
       padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 11px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      line-height: 1.4;
+      white-space: nowrap;
+      border: 1px solid transparent;
     }
-    .badge-low { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
-    .badge-medium { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); }
-    .badge-high { background: rgba(249, 115, 22, 0.2); color: var(--accent-orange); }
-    .badge-critical { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
-    .badge-blue { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); }
+    .badge-low {
+      background: var(--success-muted);
+      color: var(--success-muted-foreground);
+    }
+    .badge-low::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+    .badge-medium {
+      background: var(--warning-muted);
+      color: var(--warning-muted-foreground);
+    }
+    .badge-medium::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--warning);
+    }
+    .badge-high {
+      background: oklch(0.96 0.08 56);
+      color: oklch(0.5 0.2 56);
+    }
+    .badge-high::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: oklch(0.6 0.2 56);
+    }
+    .badge-critical {
+      background: var(--critical-muted);
+      color: var(--critical-muted-foreground);
+    }
+    .badge-critical::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--critical);
+    }
+    .badge-blue {
+      background: var(--info-muted);
+      color: var(--info-muted-foreground);
+    }
 
     /* Trend indicators */
     .trend {
@@ -312,16 +403,16 @@
       font-weight: 500;
       font-size: 13px;
     }
-    .trend-up { color: var(--accent-red); }
-    .trend-down { color: var(--accent-green); }
-    .trend-stable { color: var(--text-muted); }
+    .trend-up { color: var(--destructive); }
+    .trend-down { color: var(--success); }
+    .trend-stable { color: var(--muted-foreground); }
 
-    /* Score display */
+    /* Score bar (mini progress bar) */
     .score-bar {
       width: 100px;
       height: 6px;
-      background: var(--bg-hover);
-      border-radius: 3px;
+      background: var(--muted);
+      border-radius: 999px;
       overflow: hidden;
       display: inline-block;
       vertical-align: middle;
@@ -329,7 +420,7 @@
     }
     .score-bar-fill {
       height: 100%;
-      border-radius: 3px;
+      border-radius: 999px;
       transition: width 0.5s ease, background 0.5s ease;
     }
 
@@ -345,14 +436,15 @@
       height: 8px;
       border-radius: 50%;
     }
-    .kyc-valid .kyc-dot { background: var(--accent-green); }
-    .kyc-expiring .kyc-dot { background: var(--accent-amber); }
-    .kyc-expired .kyc-dot { background: var(--accent-red); }
+    .kyc-valid .kyc-dot { background: var(--success); }
+    .kyc-expiring .kyc-dot { background: var(--warning); }
+    .kyc-expired .kyc-dot { background: var(--destructive); }
 
     /* Chart container */
     .chart-wrapper {
       position: relative;
       height: 250px;
+      padding: 16px 24px 20px;
     }
     .charts-grid {
       display: grid;
@@ -372,7 +464,7 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      background: linear-gradient(135deg, var(--info), oklch(0.45 0.22 280));
       color: white;
       display: flex;
       align-items: center;
@@ -381,8 +473,8 @@
       font-size: 24px;
       flex-shrink: 0;
     }
-    .detail-name { font-size: 24px; font-weight: 700; }
-    .detail-meta { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+    .detail-name { font-size: 24px; font-weight: 700; letter-spacing: -0.025em; }
+    .detail-meta { font-size: 14px; color: var(--muted-foreground); margin-top: 4px; }
     .detail-score {
       margin-left: auto;
       text-align: right;
@@ -394,13 +486,13 @@
     }
     .detail-score-label {
       font-size: 14px;
-      color: var(--text-muted);
+      color: var(--muted-foreground);
       margin-top: 4px;
     }
 
-    /* AI Recommendation - matching red-flag style from index.html */
+    /* AI Recommendation */
     .ai-recommendation {
-      border-radius: 8px;
+      border-radius: var(--radius-lg);
       padding: 16px;
       display: flex;
       align-items: flex-start;
@@ -408,20 +500,20 @@
       margin-bottom: 20px;
     }
     .ai-recommendation.approve {
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
+      background: var(--success-muted);
+      border: 1px solid var(--success);
     }
     .ai-recommendation.review {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: var(--warning-muted);
+      border: 1px solid var(--warning);
     }
     .ai-recommendation.reject {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
+      background: var(--critical-muted);
+      border: 1px solid var(--critical);
     }
     .ai-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
     .ai-rec-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
-    .ai-rec-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    .ai-rec-text { font-size: 13px; color: var(--foreground); opacity: 0.7; line-height: 1.6; }
 
     /* Risk factor bars */
     .risk-factor { margin-bottom: 16px; }
@@ -432,20 +524,20 @@
       font-size: 14px;
     }
     .risk-factor-name { font-weight: 500; }
-    .risk-factor-value { color: var(--text-muted); }
+    .risk-factor-value { color: var(--muted-foreground); }
     .risk-factor-bar {
       height: 8px;
-      background: var(--bg-hover);
-      border-radius: 4px;
+      background: var(--muted);
+      border-radius: 999px;
       overflow: hidden;
     }
     .risk-factor-fill {
       height: 100%;
-      border-radius: 4px;
+      border-radius: 999px;
       transition: width 0.5s ease;
     }
 
-    /* Timeline - matching index.html citation style */
+    /* Timeline */
     .timeline { position: relative; padding-left: 24px; }
     .timeline::before {
       content: '';
@@ -467,17 +559,17 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      border: 2px solid var(--accent-blue);
-      background: var(--bg-card);
+      border: 2px solid var(--info);
+      background: var(--card);
     }
-    .timeline-date { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+    .timeline-date { font-size: 12px; color: var(--muted-foreground); margin-bottom: 4px; }
     .timeline-content { font-size: 14px; }
     .timeline-score { font-weight: 600; }
 
     /* Compliance card */
     .compliance-card {
-      background: var(--bg-hover);
-      border-radius: 10px;
+      background: var(--muted);
+      border-radius: var(--radius-md);
       padding: 16px;
     }
     .compliance-row {
@@ -488,17 +580,17 @@
       border-bottom: 1px solid var(--border);
     }
     .compliance-row:last-child { border-bottom: none; }
-    .compliance-label { font-size: 14px; color: var(--text-muted); }
+    .compliance-label { font-size: 14px; color: var(--muted-foreground); }
     .compliance-value { font-weight: 600; font-size: 14px; }
     .countdown {
       font-size: 12px;
       padding: 2px 8px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       font-weight: 600;
     }
-    .countdown-valid { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
-    .countdown-expiring { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); }
-    .countdown-expired { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
+    .countdown-valid { background: var(--success-muted); color: var(--success-muted-foreground); }
+    .countdown-expiring { background: var(--warning-muted); color: var(--warning-muted-foreground); }
+    .countdown-expired { background: var(--critical-muted); color: var(--critical-muted-foreground); }
 
     /* Alert feed */
     .alert-filters {
@@ -506,37 +598,38 @@
       gap: 8px;
       margin-bottom: 16px;
       flex-wrap: wrap;
+      padding: 20px 24px 0;
     }
     .filter-btn {
       padding: 6px 14px;
       border: 1px solid var(--border);
       background: transparent;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       font-size: 13px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
       font-weight: 500;
-      color: var(--text-secondary);
+      color: var(--muted-foreground);
     }
-    .filter-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .filter-btn:hover { border-color: var(--info); color: var(--info); }
     .filter-btn.active {
-      background: var(--accent-blue);
+      background: var(--info);
       color: white;
-      border-color: var(--accent-blue);
+      border-color: var(--info);
     }
 
     .alert-card {
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 16px;
       margin-bottom: 12px;
-      background: var(--bg-card);
-      transition: all 0.2s ease;
+      background: var(--card);
+      transition: all 0.15s ease;
       display: flex;
       align-items: flex-start;
       gap: 12px;
     }
-    .alert-card:hover { box-shadow: var(--shadow); }
+    .alert-card:hover { box-shadow: 0 4px 12px oklch(0 0 0 / 0.08); }
 
     .alert-severity {
       width: 10px;
@@ -545,43 +638,43 @@
       margin-top: 6px;
       flex-shrink: 0;
     }
-    .alert-severity.critical { background: var(--accent-red); box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2); }
-    .alert-severity.high { background: var(--accent-orange); box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2); }
+    .alert-severity.critical { background: var(--critical); box-shadow: 0 0 0 3px var(--critical-muted); }
+    .alert-severity.high { background: oklch(0.6 0.2 56); box-shadow: 0 0 0 3px oklch(0.96 0.08 56); }
 
     .alert-content { flex: 1; }
     .alert-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
-    .alert-reason { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+    .alert-reason { font-size: 13px; color: var(--muted-foreground); margin-bottom: 8px; }
     .alert-meta {
       display: flex;
       align-items: center;
       gap: 12px;
       font-size: 12px;
-      color: var(--text-muted);
+      color: var(--muted-foreground);
     }
 
     .alert-action-btn {
       padding: 6px 16px;
       border: none;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
       white-space: nowrap;
       align-self: flex-start;
       margin-top: 4px;
     }
     .alert-action-btn.acknowledge {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      color: white;
+      background: var(--primary);
+      color: var(--primary-foreground);
     }
-    .alert-action-btn.acknowledge:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+    .alert-action-btn.acknowledge:hover { opacity: 0.9; }
     .alert-action-btn.view {
       background: transparent;
-      color: var(--text-secondary);
+      color: var(--muted-foreground);
       border: 1px solid var(--border);
     }
-    .alert-action-btn.view:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .alert-action-btn.view:hover { border-color: var(--info); color: var(--info); }
     .alert-card.acknowledged { opacity: 0.5; }
     .alert-card.acknowledged .alert-action-btn { display: none; }
 
@@ -589,34 +682,35 @@
     .empty-state {
       text-align: center;
       padding: 48px;
-      color: var(--text-muted);
+      color: var(--muted-foreground);
     }
     .empty-state-icon { font-size: 48px; margin-bottom: 12px; }
 
     /* Buttons */
     .btn {
       padding: 8px 16px;
-      border-radius: 6px;
+      border-radius: var(--radius-md);
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
       display: inline-flex;
       align-items: center;
       gap: 8px;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      color: white;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      box-shadow: 0 1px 2px oklch(0 0 0 / 0.05);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4); }
+    .btn-primary:hover { opacity: 0.9; }
     .btn-secondary {
-      background: transparent;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+      box-shadow: 0 1px 2px oklch(0 0 0 / 0.05);
     }
-    .btn-secondary:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .btn-secondary:hover { background: oklch(0.94 0 0); }
 
     /* Back button */
     .back-btn {
@@ -624,22 +718,23 @@
       align-items: center;
       gap: 6px;
       font-size: 14px;
-      color: var(--text-muted);
+      color: var(--muted-foreground);
       cursor: pointer;
       margin-bottom: 16px;
       padding: 6px 0;
       border: none;
       background: none;
-      transition: color 0.2s ease;
+      transition: color 0.15s ease;
     }
-    .back-btn:hover { color: var(--accent-blue); }
+    .back-btn:hover { color: var(--info); }
 
     /* Responsive */
     @media (max-width: 1024px) {
       .charts-grid { grid-template-columns: 1fr; }
       .detail-header { flex-wrap: wrap; }
       .detail-score { margin-left: 0; width: 100%; text-align: left; margin-top: 16px; }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
       .header { padding: 0 16px; }
@@ -654,20 +749,42 @@
     .tier-filter {
       padding: 3px 10px;
       border: none;
-      border-radius: 10px;
+      border-radius: var(--radius-xl);
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
-      background: var(--bg-hover);
-      color: var(--text-secondary);
+      transition: all 0.15s ease;
+      background: var(--muted);
+      color: var(--muted-foreground);
     }
     .tier-filter:hover { opacity: 0.8; }
-    .tier-filter.active { background: var(--accent-blue); color: white; }
+    .tier-filter.active { background: var(--info); color: white; }
 
     .mt-2 { margin-top: 8px; }
     .mt-4 { margin-top: 16px; }
     .mb-4 { margin-bottom: 16px; }
+
+    /* Search input styled per design system */
+    .search-input, .input {
+      display: flex;
+      height: 36px;
+      padding: 8px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--input);
+      background: var(--background);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--foreground);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      font-family: inherit;
+      width: 220px;
+    }
+    .search-input::placeholder { color: var(--muted-foreground); }
+    .search-input:focus {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.15);
+    }
   </style>
 </head>
 <body>
@@ -683,17 +800,17 @@
   <!-- Nav bar -->
   <div class="nav-bar">
     <nav class="nav-tabs">
-      <button class="nav-tab active" data-tab="dashboard">
+      <button class="nav-tab active" data-tab="dashboard" title="View risk dashboard">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         Dashboard
       </button>
-      <button class="nav-tab" data-tab="alerts">
+      <button class="nav-tab" data-tab="alerts" title="View alerts requiring review">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         Alerts <span class="alert-badge" id="alert-count-badge">0</span>
       </button>
     </nav>
     <div class="nav-right">
-      <div class="ai-status">
+      <div class="ai-status" title="AI continuously monitors and updates risk scores in real-time">
         <span class="ai-dot"></span>
         AI Scoring Active
       </div>
@@ -704,6 +821,42 @@
     <!-- DASHBOARD SCREEN -->
     <section id="screen-dashboard" class="screen active">
       <div class="stats-grid" id="stats-grid"></div>
+
+      <!-- Model Governance Panel -->
+      <div class="card" style="margin-bottom: 20px;">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Model Governance — EU AI Act Compliance</div>
+            <div class="card-subtitle">Governed MLOps pipeline with drift monitoring, bias checks, and human-in-the-loop approval</div>
+          </div>
+          <span class="badge badge-low" style="gap: 4px;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--success);"></span>
+            Compliant
+          </span>
+        </div>
+        <div class="card-content" style="display: flex; gap: 24px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 120px;">
+            <div class="stat-label">Model Version</div>
+            <div class="stat-value" style="font-size: 22px;" id="model-version-display"></div>
+          </div>
+          <div style="flex: 1; min-width: 120px;">
+            <div class="stat-label">Last Retrained</div>
+            <div class="stat-value" style="font-size: 22px;" id="model-retrained-display"></div>
+          </div>
+          <div style="flex: 1; min-width: 120px;">
+            <div class="stat-label">Drift Score</div>
+            <div class="stat-value" style="font-size: 22px; color: var(--success);" id="model-drift-display"></div>
+          </div>
+          <div style="flex: 1; min-width: 120px;">
+            <div class="stat-label">Bias Check</div>
+            <div class="stat-value" style="font-size: 22px; color: var(--success);" id="model-bias-display"></div>
+          </div>
+          <div style="flex: 1; min-width: 120px;">
+            <div class="stat-label">Officer Overrides</div>
+            <div class="stat-value" style="font-size: 22px;" id="model-overrides-display"></div>
+          </div>
+        </div>
+      </div>
 
       <div class="charts-grid">
         <div class="card">
@@ -737,20 +890,23 @@
             <div class="card-subtitle">Click any user to view details</div>
           </div>
           <div style="display: flex; gap: 8px; align-items: center;">
-            <input type="text" id="table-search" placeholder="Search users..." style="padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-hover); color: var(--text-primary); font-size: 13px; width: 200px; outline: none;" oninput="renderTable()">
-            <button class="btn btn-secondary" onclick="refreshScores()">
+            <input type="text" id="table-search" class="search-input" placeholder="Search by name, email, or ID..." oninput="renderTable()">
+            <button class="btn btn-secondary" onclick="refreshScores()" title="Manually trigger AI to recalculate risk scores">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
               Refresh Scores
             </button>
           </div>
         </div>
-        <div style="padding: 10px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: center;">
-          <span style="font-size: 12px; color: var(--text-muted);">Filter by tier:</span>
-          <button class="tier-filter active" data-tier="all" onclick="setTierFilter('all')">All</button>
-          <button class="tier-filter" data-tier="low" onclick="setTierFilter('low')" style="background: rgba(16,185,129,0.2); color: #10b981;">Low</button>
-          <button class="tier-filter" data-tier="medium" onclick="setTierFilter('medium')" style="background: rgba(245,158,11,0.2); color: #f59e0b;">Medium</button>
-          <button class="tier-filter" data-tier="high" onclick="setTierFilter('high')" style="background: rgba(249,115,22,0.2); color: #f97316;">High</button>
-          <button class="tier-filter" data-tier="critical" onclick="setTierFilter('critical')" style="background: rgba(239,68,68,0.2); color: #ef4444;">Critical</button>
+        <div class="card-content" style="padding: 10px 24px; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: center; justify-content: space-between;">
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span style="font-size: 12px; color: var(--muted-foreground);">Filter by tier:</span>
+            <button class="tier-filter active" data-tier="all" onclick="setTierFilter('all')">All</button>
+            <button class="tier-filter" data-tier="low" onclick="setTierFilter('low')" style="background: var(--success-muted); color: var(--success-muted-foreground);">Low</button>
+            <button class="tier-filter" data-tier="medium" onclick="setTierFilter('medium')" style="background: var(--warning-muted); color: var(--warning-muted-foreground);">Medium</button>
+            <button class="tier-filter" data-tier="high" onclick="setTierFilter('high')" style="background: oklch(0.96 0.08 56); color: oklch(0.5 0.2 56);">High</button>
+            <button class="tier-filter" data-tier="critical" onclick="setTierFilter('critical')" style="background: var(--critical-muted); color: var(--critical-muted-foreground);">Critical</button>
+          </div>
+          <span id="table-result-info" style="font-size: 12px; color: var(--muted-foreground);"></span>
         </div>
         <div class="table-container">
           <table id="users-table">
@@ -778,11 +934,11 @@
         <div class="card-header">
           <div>
             <div class="card-title">Alert Feed</div>
-            <div class="card-subtitle">Flagged cases requiring review</div>
+            <div class="card-subtitle">Flagged cases requiring your review</div>
           </div>
         </div>
         <div class="alert-filters" id="alert-filters"></div>
-        <div id="alerts-container"></div>
+        <div id="alerts-container" style="padding: 16px 24px 24px;"></div>
       </div>
     </section>
   </main>
@@ -867,17 +1023,81 @@ function getAIRecommendation(user) {
   return { action: 'Reject', icon: 'x-circle', text: `Critical risk level. ${user.kyc.status === 'expired' ? 'Expired KYC documentation combined with high-risk indicators.' : 'Significant risk factors identified.'} Account restrictions should be applied immediately.` };
 }
 
-  const users = firstNames.map((firstName, i) => {
+function generateAIExplaination(user, riskFactors) {
+  const parts = [];
+  const sorted = [...riskFactors].sort((a, b) => b.value - a.value);
+  const top2 = sorted.slice(0, 2);
+  top2.forEach(f => {
+    parts.push(`${f.name} contributes ${Math.round(f.value)}% to the overall risk score (weight: ${f.weight}%).`);
+  });
+  if (user.isPEP) {
+    parts.push(`Customer is a Politically Exposed Person (PEP). This triggers Enhanced Due Diligence (EDD) requirements under FATF guidance.`);
+  }
+  if (user.countryRiskScore > 50) {
+    parts.push(`Operates in high-risk jurisdiction(s). Country risk index: ${Math.round(user.countryRiskScore)}%.`);
+  }
+  if (user.caseOutcome === 'edd-flagged') {
+    parts.push(`Case currently flagged for EDD — officer should complete additional verification steps.`);
+  }
+  parts.push(`Model v${user.modelVersion} applied. Drift score: ${(user.driftScore * 100).toFixed(1)}%. No bias flags detected.`);
+  return parts.join(' ');
+}
+
+const jurisdictions = ['United Kingdom', 'United States', 'Sweden', 'UAE', 'Greece', 'Cayman Islands', 'Panama', 'Singapore', 'Switzerland', 'Germany', 'British Virgin Islands', 'Luxembourg', 'Cyprus', 'Malta'];
+const countryRiskMap = {
+  'United Kingdom': 10, 'United States': 15, 'Sweden': 8, 'UAE': 35, 'Greece': 25,
+  'Cayman Islands': 70, 'Panama': 65, 'Singapore': 12, 'Switzerland': 20, 'Germany': 10,
+  'British Virgin Islands': 75, 'Luxembourg': 18, 'Cyprus': 45, 'Malta': 40
+};
+const sourceOfFunds = ['Employment Salary', 'Business Revenue', 'Investment Returns', 'Real Estate Sale', 'Inheritance', 'Pension', 'Consulting Fees', 'Trade Revenue', 'Rental Income', 'Government Benefits'];
+
+// Model governance state
+const modelState = {
+  version: '2.4.1',
+  lastRetrained: randomDate(-14, -2),
+  driftScore: 0.04,
+  biasCheck: 'Passed',
+  totalDecisions: 0,
+  overrides: 0,
+  falsePositiveRate: 0.18,
+  avgDecisionTimeMin: 4.2,
+  autoApprovedRate: 0.42
+};
+
+const users = firstNames.map((firstName, i) => {
   const lastName = lastNames[i];
+  const jurisdiction = jurisdictions[i % jurisdictions.length];
+  const countryRiskScore = countryRiskMap[jurisdiction];
   const kycExpiry = randomDate(-60, 365);
   const kyc = getKYCStatus(kycExpiry);
+  const isPEP = i < 3;
+  const sourceOfFund = sourceOfFunds[i % sourceOfFunds.length];
+  const docQuality = 10 + Math.random() * 30;
+
   let riskScore;
-  if (kyc.status === 'expired') riskScore = 60 + Math.random() * 35;
-  else if (kyc.status === 'expiring') riskScore = 35 + Math.random() * 30;
-  else riskScore = 10 + Math.random() * 25;
-  riskScore = Math.round(riskScore);
+  if (kyc.status === 'expired') riskScore = 55 + Math.random() * 35;
+  else if (kyc.status === 'expiring') riskScore = 30 + Math.random() * 30;
+  else if (isPEP) riskScore = 40 + Math.random() * 30;
+  else riskScore = 8 + Math.random() * 25;
+  if (countryRiskScore > 50) riskScore += 10 + Math.random() * 10;
+  riskScore = Math.max(5, Math.min(98, Math.round(riskScore)));
+
   const trendData = generateTrendData(riskScore, 30);
   const lastVerified = randomDate(-30, -1);
+  const caseOutcome = riskScore < 25 ? 'approved' : riskScore < 50 ? 'approved' : riskScore < 75 ? 'review-pending' : 'edd-flagged';
+  const overridden = Math.random() < 0.15;
+  const originalScore = overridden ? riskScore + (Math.random() < 0.5 ? -15 : 15) : null;
+  const officerNote = overridden ? 'Officer adjusted based on additional context not captured by model.' : null;
+
+  const riskFactors = [
+    { name: 'Document Validity', value: kyc.status === 'expired' ? 85 : kyc.status === 'expiring' ? 55 : 15, weight: 30 },
+    { name: 'Country Risk', value: countryRiskScore, weight: 20 },
+    { name: 'Data Completeness', value: 20 + Math.random() * 30, weight: 15 },
+    { name: 'PEP Status', value: isPEP ? 70 + Math.random() * 25 : 5 + Math.random() * 10, weight: 15 },
+    { name: 'Source of Funds', value: 10 + Math.random() * 40, weight: 10 },
+    { name: 'Document Quality', value: docQuality, weight: 10 }
+  ];
+
   return {
     id: `USR-${String(i + 1).padStart(4, '0')}`,
     name: `${firstName} ${lastName}`,
@@ -890,8 +1110,25 @@ function getAIRecommendation(user) {
     scoreHistory: generateScoreHistory(trendData),
     lastUpdated: randomDate(-1, 0),
     trendDirection: getTrendDirection(trendData),
-    lastVerified
+    lastVerified,
+    jurisdiction,
+    countryRiskScore,
+    isPEP,
+    sourceOfFund,
+    docQuality: Math.round(docQuality),
+    caseOutcome,
+    overridden,
+    originalScore,
+    officerNote,
+    riskFactors,
+    modelVersion: modelState.version,
+    driftScore: modelState.driftScore,
+    aiExplanation: ''
   };
+});
+
+users.forEach(u => {
+  u.aiExplanation = generateAIExplaination(u, u.riskFactors);
 });
 
 const alerts = users.filter(u => u.riskScore >= 50 || u.kyc.status === 'expired').map((user, i) => ({
@@ -915,7 +1152,6 @@ let distributionChart, kycChart, userTrendChart;
 let currentSort = { column: 'riskScore', direction: 'desc' };
 let alertFilter = 'all';
 let tierFilter = 'all';
-let lastUpdatedUserIds = [];
 let previousScores = {};
 
 // Track previous scores for flash detection
@@ -924,31 +1160,31 @@ users.forEach(u => { previousScores[u.id] = u.riskScore; });
 function renderStats() {
   const total = users.length;
   const highCritical = users.filter(u => u.riskScore >= 50).length;
-  const avgScore = Math.round(users.reduce((a, u) => a + u.riskScore, 0) / total);
   const activeAlerts = alerts.filter(a => !a.acknowledged).length;
+  const approved = users.filter(u => u.caseOutcome === 'approved').length;
 
   document.getElementById('alert-count-badge').textContent = activeAlerts;
 
   document.getElementById('stats-grid').innerHTML = `
     <div class="stat-card">
       <div class="stat-label">Users Monitored</div>
-      <div class="stat-value" style="color: var(--accent-blue);">${total}</div>
-      <div class="stat-change positive">Active tracking</div>
+      <div class="stat-value" style="color: var(--info);">${total}</div>
+      <div class="stat-change positive">${approved} approved &bull; ${modelState.autoApprovedRate * 100}% auto-approved</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">High / Critical Risk</div>
-      <div class="stat-value" style="color: ${highCritical > 5 ? 'var(--accent-red)' : 'var(--accent-orange)'}">${highCritical}</div>
+      <div class="stat-value" style="color: ${highCritical > 5 ? 'var(--critical)' : 'var(--warning)'}">${highCritical}</div>
       <div class="stat-change negative">${Math.round(highCritical / total * 100)}% of total</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Average Risk Score</div>
-      <div class="stat-value">${avgScore}</div>
-      <div class="stat-change ${avgScore < 35 ? 'positive' : 'negative'}">out of 100</div>
+      <div class="stat-label">False Positive Rate</div>
+      <div class="stat-value" style="color: var(--warning);">${(modelState.falsePositiveRate * 100).toFixed(0)}%</div>
+      <div class="stat-change positive">60–70% reduction vs. baseline</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Active Alerts</div>
-      <div class="stat-value" style="color: ${activeAlerts > 3 ? 'var(--accent-red)' : 'var(--accent-orange)'}">${activeAlerts}</div>
-      <div class="stat-change negative">Requires attention</div>
+      <div class="stat-label">Avg Decision Time</div>
+      <div class="stat-value" style="color: var(--info);">${modelState.avgDecisionTimeMin}m</div>
+      <div class="stat-change positive">Down from 12m baseline</div>
     </div>
   `;
 }
@@ -960,19 +1196,8 @@ function renderCharts() {
   const kycCounts = { Valid: 0, 'Expiring Soon': 0, Expired: 0 };
   users.forEach(u => kycCounts[u.kyc.status === 'valid' ? 'Valid' : u.kyc.status === 'expiring' ? 'Expiring Soon' : 'Expired']++);
 
-  const chartTextColor = '#9ca3b8';
-  const chartGridColor = '#2d3148';
-
-  const chartDefaults = {
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: { duration: 600, easing: 'easeOutQuart' },
-    plugins: { legend: { display: false } },
-    scales: {
-      y: { beginAtZero: true, ticks: { stepSize: 1, color: chartTextColor }, grid: { color: chartGridColor } },
-      x: { ticks: { color: chartTextColor }, grid: { display: false } }
-    }
-  };
+  const chartTextColor = '#6b7280';
+  const chartGridColor = '#e5e7eb';
 
   if (!distributionChart) {
     distributionChart = new Chart(document.getElementById('distribution-chart'), {
@@ -981,12 +1206,21 @@ function renderCharts() {
         labels: ['Low', 'Medium', 'High', 'Critical'],
         datasets: [{
           data: [tiers.Low, tiers.Medium, tiers.High, tiers.Critical],
-          backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'],
+          backgroundColor: ['oklch(0.577 0.155 150.62)', 'oklch(0.795 0.184 86.04)', 'oklch(0.6 0.2 56)', 'oklch(0.577 0.245 27.325)'],
           borderRadius: 6,
           barThickness: 40
         }]
       },
-      options: chartDefaults
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 600, easing: 'easeOutQuart' },
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, ticks: { stepSize: 1, color: chartTextColor }, grid: { color: chartGridColor } },
+          x: { ticks: { color: chartTextColor }, grid: { display: false } }
+        }
+      }
     });
   } else {
     distributionChart.data.datasets[0].data = [tiers.Low, tiers.Medium, tiers.High, tiers.Critical];
@@ -1000,7 +1234,7 @@ function renderCharts() {
         labels: ['Valid', 'Expiring Soon', 'Expired'],
         datasets: [{
           data: [kycCounts.Valid, kycCounts['Expiring Soon'], kycCounts.Expired],
-          backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+          backgroundColor: ['oklch(0.577 0.155 150.62)', 'oklch(0.795 0.184 86.04)', 'oklch(0.577 0.245 27.325)'],
           borderWidth: 0
         }]
       },
@@ -1037,28 +1271,25 @@ function renderTable() {
     const dir = currentSort.direction === 'asc' ? 1 : -1;
     if (col === 'name') return dir * a.name.localeCompare(b.name);
     if (col === 'kycExpiry') return dir * (a.kycExpiry - b.kycExpiry);
-    return dir * (a[col] - b[col]);
+    if (col === 'lastUpdated') return dir * (a.lastUpdated - b.lastUpdated);
+    if (col === 'trendDirection') return dir * a.trendDirection.localeCompare(b.trendDirection);
+    if (col === 'riskTier') {
+      const order = { Low: 0, Medium: 1, High: 2, Critical: 3 };
+      return dir * ((order[a.riskTier] || 0) - (order[b.riskTier] || 0));
+    }
+    return dir * ((a[col] ?? 0) - (b[col] ?? 0));
   });
 
   const thHTML = `
-    <th data-col="id">User ID <span class="sort-icon">${currentSort.column === 'id' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '↕'}</span></th>
-    <th data-col="name">User <span class="sort-icon">${currentSort.column === 'name' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '↕'}</span></th>
-    <th data-col="riskScore" class="${currentSort.column === 'riskScore' ? 'sorted' : ''}">Risk Score <span class="sort-icon">${currentSort.column === 'riskScore' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '↕'}</span></th>
-    <th data-col="riskTier">Risk Tier</th>
-    <th data-col="kycExpiry" class="${currentSort.column === 'kycExpiry' ? 'sorted' : ''}">KYC Status <span class="sort-icon">${currentSort.column === 'kycExpiry' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '↕'}</span></th>
-    <th data-col="trendDirection">AI Trend</th>
-    <th data-col="lastUpdated">Last Updated</th>
+    <th data-col="id" title="Unique user identifier">User ID <span class="sort-icon">${currentSort.column === 'id' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '↕'}</span></th>
+    <th data-col="name" title="User name and email">User <span class="sort-icon">${currentSort.column === 'name' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '↕'}</span></th>
+    <th data-col="riskScore" class="${currentSort.column === 'riskScore' ? 'sorted' : ''}" title="AI-calculated risk score (0-100, higher = more risk)">Risk Score <span class="sort-icon">${currentSort.column === 'riskScore' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '↕'}</span></th>
+    <th data-col="riskTier" title="Risk category based on score">Risk Tier</th>
+    <th data-col="kycExpiry" class="${currentSort.column === 'kycExpiry' ? 'sorted' : ''}" title="Know Your Customer document status">KYC Status <span class="sort-icon">${currentSort.column === 'kycExpiry' ? (currentSort.direction === 'asc' ? '↑' : '↓') : '↕'}</span></th>
+    <th data-col="trendDirection" title="Direction of risk score change over last 7 days">AI Trend</th>
+    <th data-col="lastUpdated" title="When the score was last recalculated">Last Updated</th>
   `;
   document.getElementById('users-table-head').innerHTML = thHTML;
-
-  document.querySelectorAll('#users-table-head th').forEach(th => {
-    th.addEventListener('click', () => {
-      const col = th.dataset.col;
-      if (currentSort.column === col) currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
-      else { currentSort.column = col; currentSort.direction = 'desc'; }
-      renderTable();
-    });
-  });
 
   let tbody = '';
   sorted.forEach(user => {
@@ -1070,8 +1301,8 @@ function renderTable() {
     const flashClass = hasChanged ? 'row-flash' : '';
 
     tbody += `
-      <tr onclick="showUserDetail('${user.id}')" class="${flashClass}" id="row-${user.id}">
-        <td style="font-family: monospace; font-size: 13px; color: var(--text-muted)">${user.id}</td>
+      <tr onclick="showUserDetail('${user.id}')" onkeydown="if(event.key==='Enter')showUserDetail('${user.id}')" class="${flashClass}" id="row-${user.id}" role="row" tabindex="0">
+        <td style="font-family: monospace; font-size: 13px; color: var(--muted-foreground)">${user.id}</td>
         <td>
           <div class="user-cell">
             <div class="avatar">${initials}</div>
@@ -1083,7 +1314,7 @@ function renderTable() {
         </td>
         <td>
           <span style="font-weight: 700; color: ${scoreColor}">${user.riskScore}</span>
-          ${hasChanged ? `<span style="font-size: 11px; color: var(--accent-blue); margin-left: 4px;">(${previousScores[user.id] > user.riskScore ? '↓' : '↑'}${Math.abs(user.riskScore - previousScores[user.id])})</span>` : ''}
+          ${hasChanged ? `<span style="font-size: 11px; color: var(--info); margin-left: 4px;">(${previousScores[user.id] > user.riskScore ? '↓' : '↑'}${Math.abs(user.riskScore - previousScores[user.id])})</span>` : ''}
           <div class="score-bar"><div class="score-bar-fill" style="width: ${user.riskScore}%; background: ${scoreColor}"></div></div>
         </td>
         <td><span class="badge badge-${getRiskClass(user.riskScore)}">${user.riskTier}</span></td>
@@ -1094,7 +1325,7 @@ function renderTable() {
           </div>
         </td>
         <td><span class="trend ${trendClass}">${trendIcon} ${user.trendDirection === 'up' ? 'Increasing' : user.trendDirection === 'down' ? 'Decreasing' : 'Stable'}</span></td>
-        <td style="font-size: 13px; color: var(--text-muted)">${formatDate(user.lastUpdated)}</td>
+        <td style="font-size: 13px; color: var(--muted-foreground)">${formatDate(user.lastUpdated)}</td>
       </tr>
     `;
 
@@ -1117,10 +1348,10 @@ function setTierFilter(tier) {
 }
 
 function getScoreColor(score) {
-  if (score < 25) return '#10b981';
-  if (score < 50) return '#f59e0b';
-  if (score < 75) return '#f97316';
-  return '#ef4444';
+  if (score < 25) return 'oklch(0.577 0.155 150.62)';
+  if (score < 50) return 'oklch(0.795 0.184 86.04)';
+  if (score < 75) return 'oklch(0.6 0.2 56)';
+  return 'oklch(0.577 0.245 27.325)';
 }
 
 function renderAlerts() {
@@ -1163,9 +1394,9 @@ function renderAlerts() {
           </div>
         </div>
         ${!alert.acknowledged ? `
-          <button class="alert-action-btn acknowledge" onclick="acknowledgeAlert('${alert.id}')">Acknowledge</button>
-          <button class="alert-action-btn view" onclick="showUserDetail('${alert.userId}'); showScreen('user-detail')">View</button>
-        ` : '<span style="font-size: 12px; color: var(--text-muted)">Reviewed</span>'}
+          <button class="alert-action-btn acknowledge" onclick="acknowledgeAlert('${alert.id}')" title="Mark this alert as reviewed">Acknowledge</button>
+          <button class="alert-action-btn view" onclick="showUserDetail('${alert.userId}'); showScreen('user-detail')" title="View full user details">View User</button>
+        ` : '<span style="font-size: 12px; color: var(--muted-foreground)">Reviewed</span>'}
       </div>
     `;
   });
@@ -1198,16 +1429,11 @@ function showUserDetail(userId) {
   const recommendation = getAIRecommendation(user);
   const recClass = recommendation.action.toLowerCase() === 'approve' ? 'approve' : recommendation.action.toLowerCase() === 'reject' ? 'reject' : 'review';
   const recIcon = recommendation.icon === 'check-circle' ? '&#x2713;' : recommendation.icon === 'x-circle' ? '&#x2717;' : recommendation.icon === 'alert-triangle' ? '&#x26a0;' : '&#x2139;';
-  const recTitleColor = recommendation.action.toLowerCase() === 'approve' ? 'var(--accent-green)' : recommendation.action.toLowerCase() === 'reject' ? 'var(--accent-red)' : 'var(--accent-amber)';
+  const recTitleColor = recommendation.action.toLowerCase() === 'approve' ? 'var(--success)' : recommendation.action.toLowerCase() === 'reject' ? 'var(--destructive)' : 'var(--warning)';
 
-  // Risk factor breakdown (simulated)
-  const riskFactors = [
-    { name: 'Document Validity', value: user.kyc.status === 'expired' ? 85 : user.kyc.status === 'expiring' ? 55 : 15, weight: 40 },
-    { name: 'Data Completeness', value: 20 + Math.random() * 30, weight: 20 },
-    { name: 'Behavioral Signals', value: 10 + Math.random() * 40, weight: 15 },
-    { name: 'Geographic Consistency', value: 5 + Math.random() * 25, weight: 15 },
-    { name: 'Historical Patterns', value: 15 + Math.random() * 35, weight: 10 }
-  ];
+  const caseBadgeClass = user.caseOutcome === 'approved' ? 'badge-low' : user.caseOutcome === 'edd-flagged' ? 'badge-critical' : 'badge-medium';
+  const caseBadgeLabel = user.caseOutcome === 'approved' ? 'Approved' : user.caseOutcome === 'edd-flagged' ? 'EDD Flagged' : 'Review Pending';
+  const caseBadgeDot = user.caseOutcome === 'approved' ? 'var(--success)' : user.caseOutcome === 'edd-flagged' ? 'var(--destructive)' : 'var(--warning)';
 
   // Calculate predicted trend
   const recentScores = user.trendData.slice(-7).map(d => d.score);
@@ -1229,7 +1455,16 @@ function showUserDetail(userId) {
       <div class="detail-score">
         <div class="detail-score-value" style="color: ${scoreColor}">${user.riskScore}</div>
         <div class="detail-score-label">Risk Score / 100</div>
-        <span class="badge badge-${getRiskClass(user.riskScore)} mt-2">${user.riskTier} Risk</span>
+        <div style="display: flex; gap: 6px; margin-top: 6px; justify-content: flex-end; flex-wrap: wrap;">
+          <span class="badge badge-${getRiskClass(user.riskScore)}" style="gap: 4px;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: ${scoreColor};"></span>
+            ${user.riskTier} Risk
+          </span>
+          <span class="badge ${caseBadgeClass}" style="gap: 4px;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: ${caseBadgeDot};"></span>
+            ${caseBadgeLabel}
+          </span>
+        </div>
       </div>
     </div>
 
@@ -1238,6 +1473,29 @@ function showUserDetail(userId) {
       <div>
         <div class="ai-rec-title" style="color: ${recTitleColor}">AI Recommendation: ${recommendation.action}</div>
         <div class="ai-rec-text">${recommendation.text}</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 20px;">
+      <div class="card-header">
+        <div>
+          <div class="card-title">AI Score Explainability (EU AI Act Compliant)</div>
+          <div class="card-subtitle">Full reasoning trail for audit and regulatory review</div>
+        </div>
+        <span class="badge badge-blue" style="gap: 4px;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--info);"></span>
+          v${user.modelVersion}
+        </span>
+      </div>
+      <div class="card-content">
+        <p style="font-size: 14px; line-height: 1.7; color: var(--foreground);">${user.aiExplanation}</p>
+        ${user.overridden ? `
+        <div style="margin-top: 12px; padding: 12px; border-radius: var(--radius-md); background: oklch(0.96 0.08 56); border-left: 3px solid oklch(0.6 0.2 56);">
+          <div style="font-size: 13px; font-weight: 600; color: oklch(0.5 0.2 56); margin-bottom: 4px;">Officer Override Applied</div>
+          <div style="font-size: 13px; color: oklch(0.5 0.2 56);">Original score: <strong>${Math.round(user.originalScore)}</strong> &#8594; Adjusted to: <strong>${user.riskScore}</strong></div>
+          <div style="font-size: 12px; color: var(--muted-foreground); margin-top: 4px;">${user.officerNote}</div>
+        </div>
+        ` : ''}
       </div>
     </div>
 
@@ -1257,15 +1515,15 @@ function showUserDetail(userId) {
         <div class="card-header">
           <div>
             <div class="card-title">Risk Factor Breakdown</div>
-            <div class="card-subtitle">Contribution to overall score</div>
+            <div class="card-subtitle">Weighted contribution to overall score</div>
           </div>
         </div>
-        <div id="risk-factors-container">
-          ${riskFactors.map(f => `
+        <div class="card-content">
+          ${user.riskFactors.map(f => `
             <div class="risk-factor">
               <div class="risk-factor-header">
                 <span class="risk-factor-name">${f.name}</span>
-                <span class="risk-factor-value">${Math.round(f.value)}%</span>
+                <span class="risk-factor-value">${Math.round(f.value)}% &#183; w: ${f.weight}%</span>
               </div>
               <div class="risk-factor-bar">
                 <div class="risk-factor-fill" style="width: ${f.value}%; background: ${getScoreColor(f.value)}"></div>
@@ -1276,29 +1534,32 @@ function showUserDetail(userId) {
       </div>
     </div>
 
-    <div class="grid-2">
+    <div class="grid-3">
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">Compliance / KYC Status</div>
+            <div class="card-title">Compliance / KYC</div>
+            <div class="card-subtitle">Know Your Customer verification</div>
           </div>
         </div>
-        <div class="compliance-card">
-          <div class="compliance-row">
-            <span class="compliance-label">Document Status</span>
-            <span class="compliance-value" style="color: ${user.kyc.status === 'valid' ? 'var(--accent-green)' : user.kyc.status === 'expiring' ? 'var(--accent-amber)' : 'var(--accent-red)'}">${user.kyc.label}</span>
-          </div>
-          <div class="compliance-row">
-            <span class="compliance-label">Expiry Date</span>
-            <span class="compliance-value">${formatDate(user.kycExpiry)}</span>
-          </div>
-          <div class="compliance-row">
-            <span class="compliance-label">Days Remaining</span>
-            <span class="countdown ${user.kyc.status === 'valid' ? 'countdown-valid' : user.kyc.status === 'expiring' ? 'countdown-expiring' : 'countdown-expired'}">${user.kyc.days > 0 ? user.kyc.days + ' days' : 'Expired'}</span>
-          </div>
-          <div class="compliance-row">
-            <span class="compliance-label">Last Verified</span>
-            <span class="compliance-value">${formatDate(user.lastVerified)}</span>
+        <div class="card-content">
+          <div class="compliance-card">
+            <div class="compliance-row">
+              <span class="compliance-label">Document Status</span>
+              <span class="compliance-value" style="color: ${user.kyc.status === 'valid' ? 'var(--success)' : user.kyc.status === 'expiring' ? 'var(--warning)' : 'var(--destructive)'}">${user.kyc.label}</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Expiry Date</span>
+              <span class="compliance-value">${formatDate(user.kycExpiry)}</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Days Remaining</span>
+              <span class="countdown ${user.kyc.status === 'valid' ? 'countdown-valid' : user.kyc.status === 'expiring' ? 'countdown-expiring' : 'countdown-expired'}">${user.kyc.days > 0 ? user.kyc.days + ' days' : 'Expired'}</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Last Verified</span>
+              <span class="compliance-value">${formatDate(user.lastVerified)}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1306,19 +1567,115 @@ function showUserDetail(userId) {
       <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-title">Scoring History</div>
+            <div class="card-title">Profile Details</div>
+            <div class="card-subtitle">Additional risk context</div>
           </div>
         </div>
+        <div class="card-content">
+          <div class="compliance-card">
+            <div class="compliance-row">
+              <span class="compliance-label">Jurisdiction</span>
+              <span class="compliance-value">${user.jurisdiction}</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Country Risk</span>
+              <span class="compliance-value" style="color: ${user.countryRiskScore > 50 ? 'var(--destructive)' : user.countryRiskScore > 25 ? 'var(--warning)' : 'var(--success)'}">${Math.round(user.countryRiskScore)}%</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">PEP Status</span>
+              <span class="compliance-value">${user.isPEP ? 'Yes &#8212; EDD Required' : 'No'}</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Source of Funds</span>
+              <span class="compliance-value">${user.sourceOfFund}</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Document Quality</span>
+              <span class="compliance-value">${user.docQuality}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Case Outcome</div>
+            <div class="card-subtitle">Officer decision &amp; feedback</div>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="compliance-card">
+            <div class="compliance-row">
+              <span class="compliance-label">Status</span>
+              <span class="badge ${caseBadgeClass}" style="gap: 4px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: ${caseBadgeDot};"></span>
+                ${caseBadgeLabel}
+              </span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Model Version</span>
+              <span class="compliance-value">v${user.modelVersion}</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Drift Score</span>
+              <span class="compliance-value" style="color: var(--success);">${(user.driftScore * 100).toFixed(1)}%</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Bias Check</span>
+              <span class="compliance-value" style="color: var(--success);">Passed</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Officer Override</span>
+              <span class="compliance-value">${user.overridden ? 'Applied' : 'None'}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Officer Override &amp; Feedback</div>
+          <div class="card-subtitle">Adjust risk score to train the model &#8212; feedback loops back into the adaptive scoring engine</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <div style="display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;">
+          <div style="width: 160px;">
+            <div style="font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--foreground);">Adjusted Score</div>
+            <input type="number" id="override-score-input" class="search-input" style="width: 100%;" min="0" max="100" value="${user.riskScore}">
+          </div>
+          <div style="flex: 1; min-width: 200px;">
+            <div style="font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--foreground);">Rationale Note</div>
+            <input type="text" id="override-note-input" class="search-input" style="width: 100%;" placeholder="e.g., Verified source of funds through additional documentation...">
+          </div>
+          <button class="btn btn-primary" onclick="submitOverride('${user.id}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+            Submit Override
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Scoring History</div>
+        </div>
+      </div>
+      <div class="card-content">
         <div class="timeline">
-          ${user.scoreHistory.length === 0 ? '<p style="color: var(--text-muted); font-size: 14px;">No significant score changes in recent history.</p>' :
+          ${user.scoreHistory.length === 0 ? '<p style="color: var(--muted-foreground); font-size: 14px;">No significant score changes in recent history.</p>' :
             user.scoreHistory.map(h => `
               <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">${h.date}</div>
                 <div class="timeline-content">
-                  Score changed: <span class="timeline-score" style="color: ${h.newScore > h.oldScore ? 'var(--accent-red)' : 'var(--accent-green)'}">${h.oldScore} → ${h.newScore}</span>
+                  Score changed: <span class="timeline-score" style="color: ${h.newScore > h.oldScore ? 'var(--destructive)' : 'var(--success)'}">${h.oldScore} → ${h.newScore}</span>
                 </div>
-                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">${h.reason}</div>
+                <div style="font-size: 12px; color: var(--muted-foreground); margin-top: 2px;">${h.reason}</div>
               </div>
             `).join('')}
         </div>
@@ -1333,12 +1690,12 @@ function showUserDetail(userId) {
     const ctx = document.getElementById('user-trend-chart');
     if (!ctx) return;
 
-    const chartTextColor = '#9ca3b8';
-    const chartGridColor = '#2d3148';
+    const chartTextColor = '#6b7280';
+    const chartGridColor = '#e5e7eb';
     const actualData = user.trendData.map(d => d.score);
     const labels = user.trendData.map(d => d.date);
     const predData = new Array(user.trendData.length).fill(null).concat(predicted.map(d => d.score));
-    const allLabels = [...labels, ...predLabels.map(d => d.date)];
+    const allLabels = [...labels, ...predicted.map(d => d.date)];
     const allActual = [...actualData, ...new Array(predicted.length).fill(null)];
 
     if (!userTrendChart) {
@@ -1350,8 +1707,8 @@ function showUserDetail(userId) {
             {
               label: 'Historical Score',
               data: allActual,
-              borderColor: '#3b82f6',
-              backgroundColor: 'rgba(59, 130, 246, 0.1)',
+              borderColor: 'oklch(0.572 0.223 256.61)',
+              backgroundColor: 'oklch(0.572 0.223 256.61 / 0.1)',
               fill: true,
               tension: 0.3,
               pointRadius: 0,
@@ -1360,7 +1717,7 @@ function showUserDetail(userId) {
             {
               label: 'AI Predicted',
               data: predData,
-              borderColor: '#8b5cf6',
+              borderColor: 'oklch(0.55 0.22 280)',
               borderDash: [5, 5],
               tension: 0.3,
               pointRadius: 0,
@@ -1392,8 +1749,8 @@ function showUserDetail(userId) {
             {
               label: 'Historical Score',
               data: allActual,
-              borderColor: '#3b82f6',
-              backgroundColor: 'rgba(59, 130, 246, 0.1)',
+              borderColor: 'oklch(0.572 0.223 256.61)',
+              backgroundColor: 'oklch(0.572 0.223 256.61 / 0.1)',
               fill: true,
               tension: 0.3,
               pointRadius: 0,
@@ -1402,7 +1759,7 @@ function showUserDetail(userId) {
             {
               label: 'AI Predicted',
               data: predData,
-              borderColor: '#8b5cf6',
+              borderColor: 'oklch(0.55 0.22 280)',
               borderDash: [5, 5],
               tension: 0.3,
               pointRadius: 0,
@@ -1456,6 +1813,26 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
   });
 });
 
+// Keyboard navigation - Escape to go back
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const detailScreen = document.getElementById('screen-user-detail');
+    if (detailScreen.classList.contains('active')) {
+      showScreen('dashboard');
+    }
+  }
+});
+
+// Table header sort delegation
+document.getElementById('users-table-head').addEventListener('click', (e) => {
+  const th = e.target.closest('th');
+  if (!th) return;
+  const col = th.dataset.col;
+  if (currentSort.column === col) currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+  else { currentSort.column = col; currentSort.direction = 'desc'; }
+  renderTable();
+});
+
 // ==========================================
 // SIMULATED AI SCORING UPDATES
 // ==========================================
@@ -1466,9 +1843,10 @@ function simulateScoreUpdate() {
   user.riskScore = Math.max(5, Math.min(95, user.riskScore + change));
   user.riskTier = getRiskTier(user.riskScore);
   user.trendDirection = getTrendDirection(user.trendData);
-  user.trendData.push({ date: formatDate(now), score: user.riskScore });
+  user.trendData.push({ date: formatDate(new Date()), score: user.riskScore });
   user.trendData = user.trendData.slice(-31);
   user.lastUpdated = new Date();
+  user.aiExplanation = generateAIExplaination(user, user.riskFactors);
 
   if (user.riskScore >= 50 && !alerts.find(a => a.userId === user.id && !a.acknowledged)) {
     alerts.unshift({
@@ -1490,6 +1868,40 @@ function refreshScores() {
   renderAll();
 }
 
+function submitOverride(userId) {
+  const user = users.find(u => u.id === userId);
+  if (!user) return;
+  const input = document.getElementById('override-score-input');
+  const noteInput = document.getElementById('override-note-input');
+  if (!input) return;
+  const newScore = Math.max(0, Math.min(100, parseInt(input.value, 10)));
+  if (isNaN(newScore)) return;
+  user.originalScore = user.riskScore;
+  user.riskScore = newScore;
+  user.riskTier = getRiskTier(newScore);
+  user.overridden = true;
+  user.officerNote = noteInput ? noteInput.value || 'Officer adjusted score.' : 'Officer adjusted score.';
+  user.aiExplanation = generateAIExplaination(user, user.riskFactors);
+  modelState.totalDecisions++;
+  modelState.overrides++;
+  showUserDetail(userId);
+  renderAll();
+  updateModelGovernanceDisplay();
+}
+
+function updateModelGovernanceDisplay() {
+  const vEl = document.getElementById('model-version-display');
+  const rEl = document.getElementById('model-retrained-display');
+  const dEl = document.getElementById('model-drift-display');
+  const bEl = document.getElementById('model-bias-display');
+  const oEl = document.getElementById('model-overrides-display');
+  if (vEl) vEl.textContent = modelState.version;
+  if (rEl) rEl.textContent = formatDate(modelState.lastRetrained);
+  if (dEl) dEl.textContent = (modelState.driftScore * 100).toFixed(1) + '%';
+  if (bEl) bEl.textContent = modelState.biasCheck;
+  if (oEl) oEl.textContent = modelState.overrides + ' / ' + modelState.totalDecisions;
+}
+
 function renderAll() {
   renderStats();
   renderCharts();
@@ -1509,6 +1921,9 @@ function renderAll() {
 }
 
 // Initial render
+if (typeof Chart === 'undefined') {
+  console.warn('Chart.js failed to load. Charts will not render.');
+}
 renderAll();
 
 // Simulate AI updates every 8 seconds
