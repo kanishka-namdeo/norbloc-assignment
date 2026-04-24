@@ -44,11 +44,63 @@ Then visit:
 
 ---
 
+## Screenshot Gallery
+
+### Risk Scoring — Main Dashboard
+
+![Adaptive AI Risk Scoring Dashboard](screenshots/risk-scoring-dashboard.png)
+
+*Customer portfolio overview with dynamic risk scores, severity badges, and KYC status tracking*
+
+### Risk Scoring — Drill-Down Profile
+
+![Customer Risk Profile](screenshots/risk-scoring-user-detail.png)
+
+*Individual customer risk detail — 90-day score trajectory, factor breakdown, and alert history*
+
+---
+
+### AML Copilot — Investigation Workflow
+
+![AML Investigation Flow](screenshots/aml-alert-investigation.png)
+
+*Deep-dive investigation — evidence graph, transaction analysis, adverse media, and AI recommendations*
+
+### AML Copilot — Audit Trail
+
+![AML Audit Trail](screenshots/aml-audit-trail.png)
+
+*Complete investigation timeline with timestamped analyst decisions and AI advisory actions*
+
+---
+
+### UBO Graph — Extraction Result
+
+![UBO Graph Extraction](screenshots/ubo-graph-extraction.png)
+
+*Force-directed ownership graph with 9 entities across 3 jurisdictions, color-coded by type and confidence*
+
+### UBO Graph — Entity Detail & Review
+
+![UBO Entity Detail](screenshots/ubo-entity-detail.png)
+
+*Entity detail panel showing ownership percentages, jurisdiction data, and AI confidence scores*
+
+![UBO Review Mode](screenshots/ubo-review-mode.png)
+
+*Step-through review mode — verify or flag each extracted entity with compliance decision tracking*
+
+---
+
 ## Prototype 1: Adaptive AI Risk Scoring
 
 A customer risk scoring dashboard that dynamically assesses and visualizes financial crime risk across a customer portfolio.
 
 ![Adaptive AI Risk Scoring Dashboard](screenshots/risk-scoring-dashboard.png)
+
+![Customer Risk Profile](screenshots/risk-scoring-user-detail.png)
+
+*Drill-down view — individual customer profile with 90-day score history, risk factor breakdown, and alert timeline*
 
 ### Features
 
@@ -72,6 +124,14 @@ A customer risk scoring dashboard that dynamically assesses and visualizes finan
 An AI assistant that helps compliance analysts investigate, triage, and resolve AML alerts through natural language interaction.
 
 ![AML Alert Triage Copilot](screenshots/aml-alert-triage-copilot.png)
+
+![AML Investigation Flow](screenshots/aml-alert-investigation.png)
+
+*Investigation workflow — evidence graph, transaction analysis, adverse media, and AI escalation recommendation*
+
+![AML Audit Trail](screenshots/aml-audit-trail.png)
+
+*Audit trail panel — timestamped investigation decisions with AI advisory actions and human oversight log*
 
 ### Features
 
@@ -106,6 +166,14 @@ An AI assistant that helps compliance analysts investigate, triage, and resolve 
 An interactive visualization that extracts and displays Ultimate Beneficial Owner (UBO) ownership structures from unstructured corporate documents.
 
 ![UBO Graph Extraction](screenshots/ubo-graph-extraction.png)
+
+![UBO Entity Detail](screenshots/ubo-entity-detail.png)
+
+*Entity detail panel — ownership percentages, jurisdiction data, role classification, and AI confidence scores*
+
+![UBO Review Mode](screenshots/ubo-review-mode.png)
+
+*Step-through review mode — verify or flag each extracted entity with compliance decision tracking*
 
 ### Features
 
@@ -166,12 +234,17 @@ Each prototype uses realistic mock data:
 norbloc-assignment/
 ├── design-system.html                # Shared OKLCH design tokens & component patterns
 ├── risk-scoring-prototype.html       # Adaptive AI Risk Scoring dashboard (1,937 lines)
-├── aml-alert-triage-copilot.html     # AML Alert Triage Copilot (Sancus) (1,639 lines)
-├── ubo-graph-extraction-prototype.html # Intelligent UBO Graph Extraction (2,845 lines)
+├── aml-alert-triage-copilot.html     # AML Alert Triage Copilot (Sancus) (1,645 lines)
+├── ubo-graph-extraction-prototype.html # Intelligent UBO Graph Extraction (2,847 lines)
 ├── screenshots/
 │   ├── risk-scoring-dashboard.png    # Risk scoring dashboard view
+│   ├── risk-scoring-user-detail.png  # Customer drill-down profile
 │   ├── aml-alert-triage-copilot.png  # AML copilot main interface
-│   └── ubo-graph-extraction.png      # UBO graph visualization
+│   ├── aml-alert-investigation.png   # AML investigation workflow
+│   ├── aml-audit-trail.png           # AML audit trail panel
+│   ├── ubo-graph-extraction.png      # UBO graph visualization
+│   ├── ubo-entity-detail.png         # UBO entity detail panel
+│   └── ubo-review-mode.png           # UBO compliance review mode
 └── README.md                         # This file
 ```
 

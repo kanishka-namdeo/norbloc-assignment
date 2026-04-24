@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Extracted files
+extracted*.js
+
+# Screenshots
+screenshots/

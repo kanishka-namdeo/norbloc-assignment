@@ -1920,11 +1920,27 @@ function renderAll() {
   }
 }
 
+// URL hash navigation for demo screenshots
+function applyHashNavigation() {
+  const hash = window.location.hash.slice(1);
+  const params = new URLSearchParams(hash);
+  const demoUser = params.get('user');
+  const demoAlert = params.get('alerts');
+  if (demoUser) {
+    setTimeout(() => showUserDetail(demoUser), 300);
+  }
+  if (demoAlert) {
+    setTimeout(() => showScreen('alerts'), 300);
+  }
+}
+window.addEventListener('hashchange', applyHashNavigation);
+
 // Initial render
 if (typeof Chart === 'undefined') {
   console.warn('Chart.js failed to load. Charts will not render.');
 }
 renderAll();
+setTimeout(applyHashNavigation, 500);
 
 // Simulate AI updates every 8 seconds
 setInterval(() => {

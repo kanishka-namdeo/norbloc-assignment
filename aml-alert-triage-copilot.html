@@ -1443,8 +1443,8 @@ function eddAlert(alert) {
   alert.status = 'edd';
   renderAlertList();
   addAuditEntry('Action', `EDD initiated for ${alert.id} by officer`);
-  addMessage('ai', `Enhanced Due Diligence initiated for ${alert.id}.\n\n**EDD Checklist Generated:**\n1. Verify source of wealth documentation\n2. Obtain enhanced identity verification\n3. Review full transaction history (12 months)\n4. Check all sanctions lists (OFAC, EU, UN, UK)\n5. Review beneficial ownership chain\n6. Adverse media deep-dive\n7. Geographic risk assessment\n8. Counterparty risk analysis`,
-    suggestions: ['Show evidence', 'Draft SAR', 'Next alert']);
+  addMessage('ai', `Enhanced Due Diligence initiated for ${alert.id}.\n\n**EDD Checklist Generated:**\n1. Verify source of wealth documentation\n2. Obtain enhanced identity verification\n3. Review full transaction history (12 months)\n4. Check all sanctions lists (OFAC, EU, UN, UK)\n5. Review beneficial ownership chain\n6. Adverse media deep-dive\n7. Geographic risk assessment\n8. Counterparty risk analysis`, null, null);
+  setSuggestions(['Show evidence', 'Draft SAR', 'Next alert']);
 }
 
 function draftSAR(alert) {
