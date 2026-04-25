@@ -44,51 +44,65 @@ Then visit:
 
 ---
 
-## Screenshot Gallery
+## The Compliance Workflow — In Screenshots
 
-### Risk Scoring — Main Dashboard
+### Step 1: Detecting Risk Before It Escalates
+
+Every compliance investigation starts with a signal. The **Adaptive AI Risk Scoring** dashboard surfaces rising risk across an entire customer portfolio — not as static numbers, but as live trajectories that show *when* and *why* a customer's profile is deteriorating.
 
 ![Adaptive AI Risk Scoring Dashboard](screenshots/risk-scoring-dashboard.png)
 
-*Customer portfolio overview with dynamic risk scores, severity badges, and KYC status tracking*
+*Portfolio-level view — dynamic risk scores, trend arrows, severity badges, and KYC validity at a glance. Green, amber, and red badges surface document status instantly.*
 
-### Risk Scoring — Drill-Down Profile
+When an analyst spots a customer whose score is climbing, one click drills into their full profile. The detail view reveals the **90-day risk trajectory**, the weighted factors driving the score (transaction patterns, jurisdiction exposure, PEP status, sanctions proximity), and a timeline of past alerts — so the analyst understands the *story* behind the number, not just the number itself.
 
 ![Customer Risk Profile](screenshots/risk-scoring-user-detail.png)
 
-*Individual customer risk detail — 90-day score trajectory, factor breakdown, and alert history*
+*Individual risk breakdown — 90-day score history, factor composition donut chart, alert timeline, and KYC document validity. Every score is explained, not just displayed.*
 
 ---
 
-### AML Copilot — Investigation Workflow
+### Step 2: Investigating with an AI Copilot
+
+Once an alert fires, the analyst doesn't start from scratch. **Sancus**, the AML Alert Triage Copilot, brings together evidence, relationships, and context into a single investigation workspace.
+
+![AML Alert Triage Copilot](screenshots/aml-alert-triage-copilot.png)
+
+*The copilot interface — alert inbox on the left, AI chat in the center, and structured triage summary on the right with recommended actions and confidence scores. The analyst converses with the AI, asks follow-ups, and builds a case.*
+
+For deeper investigations, the copilot surfaces an **evidence graph** that maps entity relationships and transaction flows, alongside a chronological transaction timeline and adverse media hits. The AI doesn't just present data — it recommends actions with explicit confidence levels ("85% confidence: Escalate"), giving the analyst a starting point for their own judgment.
 
 ![AML Investigation Flow](screenshots/aml-alert-investigation.png)
 
-*Deep-dive investigation — evidence graph, transaction analysis, adverse media, and AI recommendations*
+*Deep investigation mode — D3.js force-directed evidence graph connecting persons, companies, and accounts; transaction analysis with amounts and counterparties; AI-generated escalation rationale.*
 
-### AML Copilot — Audit Trail
+Every decision the analyst makes — whether following or overruling the AI's recommendation — is logged into an immutable **audit trail** with timestamps, rationale, and the exact AI advisory that informed each choice. Regulators get full provenance; analysts get a defensible record.
 
 ![AML Audit Trail](screenshots/aml-audit-trail.png)
 
-*Complete investigation timeline with timestamped analyst decisions and AI advisory actions*
+*Investigation timeline — every analyst decision and AI advisory action, timestamped and rationale-logged. Nothing happens without a trace.*
 
 ---
 
-### UBO Graph — Extraction Result
+### Step 3: Uncovering Hidden Ownership
+
+Sanctions and AML investigations often stall when corporate structures obscure who really controls an entity. The **UBO Graph Extraction** prototype tackles this by parsing unstructured corporate documents and reconstructing ownership chains as an interactive, force-directed graph.
 
 ![UBO Graph Extraction](screenshots/ubo-graph-extraction.png)
 
-*Force-directed ownership graph with 9 entities across 3 jurisdictions, color-coded by type and confidence*
+*Nine entities across three jurisdictions — individuals (teal), companies (blue), and trusts (orange) — laid out as a force-directed graph. Edge thickness encodes ownership percentage. Multi-layer structures, offshore vehicles, and nominee arrangements become visible at a glance.*
 
-### UBO Graph — Entity Detail & Review
+Clicking any entity opens its detail panel with ownership percentages, jurisdiction data, role classification, and the AI's confidence score for that extraction. The analyst sees not just *what* was extracted, but *how certain* the system is about each claim.
 
 ![UBO Entity Detail](screenshots/ubo-entity-detail.png)
 
-*Entity detail panel showing ownership percentages, jurisdiction data, and AI confidence scores*
+*Entity detail — ownership stake, jurisdiction, role, and AI confidence score. Every extraction is backed by source document context and metadata.*
+
+For compliance sign-off, the prototype includes a **step-through review mode** where each extracted entity must be verified or flagged. The analyst works through the graph systematically, building a compliance decision record that tracks exactly what was checked, what was questioned, and what was accepted.
 
 ![UBO Review Mode](screenshots/ubo-review-mode.png)
 
-*Step-through review mode — verify or flag each extracted entity with compliance decision tracking*
+*Review mode — verify or flag each entity in sequence. Compliance decision tracking ensures every extraction is human-validated before sign-off.*
 
 ---
 
