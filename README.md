@@ -44,65 +44,77 @@ Then visit:
 
 ---
 
-## The Compliance Workflow — In Screenshots
+## See the thread: portfolio → alert → ownership
 
-### Step 1: Detecting Risk Before It Escalates
+**What you’re looking at** is one compliance story told three ways — not three unrelated demos. Investigators rarely fail because they lack courage; they fail because **signals arrive scattered**, **cases sprawl across tabs**, and **ownership diagrams live behind PDFs** nobody redraws at 5 p.m. These prototypes chain together the same job a real team performs under time pressure: *prioritize by movement*, *decide an alert with evidence*, *prove who ultimately controls the customer* — each step leaving enough trace to defend later.
 
-Every compliance investigation starts with a signal. The **Adaptive AI Risk Scoring** dashboard surfaces rising risk across an entire customer portfolio — not as static numbers, but as live trajectories that show *when* and *why* a customer's profile is deteriorating.
-
-![Adaptive AI Risk Scoring Dashboard](screenshots/risk-scoring-dashboard.png)
-
-*Portfolio-level view — dynamic risk scores, trend arrows, severity badges, and KYC validity at a glance. Green, amber, and red badges surface document status instantly.*
-
-When an analyst spots a customer whose score is climbing, one click drills into their full profile. The detail view reveals the **90-day risk trajectory**, the weighted factors driving the score (transaction patterns, jurisdiction exposure, PEP status, sanctions proximity), and a timeline of past alerts — so the analyst understands the *story* behind the number, not just the number itself.
-
-![Customer Risk Profile](screenshots/risk-scoring-user-detail.png)
-
-*Individual risk breakdown — 90-day score history, factor composition donut chart, alert timeline, and KYC document validity. Every score is explained, not just displayed.*
+Walk through in order; the screenshots follow that path.
 
 ---
 
-### Step 2: Investigating with an AI Copilot
+### 1 · The morning view: who moved overnight?
 
-Once an alert fires, the analyst doesn't start from scratch. **Sancus**, the AML Alert Triage Copilot, brings together evidence, relationships, and context into a single investigation workspace.
+Static risk scores age badly. What matters is **drift**: a customer that was “fine” until the trend bent, a KYC edge that slipped into amber, an alert pattern that quietly steepened. The **Adaptive AI Risk Scoring** screen is the stand-up board — severity, direction, and document health in one pass so the queue is **ranked by motion**, not by who shouted loudest.
 
-![AML Alert Triage Copilot](screenshots/aml-alert-triage-copilot.png)
+![Adaptive AI Risk Scoring — portfolio table with scores, trends, severity, and KYC status](screenshots/risk-scoring-dashboard.png)
 
-*The copilot interface — alert inbox on the left, AI chat in the center, and structured triage summary on the right with recommended actions and confidence scores. The analyst converses with the AI, asks follow-ups, and builds a case.*
+*One scan: who needs eyes today, and whether the file is documentation-sound as well as score-hot.*
 
-For deeper investigations, the copilot surfaces an **evidence graph** that maps entity relationships and transaction flows, alongside a chronological transaction timeline and adverse media hits. The AI doesn't just present data — it recommends actions with explicit confidence levels ("85% confidence: Escalate"), giving the analyst a starting point for their own judgment.
+Click through and the abstraction becomes a **timeline**: ninety days of trajectory, the factor mix behind the number, and recent alert history side by side. The goal isn’t a prettier metric — it’s **enough context to choose the next action** without opening five systems.
 
-![AML Investigation Flow](screenshots/aml-alert-investigation.png)
+![Customer risk profile — 90-day trajectory, factor breakdown, alert timeline, KYC validity](screenshots/risk-scoring-user-detail.png)
 
-*Deep investigation mode — D3.js force-directed evidence graph connecting persons, companies, and accounts; transaction analysis with amounts and counterparties; AI-generated escalation rationale.*
-
-Every decision the analyst makes — whether following or overruling the AI's recommendation — is logged into an immutable **audit trail** with timestamps, rationale, and the exact AI advisory that informed each choice. Regulators get full provenance; analysts get a defensible record.
-
-![AML Audit Trail](screenshots/aml-audit-trail.png)
-
-*Investigation timeline — every analyst decision and AI advisory action, timestamped and rationale-logged. Nothing happens without a trace.*
+*From portfolio row to file narrative: where the score came from, what changed, and what already happened on this name.*
 
 ---
 
-### Step 3: Uncovering Hidden Ownership
+### 2 · The alert: squeeze the case, keep the human on the hook
 
-Sanctions and AML investigations often stall when corporate structures obscure who really controls an entity. The **UBO Graph Extraction** prototype tackles this by parsing unstructured corporate documents and reconstructing ownership chains as an interactive, force-directed graph.
+When an AML alert hits, **speed and defensibility pull in opposite directions**. **Sancus** (AML Alert Triage Copilot) pulls the inbox, the model conversation, and the structured triage panel into one surface — so the analyst can **ask**, **challenge**, and **close** without losing the thread in browser tabs.
 
-![UBO Graph Extraction](screenshots/ubo-graph-extraction.png)
+![AML Alert Triage Copilot — inbox, AI chat, triage summary and recommended actions](screenshots/aml-alert-triage-copilot.png)
 
-*Nine entities across three jurisdictions — individuals (teal), companies (blue), and trusts (orange) — laid out as a force-directed graph. Edge thickness encodes ownership percentage. Multi-layer structures, offshore vehicles, and nominee arrangements become visible at a glance.*
+*Triage: pick the item, interrogate the case in natural language, read a recommendation you can accept or fight.*
 
-Clicking any entity opens its detail panel with ownership percentages, jurisdiction data, role classification, and the AI's confidence score for that extraction. The analyst sees not just *what* was extracted, but *how certain* the system is about each claim.
+Then the same workspace **widens into structure**: entities, flows, and transaction chronology — the “who, how much, and when” that turns a narrative into evidence. Confidence on suggestions stays visible so **the model proposes; the analyst disposes**.
 
-![UBO Entity Detail](screenshots/ubo-entity-detail.png)
+![AML investigation — network / money-flow context, timeline, escalation rationale](screenshots/aml-alert-investigation.png)
 
-*Entity detail — ownership stake, jurisdiction, role, and AI confidence score. Every extraction is backed by source document context and metadata.*
+*Investigation depth: relationships and flows in one place before anyone escalates or dismisses.*
 
-For compliance sign-off, the prototype includes a **step-through review mode** where each extracted entity must be verified or flagged. The analyst works through the graph systematically, building a compliance decision record that tracks exactly what was checked, what was questioned, and what was accepted.
+What auditors and internal QA actually ask for is the **decision log**: what was decided, when, with what human rationale, alongside the AI guidance on screen at the time. That’s the difference between *“we remember agreeing”* and *“here is the record.”*
 
-![UBO Review Mode](screenshots/ubo-review-mode.png)
+![AML audit trail — timestamped actions, rationale, and linked AI advisories](screenshots/aml-audit-trail.png)
 
-*Review mode — verify or flag each entity in sequence. Compliance decision tracking ensures every extraction is human-validated before sign-off.*
+*Provenance: sequential, attributable decisions — not orphaned clicks.*
+
+---
+
+### 3 · The ownership stack: from inbox drop to signed-off structure
+
+Beneficial ownership hides in **nominees, shells, and cross-border stacks**. **Intelligent UBO Graph Extraction** starts where compliance teams really start: **documents in the door** — registry extracts, certificates, declarations — with multi-language OCR and a demo path so reviewers can load sample data and see the pipeline end to end.
+
+![UBO upload — document ingest, drag-and-drop, and demo sample data](screenshots/ubo-document-upload.png)
+
+*Ingest: one front door for filings before anything becomes a node on a graph.*
+
+Extraction turns that mess into a **live graph** — entity types, stakes, and layers you’d otherwise sketch by hand in a slide deck.
+
+![UBO graph — force-directed ownership across individuals, companies, trusts](screenshots/ubo-graph-extraction.png)
+
+*From text and tables to a map: structure as an artifact, not a footnote.*
+
+A selected node grounds the picture in **percentages, roles, jurisdiction, and per-entity extraction confidence** — so uncertainty is explicit and never mistaken for low risk.
+
+![UBO entity detail — stake, jurisdiction, role, extraction confidence](screenshots/ubo-entity-detail.png)
+
+*Facts with receipts: what was inferred, and how far to trust it.*
+
+The last mile is **review mode**: entity-by-entity verify or flag, with a decision trail that matches how teams actually sign off. The graph sells the story; the checklist **ships the control**.
+
+![UBO review — sequential verify/flag workflow with compliance tracking](screenshots/ubo-review-mode.png)
+
+*Human-in-the-loop: nothing graduates as “extracted” until someone consciously accepts or escalates.*
 
 ---
 
@@ -179,6 +191,10 @@ An AI assistant that helps compliance analysts investigate, triage, and resolve 
 
 An interactive visualization that extracts and displays Ultimate Beneficial Owner (UBO) ownership structures from unstructured corporate documents.
 
+![UBO document upload stage](screenshots/ubo-document-upload.png)
+
+*Upload stage — drag-and-drop ingest, OCR, and demo sample data*
+
 ![UBO Graph Extraction](screenshots/ubo-graph-extraction.png)
 
 ![UBO Entity Detail](screenshots/ubo-entity-detail.png)
@@ -219,7 +235,7 @@ All prototypes follow a **zero-build, zero-dependency** approach with a shared d
 - **Single HTML files** -- Each prototype is one self-contained file with embedded CSS and JavaScript
 - **No build tools** -- No npm, webpack, or transpilation required
 - **CDN-hosted libraries** -- Only Chart.js and D3.js loaded from CDN
-- **Dark theme** -- Corporate dark theme using CSS custom properties, consistent across all prototypes
+- **Theming** -- Shared OKLCH tokens and CSS custom properties; light corporate surfaces by default (AML prototype includes an optional dark mode)
 
 ### Technical Stack
 
@@ -256,6 +272,7 @@ norbloc-assignment/
 │   ├── aml-alert-triage-copilot.png  # AML copilot main interface
 │   ├── aml-alert-investigation.png   # AML investigation workflow
 │   ├── aml-audit-trail.png           # AML audit trail panel
+│   ├── ubo-document-upload.png        # UBO document ingest / upload stage
 │   ├── ubo-graph-extraction.png      # UBO graph visualization
 │   ├── ubo-entity-detail.png         # UBO entity detail panel
 │   └── ubo-review-mode.png           # UBO compliance review mode
