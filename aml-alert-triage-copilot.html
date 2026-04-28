@@ -615,6 +615,218 @@ body {
 .timeline-legend-item { display: flex; align-items: center; gap: 3px; font-size: 9px; color: var(--muted-foreground); }
 .timeline-legend-dot { width: 6px; height: 6px; border-radius: 50%; }
 
+/* Network Graph */
+.network-graph-container { position: relative; height: 100%; border-radius: var(--radius-md); background: oklch(0.98 0 0); overflow: hidden; }
+.network-graph-container svg { width: 100%; height: 100%; }
+.network-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; margin-bottom: 6px; }
+.network-toolbar-left { display: flex; align-items: center; gap: 6px; }
+.network-toolbar-right { display: flex; align-items: center; gap: 6px; }
+.network-filter-btn {
+  padding: 4px 8px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 600;
+  cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--muted-foreground);
+  transition: all 0.15s;
+}
+.network-filter-btn:hover { border-color: var(--ring); color: var(--foreground); }
+.network-filter-btn.active { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+.network-legend { display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+.network-legend-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--muted-foreground); }
+.network-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.network-tooltip {
+  position: absolute; background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 10px; font-size: 11px; min-width: 150px;
+  box-shadow: 0 4px 16px oklch(0 0 0 / 0.1); pointer-events: none; z-index: 10; display: none;
+}
+.network-tooltip.visible { display: block; }
+.network-tooltip-title { font-weight: 600; margin-bottom: 4px; font-size: 12px; }
+.network-tooltip-row { display: flex; justify-content: space-between; padding: 2px 0; }
+.network-tooltip-label { color: var(--muted-foreground); }
+.network-tooltip-value { font-weight: 600; }
+.network-reset-btn {
+  position: absolute; bottom: 8px; right: 8px; padding: 4px 10px; border-radius: var(--radius-sm);
+  font-size: 10px; font-weight: 600; cursor: pointer; background: var(--card);
+  border: 1px solid var(--border); color: var(--muted-foreground); z-index: 5;
+}
+.network-reset-btn:hover { background: var(--muted); color: var(--foreground); }
+
+/* Investigation Checklist */
+.investigation-checklist { padding: 4px 0; }
+.checklist-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.checklist-progress { display: flex; align-items: center; gap: 8px; }
+.checklist-progress-bar { width: 120px; height: 4px; background: var(--muted); border-radius: 2px; overflow: hidden; }
+.checklist-progress-fill { height: 100%; background: var(--info); border-radius: 2px; transition: width 0.3s ease; }
+.checklist-progress-text { font-size: 10px; color: var(--muted-foreground); font-weight: 600; }
+.checklist-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+  border-radius: var(--radius-md); margin-bottom: 4px; border: 1px solid var(--border);
+  background: var(--card); cursor: pointer; transition: all 0.15s;
+}
+.checklist-item:hover { background: var(--accent); border-color: var(--ring); }
+.checklist-item.completed { border-left: 3px solid var(--success); }
+.checklist-item.in-progress { border-left: 3px solid var(--warning); }
+.checklist-item.not-started { border-left: 3px solid var(--border); }
+.checklist-checkbox { width: 18px; height: 18px; border-radius: 4px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
+.checklist-item.completed .checklist-checkbox { background: var(--success); border-color: var(--success); }
+.checklist-checkbox svg { display: none; }
+.checklist-item.completed .checklist-checkbox svg { display: block; }
+.checklist-item-content { flex: 1; }
+.checklist-item-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.checklist-item-desc { font-size: 10px; color: var(--muted-foreground); }
+.checklist-item-status { font-size: 9px; padding: 2px 6px; border-radius: 999px; font-weight: 600; white-space: nowrap; }
+.checklist-item.completed .checklist-item-status { background: var(--success-muted); color: var(--success-muted-foreground); }
+.checklist-item.in-progress .checklist-item-status { background: var(--warning-muted); color: var(--warning-muted-foreground); }
+.checklist-item.not-started .checklist-item-status { background: var(--muted); color: var(--muted-foreground); }
+
+/* Investigator Notes */
+.notes-container { padding: 4px 0; }
+.note-add { display: flex; gap: 8px; margin-bottom: 16px; }
+.note-add textarea {
+  flex: 1; padding: 8px; border-radius: var(--radius-md); border: 1px solid var(--input);
+  font-size: 12px; font-family: inherit; resize: vertical; min-height: 60px; outline: none;
+}
+.note-add textarea:focus { border-color: var(--ring); }
+.note-add-btn {
+  padding: 6px 12px; border-radius: var(--radius-md); font-size: 11px; font-weight: 600;
+  cursor: pointer; background: var(--primary); color: var(--primary-foreground); border: none; align-self: flex-end;
+}
+.note-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.note-item:last-child { border-bottom: none; }
+.note-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.note-meta { display: flex; align-items: center; gap: 8px; font-size: 10px; color: var(--muted-foreground); }
+.note-author { font-weight: 600; color: var(--foreground); }
+.note-delete-btn { background: none; border: none; color: var(--muted-foreground); cursor: pointer; font-size: 12px; padding: 2px; }
+.note-delete-btn:hover { color: var(--critical); }
+.note-body { font-size: 12px; line-height: 1.6; color: var(--foreground); white-space: pre-wrap; }
+.note-empty { font-size: 11px; color: var(--muted-foreground); padding: 20px 0; text-align: center; }
+
+/* Explainable AI / Contribution Bars */
+.contribution-breakdown { background: var(--muted / 0.3); border-radius: var(--radius-md); padding: 12px; margin-top: 10px; }
+.contribution-title { font-size: 11px; font-weight: 600; margin-bottom: 10px; color: var(--foreground); }
+.contribution-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.contribution-label { width: 140px; font-size: 11px; font-weight: 500; flex-shrink: 0; }
+.contribution-bar-container { flex: 1; height: 8px; background: var(--muted); border-radius: 4px; position: relative; overflow: visible; }
+.contribution-bar { height: 100%; border-radius: 4px; position: absolute; }
+.contribution-bar.negative { background: var(--destructive); left: 0; }
+.contribution-bar.positive { background: var(--success); left: 50%; }
+.contribution-value { width: 40px; text-align: right; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.contribution-value.negative { color: var(--destructive); }
+.contribution-value.positive { color: var(--success); }
+.contribution-summary { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 11px; color: var(--muted-foreground); }
+.contribution-summary strong { color: var(--foreground); }
+
+/* SLA Badge */
+.sla-badge {
+  font-size: 9px; padding: 1px 5px; border-radius: 999px; font-weight: 600; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 3px;
+}
+.sla-badge.healthy { background: var(--success-muted); color: var(--success-muted-foreground); }
+.sla-badge.warning { background: var(--warning-muted); color: var(--warning-muted-foreground); }
+.sla-badge.breached { background: var(--critical-muted); color: var(--critical); animation: pulse 2s infinite; }
+.sla-badge svg { width: 8px; height: 8px; }
+.sla-breach-banner {
+  display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+  background: var(--critical-muted); border: 1px solid oklch(0.577 0.245 27.325 / 0.2);
+  border-radius: var(--radius-md); margin-bottom: 10px; font-size: 11px; color: var(--critical); font-weight: 600;
+}
+.sla-breach-banner svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* Duplicate Badge */
+.duplicate-badge {
+  font-size: 9px; padding: 1px 5px; border-radius: 999px; font-weight: 600;
+  background: oklch(0.96 0.05 290); color: oklch(0.5 0.2 290); white-space: nowrap;
+}
+.duplicate-merge-btn {
+  padding: 4px 8px; border-radius: var(--radius-sm); font-size: 10px; font-weight: 600;
+  cursor: pointer; border: 1px solid oklch(0.5 0.2 290 / 0.3); background: transparent;
+  color: oklch(0.5 0.2 290); transition: all 0.15s;
+}
+.duplicate-merge-btn:hover { background: oklch(0.96 0.05 290); }
+
+/* Review Status Badge */
+.review-badge { font-size: 9px; padding: 1px 6px; border-radius: 999px; font-weight: 600; }
+.review-pending { background: var(--warning-muted); color: var(--warning-muted-foreground); }
+.review-approved { background: var(--success-muted); color: var(--success-muted-foreground); }
+.review-rejected { background: var(--critical-muted); color: var(--critical); }
+
+/* QA Review Modal */
+.qa-modal {
+  position: fixed; inset: 0; background: oklch(0 0 0 / 0.4); backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center; z-index: 1003;
+}
+.qa-modal.visible { display: flex; }
+.qa-box {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-xl);
+  padding: 24px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;
+  box-shadow: 0 20px 60px oklch(0 0 0 / 0.15);
+}
+.qa-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+.qa-subtitle { font-size: 11px; color: var(--muted-foreground); margin-bottom: 16px; }
+.qa-field { margin-bottom: 12px; }
+.qa-label { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+.qa-value { font-size: 12px; padding: 6px 8px; background: var(--muted); border-radius: var(--radius-sm); }
+.qa-textarea {
+  width: 100%; padding: 8px; border-radius: var(--radius-md); border: 1px solid var(--input);
+  font-size: 12px; font-family: inherit; resize: vertical; min-height: 80px; outline: none;
+}
+.qa-textarea:focus { border-color: var(--ring); }
+.qa-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+.qa-btn { padding: 7px 16px; border-radius: var(--radius-md); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.qa-btn-approve { background: var(--success); color: white; border: none; }
+.qa-btn-approve:hover { background: oklch(0.48 0.14 150); }
+.qa-btn-reject { background: var(--destructive); color: white; border: none; }
+.qa-btn-reject:hover { background: oklch(0.51 0.22 27); }
+.qa-btn-rework { border: 1px solid var(--border); background: transparent; color: var(--foreground); }
+.qa-btn-rework:hover { background: var(--muted); }
+
+/* Dashboard */
+.dashboard-overlay {
+  position: fixed; inset: 0; background: var(--background); z-index: 95; display: none;
+  overflow-y: auto; padding: 70px 24px 24px;
+}
+.dashboard-overlay.visible { display: block; }
+.dashboard-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.dashboard-title { font-size: 18px; font-weight: 700; }
+.dashboard-close { background: none; border: none; color: var(--muted-foreground); cursor: pointer; font-size: 20px; padding: 4px; }
+.dashboard-close:hover { color: var(--foreground); }
+.dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+.dashboard-stat { padding: 16px; border-radius: var(--radius-lg); background: var(--card); border: 1px solid var(--border); }
+.dashboard-stat-value { font-size: 24px; font-weight: 700; line-height: 1.2; }
+.dashboard-stat-label { font-size: 10px; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; font-weight: 600; }
+.dashboard-chart-section { margin-bottom: 20px; }
+.dashboard-chart-title { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.dashboard-chart { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; min-height: 200px; }
+.dashboard-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.dashboard-table th { text-align: left; padding: 8px 10px; font-weight: 600; color: var(--muted-foreground); border-bottom: 2px solid var(--border); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+.dashboard-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.dashboard-table tr:hover td { background: var(--muted / 0.3); }
+
+/* Dark Mode */
+.dark-mode { --background: oklch(0.145 0 0); --foreground: oklch(0.985 0 0); --card: oklch(0.195 0 0);
+  --card-foreground: oklch(0.985 0 0); --popover: oklch(0.195 0 0); --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0); --primary-foreground: oklch(0.145 0 0); --secondary: oklch(0.205 0 0);
+  --secondary-foreground: oklch(0.985 0 0); --muted: oklch(0.205 0 0); --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.205 0 0); --accent-foreground: oklch(0.985 0 0);
+  --border: oklch(0.28 0 0); --input: oklch(0.28 0 0); --ring: oklch(0.708 0 0);
+  --sidebar: oklch(0.18 0 0); --sidebar-foreground: oklch(0.985 0 0); --sidebar-border: oklch(0.28 0 0);
+  --sidebar-accent: oklch(0.22 0 0); --success-muted: oklch(0.25 0.06 150); --warning-muted: oklch(0.25 0.06 86);
+  --critical-muted: oklch(0.25 0.06 27); --info-muted: oklch(0.25 0.06 256); }
+
+/* Resizable Panels */
+.sidebar-toggle {
+  background: none; border: none; color: var(--muted-foreground); cursor: pointer; padding: 4px;
+  display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+}
+.sidebar-toggle:hover { color: var(--foreground); }
+.alert-sidebar.collapsed { min-width: 56px; width: 56px; }
+.alert-sidebar.collapsed .alert-list, .alert-sidebar.collapsed .case-list,
+.alert-sidebar.collapsed .metrics-bar, .alert-sidebar.collapsed .filter-bar,
+.alert-sidebar.collapsed .search-input { display: none; }
+.alert-sidebar.collapsed .sidebar-header { padding: 8px 4px; }
+.alert-sidebar.collapsed .sidebar-tabs { flex-direction: column; gap: 4px; }
+.alert-sidebar.collapsed .sidebar-tab { font-size: 0; padding: 8px 4px; }
+.alert-sidebar.collapsed .sidebar-top-row { flex-direction: column; gap: 8px; }
+.alert-sidebar.collapsed .sidebar-title { font-size: 0; }
+.alert-sidebar.collapsed .sidebar-title::before { content: '🔔'; font-size: 18px; }
+
 /* Keyboard Shortcuts Modal */
 .shortcuts-modal {
   position: fixed; inset: 0; background: oklch(0 0 0 / 0.4); backdrop-filter: blur(4px);
@@ -820,6 +1032,34 @@ body {
   </div>
 </div>
 
+<!-- Dashboard Overlay -->
+<div class="dashboard-overlay" id="dashboard-overlay">
+  <div class="dashboard-header">
+    <div class="dashboard-title">Analyst Dashboard</div>
+    <button class="dashboard-close" onclick="toggleDashboard()">&times;</button>
+  </div>
+  <div id="dashboard-body"></div>
+</div>
+
+<!-- QA Review Modal -->
+<div class="qa-modal" id="qa-modal">
+  <div class="qa-box">
+    <div class="qa-title">QA Review</div>
+    <div class="qa-subtitle">Reviewing <span id="qa-alert-id"></span> — <span id="qa-customer"></span></div>
+    <div class="qa-field"><div class="qa-label">AI Triage Classification</div><div class="qa-value" id="qa-triage"></div></div>
+    <div class="qa-field"><div class="qa-label">AI Confidence</div><div class="qa-value" id="qa-confidence"></div></div>
+    <div class="qa-field">
+      <div class="qa-label">Reviewer Comment <span style="color:var(--critical)">*</span></div>
+      <textarea class="qa-textarea" id="qa-reviewer-comment" placeholder="Provide your review rationale..."></textarea>
+    </div>
+    <div class="qa-actions">
+      <button class="qa-btn qa-btn-rework" onclick="submitQAReview('pending')">Request Rework</button>
+      <button class="qa-btn qa-btn-reject" onclick="submitQAReview('rejected')">Reject</button>
+      <button class="qa-btn qa-btn-approve" onclick="submitQAReview('approved')">Approve</button>
+    </div>
+  </div>
+</div>
+
 <!-- Batch Operations Bar -->
 <div class="batch-bar" id="batch-bar">
   <span class="batch-count" id="batch-count">0 selected</span>
@@ -931,11 +1171,17 @@ body {
     </div>
     <div class="detail-tabs" id="detail-tabs">
       <button class="detail-tab active" data-dtab="detail">Overview</button>
+      <button class="detail-tab" data-dtab="network">Network</button>
       <button class="detail-tab" data-dtab="timeline">Timeline</button>
+      <button class="detail-tab" data-dtab="investigation">Investigation</button>
+      <button class="detail-tab" data-dtab="notes">Notes</button>
       <button class="detail-tab" data-dtab="policy">Policy</button>
     </div>
     <div class="detail-tab-content active" id="detail-tab-detail"><div class="detail-content" id="detail-content"></div></div>
+    <div class="detail-tab-content" id="detail-tab-network"><div id="network-content" style="height:400px;"></div></div>
     <div class="detail-tab-content" id="detail-tab-timeline"><div id="timeline-content"></div></div>
+    <div class="detail-tab-content" id="detail-tab-investigation"><div id="investigation-content"></div></div>
+    <div class="detail-tab-content" id="detail-tab-notes"><div id="notes-content"></div></div>
     <div class="detail-tab-content" id="detail-tab-policy"><div id="policy-content"></div></div>
   </div>
 </div>
@@ -991,7 +1237,11 @@ const alerts = [
       accountTypes: ['Business Checking', 'Wire Transfer'], accountOpenDate: '2023-03-10', tenure: '1 yr 10 mo', expectedActivity: 'Monthly wires $50K-$200K', priorSARs: 1, priorSARDates: ['2024-06-15'], watchlistHistory: [{ date: '2024-06-15', reason: 'OFAC SDN match', status: 'flagged' }] },
     alertType: 'Sanctions Hit', severity: 'critical', status: 'pending', timestamp: new Date(Date.now() - 3600000), assignedTo: 'unassigned',
     triage: { classification: 'escalate', confidence: 94 },
-    riskFactors: [{ name: 'OFAC List Match', value: 98 }, { name: 'High-Risk Jurisdiction', value: 75 }, { name: 'Transaction Velocity', value: 60 }],
+    riskFactors: [
+      { name: 'OFAC List Match', value: 98, contribution: 35 },
+      { name: 'High-Risk Jurisdiction', value: 75, contribution: 15 },
+      { name: 'Transaction Velocity', value: 60, contribution: 8 }
+    ],
     transactions: [
       { date: '2025-01-18', amount: 485000, currency: 'USD', direction: 'OUT', counterparty: 'Meridian Holdings Ltd', country: 'Cyprus' },
       { date: '2025-01-17', amount: 250000, currency: 'EUR', direction: 'IN', counterparty: 'Baltic Trade Corp', country: 'Latvia' },
@@ -1006,7 +1256,18 @@ const alerts = [
       { type: 'OFAC Match', desc: 'Name matches SDN list entry #21847, DOB verified. Exact DOB match on OFAC SDN list.', source: 'LexisNexis', date: '2025-01-18' },
       { type: 'Transaction Pattern', desc: '3 large transfers in 72 hours to high-risk jurisdictions totaling $910K.', source: 'MemberCheck', date: '2025-01-18' }
     ],
-    aiSummary: 'Critical sanctions alert. Customer Dmitri Volkov matches an entry on the OFAC SDN list (entry #21847). Date of birth confirmed. Multiple large transactions to Cyprus, Latvia, and Malta detected in the past 72 hours. Immediate escalation recommended.'
+    aiSummary: 'Critical sanctions alert. Customer Dmitri Volkov matches an entry on the OFAC SDN list (entry #21847). Date of birth confirmed. Multiple large transactions to Cyprus, Latvia, and Malta detected in the past 72 hours. Immediate escalation recommended.',
+    notes: [],
+    reviewStatus: null,
+    isDuplicate: false,
+    investigationChecklist: [
+      { id: 'kyc', title: 'KYC Verification', desc: 'Review identity documents, beneficial ownership, and KYC completeness', status: 'not-started' },
+      { id: 'sanctions', title: 'Sanctions Screening', desc: 'Cross-check against OFAC, EU, UN, and UK sanctions lists', status: 'not-started' },
+      { id: 'tx-analysis', title: 'Transaction Analysis', desc: 'Analyze transaction patterns, volumes, and counterparties', status: 'not-started' },
+      { id: 'adverse-media', title: 'Adverse Media Review', desc: 'Deep-dive into adverse media hits and sentiment analysis', status: 'not-started' },
+      { id: 'counterparty', title: 'Counterparty Risk Assessment', desc: 'Assess risk profile of all counterparties involved', status: 'not-started' },
+      { id: 'sar-decision', title: 'SAR Decision', desc: 'Document SAR filing decision with rationale', status: 'not-started' }
+    ]
   },
   {
     id: 'AML-002', customer: { name: 'Li Wei', id: 'CUST-3392', riskScore: 78, kycStatus: 'Valid', jurisdiction: 'China', dob: '1985-11-22', pep: false,
@@ -2081,7 +2342,465 @@ document.getElementById('detail-panel-toggle').addEventListener('click', () => {
 // ============================================================
 // INITIALIZE
 // ============================================================
+// ============================================================
+// ENHANCEMENT 1: FULL ENTITY NETWORK GRAPH
+// ============================================================
+function renderNetworkGraph(alert) {
+  const container = document.getElementById('network-content');
+  if (!container || !alert) return;
+  container.innerHTML = '';
+  const width = container.clientWidth || 400; const height = 400;
+  const svgEl = document.createElement('div');
+  svgEl.className = 'network-graph-container'; svgEl.style.width = '100%'; svgEl.style.height = '400px';
+  container.appendChild(svgEl);
+  const tooltip = document.createElement('div');
+  tooltip.className = 'network-tooltip'; tooltip.id = 'network-tooltip';
+  container.appendChild(tooltip);
+  const svg = d3.select(svgEl).append('svg').attr('width', '100%').attr('height', '100%').attr('viewBox', `0 0 ${width} ${height}`);
+  const g = svg.append('g');
+  svg.append('defs').append('marker').attr('id', 'arrow').attr('viewBox', '0 -5 10 10').attr('refX', 28).attr('refY', 0).attr('markerWidth', 6).attr('markerHeight', 6).attr('orient', 'auto')
+    .append('svg:path').attr('d', 'M0,-5L10,0L0,5').attr('fill', 'var(--border)');
+  const zoom = d3.zoom().scaleExtent([0.3, 4]).on('zoom', (e) => g.attr('transform', e.transform));
+  svg.call(zoom);
+  const nodes = [{ id: alert.customer.name, type: 'center', customer: alert.customer }]; const links = []; const nodeIds = new Set([alert.customer.name]);
+  alert.transactions.forEach(tx => {
+    if (!nodeIds.has(tx.counterparty)) { nodeIds.add(tx.counterparty); nodes.push({ id: tx.counterparty, type: 'counterparty', country: tx.country }); }
+    links.push({ source: alert.customer.name, target: tx.counterparty, value: tx.amount, direction: tx.direction, currency: tx.currency });
+  });
+  alert.linkedAlerts.forEach(linkedId => { const linked = alerts.find(a => a.id === linkedId); if (linked && !nodeIds.has(linked.customer.name)) { nodeIds.add(linked.customer.name); nodes.push({ id: linked.customer.name, type: 'linked', alert: linked }); links.push({ source: alert.customer.name, target: linked.customer.name, value: 0, direction: 'linked', label: `Linked: ${linkedId}` }); } });
+  const colorMap = { center: '#3b82f6', counterparty: '#9ca3b8', linked: '#f59e0b' }; const radiusMap = { center: 22, counterparty: 14, linked: 18 };
+  const simulation = d3.forceSimulation(nodes).force('link', d3.forceLink(links).id(d => d.id).distance(100)).force('charge', d3.forceManyBody().strength(-300)).force('center', d3.forceCenter(width / 2, height / 2)).force('collision', d3.forceCollide().radius(d => radiusMap[d.type] + 8));
+  const link = g.selectAll('.link').data(links).join('line').attr('class', 'link').attr('stroke', d => d.direction === 'linked' ? '#f59e0b' : 'var(--border)').attr('stroke-width', d => Math.max(1, Math.min(d.value / 200000, 4))).attr('stroke-opacity', 0.5);
+  const node = g.selectAll('.node-group').data(nodes).join('g').attr('class', 'node-group').attr('cursor', 'pointer');
+  node.append('circle').attr('r', d => radiusMap[d.type]).attr('fill', d => colorMap[d.type]).attr('stroke', d => d.type === 'center' ? 'oklch(0.45 0.22 256)' : 'none').attr('stroke-width', 2);
+  node.append('text').attr('text-anchor', 'middle').attr('dy', '0.35em').attr('fill', d => d.type === 'center' ? 'white' : '#0f1117').attr('font-size', d => d.type === 'center' ? 9 : 8).attr('font-weight', 600).text(d => d.id.length > 14 ? d.id.substring(0, 12) + '..' : d.id);
+  node.append('text').attr('text-anchor', 'middle').attr('dy', d => radiusMap[d.type] + 14).attr('fill', '#9ca3b8').attr('font-size', 8).text(d => d.country || (d.alert ? d.alert.id : ''));
+  node.on('mouseover', function(event, d) {
+    const tt = document.getElementById('network-tooltip');
+    let html = `<div class="network-tooltip-title">${d.id}</div>`;
+    if (d.customer) { html += `<div class="network-tooltip-row"><span class="network-tooltip-label">Risk Score</span><span class="network-tooltip-value">${d.customer.riskScore}/100</span></div><div class="network-tooltip-row"><span class="network-tooltip-label">Jurisdiction</span><span class="network-tooltip-value">${d.customer.jurisdiction}</span></div><div class="network-tooltip-row"><span class="network-tooltip-label">PEP</span><span class="network-tooltip-value">${d.customer.pep ? 'Yes' : 'No'}</span></div>`; }
+    if (d.alert) { html += `<div class="network-tooltip-row"><span class="network-tooltip-label">Alert</span><span class="network-tooltip-value">${d.alert.id}</span></div><div class="network-tooltip-row"><span class="network-tooltip-label">Type</span><span class="network-tooltip-value">${d.alert.alertType}</span></div>`; }
+    tt.innerHTML = html; tt.classList.add('visible');
+    const svgRect = svgEl.getBoundingClientRect(); tt.style.left = (event.clientX - svgRect.left + 12) + 'px'; tt.style.top = (event.clientY - svgRect.top - 10) + 'px';
+    d3.select(this).select('circle').transition().duration(100).attr('r', radiusMap[d.type] + 4);
+  }).on('mouseout', function(event, d) {
+    document.getElementById('network-tooltip').classList.remove('visible');
+    d3.select(this).select('circle').transition().duration(100).attr('r', radiusMap[d.type]);
+  }).on('click', function(event, d) {
+    if (d.alert && d.alert.id !== alert.id) { activeAlert = d.alert; renderAlertList(); showDetailPanel(d.alert); }
+    else if (d.customer && d.customer.id !== alert.customer.id) { const relatedAlert = alerts.find(a => a.customer.id === d.customer.id); if (relatedAlert) { activeAlert = relatedAlert; renderAlertList(); showDetailPanel(relatedAlert); } }
+  });
+  const linkLabels = g.selectAll('.link-label').data(links.filter(d => d.direction !== 'IN' && d.direction !== 'OUT')).join('text').attr('class', 'link-label').attr('text-anchor', 'middle').attr('dy', -6).attr('font-size', 7).attr('fill', '#f59e0b').text(d => d.label || '');
+  simulation.on('tick', () => { link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y); node.attr('transform', d => `translate(${d.x},${d.y})`); linkLabels.attr('x', d => (d.source.x + d.target.x) / 2).attr('y', d => (d.source.y + d.target.y) / 2 - 6); });
+}
+
+// ============================================================
+// ENHANCEMENT 2: INVESTIGATOR NOTES
+// ============================================================
+function renderNotes(alert) {
+  const el = document.getElementById('notes-content');
+  if (!el || !alert) return;
+  let html = `<div class="notes-container"><div class="note-add"><textarea id="note-input" placeholder="Add a note to this alert..."></textarea><button class="note-add-btn" onclick="addNote()">Add</button></div>`;
+  if (alert.notes && alert.notes.length > 0) { alert.notes.forEach((note, i) => { html += `<div class="note-item"><div class="note-header"><div class="note-meta"><span class="note-author">${note.author}</span><span>${note.timestamp}</span></div><button class="note-delete-btn" onclick="deleteNote('${alert.id}', ${i})">&times;</button></div><div class="note-body">${note.body}</div></div>`; }); }
+  else { html += '<div class="note-empty">No notes yet. Add your observations below.</div>'; }
+  html += '</div>'; el.innerHTML = html;
+}
+function addNote() {
+  if (!activeAlert) return; const input = document.getElementById('note-input'); const body = input.value.trim(); if (!body) return;
+  if (!activeAlert.notes) activeAlert.notes = [];
+  activeAlert.notes.push({ author: 'Analyst', body, timestamp: new Date().toLocaleString() });
+  addAuditEntry('Note', `Note added to ${activeAlert.id}: ${body.substring(0, 50)}...`);
+  renderNotes(activeAlert);
+}
+function deleteNote(alertId, index) {
+  const alert = alerts.find(a => a.id === alertId); if (!alert || !alert.notes) return;
+  alert.notes.splice(index, 1); addAuditEntry('Note', `Note deleted from ${alertId}`);
+  renderNotes(alert);
+}
+
+// ============================================================
+// ENHANCEMENT 3: EXPLAINABLE AI (CONTRIBUTION BARS)
+// ============================================================
+function renderContributionBreakdown(alert) {
+  if (!alert.riskFactors || !alert.riskFactors[0]?.contribution) return '';
+  let html = '<div class="contribution-breakdown"><div class="contribution-title">Score Contribution Analysis</div>';
+  alert.riskFactors.forEach(f => {
+    const sign = f.contribution > 0 ? '+' : '';
+    const barClass = f.contribution > 0 ? 'positive' : 'negative';
+    const barWidth = Math.abs(f.contribution) * 2;
+    html += `<div class="contribution-item"><span class="contribution-label">${f.name}</span><div class="contribution-bar-container"><div class="contribution-bar ${barClass}" style="width:${barWidth}%"></div></div><span class="contribution-value ${barClass}">${sign}${f.contribution}%</span></div>`;
+  });
+  html += `<div class="contribution-summary">Base Score: <strong>20</strong> | Factor Contributions: <strong>${alert.riskFactors.reduce((s, f) => s + Math.abs(f.contribution), 0)}%</strong> | Final Score: <strong>${alert.riskScore}/100</strong></div>`;
+  html += '</div>'; return html;
+}
+
+// ============================================================
+// ENHANCEMENT 4: SLA COUNTDOWN TIMERS
+// ============================================================
+function calcSLADeadline(alert) {
+  const type = alert.alertType;
+  if (type.includes('Sanctions')) return new Date(alert.timestamp.getTime() + 2 * 3600000);
+  if (type.includes('PEP')) return new Date(alert.timestamp.getTime() + 4 * 3600000);
+  return new Date(alert.timestamp.getTime() + 24 * 3600000);
+}
+function renderSLABadge(deadline) {
+  const now = new Date(); const remaining = deadline - now;
+  if (remaining <= 0) return '<span class="sla-badge breached"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>BREACHED</span>';
+  const total = deadline.getTime() - (deadline.getTime() - (2 * 3600000)); const pct = remaining / total;
+  const mins = Math.floor(remaining / 60000); const hrs = Math.floor(mins / 60);
+  const label = hrs > 0 ? `${hrs}h ${mins % 60}m` : `${mins}m`;
+  if (pct < 0.25) return `<span class="sla-badge warning">${label}</span>`;
+  return `<span class="sla-badge healthy">${label}</span>`;
+}
+function renderSLABreachBanner(alert) {
+  const deadline = calcSLADeadline(alert);
+  if (deadline > new Date()) return '';
+  return `<div class="sla-breach-banner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>SLA BREACHED: ${alert.alertType} should have been actioned ${Math.floor((new Date() - calcSLADeadline(alert)) / 3600000)}h ago</div>`;
+}
+function updateSLATimers() {
+  document.querySelectorAll('.sla-timer').forEach(el => {
+    const deadline = new Date(el.dataset.deadline); const remaining = deadline - new Date();
+    if (remaining <= 0) { el.className = 'sla-badge breached'; el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>BREACHED'; }
+    else { const mins = Math.floor(remaining / 60000); const hrs = Math.floor(mins / 60); el.textContent = hrs > 0 ? `${hrs}h ${mins % 60}m` : `${mins}m`; }
+  });
+}
+setInterval(updateSLATimers, 30000);
+
+// ============================================================
+// ENHANCEMENT 5: ANALYST ACTIVITY DASHBOARD
+// ============================================================
+function toggleDashboard() {
+  const overlay = document.getElementById('dashboard-overlay');
+  if (overlay) { overlay.classList.toggle('visible'); if (overlay.classList.contains('visible')) renderDashboard(); }
+}
+function renderDashboard() {
+  const el = document.getElementById('dashboard-body'); if (!el) return;
+  const totalAlerts = alerts.length; const resolved = metrics.resolved; const pending = alerts.filter(a => a.status === 'pending').length;
+  const dismissed = metrics.totalDismissed; const escalated = metrics.totalEscalated; const fpr = (dismissed + escalated) > 0 ? Math.round((dismissed / (dismissed + escalated)) * 100) : 0;
+  const aiAgr = metrics.totalAI > 0 ? Math.round((metrics.aiAgreed / metrics.totalAI) * 100) : 0;
+  const avgRisk = totalAlerts > 0 ? Math.round(alerts.reduce((s, a) => s + a.riskScore, 0) / totalAlerts) : 0;
+  const analysts = [
+    { name: 'Sarah Chen', alerts: 3, avgTime: '12m', fpRate: '45%', escalationRate: '35%' },
+    { name: 'James Okafor', alerts: 4, avgTime: '18m', fpRate: '38%', escalationRate: '52%' },
+    { name: 'Priya Sharma', alerts: 2, avgTime: '9m', fpRate: '55%', escalationRate: '25%' },
+    { name: 'Unassigned', alerts: alerts.filter(a => a.assignedTo === 'unassigned').length, avgTime: '—', fpRate: '—', escalationRate: '—' }
+  ];
+  el.innerHTML = `
+    <div class="dashboard-grid">
+      <div class="dashboard-stat"><div class="dashboard-stat-value">${pending}</div><div class="dashboard-stat-label">Pending Alerts</div></div>
+      <div class="dashboard-stat"><div class="dashboard-stat-value">${resolved}</div><div class="dashboard-stat-label">Resolved Today</div></div>
+      <div class="dashboard-stat"><div class="dashboard-stat-value" style="color:var(--success)">${fpr}%</div><div class="dashboard-stat-label">FP Rate</div></div>
+      <div class="dashboard-stat"><div class="dashboard-stat-value" style="color:var(--info)">${aiAgr}%</div><div class="dashboard-stat-label">AI Agreement</div></div>
+      <div class="dashboard-stat"><div class="dashboard-stat-value">${metrics.sarsFiled}</div><div class="dashboard-stat-label">SARs Filed</div></div>
+      <div class="dashboard-stat"><div class="dashboard-stat-value">${escalated}</div><div class="dashboard-stat-label">Escalated</div></div>
+      <div class="dashboard-stat"><div class="dashboard-stat-value">${avgRisk}/100</div><div class="dashboard-stat-label">Avg Risk Score</div></div>
+      <div class="dashboard-stat"><div class="dashboard-stat-value">${dismissed}</div><div class="dashboard-stat-label">Dismissed</div></div>
+    </div>
+    <div class="dashboard-chart-section"><div class="dashboard-chart-title">Analyst Performance</div><div class="dashboard-chart">
+      <table class="dashboard-table"><thead><tr><th>Analyst</th><th>Alerts</th><th>Avg Time</th><th>FP Rate</th><th>Escalation Rate</th></tr></thead><tbody>
+      ${analysts.map(a => `<tr><td><strong>${a.name}</strong></td><td>${a.alerts}</td><td>${a.avgTime}</td><td>${a.fpRate}</td><td>${a.escalationRate}</td></tr>`).join('')}
+      </tbody></table></div></div>
+    <div class="dashboard-chart-section"><div class="dashboard-chart-title">Alert Distribution</div><div class="dashboard-chart"><div id="dashboard-chart-container" style="height:200px;"></div></div></div>`;
+  renderDashboardChart();
+}
+function renderDashboardChart() {
+  const container = document.getElementById('dashboard-chart-container'); if (!container) return;
+  const data = [
+    { label: 'Critical', value: alerts.filter(a => a.severity === 'critical').length, color: 'var(--critical)' },
+    { label: 'High', value: alerts.filter(a => a.severity === 'high').length, color: 'oklch(0.6 0.2 56)' },
+    { label: 'Medium', value: alerts.filter(a => a.severity === 'medium').length, color: 'var(--warning)' },
+    { label: 'Low', value: alerts.filter(a => a.severity === 'low').length, color: 'var(--success)' }
+  ];
+  const svg = d3.select(container).append('svg').attr('width', '100%').attr('height', '100%').attr('viewBox', '0 0 400 180');
+  const x = d3.scaleBand().domain(data.map(d => d.label)).range([10, 390]).padding(0.3);
+  const y = d3.scaleLinear().domain([0, d3.max(data, d => d.value) || 10]).range([160, 10]);
+  svg.selectAll('.bar').data(data).join('rect').attr('x', d => x(d.label)).attr('y', d => y(d.value)).attr('width', x.bandwidth()).attr('height', d => 160 - y(d.value)).attr('fill', d => d.color).attr('rx', 3);
+  svg.selectAll('.label').data(data).join('text').attr('x', d => x(d.label) + x.bandwidth() / 2).attr('y', 175).attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', 'var(--muted-foreground)').text(d => d.label);
+  svg.selectAll('.value').data(data).join('text').attr('x', d => x(d.label) + x.bandwidth() / 2).attr('y', d => y(d.value) - 5).attr('text-anchor', 'middle').attr('font-size', 11).attr('font-weight', 700).attr('fill', 'var(--foreground)').text(d => d.value);
+}
+
+// ============================================================
+// ENHANCEMENT 6: ALERT DEDUPLICATION
+// ============================================================
+function detectDuplicates() {
+  const custMap = {};
+  alerts.forEach(a => {
+    const key = a.customer.id; if (!custMap[key]) custMap[key] = []; custMap[key].push(a);
+  });
+  Object.values(custMap).forEach(group => {
+    if (group.length > 1) { group.forEach((a, i) => { if (i === 0) a.isDuplicate = false; else { a.isDuplicate = true; a.duplicateOf = group[0].id; } } ); }
+  });
+}
+
+// ============================================================
+// ENHANCEMENT 7: INVESTIGATION CHECKLIST
+// ============================================================
+function renderInvestigationChecklist(alert) {
+  const el = document.getElementById('investigation-content');
+  if (!el || !alert || !alert.investigationChecklist) return;
+  const checklist = alert.investigationChecklist;
+  const completed = checklist.filter(s => s.status === 'completed').length;
+  const total = checklist.length; const pct = Math.round((completed / total) * 100);
+  let html = `<div class="investigation-checklist"><div class="checklist-header"><div>Investigation Steps</div><div class="checklist-progress"><div class="checklist-progress-bar"><div class="checklist-progress-fill" style="width:${pct}%"></div></div><span class="checklist-progress-text">${completed}/${total} (${pct}%)</span></div></div>`;
+  checklist.forEach((step, i) => {
+    html += `<div class="checklist-item ${step.status.replace(' ', '-')}" onclick="toggleChecklistStep('${alert.id}', ${i})">
+      <div class="checklist-checkbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="checklist-item-content"><div class="checklist-item-title">${step.title}</div><div class="checklist-item-desc">${step.desc}</div></div>
+      <span class="checklist-item-status">${step.status === 'completed' ? 'Done' : step.status === 'in-progress' ? 'In Progress' : 'Not Started'}</span>
+    </div>`;
+  });
+  html += '</div>'; el.innerHTML = html;
+}
+function toggleChecklistStep(alertId, stepIndex) {
+  const alert = alerts.find(a => a.id === alertId); if (!alert || !alert.investigationChecklist) return;
+  const step = alert.investigationChecklist[stepIndex];
+  step.status = step.status === 'completed' ? 'not-started' : 'completed';
+  addAuditEntry('Investigation', `Step "${step.title}" ${step.status} for ${alertId}`);
+  renderInvestigationChecklist(alert);
+}
+
+// ============================================================
+// ENHANCEMENT 8: SAR BUILDER ENHANCEMENTS
+// ============================================================
+const sarTemplates = {
+  FinCEN: { name: 'FinCEN SAR (US)', regulator: 'FinCEN', fields: ['Subject Info', 'Suspicious Activity', 'Narrative', 'Evidence', 'Linked Alerts'] },
+  UKSTR: { name: 'UK STR', regulator: 'NCA', fields: ['Subject Details', 'Activity Details', 'Narrative', 'Supporting Information'] },
+  FINTRAC: { name: 'FINTRAC STR (Canada)', regulator: 'FINTRAC', fields: ['Subject Info', 'Entity Info', 'Transaction Details', 'Narrative'] }
+};
+let currentSARTemplate = 'FinCEN';
+function renderSARBody(alert) {
+  const body = document.getElementById('sar-body');
+  let tplHtml = '<div style="margin-bottom:12px;display:flex;gap:6px;">';
+  Object.entries(sarTemplates).forEach(([key, tpl]) => { tplHtml += `<button class="network-filter-btn ${currentSARTemplate === key ? 'active' : ''}" onclick="switchSARTemplate('${key}')" style="flex:1;">${tpl.name}</button>`; });
+  tplHtml += '</div>';
+  let evHtml = ''; (alert.evidence || []).forEach((e, i) => { evHtml += `<li class="sar-evidence-item"><input type="checkbox" id="sar-ev-${i}" checked><label for="sar-ev-${i}"><strong>[${e.type}]</strong> ${e.desc.substring(0, 80)}...</label></li>`; });
+  let lnkHtml = (alert.linkedAlerts || []).map(id => `<div style="padding:5px 7px;background:var(--muted / 0.5);border-radius:var(--radius-sm);font-size:11px;margin-bottom:3px;">${id} — ${alerts.find(a => a.id === id)?.customer.name || 'Unknown'}</div>`).join('') || '<div style="font-size:11px;color:var(--muted-foreground);">None</div>';
+  body.innerHTML = `${tplHtml}
+    <div class="sar-section"><div class="sar-section-title"><span class="sar-section-number">1</span> Subject Information</div>
+      <div class="sar-field"><div class="sar-field-label">Name</div><div class="sar-field-value">${alert.customer.name}</div></div>
+      <div class="sar-field"><div class="sar-field-label">Customer ID</div><div class="sar-field-value">${alert.customer.id}</div></div>
+      <div class="sar-field"><div class="sar-field-label">Jurisdiction</div><div class="sar-field-value">${alert.customer.jurisdiction}</div></div>
+      <div class="sar-field"><div class="sar-field-label">Risk Score</div><div class="sar-field-value">${alert.riskScore}/100</div></div>
+      <div class="sar-field"><div class="sar-field-label">Alert Type</div><div class="sar-field-value">${alert.alertType}</div></div>
+    </div>
+    <div class="sar-section"><div class="sar-section-title"><span class="sar-section-number">2</span> Suspicious Activity</div>
+      <div class="sar-field"><div class="sar-field-label">Date Range</div><div class="sar-field-value">${alert.transactions[0]?.date || 'N/A'} — ${alert.transactions[alert.transactions.length - 1]?.date || 'N/A'}</div></div>
+      <div class="sar-field"><div class="sar-field-label">Total Volume</div><div class="sar-field-value">${alert.transactions.reduce((s, t) => s + t.amount, 0).toLocaleString()} ${alert.transactions[0]?.currency || 'USD'}</div></div>
+      <div class="sar-field"><div class="sar-field-label">Transaction Count</div><div class="sar-field-value">${alert.transactions.length}</div></div>
+      <div class="sar-field"><div class="sar-field-label">Jurisdictions</div><div class="sar-field-value">${[...new Set(alert.transactions.map(t => t.country))].join(', ')}</div></div>
+    </div>
+    <div class="sar-section"><div class="sar-section-title"><span class="sar-section-number">3</span> Narrative</div>
+      <textarea class="sar-narrative" id="sar-narrative-text" placeholder="Narrative will be auto-generated..."></textarea>
+      <div class="sar-char-count" id="sar-narrative-count">0 characters</div>
+      <div id="sar-quality-score" style="margin-top:6px;font-size:10px;color:var(--muted-foreground);"></div>
+    </div>
+    <div class="sar-section"><div class="sar-section-title"><span class="sar-section-number">4</span> Supporting Evidence (${alert.evidence.length} items)</div>
+      <ul class="sar-evidence-list">${evHtml}</ul>
+    </div>
+    <div class="sar-section"><div class="sar-section-title"><span class="sar-section-number">5</span> Linked Alerts</div>${lnkHtml}</div>`;
+  const ta = document.getElementById('sar-narrative-text');
+  ta.addEventListener('input', () => { document.getElementById('sar-narrative-count').textContent = ta.value.length + ' characters'; updateSARQuality(); });
+}
+function switchSARTemplate(key) { currentSARTemplate = key; if (sarAlert) renderSARBody(sarAlert); }
+function updateSARQuality() {
+  const narrative = document.getElementById('sar-narrative-text')?.value || '';
+  const evidenceChecked = document.querySelectorAll('.sar-evidence-item input:checked')?.length || 0;
+  const totalEvidence = document.querySelectorAll('.sar-evidence-item input')?.length || 1;
+  let score = 0; const checks = [];
+  if (narrative.length >= 100) { score += 30; checks.push('Narrative length ✓'); }
+  else if (narrative.length >= 50) { score += 15; checks.push('Narrative too short'); }
+  else { checks.push('Narrative missing'); }
+  if (evidenceChecked >= totalEvidence * 0.5) { score += 20; checks.push('Evidence sufficient ✓'); }
+  else { checks.push('Evidence insufficient'); }
+  if (sarAlert?.transactions?.length > 0) { score += 20; checks.push('Transaction data ✓'); }
+  if (sarAlert?.customer) { score += 15; checks.push('Customer info ✓'); }
+  if (sarAlert?.linkedAlerts?.length > 0) { score += 15; checks.push('Linked alerts ✓'); }
+  const color = score >= 70 ? 'var(--success)' : score >= 40 ? 'var(--warning)' : 'var(--critical)';
+  const label = score >= 70 ? 'Good' : score >= 40 ? 'Fair' : 'Poor';
+  document.getElementById('sar-quality-score').innerHTML = `SAR Quality: <span style="color:${color};font-weight:600;">${score}% (${label})</span> — ${checks.join(' | ')}`;
+}
+function generateSARNarrative() {
+  if (!sarAlert) return;
+  const a = sarAlert; const tmpl = sarTemplates[currentSARTemplate];
+  const text = `[${tmpl.name} — Submitted to ${tmpl.regulator}]\n\nOn ${a.transactions[0]?.date}, suspicious activity was detected on the account of ${a.customer.name} (${a.customer.id}, ${a.customer.jurisdiction}). ${a.aiSummary}\n\nTransaction analysis reveals ${a.transactions.length} transactions totaling ${a.transactions.reduce((s, t) => s + t.amount, 0).toLocaleString()} ${a.transactions[0]?.currency} across ${[...new Set(a.transactions.map(t => t.country))].join(', ')}.\n\nEvidence collected includes: ${a.evidence.map(e => e.type).join(', ')}.\n\n${a.linkedAlerts.length > 0 ? `Linked alerts ${a.linkedAlerts.join(', ')} suggest coordinated activity.` : 'No linked alerts identified.'}\n\nBased on the above, filing of this ${currentSARTemplate === 'FinCEN' ? 'SAR' : 'STR'} is recommended.`;
+  document.getElementById('sar-narrative-text').value = text;
+  document.getElementById('sar-narrative-count').textContent = text.length + ' characters';
+  updateSARQuality();
+  addAuditEntry('SAR', `Narrative auto-generated for ${currentSARTemplate} SAR-${String(sarCounter.current).padStart(4, '0')}`);
+}
+function submitSAR() {
+  if (!sarAlert) return;
+  const narrative = document.getElementById('sar-narrative-text')?.value || '';
+  if (narrative.length < 50) { showToast('Narrative must be at least 50 characters', 'warning'); return; }
+  metrics.sarsFiled++;
+  const tmpl = sarTemplates[currentSARTemplate];
+  addAuditEntry('SAR', `${currentSARTemplate} SAR-${String(sarCounter.current).padStart(4, '0')} submitted to ${tmpl.regulator} for ${sarAlert.id}. Narrative: ${narrative.length} chars.`);
+  closeSARPanel();
+  showToast(`${currentSARTemplate} SAR-${String(sarCounter.current).padStart(4, '0')} submitted to ${tmpl.regulator}`);
+  addMessage('ai', `${tmpl.name} **SAR-${String(sarCounter.current).padStart(4, '0')}** has been prepared for filing for ${sarAlert.id}. In production, this would be submitted electronically to ${tmpl.regulator}.`);
+  setSuggestions(['Show me patterns', 'Next alert']);
+}
+
+// ============================================================
+// ENHANCEMENT 9: QA / PEER REVIEW WORKFLOW
+// ============================================================
+function openQAReview(alert) {
+  if (!alert) return;
+  document.getElementById('qa-modal').classList.add('visible');
+  document.getElementById('qa-alert-id').textContent = alert.id;
+  document.getElementById('qa-customer').textContent = alert.customer.name;
+  document.getElementById('qa-triage').textContent = alert.triage?.classification || 'N/A';
+  document.getElementById('qa-confidence').textContent = alert.triage?.confidence + '%' || 'N/A';
+  document.getElementById('qa-reviewer-comment').value = '';
+}
+function closeQAReview() { document.getElementById('qa-modal').classList.remove('visible'); }
+function submitQAReview(action) {
+  if (!activeAlert) return;
+  const comment = document.getElementById('qa-reviewer-comment').value.trim();
+  if (!comment) { showToast('Please provide a review comment', 'warning'); return; }
+  activeAlert.reviewStatus = action;
+  activeAlert.reviewComment = comment;
+  activeAlert.reviewedBy = 'QA Reviewer';
+  addAuditEntry('QA Review', `${action} ${activeAlert.id}: ${comment}`);
+  closeQAReview(); renderAlertList();
+  showToast(`Review ${action} for ${activeAlert.id}`);
+}
+
+// ============================================================
+// ENHANCEMENT 10: UX IMPROVEMENTS
+// ============================================================
+function toggleSidebar() {
+  const sidebar = document.querySelector('.alert-sidebar');
+  sidebar.classList.toggle('collapsed');
+}
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  localStorage.setItem('sancus-dark-mode', isDark ? '1' : '0');
+}
+function exportAlertsCSV() {
+  const headers = ['Alert ID', 'Customer', 'Type', 'Severity', 'Risk Score', 'Status', 'Triage', 'Timestamp'];
+  const rows = alerts.map(a => [a.id, a.customer.name, a.alertType, a.severity, a.riskScore, a.status, a.triage?.classification || '', new Date(a.timestamp).toISOString()]);
+  const csv = [headers.join(','), ...rows.map(r => r.map(v => `"${v}"`).join(','))].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' }); const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = `sancus-alerts-${new Date().toISOString().split('T')[0]}.csv`; a.click();
+  URL.revokeObjectURL(url); showToast(`${alerts.length} alerts exported to CSV`);
+  addAuditEntry('Export', `${alerts.length} alerts exported to CSV`);
+}
+
+// ============================================================
+// ENHANCEMENT: SHOW DETAIL TAB RENDERERS
+// ============================================================
+function renderDetailTabContent(alert, tab) {
+  if (tab === 'network') { renderNetworkGraph(alert); }
+  else if (tab === 'investigation') { renderInvestigationChecklist(alert); }
+  else if (tab === 'notes') { renderNotes(alert); }
+}
+
+// Override switchDetailTab to render tab content
+const _originalSwitchDetailTab = switchDetailTab;
+switchDetailTab = function(tab) {
+  _originalSwitchDetailTab(tab);
+  if (activeAlert) renderDetailTabContent(activeAlert, tab);
+};
+
+// Override showDetailPanel to render all tab content
+const _originalShowDetailPanel = showDetailPanel;
+showDetailPanel = function(alert) {
+  _originalShowDetailPanel(alert);
+  // Add contribution breakdown to detail content
+  const contributionHtml = renderContributionBreakdown(alert);
+  if (contributionHtml) {
+    const detailContent = document.getElementById('detail-content');
+    if (detailContent) { detailContent.innerHTML += contributionHtml; }
+  }
+  // Add SLA breach banner
+  const slaBanner = renderSLABreachBanner(alert);
+  if (slaBanner) {
+    const quickActions = document.getElementById('detail-actions');
+    if (quickActions) { quickActions.insertAdjacentHTML('beforebegin', slaBanner); }
+  }
+  renderDetailTabContent(alert, 'network');
+  renderInvestigationChecklist(alert);
+  renderNotes(alert);
+};
+
+// Override renderAlertList to add SLA badges and duplicate indicators
+const _originalRenderAlertList = renderAlertList;
+renderAlertList = function() {
+  detectDuplicates();
+  const listEl = document.getElementById('alert-list');
+  const searchTerm = document.getElementById('alert-search').value.toLowerCase();
+  const sev_filter = document.getElementById('severity-filter').value;
+  const triage_filter = document.getElementById('triage-filter').value;
+  let filtered = alerts.filter(a => {
+    if (sev_filter !== 'all' && a.severity !== sev_filter) return false;
+    if (triage_filter === 'pending' && a.status !== 'pending') return false;
+    if (triage_filter === 'review' && a.triage?.classification !== 'review') return false;
+    if (triage_filter === 'escalate' && a.triage?.classification !== 'escalate') return false;
+    if (searchTerm && !a.customer.name.toLowerCase().includes(searchTerm) && !a.alertType.toLowerCase().includes(searchTerm) && !a.id.toLowerCase().includes(searchTerm)) return false;
+    return true;
+  });
+  filtered.sort((a, b) => { const s = { critical: 0, high: 1, medium: 2 }; return s[a.severity] - s[b.severity]; });
+  let html = '';
+  filtered.forEach(alert => {
+    const hoursAgo = Math.floor((Date.now() - alert.timestamp) / 3600000);
+    const timeStr = hoursAgo === 0 ? 'Just now' : hoursAgo < 24 ? `${hoursAgo}h ago` : hoursAgo < 48 ? 'Yesterday' : `${Math.floor(hoursAgo / 24)}d ago`;
+    const typeIcons = { 'Sanctions Hit': '&#x26A0;', 'Structuring': '&#x1F4B5;', 'PEP Match': '&#x1F464;', 'Rapid Movement': '&#x26A1;', 'Volume Spike': '&#x1F4C8;', 'Shell Company': '&#x1F3E2;', 'Layering': '&#x1F504;', 'Cash-Intensive': '&#x1F4B0;', 'High-Risk Jurisdiction': '&#x1F30D;', 'Sanctions + Dormant': '&#x1F6AB;' };
+    const isActive = activeAlert && activeAlert.id === alert.id;
+    const scoreClass = alert.riskScore >= 80 ? 'high' : alert.riskScore >= 60 ? 'medium' : 'low';
+    const triageLabel = alert.triage ? (alert.triage.classification === 'false-positive' ? 'Likely FP' : alert.triage.classification === 'review' ? 'Needs Review' : 'Escalate') : '';
+    const triageClass = alert.triage ? `triage-${alert.triage.classification}` : '';
+    const checked = selectedAlerts.has(alert.id) ? 'checked' : '';
+    const avatarClass = getAnalystAvatarClass(alert.assignedTo);
+    const initials = getAnalystInitials(alert.assignedTo);
+    const slaDeadline = calcSLADeadline(alert);
+    const slaBadge = renderSLABadge(slaDeadline);
+    const dupBadge = alert.isDuplicate ? `<span class="duplicate-badge" title="Possible duplicate of ${alert.duplicateOf}">Dup</span>` : '';
+    const reviewBadge = alert.reviewStatus ? `<span class="review-badge review-${alert.reviewStatus}">${alert.reviewStatus === 'approved' ? 'QA ✓' : alert.reviewStatus === 'rejected' ? 'QA ✗' : 'QA ⏳'}</span>` : '';
+    html += `<div class="alert-card ${isActive ? 'active' : ''} severity-${alert.severity}" onclick="selectAlert('${alert.id}')" role="listitem">
+      <div class="alert-card-header">
+        <input type="checkbox" class="alert-checkbox" ${checked} onclick="event.stopPropagation();toggleAlertSelection('${alert.id}')" aria-label="Select ${alert.id}">
+        <div class="alert-severity-indicator ${alert.severity}"></div>
+        <span class="alert-customer">${alert.customer.name}</span>
+        ${triageLabel ? `<span class="triage-badge ${triageClass}">${triageLabel}</span>` : ''}
+        ${slaBadge}
+        ${dupBadge}
+        ${reviewBadge}
+      </div>
+      <div class="alert-card-body">
+        <div class="alert-type"><span class="alert-type-icon">${typeIcons[alert.alertType] || '&#x1F4CB;'}</span> ${alert.alertType}</div>
+        <div class="alert-meta-row">
+          <span class="alert-time">${timeStr}</span>
+          <span class="alert-score ${scoreClass}">${alert.riskScore}</span>
+          <span class="analyst-avatar ${avatarClass}" title="${getAnalystName(alert.assignedTo)}" onclick="event.stopPropagation();cycleAssignee('${alert.id}')">${initials}</span>
+        </div>
+      </div>
+      ${isActive ? `<div class="alert-actions">
+        <button class="alert-action-btn dismiss" onclick="event.stopPropagation();dismissAlert(alerts.find(a=>a.id==='${alert.id}'))">Dismiss</button>
+        <button class="alert-action-btn escalate" onclick="event.stopPropagation();escalateAlert(alerts.find(a=>a.id==='${alert.id}'))">Escalate</button>
+        <button class="alert-action-btn" onclick="event.stopPropagation();eddAlert(alerts.find(a=>a.id==='${alert.id}'))">EDD</button>
+      </div>` : ''}
+    </div>`;
+  });
+  if (filtered.length === 0) {
+    html = `<div class="empty-state">
+      <div class="empty-state-icon">&#x1F4CB;</div>
+      <div class="empty-state-title">No alerts found</div>
+      <div class="empty-state-desc">Try adjusting your filters or search terms.<br>Or ask Sancus to help you investigate.</div>
+    </div>`;
+  }
+  listEl.innerHTML = html;
+  document.getElementById('pending-count').textContent = alerts.filter(a => a.status === 'pending').length;
+  updateBatchBar();
+  updateMetrics();
+};
+
+// ============================================================
+// INITIALIZE
+// ============================================================
 function init() {
+  if (localStorage.getItem('sancus-dark-mode') === '1') document.body.classList.add('dark-mode');
   renderAlertList(); renderAuditTrail(); renderCaseList();
   setSuggestions(['Show me patterns', 'Which alerts need escalation?', 'Summarize adverse media']);
   addMessage('ai', 'Welcome! I\'m **Sancus**, your AML investigation partner.\n\n**Queue:** ' + alerts.length + ' alerts | **Critical:** ' + alerts.filter(a => a.severity === 'critical').length + ' | **High:** ' + alerts.filter(a => a.severity === 'high').length + '\n\n**AI Triage:**\n• Escalate: ' + alerts.filter(a => a.triage?.classification === 'escalate').length + '\n• Review: ' + alerts.filter(a => a.triage?.classification === 'review').length + '\n• Likely FP: ' + alerts.filter(a => a.triage?.classification === 'false-positive').length + '\n\nI operate in **advisory mode** (EU AI Act compliant). All decisions logged to the **Audit Trail**.\n\nTry: *"Show only hits with strong name match AND active sanctions*"');
