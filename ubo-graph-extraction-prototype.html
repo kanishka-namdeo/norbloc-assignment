@@ -1177,6 +1177,411 @@
     .status-rejected { fill: var(--destructive); }
     .status-flagged { fill: var(--warning); }
 
+    /* Jurisdiction risk badge */
+    .jurisdiction-risk-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .jurisdiction-risk-badge.low { background: var(--success-muted); color: var(--success-muted-foreground); }
+    .jurisdiction-risk-badge.medium { background: var(--warning-muted); color: var(--warning-muted-foreground); }
+    .jurisdiction-risk-badge.high { background: var(--critical-muted); color: var(--critical-muted-foreground); }
+
+    /* Screening panel */
+    .screening-card {
+      background: var(--muted);
+      border-radius: var(--radius-lg);
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+    .screening-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .screening-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .screening-row:last-child { border-bottom: none; }
+    .screening-row-left { display: flex; align-items: center; gap: 8px; }
+    .screening-icon { width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+    .screening-icon.clear { background: var(--success-muted); color: var(--success); }
+    .screening-icon.hit { background: var(--critical-muted); color: var(--critical); }
+    .screening-icon.potential { background: var(--warning-muted); color: var(--warning); }
+    .screening-label { font-size: 13px; font-weight: 500; }
+    .screening-status { font-size: 11px; font-weight: 600; }
+    .screening-status.clear { color: var(--success); }
+    .screening-status.hit { color: var(--critical); }
+    .screening-status.potential { color: var(--warning); }
+    .screening-detail {
+      margin-top: 8px;
+      padding: 8px;
+      background: var(--card);
+      border-radius: var(--radius-md);
+      font-size: 11px;
+      color: var(--muted-foreground);
+      line-height: 1.5;
+    }
+
+    /* UBO Threshold indicator */
+    .threshold-bar-container {
+      position: relative;
+      margin: 8px 0 4px;
+    }
+    .threshold-bar {
+      height: 8px;
+      background: var(--muted);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .threshold-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+    .threshold-bar-fill.above { background: var(--success); }
+    .threshold-bar-fill.below { background: var(--warning); }
+    .threshold-marker {
+      position: absolute;
+      top: -4px;
+      bottom: -4px;
+      width: 2px;
+      background: var(--foreground);
+      opacity: 0.5;
+      z-index: 1;
+    }
+    .threshold-marker-label {
+      position: absolute;
+      top: -18px;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      white-space: nowrap;
+    }
+    .threshold-status {
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .threshold-status.confirmed { color: var(--success); }
+    .threshold-status.below { color: var(--warning); }
+
+    /* Ownership breakdown */
+    .ownership-breakdown {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .ownership-breakdown-item {
+      flex: 1;
+      padding: 10px;
+      background: var(--muted);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+    .ownership-breakdown-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--foreground);
+    }
+    .ownership-breakdown-label {
+      font-size: 10px;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+
+    /* Control mechanisms */
+    .control-section { margin-bottom: 16px; }
+    .control-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+    }
+    .control-label { font-size: 12px; color: var(--muted-foreground); }
+    .control-value { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+    .control-check { color: var(--success); }
+    .control-cross { color: var(--muted-foreground); opacity: 0.4; }
+    .control-bar {
+      width: 60px;
+      height: 4px;
+      background: var(--muted);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .control-bar-fill {
+      height: 100%;
+      background: var(--info);
+      border-radius: 999px;
+    }
+    .control-type {
+      margin-top: 8px;
+      padding: 8px 10px;
+      background: var(--info-muted);
+      border-radius: var(--radius-md);
+      font-size: 11px;
+      color: var(--info-muted-foreground);
+      line-height: 1.5;
+    }
+
+    /* Evidence viewer */
+    .citation-item {
+      padding: 8px 12px;
+      background: var(--muted);
+      border-radius: var(--radius-md);
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: var(--foreground);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .citation-item:hover { background: var(--accent); }
+    .evidence-preview {
+      margin-top: 8px;
+      padding: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--foreground);
+      animation: fadeIn 0.2s ease;
+    }
+    .evidence-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .evidence-source { font-weight: 600; font-size: 11px; color: var(--muted-foreground); }
+    .evidence-close {
+      background: none;
+      border: none;
+      color: var(--muted-foreground);
+      cursor: pointer;
+      padding: 2px;
+      font-size: 14px;
+    }
+    .evidence-text { color: var(--foreground); }
+    .evidence-highlight {
+      background: var(--warning-muted);
+      padding: 1px 2px;
+      border-radius: 2px;
+    }
+    .evidence-page {
+      margin-top: 8px;
+      font-size: 10px;
+      color: var(--muted-foreground);
+    }
+
+    /* Entity search */
+    .search-wrapper {
+      position: relative;
+      flex: 0 0 200px;
+    }
+    .search-input-graph {
+      width: 100%;
+      height: 30px;
+      padding: 0 10px 0 28px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") no-repeat 9px center;
+      font-size: 12px;
+      color: var(--foreground);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      font-family: inherit;
+    }
+    .search-input-graph:focus { border-color: var(--ring); box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.12); }
+    .search-input-graph::placeholder { color: var(--muted-foreground); }
+
+    /* Structure risk score */
+    .risk-score-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: default;
+    }
+    .risk-score-badge.low { background: var(--success-muted); color: var(--success-muted-foreground); }
+    .risk-score-badge.medium { background: var(--warning-muted); color: var(--warning-muted-foreground); }
+    .risk-score-badge.high { background: var(--critical-muted); color: var(--critical-muted-foreground); }
+    .risk-score-value { font-size: 16px; font-weight: 700; }
+    .risk-score-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Risk score tooltip */
+    .risk-tooltip {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 8px;
+      background: var(--popover);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      min-width: 260px;
+      box-shadow: 0 8px 24px oklch(0 0 0 / 0.1);
+      z-index: 60;
+      display: none;
+      font-size: 12px;
+    }
+    .risk-tooltip.visible { display: block; }
+    .risk-tooltip-title { font-weight: 600; margin-bottom: 8px; }
+    .risk-tooltip-row { display: flex; justify-content: space-between; padding: 3px 0; color: var(--muted-foreground); }
+    .risk-tooltip-row span:last-child { font-weight: 600; color: var(--foreground); }
+
+    /* Keyboard shortcuts modal */
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 6px 12px;
+      font-size: 13px;
+    }
+    .shortcut-key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 8px;
+      background: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: monospace;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .shortcut-desc { color: var(--muted-foreground); }
+
+    /* Connected node highlight */
+    .node-connected circle:first-child { stroke-width: 3 !important; }
+    .node-dimmed { opacity: 0.15 !important; }
+    .link-dimmed { opacity: 0.08 !important; }
+
+    /* Skeleton loading */
+    @keyframes shimmer {
+      0% { background-position: -200px 0; }
+      100% { background-position: calc(200px + 100%) 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, var(--muted) 25%, var(--accent) 50%, var(--muted) 75%);
+      background-size: 200px 100%;
+      animation: shimmer 1.5s ease-in-out infinite;
+      border-radius: var(--radius-md);
+    }
+
+    /* Search highlight pulse */
+    @keyframes searchPulse {
+      0%, 100% { filter: drop-shadow(0 0 4px oklch(0.572 0.223 256.61 / 0.6)); }
+      50% { filter: drop-shadow(0 0 12px oklch(0.572 0.223 256.61 / 0.9)); }
+    }
+    .node-search-match { animation: searchPulse 1s ease-in-out infinite; }
+
+    /* ============================================================
+       DARK MODE
+       ============================================================ */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: oklch(0.18 0 0);
+        --foreground: oklch(0.95 0 0);
+        --card: oklch(0.22 0 0);
+        --card-foreground: oklch(0.95 0 0);
+        --popover: oklch(0.22 0 0);
+        --popover-foreground: oklch(0.95 0 0);
+        --primary: oklch(0.95 0 0);
+        --primary-foreground: oklch(0.22 0 0);
+        --secondary: oklch(0.28 0 0);
+        --secondary-foreground: oklch(0.95 0 0);
+        --muted: oklch(0.28 0 0);
+        --muted-foreground: oklch(0.65 0 0);
+        --accent: oklch(0.28 0 0);
+        --accent-foreground: oklch(0.95 0 0);
+        --destructive: oklch(0.6 0.22 27);
+        --destructive-foreground: oklch(0.95 0 0);
+        --border: oklch(0.32 0 0);
+        --input: oklch(0.32 0 0);
+        --ring: oklch(0.55 0 0);
+        --success: oklch(0.7 0.18 150);
+        --success-foreground: oklch(0.15 0 0);
+        --success-muted: oklch(0.25 0.06 150);
+        --success-muted-foreground: oklch(0.7 0.15 150);
+        --warning: oklch(0.8 0.18 86);
+        --warning-foreground: oklch(0.15 0 0);
+        --warning-muted: oklch(0.28 0.08 86);
+        --warning-muted-foreground: oklch(0.8 0.15 86);
+        --info: oklch(0.7 0.2 256);
+        --info-foreground: oklch(0.15 0 0);
+        --info-muted: oklch(0.25 0.07 256);
+        --info-muted-foreground: oklch(0.7 0.18 256);
+        --critical: oklch(0.6 0.22 27);
+        --critical-foreground: oklch(0.95 0 0);
+        --critical-muted: oklch(0.25 0.08 27);
+        --critical-muted-foreground: oklch(0.65 0.2 27);
+      }
+    }
+    body.dark-mode {
+      --background: oklch(0.18 0 0);
+      --foreground: oklch(0.95 0 0);
+      --card: oklch(0.22 0 0);
+      --card-foreground: oklch(0.95 0 0);
+      --popover: oklch(0.22 0 0);
+      --popover-foreground: oklch(0.95 0 0);
+      --primary: oklch(0.95 0 0);
+      --primary-foreground: oklch(0.22 0 0);
+      --secondary: oklch(0.28 0 0);
+      --secondary-foreground: oklch(0.95 0 0);
+      --muted: oklch(0.28 0 0);
+      --muted-foreground: oklch(0.65 0 0);
+      --accent: oklch(0.28 0 0);
+      --accent-foreground: oklch(0.95 0 0);
+      --destructive: oklch(0.6 0.22 27);
+      --destructive-foreground: oklch(0.95 0 0);
+      --border: oklch(0.32 0 0);
+      --input: oklch(0.32 0 0);
+      --ring: oklch(0.55 0 0);
+      --success: oklch(0.7 0.18 150);
+      --success-foreground: oklch(0.15 0 0);
+      --success-muted: oklch(0.25 0.06 150);
+      --success-muted-foreground: oklch(0.7 0.15 150);
+      --warning: oklch(0.8 0.18 86);
+      --warning-foreground: oklch(0.15 0 0);
+      --warning-muted: oklch(0.28 0.08 86);
+      --warning-muted-foreground: oklch(0.8 0.15 86);
+      --info: oklch(0.7 0.2 256);
+      --info-foreground: oklch(0.15 0 0);
+      --info-muted: oklch(0.25 0.07 256);
+      --info-muted-foreground: oklch(0.7 0.18 256);
+      --critical: oklch(0.6 0.22 27);
+      --critical-foreground: oklch(0.95 0 0);
+      --critical-muted: oklch(0.25 0.08 27);
+      --critical-muted-foreground: oklch(0.65 0.2 27);
+    }
+
     /* ============================================================
        RESPONSIVE
        ============================================================ */
@@ -1227,6 +1632,8 @@
       <div class="settings-dropdown" id="settings-dropdown" role="menu">
         <button onclick="toggleFreeze()" role="menuitem">&#x2744; Freeze graph</button>
         <button onclick="togglePresentationMode()" role="menuitem">&#x1F3AC; Presentation mode</button>
+        <button onclick="toggleDarkMode()" role="menuitem">&#x1F319; Toggle dark mode</button>
+        <button onclick="showKeyboardShortcuts()" role="menuitem">&#x2328; Keyboard shortcuts</button>
       </div>
     </div>
     <span class="header-badge" aria-label="Prototype version">Prototype</span>
@@ -1333,6 +1740,19 @@
             <div class="stat-value" id="stat-confidence">0%</div>
             <div class="stat-label">Avg Confidence</div>
           </div>
+          <div class="stat-item" style="position: relative;">
+            <div class="risk-score-badge medium" id="risk-score-badge" onclick="toggleRiskTooltip()" style="cursor: pointer;">
+              <span class="risk-score-label">Risk</span>
+              <span class="risk-score-value" id="stat-risk-score">--</span>
+            </div>
+            <div class="risk-tooltip" id="risk-tooltip">
+              <div class="risk-tooltip-title">Structure Risk Calculation</div>
+              <div class="risk-tooltip-row"><span>Jurisdiction Risk</span><span id="risk-jur">--</span></div>
+              <div class="risk-tooltip-row"><span>Red Flags</span><span id="risk-flags">--</span></div>
+              <div class="risk-tooltip-row"><span>Screening Hits</span><span id="risk-screening">--</span></div>
+              <div class="risk-tooltip-row"><span>Low Confidence</span><span id="risk-conf">--</span></div>
+            </div>
+          </div>
         </div>
         <div class="review-group">
           <button class="review-btn" onclick="startReviewMode()" aria-label="Start entity review mode">&#x2713; Start Review</button>
@@ -1350,6 +1770,9 @@
         <div class="extraction-info-item" style="margin-left: auto;">&#x1F6E1; FATF/EU Audit Trail: <strong style="color: var(--success);">Compliant</strong></div>
       </nav>
       <div class="filter-bar" id="filter-bar" role="toolbar" aria-label="Graph filters">
+        <div class="search-wrapper">
+          <input type="text" class="search-input-graph" id="graph-search" placeholder="Search entities... (Ctrl+K)" oninput="onSearch(this.value)" autocomplete="off">
+        </div>
         <span class="filter-label" id="confidence-filter-label">Confidence:</span>
         <button class="filter-btn active" data-filter="all" onclick="setFilter('all')" role="radio" aria-checked="true">All</button>
         <button class="filter-btn" data-filter="high" onclick="setFilter('high')" role="radio" aria-checked="false">&#x1F7E2; High</button>
@@ -1408,6 +1831,14 @@
             <div class="legend-item"><div class="legend-line" style="background: var(--muted-foreground)"></div>Ownership %</div>
           </div>
         </div>
+        <div class="legend-section">
+          <div class="legend-label">Jurisdiction Risk</div>
+          <div class="legend-items">
+            <div class="legend-item"><span class="jurisdiction-risk-badge low">Low</span>FATF compliant</div>
+            <div class="legend-item"><span class="jurisdiction-risk-badge medium">Medium</span>Enhanced monitoring</div>
+            <div class="legend-item"><span class="jurisdiction-risk-badge high">High</span>Offshore / tax haven</div>
+          </div>
+        </div>
       </div>
     </div>
     <aside class="side-panel" id="side-panel" aria-label="Entity details panel">
@@ -1443,10 +1874,14 @@
           type: 'parent',
           jurisdiction: 'UAE',
           jurisdictionFlag: '🇦🇪',
+          jurisdictionRisk: 'medium',
           location: 'Dubai',
           ownershipPct: 100,
+          indirectOwnership: 0,
           confidence: 0.97,
           sources: ['UAE Ministry of Economy Registry, p.1-2', 'Trade License Extract, Ref #AE-2024-8891'],
+          screening: { sanctions: 'clear', pep: 'clear', adverseMedia: 'clear', lastChecked: '2026-04-27' },
+          control: { votingRights: 100, boardControl: true, vetoRights: true, controlType: 'Direct ownership' },
           redFlags: [],
           status: 'pending'
         },
@@ -1456,10 +1891,14 @@
           type: 'subsidiary',
           jurisdiction: 'Sweden',
           jurisdictionFlag: '🇸🇪',
+          jurisdictionRisk: 'low',
           location: 'Stockholm',
           ownershipPct: 60,
+          indirectOwnership: 0,
           confidence: 0.95,
           sources: ['Bolagsverket Extract, 2024-11-15', 'Swedish Companies Registration Office'],
+          screening: { sanctions: 'clear', pep: 'clear', adverseMedia: 'clear', lastChecked: '2026-04-27' },
+          control: { votingRights: 60, boardControl: true, vetoRights: false, controlType: 'Majority ownership' },
           redFlags: [],
           status: 'pending'
         },
@@ -1469,10 +1908,14 @@
           type: 'subsidiary',
           jurisdiction: 'UAE',
           jurisdictionFlag: '🇦🇪',
+          jurisdictionRisk: 'medium',
           location: 'Dubai',
           ownershipPct: 100,
+          indirectOwnership: 0,
           confidence: 0.88,
           sources: ['DMCC Authority Registry, p.3', 'Certificate of Incorporation #DMCC-2024-4472'],
+          screening: { sanctions: 'clear', pep: 'clear', adverseMedia: 'clear', lastChecked: '2026-04-27' },
+          control: { votingRights: 100, boardControl: true, vetoRights: true, controlType: 'Wholly owned' },
           redFlags: [],
           status: 'pending'
         },
@@ -1482,10 +1925,14 @@
           type: 'subsidiary',
           jurisdiction: 'Greece',
           jurisdictionFlag: '🇬🇷',
+          jurisdictionRisk: 'medium',
           location: 'Athens',
           ownershipPct: 75,
+          indirectOwnership: 45,
           confidence: 0.93,
           sources: ['Greek General Commercial Registry (GEMI), p.1-4', 'Hellenic Business Registry Extract'],
+          screening: { sanctions: 'clear', pep: 'clear', adverseMedia: 'clear', lastChecked: '2026-04-27' },
+          control: { votingRights: 75, boardControl: true, vetoRights: false, controlType: 'Indirect via Nordic Trade (45%) + Gulf Ventures (30%)' },
           redFlags: [],
           status: 'pending'
         },
@@ -1495,10 +1942,14 @@
           type: 'ubo',
           jurisdiction: 'UAE',
           jurisdictionFlag: '🇦🇪',
+          jurisdictionRisk: 'medium',
           location: 'Dubai',
           ownershipPct: 70,
+          indirectOwnership: 0,
           confidence: 0.94,
           sources: ['Alpha Holdings Shareholder Register, p.5', 'Emirates ID Verification #784-1985-XXXXXXX'],
+          screening: { sanctions: 'clear', pep: 'potential_match', adverseMedia: 'clear', lastChecked: '2026-04-27' },
+          control: { votingRights: 70, boardControl: true, vetoRights: true, controlType: 'Direct UBO' },
           redFlags: [],
           status: 'pending'
         },
@@ -1508,10 +1959,14 @@
           type: 'ubo',
           jurisdiction: 'UAE',
           jurisdictionFlag: '🇦🇪',
+          jurisdictionRisk: 'medium',
           location: 'Abu Dhabi',
           ownershipPct: 30,
+          indirectOwnership: 0,
           confidence: 0.78,
           sources: ['Alpha Holdings Shareholder Register, p.5 (partial)', 'Discrepant entry in UAE MOE records'],
+          screening: { sanctions: 'clear', pep: 'clear', adverseMedia: 'potential_match', lastChecked: '2026-04-27' },
+          control: { votingRights: 30, boardControl: false, vetoRights: false, controlType: 'Direct UBO' },
           redFlags: [
             { title: 'Ambiguous Registry Data', desc: 'Ownership percentage differs between source documents (30% vs 25% reported)' },
             { title: 'Incomplete KYC', desc: 'Missing Emirates ID copy in uploaded documents' }
@@ -1524,10 +1979,14 @@
           type: 'ubo',
           jurisdiction: 'Greece',
           jurisdictionFlag: '🇬🇷',
+          jurisdictionRisk: 'medium',
           location: 'Athens',
           ownershipPct: 25,
+          indirectOwnership: 0,
           confidence: 0.82,
           sources: ['Aegean Logistics Shareholder List, p.2', 'Greek Tax Authority Record #GR-2024-SOF-9912'],
+          screening: { sanctions: 'clear', pep: 'clear', adverseMedia: 'hit', lastChecked: '2026-04-27' },
+          control: { votingRights: 25, boardControl: false, vetoRights: false, controlType: 'Direct UBO' },
           redFlags: [
             { title: 'Adverse Media Hit', desc: 'Named in 2023 news article regarding business dispute (requires review for materiality)' }
           ],
@@ -1539,10 +1998,14 @@
           type: 'director',
           jurisdiction: 'Sweden',
           jurisdictionFlag: '🇸🇪',
+          jurisdictionRisk: 'low',
           location: 'Stockholm',
           ownershipPct: 0,
+          indirectOwnership: 0,
           confidence: 0.92,
           sources: ['Bolagsverket Director Registry, 2024-11-15', 'Nordic Trade AB Board Resolution'],
+          screening: { sanctions: 'clear', pep: 'clear', adverseMedia: 'clear', lastChecked: '2026-04-27' },
+          control: { votingRights: 0, boardControl: true, vetoRights: false, controlType: 'Board member (non-executive)' },
           redFlags: [],
           status: 'pending'
         },
@@ -1552,10 +2015,14 @@
           type: 'director',
           jurisdiction: 'Greece',
           jurisdictionFlag: '🇬🇷',
+          jurisdictionRisk: 'medium',
           location: 'Athens',
           ownershipPct: 0,
+          indirectOwnership: 0,
           confidence: 0.96,
           sources: ['GEMI Director Registry, p.3', 'Aegean Logistics Board Appointment Letter'],
+          screening: { sanctions: 'clear', pep: 'clear', adverseMedia: 'clear', lastChecked: '2026-04-27' },
+          control: { votingRights: 0, boardControl: true, vetoRights: false, controlType: 'Managing director' },
           redFlags: [],
           status: 'pending'
         }
@@ -1583,6 +2050,11 @@
     let settingsOpen = false;
     let reviewQueueIndex = 0;
     let reviewQueue = [];
+    let darkMode = false;
+    let searchTerm = '';
+    let activeEvidenceId = null;
+    let presentationTourIndex = 0;
+    let presentationTourNodes = ['alpha-holdings', 'rashid', 'fatima', 'sofia', 'aegean-logistics'];
 
     // Utility: resolve a CSS variable for use in inline styles
     function cssVar(name) {
@@ -2128,31 +2600,68 @@
       document.getElementById('stat-entities').textContent = nodes.length;
       document.getElementById('stat-jurisdictions').textContent = jurisdictions.length;
       document.getElementById('stat-confidence').textContent = `${avgConfidence}%`;
+      updateRiskScore();
     }
 
     function showTooltip(event, d) {
       const tooltip = document.getElementById('node-tooltip');
-      document.getElementById('tooltip-name').textContent = d.name;
-      document.getElementById('tooltip-detail').textContent = `${d.type.toUpperCase()} · ${d.jurisdictionFlag} ${d.jurisdiction} · Confidence: ${(d.confidence * 100).toFixed(0)}%`;
+      const screeningSummary = d.screening ? Object.values(d.screening).filter(v => v !== 'clear' && typeof v === 'string').length : 0;
+      const riskLabels = { low: 'Low', medium: 'Medium', high: 'High' };
+      const riskClass = d.jurisdictionRisk || 'medium';
+      let detail = `${d.type.toUpperCase()} · ${d.jurisdictionFlag} ${d.jurisdiction} · Confidence: ${(d.confidence * 100).toFixed(0)}%`;
+      detail += `<br><span class="jurisdiction-risk-badge ${riskClass}" style="margin-top:4px;display:inline-flex;">Jurisdiction: ${riskLabels[riskClass]}</span>`;
+      if (screeningSummary > 0) {
+        detail += ` · <span style="color:var(--critical);font-weight:600;">${screeningSummary} screening hit(s)</span>`;
+      }
+      document.getElementById('tooltip-name').innerHTML = d.name;
+      document.getElementById('tooltip-detail').innerHTML = detail;
       tooltip.classList.add('visible');
       tooltip.style.left = `${event.pageX + 12}px`;
       tooltip.style.top = `${event.pageY - 12}px`;
+
+      // Highlight connected nodes
+      highlightConnected(d);
+    }
+
+    function highlightConnected(d) {
+      if (!node || !link) return;
+      const connectedIds = new Set([d.id]);
+      link.each(function(l) {
+        const src = typeof l.source === 'object' ? l.source.id : l.source;
+        const tgt = typeof l.target === 'object' ? l.target.id : l.target;
+        if (src === d.id) connectedIds.add(tgt);
+        if (tgt === d.id) connectedIds.add(src);
+      });
+      node.classed('node-connected', n => connectedIds.has(n.id))
+          .classed('node-dimmed', n => !connectedIds.has(n.id));
+      link.classed('link-dimmed', l => {
+        const src = typeof l.source === 'object' ? l.source.id : l.source;
+        const tgt = typeof l.target === 'object' ? l.target.id : l.target;
+        return !connectedIds.has(src) || !connectedIds.has(tgt);
+      });
+    }
+
+    function clearHighlights() {
+      if (!node || !link) return;
+      node.classed('node-connected', false).classed('node-dimmed', false).classed('node-search-match', false);
+      link.classed('link-dimmed', false);
     }
 
     function hideTooltip() {
       document.getElementById('node-tooltip').classList.remove('visible');
+      clearHighlights();
     }
 
     // ============================================================
     // STAGE 4: REVIEW PANEL
     // ============================================================
     function openPanel(d) {
+      activeEvidenceId = null;
       const panel = document.getElementById('side-panel');
       const content = document.getElementById('panel-content');
       const actions = document.getElementById('panel-actions');
 
       panel.classList.add('visible');
-      // Re-center graph after panel opens
       setTimeout(() => {
         if (simulation) {
           const container = document.getElementById('graph-container');
@@ -2172,6 +2681,47 @@
       if (d.confidence < 0.80) confidenceClass = 'confidence-low';
       else if (d.confidence < 0.90) confidenceClass = 'confidence-medium';
 
+      // UBO Threshold indicator
+      const uboThreshold = 25;
+      const isAboveThreshold = d.ownershipPct >= uboThreshold;
+      const thresholdHtml = d.type !== 'director' ? `
+        <div class="panel-field">
+          <div class="panel-field-label">UBO Threshold (>${uboThreshold}%)</div>
+          <div class="threshold-bar-container">
+            <div class="threshold-bar">
+              <div class="threshold-bar-fill ${isAboveThreshold ? 'above' : 'below'}" style="width: ${Math.min(d.ownershipPct, 100)}%"></div>
+              <div class="threshold-marker" style="left: ${uboThreshold}%">
+                <div class="threshold-marker-label">${uboThreshold}%</div>
+              </div>
+            </div>
+          </div>
+          <div class="threshold-status ${isAboveThreshold ? 'confirmed' : 'below'}">${isAboveThreshold ? 'UBO Confirmed' : 'Below UBO Threshold'}</div>
+        </div>
+      ` : '';
+
+      // Ownership breakdown (direct + indirect)
+      const totalOwnership = d.ownershipPct + (d.indirectOwnership || 0);
+      const ownershipBreakdownHtml = d.type !== 'director' && (d.indirectOwnership || 0) > 0 ? `
+        <div class="panel-field">
+          <div class="panel-field-label">Ownership Breakdown</div>
+          <div class="ownership-breakdown">
+            <div class="ownership-breakdown-item">
+              <div class="ownership-breakdown-value">${d.ownershipPct}%</div>
+              <div class="ownership-breakdown-label">Direct</div>
+            </div>
+            <div class="ownership-breakdown-item">
+              <div class="ownership-breakdown-value">${d.indirectOwnership}%</div>
+              <div class="ownership-breakdown-label">Indirect</div>
+            </div>
+            <div class="ownership-breakdown-item">
+              <div class="ownership-breakdown-value">${totalOwnership}%</div>
+              <div class="ownership-breakdown-label">Total</div>
+            </div>
+          </div>
+        </div>
+      ` : '';
+
+      // Red flags
       let redFlagsHtml = '';
       if (d.redFlags && d.redFlags.length > 0) {
         redFlagsHtml = d.redFlags.map(f => `
@@ -2182,18 +2732,75 @@
         `).join('');
       }
 
-      const citationsHtml = d.sources.map(s => `
-        <li>
+      // Screening panel
+      const screening = d.screening || { sanctions: 'clear', pep: 'clear', adverseMedia: 'clear', lastChecked: 'N/A' };
+      const screeningRow = (label, status, detail) => {
+        const iconClass = status === 'clear' ? 'clear' : status === 'hit' ? 'hit' : 'potential';
+        const statusLabel = status === 'clear' ? 'Clear' : status === 'hit' ? 'Hit Detected' : 'Potential Match';
+        return `
+          <div class="screening-row">
+            <div class="screening-row-left">
+              <div class="screening-icon ${iconClass}">${status === 'clear' ? '&#x2713;' : status === 'hit' ? '!' : '?'}</div>
+              <span class="screening-label">${label}</span>
+            </div>
+            <span class="screening-status ${iconClass}">${statusLabel}</span>
+          </div>
+        `;
+      };
+      const screeningHtml = `
+        <div class="screening-card">
+          <div class="screening-card-title">Screening Results</div>
+          ${screeningRow('Sanctions', screening.sanctions)}
+          ${screeningRow('PEP', screening.pep)}
+          ${screeningRow('Adverse Media', screening.adverseMedia)}
+          <div class="screening-detail">Last checked: ${screening.lastChecked} · Sources: World-Check, OFAC, UN, EU Sanctions</div>
+        </div>
+      `;
+
+      // Control mechanisms
+      const control = d.control;
+      const controlHtml = control ? `
+        <div class="panel-field">
+          <div class="panel-field-label">Control & Influence</div>
+          <div class="control-section">
+            <div class="control-row">
+              <span class="control-label">Voting Rights</span>
+              <span class="control-value">
+                <div class="control-bar"><div class="control-bar-fill" style="width:${control.votingRights}%"></div></div>
+                ${control.votingRights}%
+              </span>
+            </div>
+            <div class="control-row">
+              <span class="control-label">Board Control</span>
+              <span class="control-value">${control.boardControl ? '<span class="control-check">&#x2713;</span> Yes' : '<span class="control-cross">&#x2717;</span> No'}</span>
+            </div>
+            <div class="control-row">
+              <span class="control-label">Veto Rights</span>
+              <span class="control-value">${control.vetoRights ? '<span class="control-check">&#x2713;</span> Yes' : '<span class="control-cross">&#x2717;</span> No'}</span>
+            </div>
+            <div class="control-type">${control.controlType}</div>
+          </div>
+        </div>
+      ` : '';
+
+      // Citations with evidence viewer
+      const citationsHtml = d.sources.map((s, i) => `
+        <div class="citation-item" onclick="toggleEvidence('${d.id}', ${i})">
           <span class="citation-icon">&#x1F4CE;</span>
-          ${s}
-        </li>
+          <span>${s}</span>
+        </div>
       `).join('');
+
+      const evidencePreviewHtml = `
+        <div id="evidence-preview-container" style="display:none;"></div>
+      `;
 
       content.innerHTML = `
         <div class="panel-entity-name">${d.name}</div>
         <div class="panel-badges">
           <span class="badge ${typeBadgeClass[d.type]}">${d.type.toUpperCase()}</span>
           <span class="badge badge-jurisdiction">${d.jurisdictionFlag} ${d.jurisdiction} · ${d.location}</span>
+          <span class="jurisdiction-risk-badge ${d.jurisdictionRisk || 'medium'}">${(d.jurisdictionRisk || 'medium').charAt(0).toUpperCase() + (d.jurisdictionRisk || 'medium').slice(1)} Risk</span>
         </div>
 
         ${d.type !== 'director' ? `
@@ -2202,6 +2809,9 @@
           <div class="panel-field-value">${d.ownershipPct}%</div>
         </div>
         ` : ''}
+
+        ${thresholdHtml}
+        ${ownershipBreakdownHtml}
 
         <div class="panel-field">
           <div class="panel-field-label">AI Confidence Score</div>
@@ -2216,10 +2826,13 @@
         </div>
 
         ${redFlagsHtml}
+        ${screeningHtml}
+        ${controlHtml}
 
         <div class="panel-field">
           <div class="panel-field-label">Source Citations</div>
-          <ul class="citation-list">${citationsHtml}</ul>
+          ${citationsHtml}
+          ${evidencePreviewHtml}
         </div>
 
         <div class="panel-field">
@@ -2305,6 +2918,7 @@
         const status = entityStates[n.id] || 'pending';
         const isActive = document.getElementById('side-panel').classList.contains('visible') &&
                          document.getElementById('panel-content').innerHTML.includes(n.name);
+        const jRisk = n.jurisdictionRisk || 'medium';
         return `
           <div class="entity-list-item ${isActive ? 'active' : ''}" onclick="openPanelById('${n.id}')">
             <div class="entity-list-dot" style="background: ${colorMap[n.type]}"></div>
@@ -2315,6 +2929,7 @@
                 <span>${(n.confidence * 100).toFixed(0)}%</span>
               </div>
             </div>
+            <span class="jurisdiction-risk-badge ${jRisk}" style="font-size:9px;padding:1px 5px;">${jRisk.charAt(0).toUpperCase()}</span>
             <div class="entity-list-status" style="background: ${statusColors[status]}"></div>
           </div>
         `;
@@ -2825,6 +3440,430 @@
           btn.disabled = false;
         }, 2000);
       }, 1500);
+    }
+
+    // ============================================================
+    // EVIDENCE / SOURCE DOCUMENT VIEWER
+    // ============================================================
+    const mockEvidenceTexts = {
+      'alpha-holdings': [
+        { excerpt: 'The <span class="evidence-highlight">Alpha Holdings FZ-LLC</span> is registered under the UAE Ministry of Economy as a Free Zone Limited Liability Company. <span class="evidence-highlight">Ultimate beneficial ownership structure</span> shows Rashid Al-Maktoum holds 70% and Fatima Al-Nahyan holds 30%.' },
+        { excerpt: 'Trade License Reference: <span class="evidence-highlight">#AE-2024-8891</span>. License issued by Dubai Department of Economic Development. Authorized signatory: Rashid Al-Maktoum.' }
+      ],
+      'nordic-trade': [
+        { excerpt: '<span class="evidence-highlight">Nordic Trade AB</span>, org. nr 556XXX-XXXX, registered with Bolagsverket on 2024-11-15. Board: Erik Lindqvist (Chairman). <span class="evidence-highlight">Alpha Holdings FZ-LLC owns 60%</span> of share capital.' },
+        { excerpt: 'Swedish Companies Registration Office annual report filing confirms <span class="evidence-highlight">UBO: Rashid Al-Maktoum via Alpha Holdings</span>.' }
+      ],
+      'gulf-ventures': [
+        { excerpt: '<span class="evidence-highlight">Gulf Ventures DMCC</span> Certificate of Incorporation #DMCC-2024-4472. Registered in DMCC Free Zone, Dubai. <span class="evidence-highlight">100% owned by Alpha Holdings FZ-LLC</span>.' },
+        { excerpt: 'DMCC Authority Registry, page 3. Director appointment: Nikos Vlahos as managing director effective 2024-03-01.' }
+      ],
+      'aegean-logistics': [
+        { excerpt: '<span class="evidence-highlight">Aegean Logistics SA</span>, registered with GEMI (Greek General Commercial Registry). Ownership: <span class="evidence-highlight">Nordic Trade AB 45%, Gulf Ventures DMCC 30%, Sofia Papadopoulos 25%</span>. Total effective ownership by Alpha Holdings: 75%.' },
+        { excerpt: 'Hellenic Business Registry Extract. Board resolution dated 2024-06-15 confirms <span class="evidence-highlight">Nikos Vlahos as managing director</span>.' }
+      ],
+      'rashid': [
+        { excerpt: '<span class="evidence-highlight">Rashid Al-Maktoum</span> — Emirates ID #784-1985-XXXXXXX. Listed as 70% shareholder in Alpha Holdings FZ-LLC per shareholder register, page 5.' },
+        { excerpt: 'Emirates ID Verification document confirms identity match. <span class="evidence-highlight">PEP status: potential match</span> — family name associated with UAE ruling family.' }
+      ],
+      'fatima': [
+        { excerpt: '<span class="evidence-highlight">Fatima Al-Nahyan</span> — 30% shareholder in Alpha Holdings FZ-LLC. Discrepancy noted: UAE MOE records report <span class="evidence-highlight">25% vs 30%</span> in shareholder register.' },
+        { excerpt: 'Emirates ID copy missing from uploaded documents. <span class="evidence-highlight">Adverse media: potential match</span> — name appears in 2024 business dispute article.' }
+      ],
+      'sofia': [
+        { excerpt: '<span class="evidence-highlight">Sofia Papadopoulos</span> — 25% shareholder in Aegean Logistics SA. Greek Tax Authority Record #GR-2024-SOF-9912.' },
+        { excerpt: '<span class="evidence-highlight">Adverse media hit</span>: Named in 2023 Kathimerini article regarding commercial property dispute with Delta Properties SA. Requires materiality assessment.' }
+      ],
+      'erik': [
+        { excerpt: '<span class="evidence-highlight">Erik Lindqvist</span> — Director of Nordic Trade AB per Bolagsverket registry, 2024-11-15. Non-executive board member, no ownership stake.' },
+        { excerpt: 'Nordic Trade AB Board Resolution appointing Erik Lindqvist as <span class="evidence-highlight">Chairman of the Board</span>.' }
+      ],
+      'nikos': [
+        { excerpt: '<span class="evidence-highlight">Nikos Vlahos</span> — Managing Director of Aegean Logistics SA per GEMI registry, page 3. No ownership interest.' },
+        { excerpt: 'Aegean Logistics Board Appointment Letter dated 2024-03-01. <span class="evidence-highlight">Managing director</span> with operational authority.' }
+      ]
+    };
+
+    function toggleEvidence(nodeId, sourceIndex) {
+      const container = document.getElementById('evidence-preview-container');
+      if (activeEvidenceId === `${nodeId}-${sourceIndex}`) {
+        container.style.display = 'none';
+        activeEvidenceId = null;
+        return;
+      }
+      activeEvidenceId = `${nodeId}-${sourceIndex}`;
+      const evidence = mockEvidenceTexts[nodeId];
+      if (!evidence || !evidence[sourceIndex]) {
+        container.style.display = 'none';
+        return;
+      }
+      const node = mockData.nodes.find(n => n.id === nodeId);
+      const sourceName = node ? node.sources[sourceIndex] : 'Unknown source';
+      container.style.display = 'block';
+      container.innerHTML = `
+        <div class="evidence-preview">
+          <div class="evidence-header">
+            <span class="evidence-source">${sourceName}</span>
+            <button class="evidence-close" onclick="activeEvidenceId=null;document.getElementById('evidence-preview-container').style.display='none';">&#x2715;</button>
+          </div>
+          <div class="evidence-text">${evidence[sourceIndex].excerpt}</div>
+          <div class="evidence-page">Source document excerpt · Page ${sourceIndex + 1}</div>
+        </div>
+      `;
+    }
+
+    // ============================================================
+    // ENTITY SEARCH
+    // ============================================================
+    function onSearch(query) {
+      searchTerm = query.toLowerCase().trim();
+      if (!node || searchTerm === '') {
+        if (node) {
+          node.transition().duration(300).style('opacity', 1).classed('node-search-match', false);
+          if (link) link.transition().duration(300).style('opacity', 1);
+        }
+        return;
+      }
+      node.transition().duration(300)
+        .style('opacity', d => {
+          const match = d.name.toLowerCase().includes(searchTerm) ||
+                        d.type.toLowerCase().includes(searchTerm) ||
+                        d.jurisdiction.toLowerCase().includes(searchTerm) ||
+                        d.location.toLowerCase().includes(searchTerm);
+          return match ? 1 : 0.15;
+        })
+        .classed('node-search-match', d => {
+          return d.name.toLowerCase().includes(searchTerm) ||
+                 d.jurisdiction.toLowerCase().includes(searchTerm) ||
+                 d.location.toLowerCase().includes(searchTerm);
+        });
+
+      if (link) {
+        link.transition().duration(300)
+          .style('opacity', d => {
+            const src = typeof d.source === 'object' ? d.source : mockData.nodes.find(n => n.id === d.source);
+            const tgt = typeof d.target === 'object' ? d.target : mockData.nodes.find(n => n.id === d.target);
+            if (!src || !tgt) return 0.15;
+            const srcMatch = src.name.toLowerCase().includes(searchTerm);
+            const tgtMatch = tgt.name.toLowerCase().includes(searchTerm);
+            return (srcMatch || tgtMatch) ? 1 : 0.1;
+          });
+      }
+    }
+
+    // ============================================================
+    // STRUCTURE RISK SCORE
+    // ============================================================
+    function computeRiskScore() {
+      const nodes = mockData.nodes;
+      let jurScore = 0, flagScore = 0, screeningScore = 0, confScore = 0;
+
+      nodes.forEach(n => {
+        const jRisk = n.jurisdictionRisk || 'medium';
+        jurScore += jRisk === 'high' ? 30 : jRisk === 'medium' ? 15 : 5;
+
+        if (n.redFlags) flagScore += n.redFlags.length * 10;
+
+        if (n.screening) {
+          const s = n.screening;
+          if (s.sanctions === 'hit') screeningScore += 25;
+          if (s.pep === 'hit') screeningScore += 20;
+          if (s.pep === 'potential_match') screeningScore += 10;
+          if (s.adverseMedia === 'hit') screeningScore += 15;
+          if (s.adverseMedia === 'potential_match') screeningScore += 5;
+        }
+
+        if (n.confidence < 0.80) confScore += 15;
+        else if (n.confidence < 0.90) confScore += 5;
+      });
+
+      const raw = jurScore + flagScore + screeningScore + confScore;
+      const max = nodes.length * (30 + 30 + 25 + 15);
+      const normalized = Math.min(Math.round((raw / Math.max(max, 1)) * 100), 100);
+
+      return {
+        score: normalized,
+        level: normalized < 30 ? 'low' : normalized < 60 ? 'medium' : 'high',
+        jurisdictionScore: Math.min(jurScore, 100),
+        flagScore: Math.min(flagScore, 100),
+        screeningScore: Math.min(screeningScore, 100),
+        confScore: Math.min(confScore, 100)
+      };
+    }
+
+    function updateRiskScore() {
+      const risk = computeRiskScore();
+      const badge = document.getElementById('risk-score-badge');
+      const scoreEl = document.getElementById('stat-risk-score');
+      if (!badge || !scoreEl) return;
+
+      badge.className = `risk-score-badge ${risk.level}`;
+      scoreEl.textContent = `${risk.score}/100`;
+
+      document.getElementById('risk-jur').textContent = `${risk.jurisdictionScore}/100`;
+      document.getElementById('risk-flags').textContent = `${risk.flagScore}/100`;
+      document.getElementById('risk-screening').textContent = `${risk.screeningScore}/100`;
+      document.getElementById('risk-conf').textContent = `${risk.confScore}/100`;
+    }
+
+    let riskTooltipVisible = false;
+    function toggleRiskTooltip() {
+      const tooltip = document.getElementById('risk-tooltip');
+      riskTooltipVisible = !riskTooltipVisible;
+      tooltip.classList.toggle('visible', riskTooltipVisible);
+    }
+
+    document.addEventListener('click', (e) => {
+      if (riskTooltipVisible && !e.target.closest('.risk-score-badge')) {
+        const tooltip = document.getElementById('risk-tooltip');
+        if (tooltip) tooltip.classList.remove('visible');
+        riskTooltipVisible = false;
+      }
+    });
+
+    // ============================================================
+    // DARK MODE TOGGLE
+    // ============================================================
+    function toggleDarkMode() {
+      darkMode = !darkMode;
+      document.body.classList.toggle('dark-mode', darkMode);
+      settingsOpen = false;
+      const dd = document.getElementById('settings-dropdown');
+      if (dd) dd.classList.remove('visible');
+    }
+
+    // ============================================================
+    // KEYBOARD SHORTCUTS
+    // ============================================================
+    function showKeyboardShortcuts() {
+      settingsOpen = false;
+      const dd = document.getElementById('settings-dropdown');
+      if (dd) dd.classList.remove('visible');
+
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-overlay visible';
+      overlay.onclick = () => overlay.remove();
+      overlay.innerHTML = `
+        <div class="modal" onclick="event.stopPropagation();" style="width:480px;">
+          <div class="modal-header">
+            <div class="modal-title">Keyboard Shortcuts</div>
+            <button class="modal-close-btn" onclick="this.closest('.modal-overlay').remove()">&#x2715;</button>
+          </div>
+          <div class="modal-content">
+            <div class="shortcuts-grid">
+              <span class="shortcut-key">Ctrl+K</span><span class="shortcut-desc">Focus entity search</span>
+              <span class="shortcut-key">Esc</span><span class="shortcut-desc">Close panel / dismiss hint</span>
+              <span class="shortcut-key">Space</span><span class="shortcut-desc">Toggle graph freeze</span>
+              <span class="shortcut-key">1</span><span class="shortcut-desc">Navigate to Upload stage</span>
+              <span class="shortcut-key">2</span><span class="shortcut-desc">Navigate to Extraction stage</span>
+              <span class="shortcut-key">3</span><span class="shortcut-desc">Navigate to Graph stage</span>
+              <span class="shortcut-key">4</span><span class="shortcut-desc">Navigate to Review stage</span>
+              <span class="shortcut-key">&#x2190; &#x2192;</span><span class="shortcut-desc">Previous/next entity in review queue</span>
+              <span class="shortcut-key">A</span><span class="shortcut-desc">Approve current entity (review mode)</span>
+              <span class="shortcut-key">R</span><span class="shortcut-desc">Reject current entity (review mode)</span>
+              <span class="shortcut-key">F</span><span class="shortcut-desc">Flag current entity (review mode)</span>
+              <span class="shortcut-key">D</span><span class="shortcut-desc">Toggle dark mode</span>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    // Global keyboard event listener
+    document.addEventListener('keydown', (e) => {
+      // Ctrl+K: Focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('graph-search');
+        if (searchInput) {
+          searchInput.focus();
+          if (currentStage !== 'graph') showGraphStage(false);
+        }
+        return;
+      }
+
+      // Esc: Close panel, dismiss, close modals
+      if (e.key === 'Escape') {
+        if (document.querySelector('.modal-overlay.visible')) {
+          document.querySelector('.modal-overlay.visible').remove();
+          return;
+        }
+        if (document.getElementById('side-panel').classList.contains('visible')) {
+          closePanel();
+          return;
+        }
+        dismissHint();
+        return;
+      }
+
+      // Don't process shortcuts when typing in search
+      if (document.activeElement && document.activeElement.tagName === 'INPUT') return;
+
+      // Space: Toggle freeze
+      if (e.key === ' ' && currentStage === 'graph') {
+        e.preventDefault();
+        toggleFreeze();
+        return;
+      }
+
+      // Stage navigation (1-4)
+      if (e.key >= '1' && e.key <= '4') {
+        const stages = ['upload', 'extraction', 'graph', 'review'];
+        const idx = parseInt(e.key) - 1;
+        if (idx < stages.length && currentStage !== stages[idx]) {
+          const stageEl = stages[idx];
+          if (stageEl === 'graph') showGraphStage(false);
+          else if (stageEl === 'review') { startReviewMode(); return; }
+          else if (stageEl === 'upload') { goBack(); return; }
+        }
+        return;
+      }
+
+      // Review mode shortcuts
+      if (reviewMode && reviewQueue.length > 0) {
+        if (e.key === 'ArrowLeft') { reviewPrev(); return; }
+        if (e.key === 'ArrowRight') { reviewNext(); return; }
+        if (e.key === 'a' || e.key === 'A') { setEntityStateFromReview('approved'); return; }
+        if (e.key === 'r' || e.key === 'R') { setEntityStateFromReview('rejected'); return; }
+        if (e.key === 'f' || e.key === 'F') { setEntityStateFromReview('flagged'); return; }
+      }
+
+      // D: Toggle dark mode
+      if (e.key === 'd' || e.key === 'D') {
+        toggleDarkMode();
+        return;
+      }
+    });
+
+    // ============================================================
+    // PRESENTATION MODE + GUIDED TOUR
+    // ============================================================
+    function togglePresentationMode() {
+      presentationMode = !presentationMode;
+      document.body.classList.toggle('presentation-mode', presentationMode);
+      document.getElementById('presentation-banner').classList.toggle('visible', presentationMode);
+
+      presentationTourIndex = 0;
+      if (presentationMode) {
+        if (simulation) simulation.stop();
+        showPresentationTourStep();
+      } else {
+        if (dataLoaded && !isFrozen) {
+          simulation = d3.forceSimulation(mockData.nodes)
+            .force('link', d3.forceLink(mockData.links).id(d => d.id).distance(d => d.type === 'ownership' ? 120 : 100))
+            .force('charge', d3.forceManyBody().strength(-400))
+            .force('center', d3.forceCenter(document.getElementById('graph-container').clientWidth / 2, document.getElementById('graph-container').clientHeight / 2))
+            .force('collision', d3.forceCollide().radius(50))
+            .on('tick', ticked);
+        }
+        removePresentationTourAnnotations();
+      }
+      settingsOpen = false;
+      const dd = document.getElementById('settings-dropdown');
+      if (dd) dd.classList.remove('visible');
+    }
+
+    function showPresentationTourStep() {
+      removePresentationTourAnnotations();
+      if (presentationTourIndex >= presentationTourNodes.length) {
+        // Tour complete
+        return;
+      }
+      const nodeId = presentationTourNodes[presentationTourIndex];
+      const nodeData = mockData.nodes.find(n => n.id === nodeId);
+      if (!nodeData || !node) return;
+
+      // Find the SVG group for this node and highlight it
+      node.each(function(d) {
+        if (d.id === nodeId) {
+          const g = d3.select(this);
+          g.append('circle')
+            .attr('r', 40)
+            .attr('fill', 'none')
+            .attr('stroke', 'oklch(0.572 0.223 256.61)')
+            .attr('stroke-width', 2)
+            .attr('stroke-dasharray', '6,4')
+            .attr('class', 'tour-annotation')
+            .attr('opacity', 0.6);
+        }
+      });
+
+      // Show tour info in a banner
+      const existingBanner = document.getElementById('tour-banner');
+      if (existingBanner) existingBanner.remove();
+
+      const banner = document.createElement('div');
+      banner.id = 'tour-banner';
+      banner.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 20px;box-shadow:0 8px 24px oklch(0 0 0 / 0.1);z-index:150;display:flex;align-items:center;gap:16px;font-size:13px;max-width:500px;';
+      banner.innerHTML = `
+        <div>
+          <strong>${presentationTourIndex + 1}/${presentationTourNodes.length}</strong>&nbsp;&nbsp;
+          <strong>${nodeData.name}</strong> — <span style="color:var(--muted-foreground);">${nodeData.type.toUpperCase()}, ${nodeData.jurisdiction} — ${(nodeData.confidence*100).toFixed(0)}% confidence</span>
+        </div>
+        <button onclick="presentationTourIndex++;showPresentationTourStep();" style="background:var(--primary);color:var(--primary-foreground);border:none;padding:6px 12px;border-radius:var(--radius-md);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">Next &#x2192;</button>
+      `;
+      document.body.appendChild(banner);
+    }
+
+    function removePresentationTourAnnotations() {
+      if (g) g.selectAll('.tour-annotation').remove();
+      const existingBanner = document.getElementById('tour-banner');
+      if (existingBanner) existingBanner.remove();
+    }
+
+    // ============================================================
+    // EMPTY / ERROR STATES
+    // ============================================================
+    function showExtractionError() {
+      const extractionContainer = document.querySelector('.extraction-container');
+      if (extractionContainer) {
+        extractionContainer.innerHTML = `
+          <div style="text-align:center;max-width:400px;">
+            <div style="font-size:48px;margin-bottom:16px;">&#x26a0;&#x1f4e8;</div>
+            <h2 style="font-size:20px;font-weight:700;margin-bottom:8px;color:var(--critical);">Extraction Failed</h2>
+            <p style="font-size:14px;color:var(--muted-foreground);margin-bottom:24px;line-height:1.6;">
+              The document processing pipeline encountered an error. This could be due to unsupported file format, corrupted document, or temporary service unavailability.
+            </p>
+            <div style="display:flex;gap:8px;justify-content:center;">
+              <button onclick="retryExtraction()" style="background:var(--primary);color:var(--primary-foreground);border:none;padding:8px 16px;border-radius:var(--radius-md);font-size:13px;font-weight:600;cursor:pointer;">&#x1f504; Retry</button>
+              <button onclick="goBack()" style="background:var(--muted);color:var(--foreground);border:1px solid var(--border);padding:8px 16px;border-radius:var(--radius-md);font-size:13px;font-weight:600;cursor:pointer;">Upload Different File</button>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function retryExtraction() {
+      // Reset and re-run pipeline
+      for (let i = 1; i <= 4; i++) {
+        const stepEl = document.getElementById(`step-${i}`);
+        if (stepEl) { stepEl.classList.remove('active', 'complete'); }
+        const iconEl = document.getElementById(`step-icon-${i}`);
+        if (iconEl) {
+          iconEl.classList.remove('active', 'complete');
+          iconEl.classList.add('pending');
+        }
+      }
+      updateProgress(0);
+      runPipeline();
+    }
+
+    // ============================================================
+    // SIDE PANEL LOADING SKELETON
+    // ============================================================
+    function showPanelSkeleton() {
+      const content = document.getElementById('panel-content');
+      if (content) {
+        content.innerHTML = `
+          <div class="skeleton" style="height:24px;width:70%;margin-bottom:12px;"></div>
+          <div class="skeleton" style="height:16px;width:40%;margin-bottom:20px;"></div>
+          <div class="skeleton" style="height:40px;margin-bottom:16px;"></div>
+          <div class="skeleton" style="height:40px;margin-bottom:16px;"></div>
+          <div class="skeleton" style="height:60px;margin-bottom:16px;"></div>
+          <div class="skeleton" style="height:80px;margin-bottom:16px;"></div>
+        `;
+      }
     }
 
     // Close modal on overlay click

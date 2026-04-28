@@ -785,6 +785,191 @@
       border-color: var(--ring);
       box-shadow: 0 0 0 3px oklch(0.708 0 0 / 0.15);
     }
+
+    /* === New Styles for Enhancements === */
+
+    /* Scenario/Rule Management */
+    .scenario-table { width: 100%; border-collapse: collapse; }
+    .scenario-table th {
+      padding: 10px 16px; font-size: 11px; color: var(--muted-foreground);
+      text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
+      border-bottom: 1px solid var(--border); background: oklch(0.97 0 0 / 0.5);
+      text-align: left;
+    }
+    .scenario-table td {
+      padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: middle;
+    }
+    .scenario-name { font-weight: 600; font-size: 14px; }
+    .scenario-desc { font-size: 12px; color: var(--muted-foreground); margin-top: 2px; }
+    .scenario-weight-slider {
+      width: 120px; accent-color: var(--info); cursor: pointer;
+    }
+    .scenario-threshold-input {
+      width: 70px; height: 30px; padding: 0 8px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--card); font-size: 13px;
+      color: var(--foreground); outline: none; font-family: inherit; text-align: center;
+    }
+    .scenario-threshold-input:focus { border-color: var(--ring); }
+    .toggle-switch {
+      position: relative; width: 40px; height: 22px; cursor: pointer;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute; inset: 0; background: var(--muted); border-radius: 999px;
+      transition: 0.2s;
+    }
+    .toggle-slider::before {
+      content: ''; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px;
+      background: white; border-radius: 50%; transition: 0.2s;
+    }
+    .toggle-switch input:checked + .toggle-slider { background: var(--info); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(18px); }
+    .impact-simulation {
+      margin-top: 16px; padding: 16px; border-radius: var(--radius-md);
+      background: var(--info-muted); border: 1px solid var(--info);
+    }
+    .impact-title { font-weight: 600; font-size: 14px; margin-bottom: 8px; color: var(--info); }
+    .impact-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; }
+    .impact-label { color: var(--muted-foreground); }
+    .impact-value { font-weight: 600; }
+
+    /* Bulk operations */
+    .alert-select {
+      width: 18px; height: 18px; accent-color: var(--info); cursor: pointer; flex-shrink: 0; margin-top: 4px;
+    }
+    .bulk-action-bar {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--primary); color: var(--primary-foreground);
+      padding: 12px 20px; border-radius: var(--radius-lg);
+      display: none; align-items: center; gap: 12px; z-index: 200;
+      box-shadow: 0 8px 24px oklch(0 0 0 / 0.2);
+    }
+    .bulk-action-bar.visible { display: flex; }
+    .bulk-count { font-size: 14px; font-weight: 600; margin-right: 8px; }
+    .bulk-btn {
+      padding: 6px 14px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600;
+      cursor: pointer; border: 1px solid oklch(1 0 0 / 0.2); background: transparent;
+      color: var(--primary-foreground); transition: all 0.15s;
+    }
+    .bulk-btn:hover { background: oklch(1 0 0 / 0.15); }
+    .bulk-btn.danger { border-color: oklch(0.577 0.245 27.325 / 0.5); color: oklch(0.9 0.05 27); }
+
+    /* Portfolio analytics */
+    .cohort-table { width: 100%; border-collapse: collapse; }
+    .cohort-table th {
+      padding: 8px 12px; font-size: 11px; color: var(--muted-foreground);
+      text-transform: uppercase; font-weight: 600; border-bottom: 1px solid var(--border);
+      background: oklch(0.97 0 0 / 0.5); text-align: left;
+    }
+    .cohort-table td {
+      padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .risk-exposure-bar {
+      height: 8px; background: var(--muted); border-radius: 999px; overflow: hidden; min-width: 80px;
+    }
+    .risk-exposure-fill { height: 100%; border-radius: 999px; transition: width 0.5s ease; }
+    .sparkline-container { width: 80px; height: 24px; display: inline-block; vertical-align: middle; }
+
+    /* Audit trail */
+    .audit-entry {
+      display: flex; gap: 12px; padding: 12px 0;
+      border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .audit-entry:last-child { border-bottom: none; }
+    .audit-icon {
+      width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 14px; flex-shrink: 0;
+    }
+    .audit-icon.score-change { background: var(--info-muted); color: var(--info); }
+    .audit-icon.override { background: var(--warning-muted); color: var(--warning); }
+    .audit-icon.alert-action { background: var(--success-muted); color: var(--success); }
+    .audit-icon.scenario-edit { background: oklch(0.96 0.08 56); color: oklch(0.5 0.2 56); }
+    .audit-body { flex: 1; }
+    .audit-action-text { font-weight: 500; }
+    .audit-meta { font-size: 12px; color: var(--muted-foreground); margin-top: 2px; }
+
+    /* What-If Simulator */
+    .simulator-active { background: oklch(0.96 0.05 256 / 0.3); border: 1px dashed var(--info); }
+    .predicted-score {
+      font-size: 32px; font-weight: 800; text-align: center; padding: 12px;
+      border-radius: var(--radius-md); background: var(--muted);
+    }
+    .predicted-delta {
+      font-size: 14px; font-weight: 600; text-align: center; margin-top: 4px;
+    }
+
+    /* SAR Report Modal */
+    .sar-modal-overlay {
+      position: fixed; inset: 0; background: oklch(0 0 0 / 0.5); z-index: 300;
+      display: none; align-items: center; justify-content: center;
+    }
+    .sar-modal-overlay.visible { display: flex; }
+    .sar-modal {
+      background: var(--card); border-radius: var(--radius-lg); width: 700px; max-width: 90vw;
+      max-height: 85vh; overflow-y: auto; box-shadow: 0 24px 48px oklch(0 0 0 / 0.2);
+    }
+    .sar-modal-header {
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .sar-modal-title { font-size: 18px; font-weight: 700; }
+    .sar-modal-close {
+      background: none; border: none; cursor: pointer; color: var(--muted-foreground);
+      font-size: 20px; padding: 4px;
+    }
+    .sar-modal-close:hover { color: var(--foreground); }
+    .sar-modal-body { padding: 24px; }
+    .sar-field { margin-bottom: 16px; }
+    .sar-field-label { font-size: 12px; font-weight: 600; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .sar-field-value { font-size: 14px; }
+    .sar-narrative {
+      width: 100%; min-height: 120px; padding: 12px; border: 1px solid var(--border);
+      border-radius: var(--radius-md); font-size: 13px; font-family: inherit;
+      color: var(--foreground); outline: none; resize: vertical; line-height: 1.6;
+    }
+    .sar-narrative:focus { border-color: var(--ring); }
+    .sar-modal-footer {
+      padding: 16px 24px; border-top: 1px solid var(--border);
+      display: flex; gap: 8px; justify-content: flex-end;
+    }
+
+    /* Peer Benchmark */
+    .percentile-badge {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+      border-radius: var(--radius-md); background: var(--muted); font-size: 13px; font-weight: 600;
+    }
+    .similar-profile {
+      display: flex; align-items: center; gap: 10px; padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .similar-profile:last-child { border-bottom: none; }
+
+    /* Dashboard widget toggle */
+    .customize-panel {
+      display: none; padding: 12px 24px; background: var(--muted);
+      border-bottom: 1px solid var(--border); margin-bottom: 0;
+    }
+    .customize-panel.visible { display: block; }
+    .widget-toggle {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px;
+      margin: 4px; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px;
+      font-weight: 500; border: 1px solid var(--border); background: var(--card);
+      transition: all 0.15s; user-select: none;
+    }
+    .widget-toggle:hover { border-color: var(--info); }
+    .widget-toggle.active { background: var(--info); color: white; border-color: var(--info); }
+    .customize-btn {
+      padding: 6px 12px; border: 1px solid var(--border); background: var(--card);
+      border-radius: var(--radius-sm); font-size: 12px; cursor: pointer;
+      color: var(--muted-foreground); font-weight: 500; transition: all 0.15s;
+    }
+    .customize-btn:hover { border-color: var(--info); color: var(--info); }
+    .customize-btn.active { background: var(--info); color: white; border-color: var(--info); }
+
+    /* Audit filters */
+    .audit-filters {
+      display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; padding: 20px 24px 0;
+    }
   </style>
 </head>
 <body>
@@ -807,6 +992,14 @@
       <button class="nav-tab" data-tab="alerts" title="View alerts requiring review">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         Alerts <span class="alert-badge" id="alert-count-badge">0</span>
+      </button>
+      <button class="nav-tab" data-tab="scenarios" title="Configure risk scenarios and rules">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Scenarios
+      </button>
+      <button class="nav-tab" data-tab="audit" title="View audit trail of all actions">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Audit Trail
       </button>
     </nav>
     <div class="nav-right">
@@ -936,12 +1129,93 @@
             <div class="card-title">Alert Feed</div>
             <div class="card-subtitle">Flagged cases requiring your review</div>
           </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <label style="display: flex; align-items: center; gap: 6px; font-size: 13px; cursor: pointer; color: var(--muted-foreground);">
+              <input type="checkbox" id="alert-select-all" onchange="toggleSelectAllAlerts()" style="accent-color: var(--info); cursor: pointer;">
+              Select All
+            </label>
+          </div>
         </div>
         <div class="alert-filters" id="alert-filters"></div>
         <div id="alerts-container" style="padding: 16px 24px 24px;"></div>
       </div>
     </section>
+
+    <!-- SCENARIOS SCREEN -->
+    <section id="screen-scenarios" class="screen">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Risk Scenario Configuration</div>
+            <div class="card-subtitle">No-code rule management — tune weights and thresholds without engineering</div>
+          </div>
+          <button class="btn btn-primary" onclick="simulateScenarioImpact()" id="simulate-impact-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Simulate Impact
+          </button>
+        </div>
+        <div class="table-container" style="padding: 0 24px 24px;">
+          <table class="scenario-table" id="scenario-table">
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th>Risk Weight</th>
+                <th>Threshold</th>
+                <th>Status</th>
+                <th>Last Tuned</th>
+              </tr>
+            </thead>
+            <tbody id="scenario-tbody"></tbody>
+          </table>
+          <div id="impact-simulation-area"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUDIT TRAIL SCREEN -->
+    <section id="screen-audit" class="screen">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Audit Trail</div>
+            <div class="card-subtitle">Complete traceability of all scoring actions and decisions</div>
+          </div>
+        </div>
+        <div class="audit-filters" id="audit-filters"></div>
+        <div id="audit-container" style="padding: 16px 24px 24px;"></div>
+      </div>
+    </section>
   </main>
+
+  <!-- SAR Report Modal -->
+  <div class="sar-modal-overlay" id="sar-modal" onclick="if(event.target===this)closeSarModal()">
+    <div class="sar-modal">
+      <div class="sar-modal-header">
+        <div class="sar-modal-title">Generate SAR/STR Report</div>
+        <button class="sar-modal-close" onclick="closeSarModal()">&times;</button>
+      </div>
+      <div class="sar-modal-body" id="sar-modal-body"></div>
+      <div class="sar-modal-footer">
+        <button class="btn btn-secondary" onclick="closeSarModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="previewSarReport()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Preview Report
+        </button>
+        <button class="btn btn-secondary" onclick="exportSarReport()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bulk Action Bar -->
+  <div class="bulk-action-bar" id="bulk-action-bar">
+    <span class="bulk-count" id="bulk-count">0 selected</span>
+    <button class="bulk-btn" onclick="bulkAcknowledge()">Acknowledge</button>
+    <button class="bulk-btn" onclick="bulkEscalate()">Escalate</button>
+    <button class="bulk-btn danger" onclick="bulkDismiss()">Dismiss as False Positive</button>
+  </div>
 
 <script>
 // ==========================================
@@ -1142,8 +1416,45 @@ const alerts = users.filter(u => u.riskScore >= 50 || u.kyc.status === 'expired'
           'Risk score exceeded threshold',
   aiAction: getAIRecommendation(user).action,
   timestamp: randomDate(-7, 0),
-  acknowledged: false
+  acknowledged: false,
+  selected: false
 }));
+
+// ==========================================
+// SCENARIO DATA
+// ==========================================
+const scenarios = [
+  { id: 'SCN-001', name: 'High-Risk Jurisdiction', description: 'Flags customers operating in FATF grey/black list countries', weight: 20, threshold: 50, active: true, lastTuned: randomDate(-30, -1) },
+  { id: 'SCN-002', name: 'PEP Proximity Detection', description: 'Detects Politically Exposed Persons and close associates', weight: 15, threshold: 60, active: true, lastTuned: randomDate(-14, -2) },
+  { id: 'SCN-003', name: 'Transaction Velocity', description: 'Unusual transaction volume or frequency patterns', weight: 25, threshold: 75, active: true, lastTuned: randomDate(-7, 0) },
+  { id: 'SCN-004', name: 'Document Expiry', description: 'KYC documentation approaching or past expiration', weight: 30, threshold: 30, active: true, lastTuned: randomDate(-21, -3) },
+  { id: 'SCN-005', name: 'Adverse Media Hit', description: 'Negative news or sanctions list matches', weight: 10, threshold: 40, active: true, lastTuned: randomDate(-10, -1) },
+  { id: 'SCN-006', name: 'Data Completeness', description: 'Incomplete customer information or missing fields', weight: 15, threshold: 50, active: true, lastTuned: randomDate(-30, -5) },
+  { id: 'SCN-007', name: 'Document Quality Score', description: 'Low quality or potentially tampered documents', weight: 10, threshold: 35, active: false, lastTuned: randomDate(-45, -10) },
+  { id: 'SCN-008', name: 'Sanctions Proximity', description: 'Connections to sanctioned entities or networks', weight: 20, threshold: 70, active: true, lastTuned: randomDate(-5, -1) }
+];
+
+// ==========================================
+// AUDIT LOG DATA
+// ==========================================
+const auditLog = [];
+function addAuditEntry(action, target, oldValue, newValue, actor, rationale) {
+  auditLog.unshift({
+    id: `AUD-${String(auditLog.length + 1).padStart(4, '0')}`,
+    timestamp: new Date(),
+    action, target, oldValue, newValue, actor: actor || 'AI System', rationale
+  });
+}
+
+// Seed initial audit entries
+addAuditEntry('Score Updated', 'USR-0003 (Olivia Anderson)', '52', '58', 'AI System', 'Automated recalculation — transaction velocity increased');
+addAuditEntry('Officer Override', 'USR-0007 (Sophia Johnson)', '65', '50', 'Officer M. Chen', 'Verified source of funds through additional documentation');
+addAuditEntry('Alert Acknowledged', 'ALT-0001', '—', 'Reviewed', 'Officer J. Smith', 'Standard review completed');
+addAuditEntry('Scenario Tuned', 'High-Risk Jurisdiction (SCN-001)', 'Threshold: 40', 'Threshold: 50', 'Officer Admin', 'Adjusted to reduce false positives from low-risk jurisdictions');
+addAuditEntry('Score Updated', 'USR-0012 (James Williams)', '22', '18', 'AI System', 'KYC documents renewed — risk factors decreased');
+addAuditEntry('Alert Acknowledged', 'ALT-0002', '—', 'Reviewed', 'Officer J. Smith', 'False positive — customer provided additional context');
+addAuditEntry('Model Retrained', 'Risk Scoring Engine v2.4.1', 'v2.4.0', 'v2.4.1', 'MLOps Pipeline', 'Scheduled retraining with 90-day lookback window');
+addAuditEntry('Score Updated', 'USR-0006 (Ethan Brown)', '41', '55', 'AI System', 'Country risk recalculation — jurisdiction reassessed');
 
 // ==========================================
 // RENDER FUNCTIONS
@@ -1355,14 +1666,7 @@ function getScoreColor(score) {
 }
 
 function renderAlerts() {
-  const filtered = alerts.filter(a => {
-    if (alertFilter === 'all') return true;
-    if (alertFilter === 'active') return !a.acknowledged;
-    if (alertFilter === 'critical') return a.severity === 'critical';
-    if (alertFilter === 'high') return a.severity === 'high';
-    if (alertFilter === 'acknowledged') return a.acknowledged;
-    return true;
-  });
+  const filtered = getFilteredAlerts();
 
   const filtersHTML = ['all', 'active', 'critical', 'high', 'acknowledged'].map(f =>
     `<button class="filter-btn ${alertFilter === f ? 'active' : ''}" onclick="setAlertFilter('${f}')">${f === 'all' ? 'All' : f === 'active' ? 'Active' : f === 'critical' ? 'Critical' : f === 'high' ? 'High' : 'Reviewed'}</button>`
@@ -1383,6 +1687,9 @@ function renderAlerts() {
   filtered.forEach(alert => {
     html += `
       <div class="alert-card ${alert.acknowledged ? 'acknowledged' : ''}">
+        <input type="checkbox" class="alert-select" ${alert.selected ? 'checked' : ''}
+          onchange="toggleAlertSelection('${alert.id}')"
+          ${alert.acknowledged ? 'disabled' : ''}>
         <div class="alert-severity ${alert.severity}"></div>
         <div class="alert-content">
           <div class="alert-title">${alert.userName} (${alert.userId})</div>
@@ -1412,9 +1719,260 @@ function acknowledgeAlert(alertId) {
   const alert = alerts.find(a => a.id === alertId);
   if (alert) {
     alert.acknowledged = true;
+    alert.selected = false;
+    addAuditEntry('Alert Acknowledged', alertId, '—', 'Reviewed', 'Officer', null);
     renderAlerts();
     renderStats();
+    renderAuditTrail();
+    updateBulkActionBar();
   }
+}
+
+// ==========================================
+// BULK OPERATIONS
+// ==========================================
+function toggleSelectAllAlerts() {
+  const checked = document.getElementById('alert-select-all').checked;
+  const filtered = getFilteredAlerts();
+  filtered.forEach(a => { a.selected = checked; });
+  renderAlerts();
+  updateBulkActionBar();
+}
+
+function toggleAlertSelection(alertId) {
+  const alert = alerts.find(a => a.id === alertId);
+  if (alert) {
+    alert.selected = !alert.selected;
+    updateBulkActionBar();
+  }
+}
+
+function updateBulkActionBar() {
+  const selected = alerts.filter(a => a.selected);
+  const bar = document.getElementById('bulk-action-bar');
+  const count = document.getElementById('bulk-count');
+  if (selected.length > 0) {
+    bar.classList.add('visible');
+    count.textContent = selected.length + ' selected';
+  } else {
+    bar.classList.remove('visible');
+  }
+}
+
+function getFilteredAlerts() {
+  return alerts.filter(a => {
+    if (alertFilter === 'all') return true;
+    if (alertFilter === 'active') return !a.acknowledged;
+    if (alertFilter === 'critical') return a.severity === 'critical';
+    if (alertFilter === 'high') return a.severity === 'high';
+    if (alertFilter === 'acknowledged') return a.acknowledged;
+    return true;
+  });
+}
+
+function bulkAcknowledge() {
+  alerts.filter(a => a.selected).forEach(a => {
+    a.acknowledged = true;
+    a.selected = false;
+    addAuditEntry('Alert Acknowledged (bulk)', a.id, '—', 'Reviewed', 'Officer', null);
+  });
+  document.getElementById('alert-select-all').checked = false;
+  renderAlerts();
+  renderStats();
+  renderAuditTrail();
+  updateBulkActionBar();
+}
+
+function bulkEscalate() {
+  alerts.filter(a => a.selected).forEach(a => {
+    a.selected = false;
+    addAuditEntry('Alert Escalated', a.id, '—', 'Escalated', 'Officer', null);
+  });
+  document.getElementById('alert-select-all').checked = false;
+  renderAlerts();
+  renderAuditTrail();
+  updateBulkActionBar();
+}
+
+function bulkDismiss() {
+  alerts.filter(a => a.selected).forEach(a => {
+    a.acknowledged = true;
+    a.selected = false;
+    addAuditEntry('Alert Dismissed (FP)', a.id, '—', 'False Positive', 'Officer', null);
+  });
+  document.getElementById('alert-select-all').checked = false;
+  renderAlerts();
+  renderStats();
+  renderAuditTrail();
+  updateBulkActionBar();
+}
+
+// ==========================================
+// SCENARIO MANAGEMENT
+// ==========================================
+function renderScenarios() {
+  let html = '';
+  scenarios.forEach(scn => {
+    html += `
+      <tr>
+        <td>
+          <div class="scenario-name">${scn.name}</div>
+          <div class="scenario-desc">${scn.description}</div>
+        </td>
+        <td>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <input type="range" class="scenario-weight-slider" min="0" max="50" value="${scn.weight}"
+              onchange="updateScenarioWeight('${scn.id}', this.value)"
+              oninput="this.nextElementSibling.textContent=this.value+'%'">
+            <span style="font-size: 13px; font-weight: 600; min-width: 35px;">${scn.weight}%</span>
+          </div>
+        </td>
+        <td>
+          <input type="number" class="scenario-threshold-input" min="0" max="100" value="${scn.threshold}"
+            onchange="updateScenarioThreshold('${scn.id}', this.value)">
+        </td>
+        <td>
+          <label class="toggle-switch">
+            <input type="checkbox" ${scn.active ? 'checked' : ''} onchange="toggleScenario('${scn.id}', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+          <span style="margin-left: 8px; font-size: 12px; color: ${scn.active ? 'var(--success)' : 'var(--muted-foreground)'};">${scn.active ? 'Active' : 'Inactive'}</span>
+        </td>
+        <td style="font-size: 13px; color: var(--muted-foreground);">${formatDate(scn.lastTuned)}</td>
+      </tr>
+    `;
+  });
+  document.getElementById('scenario-tbody').innerHTML = html;
+}
+
+function updateScenarioWeight(id, value) {
+  const scn = scenarios.find(s => s.id === id);
+  if (scn) {
+    scn.weight = parseInt(value, 10);
+    scn.lastTuned = new Date();
+  }
+}
+
+function updateScenarioThreshold(id, value) {
+  const scn = scenarios.find(s => s.id === id);
+  if (scn) {
+    const old = scn.threshold;
+    scn.threshold = parseInt(value, 10);
+    scn.lastTuned = new Date();
+    addAuditEntry('Scenario Tuned', scn.name, `Threshold: ${old}`, `Threshold: ${scn.threshold}`, 'Officer', null);
+    renderAuditTrail();
+  }
+}
+
+function toggleScenario(id, active) {
+  const scn = scenarios.find(s => s.id === id);
+  if (scn) {
+    scn.active = active;
+    scn.lastTuned = new Date();
+    addAuditEntry('Scenario Toggled', scn.name, active ? 'Inactive' : 'Active', active ? 'Active' : 'Inactive', 'Officer', null);
+    renderAuditTrail();
+    renderScenarios();
+  }
+}
+
+function simulateScenarioImpact() {
+  const activeScenarios = scenarios.filter(s => s.active);
+  const totalWeight = activeScenarios.reduce((sum, s) => sum + s.weight, 0);
+  const avgThreshold = activeScenarios.reduce((sum, s) => sum + s.threshold, 0) / activeScenarios.length;
+
+  const flaggedCount = users.filter(u => {
+    let score = 0;
+    if (u.kyc.status === 'expired' || u.kyc.status === 'expiring') score += (scenarios.find(s => s.id === 'SCN-004')?.threshold || 30);
+    if (u.countryRiskScore > 50) score += (scenarios.find(s => s.id === 'SCN-001')?.threshold || 50);
+    if (u.isPEP) score += (scenarios.find(s => s.id === 'SCN-002')?.threshold || 60);
+    return score >= avgThreshold;
+  }).length;
+
+  const highRiskCount = users.filter(u => u.riskScore >= 75).length;
+
+  document.getElementById('impact-simulation-area').innerHTML = `
+    <div class="impact-simulation">
+      <div class="impact-title">Simulated Portfolio Impact</div>
+      <div class="impact-row">
+        <span class="impact-label">Active Scenarios</span>
+        <span class="impact-value">${activeScenarios.length} of ${scenarios.length}</span>
+      </div>
+      <div class="impact-row">
+        <span class="impact-label">Total Active Weight</span>
+        <span class="impact-value">${totalWeight}%</span>
+      </div>
+      <div class="impact-row">
+        <span class="impact-label">Avg Threshold</span>
+        <span class="impact-value">${Math.round(avgThreshold)}</span>
+      </div>
+      <div class="impact-row">
+        <span class="impact-label">Estimated Flagged Users</span>
+        <span class="impact-value" style="color: ${flaggedCount > 5 ? 'var(--destructive)' : 'var(--warning)'};">${flaggedCount} (${Math.round(flaggedCount / users.length * 100)}%)</span>
+      </div>
+      <div class="impact-row">
+        <span class="impact-label">High/Critical Risk Users</span>
+        <span class="impact-value">${highRiskCount} (${Math.round(highRiskCount / users.length * 100)}%)</span>
+      </div>
+    </div>
+  `;
+}
+
+// ==========================================
+// AUDIT TRAIL
+// ==========================================
+let auditFilter = 'all';
+
+function renderAuditTrail() {
+  const filtersHTML = ['all', 'score-change', 'override', 'alert-action', 'scenario-edit'].map(f =>
+    `<button class="filter-btn ${auditFilter === f ? 'active' : ''}" onclick="setAuditFilter('${f}')">${
+      f === 'all' ? 'All' : f === 'score-change' ? 'Score Changes' : f === 'override' ? 'Overrides' : f === 'alert-action' ? 'Alert Actions' : 'Scenario Edits'
+    }</button>`
+  ).join('');
+  document.getElementById('audit-filters').innerHTML = filtersHTML;
+
+  const filtered = auditLog.filter(entry => {
+    if (auditFilter === 'all') return true;
+    if (auditFilter === 'score-change') return entry.action.includes('Score');
+    if (auditFilter === 'override') return entry.action.includes('Override');
+    if (auditFilter === 'alert-action') return entry.action.includes('Alert');
+    if (auditFilter === 'scenario-edit') return entry.action.includes('Scenario');
+    return true;
+  });
+
+  let html = '';
+  filtered.forEach(entry => {
+    const iconClass = entry.action.includes('Score') ? 'score-change' :
+                      entry.action.includes('Override') ? 'override' :
+                      entry.action.includes('Alert') ? 'alert-action' : 'scenario-edit';
+    const iconSymbol = entry.action.includes('Score') ? '↑' :
+                       entry.action.includes('Override') ? '✎' :
+                       entry.action.includes('Alert') ? '✓' : '⚙';
+
+    html += `
+      <div class="audit-entry">
+        <div class="audit-icon ${iconClass}">${iconSymbol}</div>
+        <div class="audit-body">
+          <div class="audit-action-text">${entry.action}${entry.target ? ` — ${entry.target}` : ''}</div>
+          <div class="audit-meta">
+            ${formatDate(entry.timestamp)} &bull; ${entry.actor}
+            ${entry.oldValue !== undefined && entry.oldValue !== '—' ? ` &bull; ${entry.oldValue} → ${entry.newValue}` : ''}
+            ${entry.rationale ? ` &bull; ${entry.rationale}` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  if (filtered.length === 0) {
+    html = '<div class="empty-state"><div class="empty-state-icon">&#x1F4C1;</div><div>No audit entries match your filter</div></div>';
+  }
+
+  document.getElementById('audit-container').innerHTML = html;
+}
+
+function setAuditFilter(filter) {
+  auditFilter = filter;
+  renderAuditTrail();
 }
 
 // ==========================================
@@ -1515,19 +2073,30 @@ function showUserDetail(userId) {
         <div class="card-header">
           <div>
             <div class="card-title">Risk Factor Breakdown</div>
-            <div class="card-subtitle">Weighted contribution to overall score</div>
+            <div class="card-subtitle">Drag sliders to simulate "what-if" scenarios</div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <div id="simulated-score-display" style="display: none;">
+              <div style="text-align: right; font-size: 11px; color: var(--muted-foreground);">Predicted</div>
+              <div id="simulated-score-value" style="font-size: 22px; font-weight: 800; color: var(--info);"></div>
+              <div id="simulated-delta" style="font-size: 11px; font-weight: 600; text-align: right;"></div>
+            </div>
           </div>
         </div>
-        <div class="card-content">
-          ${user.riskFactors.map(f => `
-            <div class="risk-factor">
+        <div class="card-content" id="risk-factors-container">
+          ${user.riskFactors.map((f, idx) => `
+            <div class="risk-factor" id="risk-factor-${idx}">
               <div class="risk-factor-header">
                 <span class="risk-factor-name">${f.name}</span>
-                <span class="risk-factor-value">${Math.round(f.value)}% &#183; w: ${f.weight}%</span>
+                <span class="risk-factor-value" id="rf-value-${idx}">${Math.round(f.value)}% &#183; w: ${f.weight}%</span>
               </div>
               <div class="risk-factor-bar">
                 <div class="risk-factor-fill" style="width: ${f.value}%; background: ${getScoreColor(f.value)}"></div>
               </div>
+              <input type="range" min="0" max="100" value="${Math.round(f.value)}"
+                style="width: 100%; accent-color: var(--info); cursor: pointer; margin-top: 4px; opacity: 0; transition: opacity 0.2s;"
+                oninput="updateRiskFactorSim('${user.id}', ${idx}, this.value)"
+                onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'">
             </div>
           `).join('')}
         </div>
@@ -1681,9 +2250,71 @@ function showUserDetail(userId) {
         </div>
       </div>
     </div>
+
+    <!-- SAR/STR Report Generation -->
+    <div class="card" style="margin-top: 20px;">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Regulatory Reporting</div>
+          <div class="card-subtitle">Generate Suspicious Activity Report (SAR/STR)</div>
+        </div>
+        <button class="btn btn-primary" onclick="openSarModal('${user.id}')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Generate SAR
+        </button>
+      </div>
+      <div class="card-content">
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <div class="compliance-card" style="flex: 1; min-width: 150px;">
+            <div class="compliance-row">
+              <span class="compliance-label">Case Status</span>
+              <span class="compliance-value" style="color: ${user.caseOutcome === 'edd-flagged' ? 'var(--destructive)' : 'var(--warning)'}">${caseBadgeLabel}</span>
+            </div>
+            <div class="compliance-row">
+              <span class="compliance-label">Filing Required</span>
+              <span class="compliance-value">${user.riskScore >= 75 || user.caseOutcome === 'edd-flagged' ? 'Yes' : 'Pending Review'}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Peer Benchmark -->
+    <div class="card" style="margin-top: 20px;">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Peer Benchmark</div>
+          <div class="card-subtitle">How this user compares to the portfolio</div>
+        </div>
+      </div>
+      <div class="card-content">
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap;">
+          <div class="percentile-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Percentile Rank: <span id="percentile-value"></span>
+          </div>
+          <span style="font-size: 13px; color: var(--muted-foreground);">Higher percentile = higher risk than peers</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div>
+            <div style="font-size: 12px; font-weight: 600; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Trend Comparison</div>
+            <div class="chart-wrapper" style="height: 150px; padding: 8px 0;">
+              <canvas id="peer-trend-chart"></canvas>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 600; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Similar Risk Profiles</div>
+            <div id="similar-profiles"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   `;
 
   document.getElementById('user-detail-content').innerHTML = content;
+
+  // Initialize What-If simulator
+  initWhatIfSim(user);
 
   // Render trend chart
   setTimeout(() => {
@@ -1782,7 +2413,403 @@ function showUserDetail(userId) {
         }
       });
     }
+
+    // Render peer benchmark
+    renderPeerBenchmark(user);
   }, 50);
+}
+
+
+// ==========================================
+// WHAT-IF SCORE SIMULATOR
+// ==========================================
+let simScores = {};
+let originalFactors = {};
+
+function initWhatIfSim(user) {
+  simScores = {};
+  originalFactors = {};
+  user.riskFactors.forEach((f, i) => {
+    simScores[i] = f.value;
+    originalFactors[i] = f.value;
+  });
+  document.getElementById('simulated-score-display').style.display = 'none';
+}
+
+function updateRiskFactorSim(userId, factorIdx, newValue) {
+  const user = users.find(u => u.id === userId);
+  if (!user) return;
+  simScores[factorIdx] = parseFloat(newValue);
+  user.riskFactors[factorIdx].value = simScores[factorIdx];
+
+  // Update the bar visually
+  const fill = document.querySelector(`#risk-factor-${factorIdx} .risk-factor-fill`);
+  if (fill) fill.style.width = newValue + '%';
+  const valEl = document.getElementById(`rf-value-${factorIdx}`);
+  if (valEl) valEl.innerHTML = `${Math.round(newValue)}% &#183; w: ${user.riskFactors[factorIdx].weight}%`;
+
+  // Calculate predicted score
+  const totalWeight = user.riskFactors.reduce((s, f) => s + f.weight, 0);
+  let predicted = 0;
+  user.riskFactors.forEach((f, i) => {
+    predicted += (simScores[i] / 100) * (f.weight / totalWeight) * 100;
+  });
+  predicted = Math.round(Math.max(0, Math.min(100, predicted)));
+
+  const delta = predicted - user.riskScore;
+  const display = document.getElementById('simulated-score-display');
+  const valueEl = document.getElementById('simulated-score-value');
+  const deltaEl = document.getElementById('simulated-delta');
+
+  display.style.display = 'block';
+  valueEl.textContent = predicted;
+  valueEl.style.color = getScoreColor(predicted);
+  deltaEl.textContent = delta > 0 ? `+${delta} from current` : delta === 0 ? 'No change' : `${delta} from current`;
+  deltaEl.style.color = delta > 0 ? 'var(--destructive)' : delta < 0 ? 'var(--success)' : 'var(--muted-foreground)';
+}
+
+// ==========================================
+// SAR/STR REPORT MODAL
+// ==========================================
+let sarUser = null;
+
+function openSarModal(userId) {
+  sarUser = users.find(u => u.id === userId);
+  if (!sarUser) return;
+
+  const rec = getAIRecommendation(sarUser);
+  document.getElementById('sar-modal-body').innerHTML = `
+    <div class="sar-field">
+      <div class="sar-field-label">Customer Information</div>
+      <div class="sar-field-value"><strong>${sarUser.name}</strong> (${sarUser.id}) &bull; ${sarUser.email}</div>
+    </div>
+    <div class="sar-field">
+      <div class="sar-field-label">Jurisdiction</div>
+      <div class="sar-field-value">${sarUser.jurisdiction} (Risk: ${Math.round(sarUser.countryRiskScore)}%)</div>
+    </div>
+    <div class="sar-field">
+      <div class="sar-field-label">Risk Score</div>
+      <div class="sar-field-value" style="color: ${getScoreColor(sarUser.riskScore)}; font-size: 24px; font-weight: 800;">${sarUser.riskScore} / 100 — ${sarUser.riskTier} Risk</div>
+    </div>
+    <div class="sar-field">
+      <div class="sar-field-label">Key Risk Factors</div>
+      <div class="sar-field-value">
+        ${sarUser.riskFactors.filter(f => f.value >= 40).map(f =>
+          `<span class="badge badge-${f.value >= 75 ? 'critical' : f.value >= 50 ? 'high' : 'medium'}" style="margin: 2px;">${f.name}: ${Math.round(f.value)}%</span>`
+        ).join(' ')}
+      </div>
+    </div>
+    <div class="sar-field">
+      <div class="sar-field-label">AI Recommendation</div>
+      <div class="sar-field-value">${rec.text}</div>
+    </div>
+    <div class="sar-field">
+      <div class="sar-field-label">Score History (Last 30 Days)</div>
+      <div class="sar-field-value">
+        ${sarUser.scoreHistory.map(h => `${h.date}: ${h.oldScore} → ${h.newScore}`).join('<br>')}
+      </div>
+    </div>
+    <div class="sar-field">
+      <div class="sar-field-label">PEP Status</div>
+      <div class="sar-field-value">${sarUser.isPEP ? 'Yes — Politically Exposed Person' : 'No'}</div>
+    </div>
+    <div class="sar-field">
+      <div class="sar-field-label">Source of Funds</div>
+      <div class="sar-field-value">${sarUser.sourceOfFund}</div>
+    </div>
+    <div class="sar-field">
+      <div class="sar-field-label">Compliance Narrative</div>
+      <textarea class="sar-narrative" id="sar-narrative-text" placeholder="Describe the suspicious activity, patterns observed, and reasons for filing this report..."></textarea>
+    </div>
+  `;
+  document.getElementById('sar-modal').classList.add('visible');
+}
+
+function closeSarModal() {
+  document.getElementById('sar-modal').classList.remove('visible');
+  sarUser = null;
+}
+
+function previewSarReport() {
+  if (!sarUser) return;
+  const narrative = document.getElementById('sar-narrative-text')?.value || 'No narrative provided.';
+  document.getElementById('sar-modal-body').innerHTML = `
+    <div style="padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--muted);">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="font-size: 18px; font-weight: 700;">SAR/STR — Suspicious Activity Report</div>
+        <div style="font-size: 12px; color: var(--muted-foreground);">Generated by norbloc RiskAI • ${formatDate(new Date())}</div>
+      </div>
+      <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 8px 0; color: var(--muted-foreground); width: 40%;">Customer</td><td style="padding: 8px 0; font-weight: 600;">${sarUser.name} (${sarUser.id})</td></tr>
+        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 8px 0; color: var(--muted-foreground);">Jurisdiction</td><td style="padding: 8px 0;">${sarUser.jurisdiction}</td></tr>
+        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 8px 0; color: var(--muted-foreground);">Risk Score</td><td style="padding: 8px 0; font-weight: 700; color: ${getScoreColor(sarUser.riskScore)};">${sarUser.riskScore} — ${sarUser.riskTier}</td></tr>
+        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 8px 0; color: var(--muted-foreground);">PEP</td><td style="padding: 8px 0;">${sarUser.isPEP ? 'Yes' : 'No'}</td></tr>
+        <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 8px 0; color: var(--muted-foreground);">Source of Funds</td><td style="padding: 8px 0;">${sarUser.sourceOfFund}</td></tr>
+        <tr><td style="padding: 8px 0; color: var(--muted-foreground); vertical-align: top;">Narrative</td><td style="padding: 8px 0;">${narrative}</td></tr>
+      </table>
+    </div>
+  `;
+}
+
+function exportSarReport() {
+  addAuditEntry('SAR Generated', sarUser ? sarUser.id : '—', '—', 'Report filed', 'Officer', 'SAR/STR report exported');
+  renderAuditTrail();
+  closeSarModal();
+}
+
+// ==========================================
+// PEER BENCHMARK
+// ==========================================
+function renderPeerBenchmark(user) {
+  // Calculate percentile
+  const sorted = [...users].sort((a, b) => a.riskScore - b.riskScore);
+  const rank = sorted.findIndex(u => u.id === user.id) + 1;
+  const percentile = Math.round((rank / users.length) * 100);
+
+  const pEl = document.getElementById('percentile-value');
+  if (pEl) pEl.textContent = percentile + '%';
+
+  // Find similar profiles
+  const others = users.filter(u => u.id !== user.id).map(u => {
+    const dist = u.riskFactors.reduce((s, f, i) => s + Math.abs(f.value - user.riskFactors[i].value), 0);
+    return { user: u, distance: dist };
+  }).sort((a, b) => a.distance - b.distance).slice(0, 3);
+
+  const profilesEl = document.getElementById('similar-profiles');
+  if (profilesEl && others.length > 0) {
+    profilesEl.innerHTML = others.map(o => `
+      <div class="similar-profile" onclick="showUserDetail('${o.user.id}')" style="cursor: pointer;">
+        <div class="avatar" style="width: 28px; height: 28px; font-size: 11px;">${o.user.name.split(' ').map(n => n[0]).join('')}</div>
+        <div style="flex: 1;">
+          <div style="font-size: 13px; font-weight: 500;">${o.user.name}</div>
+          <div style="font-size: 11px; color: var(--muted-foreground);">Score: ${o.user.riskScore} • ${o.user.riskTier}</div>
+        </div>
+        <span class="badge badge-${getRiskClass(o.user.riskScore)}" style="font-size: 11px;">${o.user.riskTier}</span>
+      </div>
+    `).join('');
+  }
+
+  // Peer trend chart
+  setTimeout(() => {
+    const ctx = document.getElementById('peer-trend-chart');
+    if (!ctx) return;
+
+    const chartTextColor = '#6b7280';
+    const chartGridColor = '#e5e7eb';
+    const labels = user.trendData.slice(-14).map(d => d.date);
+    const userData = user.trendData.slice(-14).map(d => d.score);
+    const avgData = user.trendData.slice(-14).map((_, i) => {
+      const date = user.trendData[user.trendData.length - 14 + i]?.date;
+      const sum = users.reduce((s, u) => {
+        const idx = u.trendData.length - 14 + i;
+        return s + (u.trendData[idx]?.score || 0);
+      }, 0);
+      return Math.round(sum / users.length);
+    });
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'User',
+            data: userData,
+            borderColor: getScoreColor(user.riskScore),
+            borderWidth: 2, fill: false, tension: 0.3, pointRadius: 2, pointHoverRadius: 4
+          },
+          {
+            label: 'Portfolio Avg',
+            data: avgData,
+            borderColor: 'oklch(0.556 0 0)',
+            borderWidth: 1.5, borderDash: [4, 4], fill: false, tension: 0.3, pointRadius: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: { duration: 400 },
+        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'line', padding: 10, font: { size: 10 }, color: chartTextColor } } },
+        scales: {
+          y: { min: 0, max: 100, ticks: { stepSize: 25, font: { size: 10 }, color: chartTextColor }, grid: { color: chartGridColor } },
+          x: { ticks: { maxTicksLimit: 4, font: { size: 10 }, color: chartTextColor }, grid: { display: false } }
+        }
+      }
+    });
+  }, 100);
+}
+
+// ==========================================
+// PORTFOLIO ANALYTICS
+// ==========================================
+let portfolioChart;
+
+function renderPortfolioAnalytics() {
+  // Geographic exposure
+  const geoMap = {};
+  users.forEach(u => {
+    if (!geoMap[u.jurisdiction]) geoMap[u.jurisdiction] = { count: 0, totalRisk: 0, avgScore: 0 };
+    geoMap[u.jurisdiction].count++;
+    geoMap[u.jurisdiction].totalRisk += u.riskScore;
+  });
+  Object.keys(geoMap).forEach(k => {
+    geoMap[k].avgScore = Math.round(geoMap[k].totalRisk / geoMap[k].count);
+  });
+
+  const sortedGeo = Object.entries(geoMap).sort((a, b) => b[1].count - a[1].count);
+
+  // Cohort comparison
+  const cohorts = {
+    'PEP': { count: 0, avgScore: 0, high: 0 },
+    'Non-PEP Retail': { count: 0, avgScore: 0, high: 0 },
+    'High-Risk Jurisdiction': { count: 0, avgScore: 0, high: 0 }
+  };
+  users.forEach(u => {
+    if (u.isPEP) {
+      cohorts['PEP'].count++;
+      cohorts['PEP'].avgScore += u.riskScore;
+      if (u.riskScore >= 50) cohorts['PEP'].high++;
+    } else {
+      cohorts['Non-PEP Retail'].count++;
+      cohorts['Non-PEP Retail'].avgScore += u.riskScore;
+      if (u.riskScore >= 50) cohorts['Non-PEP Retail'].high++;
+    }
+    if (u.countryRiskScore > 50) {
+      cohorts['High-Risk Jurisdiction'].count++;
+      cohorts['High-Risk Jurisdiction'].avgScore += u.riskScore;
+      if (u.riskScore >= 50) cohorts['High-Risk Jurisdiction'].high++;
+    }
+  });
+  Object.keys(cohorts).forEach(k => {
+    cohorts[k].avgScore = cohorts[k].count > 0 ? Math.round(cohorts[k].avgScore / cohorts[k].count) : 0;
+  });
+
+  // Portfolio sparkline data (average score over time)
+  const portTrendData = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 86400000);
+    let sum = 0;
+    users.forEach(u => {
+      const idx = u.trendData.length - 30 + i;
+      sum += u.trendData[idx]?.score || u.riskScore;
+    });
+    portTrendData.push({ date: formatDate(d), score: Math.round(sum / users.length) });
+  }
+
+  let geoHTML = sortedGeo.map(([name, data]) => `
+    <tr>
+      <td style="font-weight: 500;">${name}</td>
+      <td>${data.count}</td>
+      <td>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div class="risk-exposure-bar">
+            <div class="risk-exposure-fill" style="width: ${data.avgScore}%; background: ${getScoreColor(data.avgScore)};"></div>
+          </div>
+          <span style="font-size: 13px; font-weight: 600; color: ${getScoreColor(data.avgScore)};">${data.avgScore}</span>
+        </div>
+      </td>
+      <td><span class="badge badge-${data.avgScore >= 75 ? 'critical' : data.avgScore >= 50 ? 'high' : 'low'}">${data.avgScore >= 50 ? 'Elevated' : 'Normal'}</span></td>
+    </tr>
+  `).join('');
+
+  let cohortHTML = Object.entries(cohorts).map(([name, data]) => `
+    <tr>
+      <td style="font-weight: 500;">${name}</td>
+      <td>${data.count}</td>
+      <td style="font-weight: 700; color: ${getScoreColor(data.avgScore)};">${data.avgScore}</td>
+      <td>${data.high}</td>
+      <td>
+        <div class="sparkline-container"><canvas id="cohort-sparkline-${name.replace(/\s+/g, '-')}"></canvas></div>
+      </td>
+    </tr>
+  `).join('');
+
+  const portAvg = Math.round(users.reduce((s, u) => s + u.riskScore, 0) / users.length);
+
+  // Insert portfolio section into dashboard
+  const existing = document.getElementById('portfolio-analytics-section');
+  if (!existing) {
+    const dashboard = document.getElementById('screen-dashboard');
+    const statsGrid = document.getElementById('stats-grid');
+    const portfolioHTML = `
+      <div id="portfolio-analytics-section" style="margin-bottom: 24px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <h3 style="font-size: 18px; font-weight: 700;">Portfolio Analytics</h3>
+          <span style="font-size: 13px; color: var(--muted-foreground);">Portfolio avg risk: <strong style="color: ${getScoreColor(portAvg)}">${portAvg}</strong></span>
+        </div>
+        <div class="charts-grid">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Geographic Risk Exposure</div>
+                <div class="card-subtitle">Risk distribution by jurisdiction</div>
+              </div>
+            </div>
+            <div class="card-content" style="padding: 12px 24px;">
+              <table class="cohort-table">
+                <thead><tr><th>Jurisdiction</th><th>Users</th><th>Avg Score</th><th>Level</th></tr></thead>
+                <tbody>${geoHTML}</tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Cohort Risk Comparison</div>
+                <div class="card-subtitle">Risk by customer segment</div>
+              </div>
+            </div>
+            <div class="card-content" style="padding: 12px 24px;">
+              <table class="cohort-table">
+                <thead><tr><th>Cohort</th><th>Users</th><th>Avg Score</th><th>High+</th><th>Trend</th></tr></thead>
+                <tbody>${cohortHTML}</tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    statsGrid.insertAdjacentHTML('afterend', portfolioHTML);
+  }
+
+  // Render cohort sparklines
+  setTimeout(() => {
+    const cohortsData = {
+      'PEP': users.filter(u => u.isPEP),
+      'Non-PEP-Retail': users.filter(u => !u.isPEP),
+      'High-Risk-Jurisdiction': users.filter(u => u.countryRiskScore > 50)
+    };
+
+    Object.entries(cohortsData).forEach(([key, cohortUsers]) => {
+      const canvas = document.getElementById(`cohort-sparkline-${key}`);
+      if (!canvas || cohortUsers.length === 0) return;
+
+      const avgScores = [];
+      for (let i = 0; i < 14; i++) {
+        const sum = cohortUsers.reduce((s, u) => {
+          const idx = u.trendData.length - 14 + i;
+          return s + (u.trendData[idx]?.score || 0);
+        }, 0);
+        avgScores.push(Math.round(sum / cohortUsers.length));
+      }
+
+      new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: avgScores.map((_, i) => i),
+          datasets: [{
+            data: avgScores,
+            borderColor: 'oklch(0.572 0.223 256.61)',
+            borderWidth: 1.5, fill: false, tension: 0.3, pointRadius: 0
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, animation: false,
+          plugins: { legend: { display: false } },
+          scales: { x: { display: false }, y: { display: false, min: 0, max: 100 } }
+        }
+      });
+    });
+  }, 100);
 }
 
 // ==========================================
@@ -1797,14 +2824,19 @@ function showScreen(screenName) {
     return;
   }
 
-  // Clean up user detail chart when navigating away
-  if (screenName === 'dashboard' || screenName === 'alerts') {
-    userTrendChart = null;
-  }
+  // Clean up charts when navigating away
+  userTrendChart = null;
 
   document.getElementById(`screen-${screenName}`).classList.add('active');
   const tab = document.querySelector(`[data-tab="${screenName}"]`);
   if (tab) tab.classList.add('active');
+
+  // Initialize screen-specific content
+  if (screenName === 'scenarios') renderScenarios();
+  if (screenName === 'audit') renderAuditTrail();
+  if (screenName === 'dashboard') {
+    renderPortfolioAnalytics();
+  }
 }
 
 document.querySelectorAll('.nav-tab').forEach(tab => {
@@ -1839,6 +2871,7 @@ document.getElementById('users-table-head').addEventListener('click', (e) => {
 function simulateScoreUpdate() {
   const idx = Math.floor(Math.random() * users.length);
   const user = users[idx];
+  const oldScore = user.riskScore;
   const change = Math.round((Math.random() * 12 - 6) * (user.kyc.status === 'expired' ? 1.5 : 1));
   user.riskScore = Math.max(5, Math.min(95, user.riskScore + change));
   user.riskTier = getRiskTier(user.riskScore);
@@ -1847,6 +2880,10 @@ function simulateScoreUpdate() {
   user.trendData = user.trendData.slice(-31);
   user.lastUpdated = new Date();
   user.aiExplanation = generateAIExplaination(user, user.riskFactors);
+
+  if (Math.abs(user.riskScore - oldScore) > 3) {
+    addAuditEntry('Score Updated', `${user.id} (${user.name})`, String(oldScore), String(user.riskScore), 'AI System', 'Automated recalculation');
+  }
 
   if (user.riskScore >= 50 && !alerts.find(a => a.userId === user.id && !a.acknowledged)) {
     alerts.unshift({
@@ -1858,7 +2895,8 @@ function simulateScoreUpdate() {
       reason: 'Risk score increased — AI adaptive scoring detected anomaly',
       aiAction: getAIRecommendation(user).action,
       timestamp: new Date(),
-      acknowledged: false
+      acknowledged: false,
+      selected: false
     });
   }
 }
@@ -1884,6 +2922,7 @@ function submitOverride(userId) {
   user.aiExplanation = generateAIExplaination(user, user.riskFactors);
   modelState.totalDecisions++;
   modelState.overrides++;
+  addAuditEntry('Officer Override', `${user.id} (${user.name})`, String(user.originalScore), String(newScore), 'Officer', user.officerNote);
   showUserDetail(userId);
   renderAll();
   updateModelGovernanceDisplay();
@@ -1907,6 +2946,8 @@ function renderAll() {
   renderCharts();
   renderTable();
   renderAlerts();
+  renderPortfolioAnalytics();
+  updateBulkActionBar();
 
   // If currently viewing user detail, refresh it with updated data
   const detailScreen = document.getElementById('screen-user-detail');
